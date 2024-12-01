@@ -5,12 +5,12 @@ def get_methodology_content():
     return [
         {
             "title": "Baseline",
-            "description": "Baseline configurations here.",
+            "description": "",
             "link": "https://docs.google.com/spreadsheets/d/1s2ggAq69Z5UcZen1Q-o8gBHBv6UiJHaeFW3QwtTLnq4/edit?usp=sharing",
         },
         {
             "title": "MITRE TIE",
-            "description": "The Technique Inference Engine (TIE) suggests techniques an adversary is likely to have used based on a set of observed techniques.",
+            "description": "MITRE AI to predict next T-Code.",
             "link": "https://center-for-threat-informed-defense.github.io/technique-inference-engine/#/",
         },
         {
