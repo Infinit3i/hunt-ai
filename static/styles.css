@@ -14,17 +14,30 @@ h1, h2, h3, p {
     color: #333;
 }
 
+/* Centering the ul container */
 ul {
     list-style-type: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Centers the list items horizontally */
+    justify-content: center;  /* Centers the list items vertically */
 }
 
+/* Style for each list item */
 ul li {
-    margin: 5px 0;
+    margin: 10px 0;
     padding: 10px;
     border-radius: 5px;
+    width: 50%;  /* Adjusted width for each item */
+    text-align: center;  /* Centers the text inside the list item */
+    border: 1px solid #ccc;  /* Border added for list items */
+    display: flex;
+    justify-content: space-between;  /* Space between content inside the item */
+    align-items: center;  /* Aligns content vertically within the item */
 }
 
+/* Success, error, and info classes */
 ul li.success {
     background-color: #28a745;
     color: white;
@@ -39,6 +52,21 @@ ul li.info {
     background-color: #17a2b8;
     color: white;
 }
+
+/* Link style inside list items */
+ul li a {
+    color: lightblue;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hover effect for links */
+ul li a:hover {
+    text-decoration: none;
+    color: orange;
+}
+
+
 
 /* Links */
 a {
@@ -322,7 +350,7 @@ button:active {
     border: none;
     padding: 0;
     margin-bottom: 20px;
-    color: #333;
+    color: blue; /* Very light white color */
     white-space: pre-wrap;
     text-align: center;
 }
@@ -333,13 +361,19 @@ button:active {
     }
 }
 
-.ascii-image {
-    display: block;
-    margin: 20px auto;
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+.ascii-art.infinit3i {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 20px;
+    color: white; /* Initial color */
+    white-space: pre-wrap;
+    text-align: center;
+    transition: color 3s ease; /* Smooth transition for color */
+}
+
+.ascii-art.infinit3i:hover {
+    color: purple; /* Color change on hover */
 }
 
 /* Tips */
@@ -453,27 +487,7 @@ pre {
 }
 
 
-/* notebook */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.form-data {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 16px;
-    resize: none;
-}
+/* Styling the notebook display */
 
 button {
     align-self: flex-start;
@@ -481,52 +495,6 @@ button {
     font-size: 16px;
     cursor: pointer;
 }
-
-/* Password Register */
-
-/* Password Requirements Box */
-#password-requirements {
-    position: absolute;
-    top: 200px; /* Adjust to fit below password input */
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(145deg, #e0e0e0, #ffffff);
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2), -5px -5px 15px rgba(255, 255, 255, 0.7);
-    width: 300px;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 1000;
-}
-
-#password-requirements.hidden {
-    opacity: 0;
-    transform: translateX(-50%) translateY(20px);
-    pointer-events: none;
-}
-
-#password-requirements ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    color: #333;
-}
-
-#password-requirements li {
-    padding: 5px 0;
-    font-size: 14px;
-}
-
-/* Highlight Valid and Invalid States */
-#password-requirements li:before {
-    content: "• ";
-    color: red;
-}
-
-#password-requirements li.valid:before {
-    color: green;
-}
-
 
 
 
@@ -601,4 +569,96 @@ button {
 .search-bar input:focus {
     outline: none;
     border-color: #007bff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Authentication Container */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.auth-box {
+    background: #f8f8f8; /* Light off-white color */
+    color: black;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+.auth-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.auth-form-group {
+    margin-bottom: 20px;
+}
+
+.auth-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.auth-form-group input,
+.auth-form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-btn:hover {
+    background-color: #0056b3;
+}
+
+.logout-btn {
+    margin-top: 15px;
+    background-color: #dc3545;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+.auth-header {
+    color: black;
+}
+
+.auth-info {
+    color: gray;
 }
