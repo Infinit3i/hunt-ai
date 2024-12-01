@@ -6,6 +6,31 @@
         <title>{{ title }}</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
         <link id="theme-stylesheet" rel="stylesheet" href="{{ url_for('static', filename='css/' + theme + '_theme.css') }}">
+        
+        <!-- Favicon Links -->
+        <link rel="icon" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}" type="image/png" sizes="32x32">
+        <link rel="icon" href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}" type="image/png" sizes="96x96">
+        <link rel="icon" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}" type="image/png" sizes="16x16">
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-57x57.png') }}" sizes="57x57">
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-60x60.png') }}" sizes="60x60">
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-72x72.png') }}" sizes="72x72">
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-76x76.png') }}" sizes="76x76">
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-114x114.png') }}" sizes="114x114">
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-120x120.png') }}" sizes="120x120">
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-144x144.png') }}" sizes="144x144">
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-152x152.png') }}" sizes="152x152">
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-180x180.png') }}" sizes="180x180">
+
+        <!-- Android Icon -->
+        <link rel="icon" href="{{ url_for('static', filename='favicon/android-icon-192x192.png') }}" type="image/png" sizes="192x192">
+
+        <!-- Manifest File -->
+        <link rel="manifest" href="{{ url_for('static', filename='favicon/manifest.json') }}">
+
+        <!-- Windows Tile and Theme Color -->
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="{{ url_for('static', filename='favicon/ms-icon-144x144.png') }}">
+        <meta name="theme-color" content="#ffffff">
     </head>
 <body>
     <header>
