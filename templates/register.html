@@ -5,6 +5,17 @@
     <div class="auth-box">
         <h1 class="auth-header">Create an Account</h1>
 
+        <!-- Display Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul>
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
         <form id="auth-register-form" method="POST">
             <div class="auth-form-group">
                 <label for="username">Username:</label>
