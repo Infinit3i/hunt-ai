@@ -7,11 +7,13 @@
     <pre class="ascii-art no-background">{{ full_ascii_art }}</pre>
 
     <!-- Render Infinitei ASCII Art -->
-    <pre class="ascii-art no-background">{{ infinitei }}</pre>
+    <pre class="ascii-art infinit3i">{{ infinitei }}</pre>
 
     <!-- Dynamically Render Random Image -->
     {% if selected_image %}
-    <img src="{{ url_for('static', filename=selected_image) }}" alt="Cover Image" class="ascii-image">
+    <div class="image-container">
+        <img src="{{ url_for('static', filename=selected_image) }}" alt="Cover Image" class="cover-image" id="cover-image">
+    </div>
     {% endif %}
 
     <h1>Welcome to Your Cybersecurity Tool</h1>
