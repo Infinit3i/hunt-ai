@@ -484,12 +484,10 @@ input:checked + .slider:before {
 
 
 
-
-
-
-
-
-
+.cover-image {
+    max-width: 30rem;
+    max-height: 30rem;
+}
 
 /* Preformatted Text */
 pre {
