@@ -1,49 +1,68 @@
-/* halloween_theme.css */
+/* vampire_theme.css (updated with halloween_theme.css color values) */
+
 body {
-    background-color: #000000;
-    color: #ffa500;
+    background-color: #000000; /* Black background for Halloween vibe */
+    color: #ffa500; /* Orange text */
     font-family: 'Arial', sans-serif;
-    background-image: url('/static/Pictures/halloween.jpg');
+    background-image: url('/static/Pictures/halloween.jpg'); /* Halloween background image */
     background-size: cover; /* Cover the whole screen */
     background-attachment: fixed; /* Fixed background */
 }
 
 h1, h2, h3, p {
-    color: #ff8c00;
+    color: #ff8c00; /* Darker orange for headings */
 }
 
 a {
-    color: #ff4500;
+    color: #ff4500; /* Orange-red links */
 }
 
-button {
-    background-color: #333333;
-    color: #ffa500;
-    border: 2px solid #ff4500;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(255, 69, 0, 0.5);
+header {
+    background-color: #ff8c00; /* Dark orange header */
 }
 
-.navbar {
-    background-color: #333333;
-}
-
-.navbar a {
-    color: #ffa500;
-}
-
-.navbar a:hover {
-    color: #ff4500;
+header:hover {
+    color: #ff4500; /* Orange-red on hover for header */
 }
 
 .card {
-    background-color: #1a1a1a;
+    background-color: #1a1a1a; /* Dark background for cards */
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(255, 165, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(255, 165, 0, 0.3); /* Light orange shadow */
 }
 
 .card-header {
-    color: #ff8c00;
+    color: #ff8c00; /* Darker orange for card header */
+}
+
+.info-links {
+    color: #ff8c00; /* Dark orange for info links */
+}
+
+.link-button {
+    background-color: #ff8c00; /* Dark orange for button background */
+    color: #ffffff; /* White text */
+}
+
+.link-button:hover {
+    background-color: #ff4500; /* Orange-red on hover for buttons */
+    color: white;
+}
+
+.nav-link {
+    background-color: #333333; /* Dark gray background for nav link */
+    color: #ffa500; /* Orange text */
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    background-color: #ff4500; /* Orange-red on hover for nav links */
+    color: white;
+}
+
+.info-links a {
+    color: #ff4500; /* Orange-red for info links */
 }

@@ -1,7 +1,8 @@
-/* hacker_theme.css */
+/* hacker_theme.css (updated with nordic_theme.css color values) */
+
 body {
-    background-color: #000000; /* Solid black background */
-    color: #22eb10; /* Bright green text */
+    background-color: #e0f7fa; /* Light blue background */
+    color: #01579b; /* Dark blue text */
     font-family: 'Arial', sans-serif;
     background-image: url('/static/Pictures/hacker.jpg'); /* Hacker-themed image */
     background-size: cover; /* Cover the screen */
@@ -9,41 +10,41 @@ body {
 }
 
 h1, h2, h3, p {
-    color: #22eb10; /* Bright green for headings and text */
+    color: #0277bd; /* Medium blue for headings */
 }
 
 a {
-    color: #22eb10; /* Bright green for links */
+    color: #01579b; /* Dark blue for links */
     text-decoration: none;
     font-weight: bold;
 }
 
 a:hover {
-    color: #00ff00; /* Slightly brighter green for hover effect */
+    color: #81d4fa; /* Light blue for hover effect */
     text-decoration: underline;
 }
 
 button, .link-button {
-    background-color: #0b6619; /* Dark green button background */
-    color: #22eb10; /* Bright green text */
+    background-color: #0288d1; /* Bright blue button background */
+    color: white; /* White text */
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.2s ease;
     text-decoration: none; /* Remove underline for links styled as buttons */
-    font-weight: bold; /* Consistent font weight */
-    display: inline-block; /* Ensure consistent button-like behavior */
+    font-weight: bold;
+    display: inline-block;
     text-align: center;
 }
 
 button:hover, .link-button:hover {
-    background-color: #0d7a1f; /* Brighter green on hover */
+    background-color: #81d4fa; /* Lighter blue on hover */
     transform: scale(1.05); /* Slight zoom effect */
     cursor: pointer;
 }
 
 button:active, .link-button:active {
-    background-color: #094d14; /* Darker green when pressed */
+    background-color: #01579b; /* Dark blue when pressed */
     transform: scale(0.98); /* Slight shrink on click */
 }

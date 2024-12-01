@@ -1,4 +1,5 @@
-/* xmas_theme.css */
+/* vampire_theme.css (updated with xmas_theme.css color values) */
+
 body {
     background-color: #ffffff; /* White background for snow-like effect */
     color: #006400; /* Dark green text */
@@ -14,57 +15,54 @@ h1, h2, h3, p {
 
 a {
     color: #006400; /* Dark green for links */
-    text-decoration: none;
 }
 
-a:hover {
-    color: #ff0000; /* Red hover effect */
-    text-decoration: underline;
+header {
+    background-color: #d32f2f; /* Festive red header */
 }
 
-button {
-    background-color: #d32f2f; /* Festive red button background */
-    color: #ffffff; /* White text */
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #b71c1c; /* Darker red on hover */
-    cursor: pointer;
-}
-
-.navbar {
-    background-color: #006400; /* Green navbar */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.navbar a {
-    color: #ffffff; /* White text for navbar links */
-    font-weight: bold;
-}
-
-.navbar a:hover {
-    color: #ffeb3b; /* Golden yellow hover effect */
+header:hover {
+    color: #ff0000; /* Red hover effect for header */
 }
 
 .card {
     background-color: #008000; /* Xmas green for cards */
     border-radius: 8px;
     padding: 20px;
-    margin-bottom: 20px;
-    color: #ffffff; /* White text on cards */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-    font-size: 1.5rem;
-    color: #ff0000; /* Red headers inside cards */
-    font-weight: bold;
-    border-bottom: 2px solid #ffeb3b; /* Golden yellow underline for card headers */
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+    color: #ff0000; /* Red header inside cards */
+}
+
+.info-links {
+    color: #d32f2f; /* Festive red for info links */
+}
+
+.link-button {
+    background-color: #d32f2f; /* Festive red for button background */
+    color: #ffffff; /* White text */
+}
+
+.link-button:hover {
+    background-color: #b71c1c; /* Darker red on hover for buttons */
+    color: white;
+}
+
+.nav-link {
+    background-color: #006400; /* Green background for nav link */
+    color: white; /* White text */
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    background-color: #ffeb3b; /* Golden yellow on hover */
+    color: white;
+}
+
+.info-links a {
+    color: #006400; /* Dark green for info links */
 }

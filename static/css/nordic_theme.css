@@ -1,46 +1,65 @@
-/* nordic_theme.css */
+/* vampire_theme.css (updated with nordic_theme.css color values) */
+
 body {
-    background-color: #e0f7fa;
-    color: #01579b;
+    background-color: #e0f7fa; /* Light blue background */
+    color: #01579b; /* Dark blue text */
     font-family: 'Arial', sans-serif;
 }
 
 h1, h2, h3, p {
-    color: #0277bd;
+    color: #0277bd; /* Medium blue for headings */
 }
 
 a {
-    color: #01579b;
+    color: #01579b; /* Dark blue for links */
 }
 
-button {
-    background-color: #0288d1;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+header {
+    background-color: #0277bd; /* Medium blue header */
 }
 
-.navbar {
-    background-color: #01579b;
-}
-
-.navbar a {
-    color: #ffffff;
-}
-
-.navbar a:hover {
-    color: #81d4fa;
+header:hover {
+    color: #81d4fa; /* Light blue on hover for header */
 }
 
 .card {
-    background-color: #b3e5fc;
+    background-color: #b3e5fc; /* Light blue for cards */
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-    color: #01579b;
+    color: #01579b; /* Dark blue for card header */
+}
+
+.info-links {
+    color: #01579b; /* Dark blue for info links */
+}
+
+.link-button {
+    background-color: #0288d1; /* Bright blue for button background */
+    color: white; /* White text */
+}
+
+.link-button:hover {
+    background-color: #81d4fa; /* Light blue on hover for buttons */
+    color: white;
+}
+
+.nav-link {
+    background-color: #01579b; /* Dark blue for nav links */
+    color: #ffffff; /* White text */
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    background-color: #81d4fa; /* Light blue on hover for nav links */
+    color: white;
+}
+
+.info-links a {
+    color: #01579b; /* Dark blue for info links */
 }
