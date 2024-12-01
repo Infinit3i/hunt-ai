@@ -617,7 +617,7 @@ button {
 }
 
 .search-button {
-    width: 5rem;
+    width: 20px;
 }
 
 
@@ -627,25 +627,43 @@ button {
 
 
 
+/* Style for file upload */
+form input[type="file"] {
+    display: block;
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 300px;
+}
 
 
+.auth-header {
+    color:black;
+}
+
+.auth-info {
+    color: darkgray;
+}
 
 /* Authentication Container */
 .auth-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    padding: 5rem;
+    height: 50vh; /* Full viewport height */
 }
 
 .auth-box {
     background: #f8f8f8; /* Light off-white color */
     color: black;
-    padding: 30px;
+    padding: 50px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 600px;
+    margin: 10px;
 }
 
 .auth-title {
@@ -656,6 +674,9 @@ button {
 
 .auth-form-group {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the inputs and labels */
 }
 
 .auth-form-group label {
@@ -666,7 +687,7 @@ button {
 
 .auth-form-group input,
 .auth-form-group select {
-    width: 100%;
+    width: 80%; /* Adjusted width to avoid too wide input fields */
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -674,9 +695,8 @@ button {
 }
 
 .auth-btn {
-    width: 100%;
+    width: 100%; /* Adjusted to the same width as the inputs */
     padding: 12px;
-    font-size: 16px;
     font-weight: bold;
     color: white;
     background-color: #007bff;
@@ -684,28 +704,26 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 20px; /* Space between button and form fields */
 }
 
 .auth-btn:hover {
     background-color: #0056b3;
 }
 
-.logout-btn {
-    margin-top: 15px;
-    background-color: #dc3545;
+.auth-form-group input[type="text"], 
+.auth-form-group input[type="password"], 
+.auth-form-group select {
+    width: 100%; /* Full width for text and password fields */
 }
 
-.logout-btn:hover {
-    background-color: #c82333;
+.auth-box form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.auth-header {
-    color: black;
-}
-
-.auth-info {
-    color: gray;
-}
 
 /* Make form fields stack on each other */
 form .form-group {
