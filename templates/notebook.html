@@ -15,6 +15,10 @@
     
     <label for="entry">Entry:</label>
     <textarea name="entry" id="entry" rows="2" required></textarea>
+
+    <label for="incident_time">Incident Time:</label>
+    <input type="datetime-local" id="incident_time" name="incident_time" required>
+
     <button type="submit">Add</button>
 </form>
 
@@ -26,8 +30,11 @@
 <ul>
     {% for entry in entries %}
     <li>
-        {{ entry }} 
-        <a href="{{ url_for('delete_entry', category=category, index=loop.index0) }}">Delete</a>
+        {{ entry['data'] }} - {{ entry['time'] }}
+        {% if entry['category'] == 'ips' %}
+            (Hostname: {{ entry['hostname'] }})
+        {% endif %}
+        <a href="{{ url_for('routes.delete_entry', category=category, index=loop.index0) }}">Delete</a>
     </li>
     {% endfor %}
 </ul>
