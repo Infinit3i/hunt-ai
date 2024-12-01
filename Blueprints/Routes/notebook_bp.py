@@ -1,13 +1,15 @@
-import os
 import json
-import re
-import socket
-from datetime import datetime
-from flask import Blueprint, request, render_template, redirect, url_for, flash, session
+import os
+from flask import Blueprint, request, render_template, flash, redirect, url_for, session
 from flask_login import login_required, current_user
+from datetime import datetime
 
 # Define the notebook blueprint
 notebook_bp = Blueprint('notebook', __name__, url_prefix='/notebook')
+
+# Ensure the notebooks directory exists
+if not os.path.exists('notebooks'):
+    os.makedirs('notebooks')
 
 # Generate the JSON file path dynamically based on user and date
 def get_save_path():
@@ -15,10 +17,6 @@ def get_save_path():
     date_str = datetime.now().strftime('%Y-%m-%d')
     filename = f"{username}-{date_str}.json"
     return os.path.join('notebooks', filename)
-
-# Ensure the notebooks directory exists
-if not os.path.exists('notebooks'):
-    os.makedirs('notebooks')
 
 # Load notebook data from the user-specific file
 def load_notebook():
@@ -40,6 +38,40 @@ def save_notebook(data):
     save_path = get_save_path()
     with open(save_path, 'w') as file:
         json.dump(data, file, indent=4)
+
+# Import notebook data from a file
+@notebook_bp.route('/import', methods=['POST'])
+@login_required
+def import_notebook():
+    if 'file' not in request.files:
+        flash('No file part', 'error')
+        return redirect(url_for('notebook.notebook'))
+
+    file = request.files['file']
+    if file.filename == '':
+        flash('No selected file', 'error')
+        return redirect(url_for('notebook.notebook'))
+
+    try:
+        imported_data = json.load(file)
+    except json.JSONDecodeError:
+        flash('Invalid JSON file', 'error')
+        return redirect(url_for('notebook.notebook'))
+
+    current_notebook = load_notebook()
+
+    # Merge the imported data into the current user's data
+    for category, entries in imported_data.items():
+        if category in current_notebook:
+            for entry in entries:
+                # If it's a note, label it with the user who added it
+                if category == 'notes':
+                    entry['data'] += f" (Imported from {file.filename})"
+                current_notebook[category].append(entry)
+
+    save_notebook(current_notebook)
+    flash('Notebook data imported successfully!', 'success')
+    return redirect(url_for('notebook.notebook'))
 
 # Notebook route
 @notebook_bp.route('/', methods=['GET', 'POST'])
@@ -64,31 +96,10 @@ def notebook():
             flash('Invalid incident time format!', 'error')
             return redirect(url_for('notebook.notebook'))
 
-        if category == 'ips':
-            # Validate IP address
-            ip_pattern = re.compile(
-                r'^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$'
-            )  # Simple IPv4 regex
-            if not ip_pattern.match(entry):
-                flash('Invalid IP address format!', 'error')
-                return redirect(url_for('notebook.notebook'))
-
-            try:
-                # Lookup hostname
-                hostname = socket.gethostbyaddr(entry)[0]
-            except socket.herror:
-                hostname = 'Unknown'
-
-            session['notebook']['ips'].append({
-                'data': entry,
-                'time': incident_datetime.strftime('%Y-%m-%d %H:%M'),
-                'hostname': hostname
-            })
-        else:
-            session['notebook'][category].append({
-                'data': entry,
-                'time': incident_datetime.strftime('%Y-%m-%d %H:%M')
-            })
+        session['notebook'][category].append({
+            'data': entry,
+            'time': incident_datetime.strftime('%Y-%m-%d %H:%M')
+        })
 
         session.modified = True
         save_notebook(session['notebook'])
@@ -96,19 +107,27 @@ def notebook():
 
     return render_template('notebook.html', notebook=session['notebook'])
 
-# Delete entry route
-@notebook_bp.route('/delete/<category>/<int:index>', methods=['POST', 'GET'])
+# Delete an entry from the notebook
+@notebook_bp.route('/delete/<category>/<int:index>', methods=['POST'])
 @login_required
 def delete_entry(category, index):
-    if category in session['notebook']:
-        try:
-            session['notebook'][category].pop(index)
-            session.modified = True
-            save_notebook(session['notebook'])
-            flash('Entry deleted successfully!', 'success')
-        except IndexError:
-            flash('Invalid entry index!', 'error')
-    else:
-        flash('Invalid category!', 'error')
+    # Ensure the notebook is loaded from the session
+    current_notebook = session.get('notebook')
+
+    if not current_notebook or category not in current_notebook:
+        flash('Category not found!', 'error')
+        return redirect(url_for('notebook.notebook'))
+
+    # Check if the index is valid
+    if index < 0 or index >= len(current_notebook[category]):
+        flash('Invalid entry index!', 'error')
+        return redirect(url_for('notebook.notebook'))
+
+    # Remove the entry
+    current_notebook[category].pop(index)
+
+    session.modified = True
+    save_notebook(current_notebook)  # Save the updated notebook
+    flash('Entry deleted successfully!', 'success')
 
     return redirect(url_for('notebook.notebook'))

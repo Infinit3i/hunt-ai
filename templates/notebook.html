@@ -4,11 +4,10 @@
 
 <!-- Notebook Form -->
 <form method="POST">
-    <!-- Category and Incident Time side by side -->
     <div class="form-group">
         <div class="side-by-side">
             <div class="form-item">
-                <label for="category">Category</label>
+                <label for="category">Category:</label>
                 <select name="category" id="category" required>
                     <option value="notes">Notes</option>
                     <option value="ips">IPs</option>
@@ -19,20 +18,27 @@
             </div>
 
             <div class="form-item">
-                <label for="incident_time">Incident Time</label>
+                <label for="incident_time">Incident Time:</label>
                 <input type="datetime-local" id="incident_time" name="incident_time" required>
             </div>
         </div>
     </div>
 
-    <!-- Note Entry below Category and Incident Time -->
     <div class="form-group">
         <label for="entry">Entry:</label>
         <textarea name="entry" id="entry" rows="3" required></textarea>
-        <button type="submit">Add</button>
     </div>
     
-    
+    <button type="submit">Add</button>
+</form>
+
+<hr>
+
+<!-- Import Notebook Data -->
+<h3>Import Notebook Data</h3>
+<form action="{{ url_for('notebook.import_notebook') }}" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Import</button>
 </form>
 
 <hr>
@@ -47,7 +53,7 @@
         {% if entry['category'] == 'ips' %}
             (Hostname: {{ entry['hostname'] }})
         {% endif %}
-        <a href="{{ url_for('notebook.delete_entry', category=category, index=loop.index0) }}">Delete</a>
+        <a href="{{ url_for('notebook.delete_entry', category=category, index=loop.index0) }}" onclick="return confirm('Are you sure you want to delete this entry?')">Delete</a>
     </li>
     {% endfor %}
 </ul>

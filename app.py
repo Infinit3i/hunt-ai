@@ -6,6 +6,8 @@ from Blueprints.models import db, User
 from Blueprints.user_creation_bp import user_creation_bp
 from Blueprints.routes import routes_bp
 from Blueprints.Routes.notebook_bp import notebook_bp
+
+
 from static.tips import *
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
@@ -19,7 +21,7 @@ app.secret_key = os.urandom(24)
 # Register blueprints
 app.register_blueprint(user_creation_bp)
 app.register_blueprint(routes_bp)
-app.register_blueprint(notebook_bp)
+app.register_blueprint(notebook_bp, url_prefix='/notebook')
 
 # SQLAlchemy configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
