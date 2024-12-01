@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<p>Select a tool or resource below:</p>
+<ul>
+    {% for action in submenu %}
+    <li>
+        <a href="#" onclick="event.preventDefault(); {{ action.function }}()">
+            {{ action.description }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Hunt Methodology</h1>
+
+<!-- Display Baseline and MITRE TIE as buttons -->
+<div class="content-box">
+    {% for section in content %}
+        {% if section.title == "Baseline" or section.title == "MITRE TIE" %}
+        <div class="button-section">
+            <h2>{{ section.title }}</h2>
+            <p>{{ section.description }}</p>
+            <a href="{{ section.link }}" target="_blank" class="link-button">Explore {{ section.title }}</a>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<br>
+<hr>
+
+
+<h1>Incident Response Investigation Funnel</h1>
+<!-- Display the rest of the sections as links -->
+<ul>
+    {% for section in content %}
+        {% if section.title != "Baseline" and section.title != "MITRE TIE" %}
+        <li><a href="/methodology/{{ section.title.replace(' ', '_') }}">{{ section.title }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<h2>Operating System IOCs</h2>
+<ul>
+    <li><a href="/windows" class="link-button">Windows IOC</a></li>
+    <li><a href="/linux" class="link-button">Linux IOC</a></li>  
+</ul>
+{% endblock %}

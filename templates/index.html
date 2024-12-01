@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Centered container -->
+<div class="center-container">
+    <!-- Render Full ASCII Art -->
+    <pre class="ascii-art no-background">{{ full_ascii_art }}</pre>
+
+    <!-- Render Infinitei ASCII Art -->
+    <pre class="ascii-art no-background">{{ infinitei }}</pre>
+
+    <!-- Dynamically Render Random Image -->
+    {% if selected_image %}
+    <img src="{{ url_for('static', filename=selected_image) }}" alt="Cover Image" class="ascii-image">
+    {% endif %}
+
+    <h1>Welcome to Your Cybersecurity Tool</h1>
+    
+    <!-- Render README Description -->
+    <p>{{ readme_description }}</p>
+
+    <!-- Links displayed side by side -->
+    <div class="link-container">
+        {% for link in links %}
+        <a class="link-button" href="{{ link.url }}" target="_blank">{{ link.name }}</a>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

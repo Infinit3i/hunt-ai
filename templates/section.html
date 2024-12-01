@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ section.title }}</h1>
+
+<h2>Content</h2>
+<pre>{{ section.content }}</pre>
+
+{% if section.resources %}
+<h2>Resources</h2>
+<ul>
+    {% for resource in section.resources %}
+    <li><a href="{{ resource }}" target="_blank">{{ resource }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<a href="/{{ request.path.split('/')[1] }}">Back to All Sections</a>
+{% endblock %}

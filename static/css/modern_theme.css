@@ -1,0 +1,53 @@
+/* modern_theme.css */
+body {
+    background-color: #1c1c1c;
+    color: #000000;
+    font-family: 'Arial', sans-serif;
+}
+
+h1, h2, h3, p {
+    color: #f0f0f0;
+}
+
+a {
+    color: #00bcd4;
+}
+
+button {
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.navbar {
+    background-color: #263238;
+}
+
+.navbar a {
+    color: #ffffff;
+}
+
+.navbar a:hover {
+    color: #00bcd4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    font-size: 1.5rem;
+    color: #00bcd4;
+}

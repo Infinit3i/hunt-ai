@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Linux Indicators of Compromise (IOCs)</h1>
+<p>Select a section to explore:</p>
+
+<ul>
+    {% for section in sections %}
+    <li><a href="/linux/{{ section.title.replace(' ', '_') }}">{{ section.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

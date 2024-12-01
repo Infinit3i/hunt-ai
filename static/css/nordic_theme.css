@@ -1,0 +1,46 @@
+/* nordic_theme.css */
+body {
+    background-color: #e0f7fa;
+    color: #01579b;
+    font-family: 'Arial', sans-serif;
+}
+
+h1, h2, h3, p {
+    color: #0277bd;
+}
+
+a {
+    color: #01579b;
+}
+
+button {
+    background-color: #0288d1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar {
+    background-color: #01579b;
+}
+
+.navbar a {
+    color: #ffffff;
+}
+
+.navbar a:hover {
+    color: #81d4fa;
+}
+
+.card {
+    background-color: #b3e5fc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    color: #01579b;
+}

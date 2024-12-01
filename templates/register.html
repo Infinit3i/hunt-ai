@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Create an Account</h1>
+
+<div id="password-requirements" class="hidden">
+    <ul>
+        <li id="min-length">Minimum 10 characters: ❌</li>
+        <li id="uppercase">At least 1 uppercase letter: ❌</li>
+        <li id="special-char">At least 1 special character: ❌</li>
+        <li id="number">At least 1 number: ❌</li>
+        <li id="match">Passwords match: ❌</li>
+    </ul>
+</div>
+
+<form method="POST">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    
+    <label for="confirm_password">Confirm Password:</label>
+    <input type="password" id="confirm_password" name="confirm_password" required>
+
+    <button type="submit">Register</button>
+</form>
+
+<script>
+    const passwordField = document.getElementById('password');
+    const confirmPasswordField = document.getElementById('confirm_password');
+    const passwordRequirements = document.getElementById('password-requirements');
+
+    function showRequirements() {
+        passwordRequirements.classList.remove('hidden');
+    }
+
+    function hideRequirements() {
+        if (!passwordField.value && !confirmPasswordField.value) {
+            passwordRequirements.classList.add('hidden');
+        }
+    }
+
+    // Event listeners for showing and hiding the requirements
+    passwordField.addEventListener('focus', showRequirements);
+    passwordField.addEventListener('blur', hideRequirements);
+
+    confirmPasswordField.addEventListener('focus', showRequirements);
+    confirmPasswordField.addEventListener('blur', hideRequirements);
+
+    // Prevent hiding on invalid form submission
+    document.querySelector('form').addEventListener('submit', (event) => {
+        if (!passwordField.value || !confirmPasswordField.value) {
+            passwordRequirements.classList.remove('hidden');
+        }
+    });
+</script>
+
+
+{% endblock %}

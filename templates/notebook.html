@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Notebook</h1>
+
+<!-- Notebook Form -->
+<form method="POST">
+    <label for="category">Category:</label>
+    <select name="category" id="category" required>
+        <option value="notes">Notes</option>
+        <option value="ips">IPs</option>
+        <option value="domains">Domains</option>
+        <option value="services">Services</option>
+        <option value="tasks">Scheduled Tasks</option>
+    </select>
+    
+    <label for="entry">Entry:</label>
+    <textarea name="entry" id="entry" rows="2" required></textarea>
+    <button type="submit">Add</button>
+</form>
+
+<hr>
+
+<!-- Display Notebook Entries -->
+{% for category, entries in notebook.items() %}
+<h2>{{ category.capitalize() }}</h2>
+<ul>
+    {% for entry in entries %}
+    <li>
+        {{ entry }} 
+        <a href="{{ url_for('delete_entry', category=category, index=loop.index0) }}">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+{% if not entries %}
+<p>No entries yet.</p>
+{% endif %}
+{% endfor %}
+{% endblock %}

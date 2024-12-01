@@ -1,0 +1,67 @@
+/* vampire_theme.css */
+body {
+    background-color: #1a001a;
+    color: #e6e6e6;
+    font-family: 'Arial', sans-serif;
+}
+
+h1, h2, h3, p {
+    color: #ff0033;
+}
+
+a {
+    color: #9900cc;
+}
+
+button {
+    background-color: #4d004d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #660066; /* Lighten the button color */
+    animation: shake 0.5s; /* Apply shake animation */
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-3px);
+    }
+    50% {
+        transform: translateX(3px);
+    }
+    75% {
+        transform: translateX(-3px);
+    }
+}
+
+.navbar {
+    background-color: #330033;
+}
+
+.navbar a {
+    color: #ff6699;
+}
+
+.navbar a:hover {
+    color: #ff0033;
+}
+
+.card {
+    background-color: #2e0032;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(255, 0, 51, 0.3);
+}
+
+.card-header {
+    color: #ff0033;
+}

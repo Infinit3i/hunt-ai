@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ content.title }}</h1>
+<p>{{ content.description }}</p>
+<ul>
+    {% for resource in content.resources %}
+    <li><a href="{{ resource.url }}" target="_blank">{{ resource.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

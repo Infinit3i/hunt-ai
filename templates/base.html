@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link id="theme-stylesheet" rel="stylesheet" href="{{ url_for('static', filename='css/' + theme + '_theme.css') }}">
+    </head>
+<body>
+    <header>
+        <!-- Navigation menu -->
+        <nav class="nav-links">
+            <div class="nav-left">
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <form action="/search" method="GET">
+                        <input type="text" name="query" placeholder="Search..." aria-label="Search">
+                        <button type="submit">🔍</button>
+                    </form>
+                </div>
+                
+            </div>
+            <!-- Centered Links -->
+            <div class="nav-center">
+                <a href="/">Home</a>
+                <div class="dropdown">
+                    <a href="/methodology">Methodology</a>
+                    <div class="dropdown-content">
+                        <a href="/windows">Windows</a>
+                        <a href="/linux">Linux</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="/investigate">Investigate</a>
+                    <div class="dropdown-content">
+                        <a href="/investigate/threat">Threat Intel</a>
+                        <a href="/investigate/ip">IP</a>
+                        <a href="/investigate/domain">Domain</a>
+                        <a href="/investigate/filehash">File Hash</a>
+                        <a href="/investigate/malware">Malware</a>
+                    </div>
+                </div>
+                <a href="/rule_creation">Rule Creation</a>
+            </div>
+            <!-- Right-Aligned Links -->
+            <div class="nav-right">
+                {% if current_user.is_authenticated %}
+                    <a href="/notebook">Notebook</a>
+                    <a href="/profile">{{ current_user.username }}</a>
+                {% else %}
+                    <a href="/register">Register</a>
+                    <a href="/login">Login</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+    
+
+    <div class="tip">
+        {{ random_tip | safe }}
+    </div>
+
+    <main class="{{ theme }}-theme main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+    
+        // Initialize theme on page load
+        const currentTheme = localStorage.getItem('theme') || 'modern';
+        body.classList.add(`${currentTheme}-theme`);
+        themeToggle.checked = currentTheme === 'light';
+    
+        // Event listener for theme toggle
+        themeToggle.addEventListener('change', async function () {
+            const newTheme = this.checked ? 'light' : 'modern';
+    
+            // Apply theme immediately
+            body.classList.remove('modern-theme', 'light-theme');
+            body.classList.add(`${newTheme}-theme`);
+    
+            // Save the new theme locally
+            localStorage.setItem('theme', newTheme);
+    
+            // Send the update to the backend asynchronously
+            try {
+                const response = await fetch('/set_theme', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ theme: newTheme }),
+                });
+    
+                if (!response.ok) {
+                    console.error('Failed to update theme on the server:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error updating theme on the backend:', error);
+            }
+        });
+    </script>     
+</body>
+</html>

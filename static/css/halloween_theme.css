@@ -1,0 +1,49 @@
+/* halloween_theme.css */
+body {
+    background-color: #000000;
+    color: #ffa500;
+    font-family: 'Arial', sans-serif;
+    background-image: url('/static/Pictures/halloween.jpg');
+    background-size: cover; /* Cover the whole screen */
+    background-attachment: fixed; /* Fixed background */
+}
+
+h1, h2, h3, p {
+    color: #ff8c00;
+}
+
+a {
+    color: #ff4500;
+}
+
+button {
+    background-color: #333333;
+    color: #ffa500;
+    border: 2px solid #ff4500;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(255, 69, 0, 0.5);
+}
+
+.navbar {
+    background-color: #333333;
+}
+
+.navbar a {
+    color: #ffa500;
+}
+
+.navbar a:hover {
+    color: #ff4500;
+}
+
+.card {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(255, 165, 0, 0.3);
+}
+
+.card-header {
+    color: #ff8c00;
+}

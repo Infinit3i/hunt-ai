@@ -1,0 +1,49 @@
+/* hacker_theme.css */
+body {
+    background-color: #000000; /* Solid black background */
+    color: #22eb10; /* Bright green text */
+    font-family: 'Arial', sans-serif;
+    background-image: url('/static/Pictures/hacker.jpg'); /* Hacker-themed image */
+    background-size: cover; /* Cover the screen */
+    background-attachment: fixed; /* Fixed background */
+}
+
+h1, h2, h3, p {
+    color: #22eb10; /* Bright green for headings and text */
+}
+
+a {
+    color: #22eb10; /* Bright green for links */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #00ff00; /* Slightly brighter green for hover effect */
+    text-decoration: underline;
+}
+
+button, .link-button {
+    background-color: #0b6619; /* Dark green button background */
+    color: #22eb10; /* Bright green text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* Remove underline for links styled as buttons */
+    font-weight: bold; /* Consistent font weight */
+    display: inline-block; /* Ensure consistent button-like behavior */
+    text-align: center;
+}
+
+button:hover, .link-button:hover {
+    background-color: #0d7a1f; /* Brighter green on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+    cursor: pointer;
+}
+
+button:active, .link-button:active {
+    background-color: #094d14; /* Darker green when pressed */
+    transform: scale(0.98); /* Slight shrink on click */
+}

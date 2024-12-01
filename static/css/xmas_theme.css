@@ -1,0 +1,70 @@
+/* xmas_theme.css */
+body {
+    background-color: #ffffff; /* White background for snow-like effect */
+    color: #006400; /* Dark green text */
+    font-family: 'Arial', sans-serif;
+    background-image: url('/static/Pictures/xmas_tree.jpg'); /* Tree PNG for festive vibe */
+    background-size: cover; /* Cover the whole screen */
+    background-attachment: fixed; /* Fixed background */
+}
+
+h1, h2, h3, p {
+    color: #d32f2f; /* Festive red for headings */
+}
+
+a {
+    color: #006400; /* Dark green for links */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ff0000; /* Red hover effect */
+    text-decoration: underline;
+}
+
+button {
+    background-color: #d32f2f; /* Festive red button background */
+    color: #ffffff; /* White text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #b71c1c; /* Darker red on hover */
+    cursor: pointer;
+}
+
+.navbar {
+    background-color: #006400; /* Green navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+    color: #ffffff; /* White text for navbar links */
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #ffeb3b; /* Golden yellow hover effect */
+}
+
+.card {
+    background-color: #008000; /* Xmas green for cards */
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: #ffffff; /* White text on cards */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    font-size: 1.5rem;
+    color: #ff0000; /* Red headers inside cards */
+    font-weight: bold;
+    border-bottom: 2px solid #ffeb3b; /* Golden yellow underline for card headers */
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
