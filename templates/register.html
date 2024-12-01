@@ -1,63 +1,93 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Create an Account</h1>
+<div class="auth-container">
+    <div class="auth-box">
+        <h1 class="auth-header">Create an Account</h1>
 
-<div id="password-requirements" class="hidden">
-    <ul>
-        <li id="min-length">Minimum 10 characters: ❌</li>
-        <li id="uppercase">At least 1 uppercase letter: ❌</li>
-        <li id="special-char">At least 1 special character: ❌</li>
-        <li id="number">At least 1 number: ❌</li>
-        <li id="match">Passwords match: ❌</li>
-    </ul>
+        <form id="auth-register-form" method="POST">
+            <div class="auth-form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="auth-username" name="username" required>
+            </div>
+
+            <div class="auth-form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="auth-password" name="password" required>
+            </div>
+            
+            <div class="auth-form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="auth-confirm_password" name="confirm_password" required>
+            </div>
+
+            <button id="auth-register-btn" type="submit">Register</button>
+        </form>
+
+        <!-- Password Requirements Box -->
+        <div id="auth-password-requirements" class="auth-hidden">
+            <ul>
+                <li id="auth-min-length">Minimum 10 characters: ❌</li>
+                <li id="auth-uppercase">At least 1 uppercase letter: ❌</li>
+                <li id="auth-special-char">At least 1 special character: ❌</li>
+                <li id="auth-number">At least 1 number: ❌</li>
+                <li id="auth-match">Passwords match: ❌</li>
+            </ul>
+        </div>
+    </div>
 </div>
 
-<form method="POST">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    
-    <label for="confirm_password">Confirm Password:</label>
-    <input type="password" id="confirm_password" name="confirm_password" required>
-
-    <button type="submit">Register</button>
-</form>
-
 <script>
-    const passwordField = document.getElementById('password');
-    const confirmPasswordField = document.getElementById('confirm_password');
-    const passwordRequirements = document.getElementById('password-requirements');
+    const passwordField = document.getElementById('auth-password');
+    const confirmPasswordField = document.getElementById('auth-confirm_password');
+    const passwordRequirements = document.getElementById('auth-password-requirements');
+
+    // Validation functions
+    function updateRequirements() {
+        const password = passwordField.value;
+        const confirmPassword = confirmPasswordField.value;
+
+        // Validate each requirement and update the list dynamically
+        document.getElementById('auth-min-length').innerHTML = password.length >= 10
+            ? "Minimum 10 characters: ✅"
+            : "Minimum 10 characters: ❌";
+
+        document.getElementById('auth-uppercase').innerHTML = /[A-Z]/.test(password)
+            ? "At least 1 uppercase letter: ✅"
+            : "At least 1 uppercase letter: ❌";
+
+        document.getElementById('auth-special-char').innerHTML = /[!@#$%^&*(),.?":{}|<>]/.test(password)
+            ? "At least 1 special character: ✅"
+            : "At least 1 special character: ❌";
+
+        document.getElementById('auth-number').innerHTML = /\d/.test(password)
+            ? "At least 1 number: ✅"
+            : "At least 1 number: ❌";
+
+        document.getElementById('auth-match').innerHTML = password === confirmPassword
+            ? "Passwords match: ✅"
+            : "Passwords match: ❌";
+    }
 
     function showRequirements() {
-        passwordRequirements.classList.remove('hidden');
+        passwordRequirements.classList.add('auth-visible');
     }
 
     function hideRequirements() {
         if (!passwordField.value && !confirmPasswordField.value) {
-            passwordRequirements.classList.add('hidden');
+            passwordRequirements.classList.remove('auth-visible');
         }
     }
 
-    // Event listeners for showing and hiding the requirements
+    // Event listeners for showing/hiding and dynamically updating the requirements
     passwordField.addEventListener('focus', showRequirements);
-    passwordField.addEventListener('blur', hideRequirements);
-
     confirmPasswordField.addEventListener('focus', showRequirements);
+    passwordField.addEventListener('blur', hideRequirements);
     confirmPasswordField.addEventListener('blur', hideRequirements);
+    passwordField.addEventListener('input', updateRequirements);
+    confirmPasswordField.addEventListener('input', updateRequirements);
 
-    // Prevent hiding on invalid form submission
-    document.querySelector('form').addEventListener('submit', (event) => {
-        if (!passwordField.value || !confirmPasswordField.value) {
-            passwordRequirements.classList.remove('hidden');
-        }
-    });
+    // Initialize the requirements visibility and validation state
+    document.addEventListener('DOMContentLoaded', updateRequirements);
 </script>
-
-
 {% endblock %}
