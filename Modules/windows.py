@@ -108,8 +108,7 @@ def get_windows_content():
             "title": persistence_menu["title"],
             "content": persistence_menu["description"],
             "resources": [
-                "https://attack.mitre.org/",
-                "https://www.splunk.com/"
+                "",
             ],
             "links": [
                 {"name": method["name"], "url": method["url"]} for method in persistence_menu["methods"]
