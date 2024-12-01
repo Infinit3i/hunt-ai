@@ -10,10 +10,12 @@ from flask_sqlalchemy import SQLAlchemy
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from static.tips import get_random_tip_or_joke
+
 from Modules.windows import get_windows_content
 from Modules.rule_creation import get_rule_creation_content
 from Modules.linux import get_linux_content
-from Modules.tips import get_random_tip_or_joke
+
 from Modules.methodology import get_methodology_content
 from Modules.investigate import get_investigate_content
 
