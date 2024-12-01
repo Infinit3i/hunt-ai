@@ -1,86 +1,107 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>User Profile</h1>
-<p>Welcome, {{ username }}!</p>
+<div class="auth-container">
+    <div class="auth-box">
+        <h1 class="auth-title">User Profile</h1>
 
-<!-- Display Flash Messages -->
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <ul>
-      {% for category, message in messages %}
-        <li class="{{ category }}">{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+        <!-- Display Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul>
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
 
-<!-- Display the username and other information -->
-<div>
-    <h3>Your Information:</h3>
-    <ul>
-        <li><strong>Username:</strong> {{ username }}</li>
-        <li><strong>Email:</strong> {{ email }}</li>
-        <li><strong>Role:</strong> {{ role }}</li>
-        <li><strong>Team:</strong> {{ team }}</li>
-        <li><strong>Manager:</strong> {{ manager }}</li>
-    </ul>
-
-    <!-- Profile Update Form -->
-    <form method="POST">
-        <div>
-            <label for="role">Role:</label>
-            <select name="role" id="role" required>
-                <option value="" disabled selected>Please select a role</option>
-                <option value="Junior Host Analyst" {% if role == 'Junior Host Analyst' %}selected{% endif %}>Junior Host Analyst</option>
-                <option value="Junior Network Analyst" {% if role == 'Junior Network Analyst' %}selected{% endif %}>Junior Network Analyst</option>
-                <option value="Senior Host Analyst" {% if role == 'Senior Host Analyst' %}selected{% endif %}>Senior Host Analyst</option>
-                <option value="Senior Network Analyst" {% if role == 'Senior Network Analyst' %}selected{% endif %}>Senior Network Analyst</option>
-                <option value="Lead Analyst" {% if role == 'Lead Analyst' %}selected{% endif %}>Lead Analyst</option>
-                <option value="DFIR" {% if role == 'DFIR' %}selected{% endif %}>DFIR</option>
-                <option value="Malware Analyst" {% if role == 'Malware Analyst' %}selected{% endif %}>Malware Analyst</option>
-            </select>
-        </div>
-        <div>
-            <label for="theme">Theme:</label>
-            <select name="theme" id="theme">
-                <option value="dark" {% if theme == 'dark' %}selected{% endif %}>Dark Theme</option>
-                <option value="light" {% if theme == 'light' %}selected{% endif %}>Light Theme</option>
-                <option value="modern" {% if theme == 'modern' %}selected{% endif %}>Modern Theme</option>
-                <option value="hacker" {% if theme == 'hacker' %}selected{% endif %}>Hacker Theme</option>
-                <option value="vampire" {% if theme == 'vampire' %}selected{% endif %}>Vampire Theme</option>
-                <option value="nordic" {% if theme == 'nordic' %}selected{% endif %}>Nordic Theme</option>
-                <option value="halloween" {% if theme == 'halloween' %}selected{% endif %}>Halloween Theme</option>
-                <option value="xmas" {% if theme == 'xmas' %}selected{% endif %}>Christmas Theme</option>
-            </select>
-        </div>
-        <div>
-            <label for="team">Team:</label>
-            <input type="text" id="team" name="team" value="{{ team }}" required>
+        <!-- User Information -->
+        <div class="auth-info">
+            <ul>
+                <li><strong>Username:</strong> {{ current_user.username or 'Not available' }}</li>
+                <li><strong>Role:</strong> {{ current_user.role or 'Not set' }}</li>
+                <li><strong>Team:</strong> {{ current_user.team or 'Not set' }}</li>
+                <li><strong>Manager:</strong> {{ current_user.manager or 'Not set' }}</li>
+            </ul>
         </div>
 
-        <div>
-            <label for="manager">Manager:</label>
-            <input type="text" id="manager" name="manager" value="{{ manager }}" required>
-        </div>
+        <!-- Profile Update Form -->
+        <form id="profile-form" method="POST">
+            <div class="auth-form-group">
+                <label for="role">Role:</label>
+                <select name="role" id="role" required>
+                    <option value="" disabled selected>Please select a role</option>
+                    <option value="Junior Host Analyst" {% if current_user.role == 'Junior Host Analyst' %}selected{% endif %}>Junior Host Analyst</option>
+                    <option value="Junior Network Analyst" {% if current_user.role == 'Junior Network Analyst' %}selected{% endif %}>Junior Network Analyst</option>
+                    <option value="Senior Host Analyst" {% if current_user.role == 'Senior Host Analyst' %}selected{% endif %}>Senior Host Analyst</option>
+                    <option value="Senior Network Analyst" {% if current_user.role == 'Senior Network Analyst' %}selected{% endif %}>Senior Network Analyst</option>
+                    <option value="Lead Analyst" {% if current_user.role == 'Lead Analyst' %}selected{% endif %}>Lead Analyst</option>
+                    <option value="DFIR" {% if current_user.role == 'DFIR' %}selected{% endif %}>DFIR</option>
+                    <option value="Malware Analyst" {% if current_user.role == 'Malware Analyst' %}selected{% endif %}>Malware Analyst</option>
+                </select>
+            </div>
 
-        <div>
-            <label for="password">New Password (leave empty if unchanged):</label>
-            <input type="password" id="password" name="password">
-        </div>
+            <div class="auth-form-group">
+                <label for="theme">Theme:</label>
+                <select name="theme" id="theme">
+                    <option value="dark" {% if current_user.theme == 'dark' %}selected{% endif %}>Dark Theme</option>
+                    <option value="light" {% if current_user.theme == 'light' %}selected{% endif %}>Light Theme</option>
+                    <option value="modern" {% if current_user.theme == 'modern' %}selected{% endif %}>Modern Theme</option>
+                    <option value="hacker" {% if current_user.theme == 'hacker' %}selected{% endif %}>Hacker Theme</option>
+                    <option value="vampire" {% if current_user.theme == 'vampire' %}selected{% endif %}>Vampire Theme</option>
+                    <option value="nordic" {% if current_user.theme == 'nordic' %}selected{% endif %}>Nordic Theme</option>
+                    <option value="halloween" {% if current_user.theme == 'halloween' %}selected{% endif %}>Halloween Theme</option>
+                    <option value="xmas" {% if current_user.theme == 'xmas' %}selected{% endif %}>Christmas Theme</option>
+                </select>
+            </div>
 
-        <div>
-            <label for="password_confirm">Confirm New Password:</label>
-            <input type="password" id="password_confirm" name="password_confirm">
-        </div>
+            <div class="auth-form-group">
+                <label for="team">Team (optional):</label>
+                <input type="text" id="team" name="team" value="{{ current_user.team }}">
+            </div>
 
-        <button type="submit">Save</button>
-    </form>
+            <div class="auth-form-group">
+                <label for="manager">Manager (optional):</label>
+                <input type="text" id="manager" name="manager" value="{{ current_user.manager }}">
+            </div>
 
-    <!-- Logout Button -->
-    <form action="{{ url_for('logout') }}" method="POST">
-        <button type="submit">Log Out</button>
-    </form>
+            <div class="auth-form-group">
+                <label for="password">New Password (optional):</label>
+                <input type="password" id="password" name="password">
+            </div>
+
+            <div class="auth-form-group">
+                <label for="password_confirm">Confirm New Password:</label>
+                <input type="password" id="password_confirm" name="password_confirm">
+            </div>
+
+            <button type="submit" class="auth-btn">Save Changes</button>
+        </form>
+
+        <!-- Logout Button -->
+        <form action="{{ url_for('user_creation.logout') }}" method="POST">
+            <button type="submit" class="auth-btn logout-btn">Log Out</button>
+        </form>
+    </div>
 </div>
 
+<script>
+    const passwordField = document.getElementById('password');
+    const confirmPasswordField = document.getElementById('password_confirm');
+
+    function validatePasswordMatch() {
+        const password = passwordField.value;
+        const confirmPassword = confirmPasswordField.value;
+
+        if (password && confirmPassword && password !== confirmPassword) {
+            confirmPasswordField.setCustomValidity("Passwords do not match.");
+        } else {
+            confirmPasswordField.setCustomValidity("");
+        }
+    }
+
+    passwordField.addEventListener('input', validatePasswordMatch);
+    confirmPasswordField.addEventListener('input', validatePasswordMatch);
+</script>
 {% endblock %}
