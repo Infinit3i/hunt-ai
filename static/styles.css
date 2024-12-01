@@ -482,12 +482,48 @@ input:checked + .slider:before {
 
 
 
-
+.image-container {
+    position: relative;
+    display: inline-block;
+    padding: 30px;
+}
 
 .cover-image {
     max-width: 30rem;
     max-height: 30rem;
+    display: block; /* Ensures the image takes up space properly */
+    padding: 10px;
+    transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
 }
+
+.img__description {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;  /* Make the description match the width of the image */
+    height: 100%; /* Match the height of the image */
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: opacity 4s ease-in-out, visibility 4s ease-in-out;
+}
+
+.image-container:hover .img__description {
+    visibility: visible;
+    opacity: 1;
+}
+
+.image-container:hover .cover-image {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+
 
 /* Preformatted Text */
 pre {
