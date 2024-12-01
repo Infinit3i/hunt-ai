@@ -4,3 +4,4 @@ include
 bin
 pyvenv.cfg
 __pycache__
+users.db
