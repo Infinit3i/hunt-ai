@@ -19,7 +19,6 @@
                         <button type="submit">🔍</button>
                     </form>
                 </div>
-                
             </div>
             <!-- Centered Links -->
             <div class="nav-center">
@@ -55,7 +54,6 @@
             </div>
         </nav>
     </header>
-    
 
     <div class="tip">
         {{ random_tip | safe }}
@@ -68,23 +66,23 @@
     <script>
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
-    
+
         // Initialize theme on page load
-        const currentTheme = localStorage.getItem('theme') || 'modern';
+        const currentTheme = localStorage.getItem('theme') || '{{ theme }}';  // Flask variable for initial theme
         body.classList.add(`${currentTheme}-theme`);
         themeToggle.checked = currentTheme === 'light';
-    
+
         // Event listener for theme toggle
         themeToggle.addEventListener('change', async function () {
             const newTheme = this.checked ? 'light' : 'modern';
-    
+
             // Apply theme immediately
             body.classList.remove('modern-theme', 'light-theme');
             body.classList.add(`${newTheme}-theme`);
-    
+
             // Save the new theme locally
             localStorage.setItem('theme', newTheme);
-    
+
             // Send the update to the backend asynchronously
             try {
                 const response = await fetch('/set_theme', {
@@ -92,7 +90,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ theme: newTheme }),
                 });
-    
+
                 if (!response.ok) {
                     console.error('Failed to update theme on the server:', response.statusText);
                 }
