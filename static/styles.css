@@ -85,6 +85,10 @@ header {
     color: white;
     padding: 10px;
     text-align: center;
+    position: sticky; /* Makes the header stick to the top */
+    top: 0; /* Specifies the distance from the top of the viewport */
+    z-index: 1000; /* Ensures it stays above other elements */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
 }
 
 header nav {
