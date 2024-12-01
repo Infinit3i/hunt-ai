@@ -391,6 +391,18 @@ button:active {
     text-align: center;
 }
 
+/* T-Code Tip - Orange */
+.tcode-tip {
+    background-color: #fff3e0;
+    border-left: 4px solid #ff9800;
+}
+
+/* Joke Tip - Purple */
+.joke-tip {
+    background-color: #f3e5f5;
+    border-left: 4px solid #9c27b0;
+}
+
 .tip a {
     color: #1e90ff;  /* Adjust for light theme */
     text-decoration: none;
@@ -402,6 +414,7 @@ button:active {
     color: #ff4500; /* Adjust hover color */
     text-decoration: underline;
 }
+
 
 
 /* Slider */

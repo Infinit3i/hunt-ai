@@ -46,7 +46,12 @@ def inject_theme():
 
 @app.context_processor
 def inject_random_tip():
-    return {'random_tip': get_random_tip_or_joke()}
+    random_tip, random_tip_type = get_random_tip_or_joke()
+    return {
+        'random_tip': random_tip,
+        'random_tip_type': random_tip_type
+    }
+
 
 # Ensure database tables are created
 with app.app_context():

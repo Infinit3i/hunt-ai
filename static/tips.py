@@ -388,18 +388,28 @@ ANSI_ESCAPE_REGEX = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
 TCODE_PATTERN = re.compile(r'(T\d{4}(\.\d{3})?)')  # Matches T#### or T####.###
 
 def get_random_tip_or_joke(clean=False):
-    # Pick a random tip or joke
+    # Pick a random tip, joke, or T-code
     item = random.choice(TIPS + JOKES + TCODES)
+    
+    # Determine type of item
+    if item in TIPS:
+        tip_type = 'tip'
+    elif item in JOKES:
+        tip_type = 'joke'
+    else:
+        tip_type = 't-code'
     
     # Replace T-Codes with clickable links
     def replace_tcode_with_link(match):
         tcode = match.group(1)
         return f'<a href="https://attack.mitre.org/techniques/{tcode}/" target="_blank">{tcode}</a>'
     
+    # Format the item (only T-Codes get special formatting)
     formatted_item = TCODE_PATTERN.sub(replace_tcode_with_link, item)
 
     if clean:
         # Remove HTML tags for clean output
         formatted_item = re.sub(r'<[^>]+>', '', formatted_item)
-    
-    return formatted_item
+         
+    return formatted_item, tip_type  # Return formatted item and type separately
+

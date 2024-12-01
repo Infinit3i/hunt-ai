@@ -54,9 +54,11 @@
             </div>
         </nav>
     </header>
-
-    <div class="tip">
-        {{ random_tip | safe }}
+    <div class="tip 
+    {% if random_tip_type == 't-code' %} tcode-tip 
+    {% elif random_tip_type == 'joke' %} joke-tip 
+    {% endif %}">
+    {{ random_tip | safe }}  <!-- Only output the formatted tip -->
     </div>
 
     <main class="{{ theme }}-theme main-content">

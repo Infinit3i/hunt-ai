@@ -71,8 +71,8 @@ def home():
         {"name": "Visit My Website", "url": "https://infinit3i.com/"}
     ]
 
-    # Generate a random tip
-    random_tip = get_random_tip_or_joke()
+    # Generate a random tip, joke, or T-code
+    random_tip, random_tip_type = get_random_tip_or_joke(clean=False)
 
     # Ensure theme is set in the session
     if 'theme' not in session:
@@ -85,8 +85,11 @@ def home():
         links=links,
         readme_description=readme_description,
         selected_image=selected_image,
-        random_tip=random_tip  # Pass the random tip
+        random_tip=random_tip,  # Pass the formatted tip only
+        random_tip_type=random_tip_type  # Pass the type for styling
     )
+
+
 
 
 # Methodology routes
