@@ -47,34 +47,34 @@
             </div>
             <!-- Centered Links -->
             <div class="nav-center">
-                <a href="/">Home</a>
+                <a class="nav-link" href="/">Home</a>
                 <div class="dropdown">
-                    <a href="/methodology">Methodology</a>
+                    <a class="nav-link" href="/methodology">Methodology</a>
                     <div class="dropdown-content">
-                        <a href="/windows">Windows</a>
-                        <a href="/linux">Linux</a>
+                        <a class="nav-link" href="/windows">Windows</a>
+                        <a class="nav-link" href="/linux">Linux</a>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <a href="/investigate">Investigate</a>
+                    <a class="nav-link" href="/investigate">Investigate</a>
                     <div class="dropdown-content">
-                        <a href="/investigate/threat">Threat Intel</a>
-                        <a href="/investigate/ip">IP</a>
-                        <a href="/investigate/domain">Domain</a>
-                        <a href="/investigate/filehash">File Hash</a>
-                        <a href="/investigate/malware">Malware</a>
+                        <a class="nav-link" href="/investigate/threat">Threat Intel</a>
+                        <a class="nav-link" href="/investigate/ip">IP</a>
+                        <a class="nav-link" href="/investigate/domain">Domain</a>
+                        <a class="nav-link" href="/investigate/filehash">File Hash</a>
+                        <a class="nav-link" href="/investigate/malware">Malware</a>
                     </div>
                 </div>
-                <a href="/rule_creation">Rule Creation</a>
+                <a class="nav-link" href="/rule_creation">Rule Creation</a>
             </div>
             <!-- Right-Aligned Links -->
             <div class="nav-right">
                 {% if current_user.is_authenticated %}
-                    <a href="/notebook">Notebook</a>
-                    <a href="/profile">{{ current_user.username }}</a>
+                    <a class="nav-link" href="/notebook">Notebook</a>
+                    <a class="nav-link" href="/profile">{{ current_user.username }}</a>
                 {% else %}
-                    <a href="/register">Register</a>
-                    <a href="/login">Login</a>
+                    <a class="nav-link" href="/register">Register</a>
+                    <a class="nav-link" href="/login">Login</a>
                 {% endif %}
             </div>
         </nav>

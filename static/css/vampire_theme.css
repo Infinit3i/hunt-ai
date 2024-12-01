@@ -1,7 +1,7 @@
 /* vampire_theme.css */
 body {
     background-color: #1a001a;
-    color: #e6e6e6;
+    color: black;
     font-family: 'Arial', sans-serif;
 }
 
@@ -13,46 +13,12 @@ a {
     color: #9900cc;
 }
 
-button {
-    background-color: #4d004d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    transition: background-color 0.3s ease, transform 0.2s ease;
+header {
+    background-color: #ff0033;
 }
 
-button:hover {
-    background-color: #660066; /* Lighten the button color */
-    animation: shake 0.5s; /* Apply shake animation */
-}
-
-@keyframes shake {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    25% {
-        transform: translateX(-3px);
-    }
-    50% {
-        transform: translateX(3px);
-    }
-    75% {
-        transform: translateX(-3px);
-    }
-}
-
-.navbar {
-    background-color: #330033;
-}
-
-.navbar a {
+header:hover {
     color: #ff6699;
-}
-
-.navbar a:hover {
-    color: #ff0033;
 }
 
 .card {
@@ -64,4 +30,35 @@ button:hover {
 
 .card-header {
     color: #ff0033;
+}
+
+.info-links {
+    color: #ff0033;
+}
+
+.link-button {
+    background-color: #ff0033;
+    color: white;
+}
+
+.link-button:hover {
+    background-color: #ff6699;
+    color: white;
+}
+
+.nav-link {
+    background-color: red;
+    color: white; /* Changed from black to white for better contrast */
+    padding: 10px 20px; /* Added some padding to make the link more clickable */
+    border-radius: 10px; /* Adjust the value to control how round the edges are */
+    text-decoration: none; /* Optional: Removes underline from the link */
+}
+
+.nav-link:hover {
+    background-color: #ff6699;
+    color: white; /* Changed from black to white for better contrast */
+}
+
+.info-links a {
+    color: red;
 }

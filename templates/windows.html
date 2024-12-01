@@ -5,7 +5,7 @@
 
 <ul>
     {% for section in sections %}
-        <li><a href="/windows/{{ section.title.replace(' ', '_') }}">{{ section.title }}</a></li>
+        <li><a class="info-links" href="/windows/{{ section.title.replace(' ', '_') }}">{{ section.title }}</a></li>
     {% endfor %}
 </ul>
 
@@ -15,7 +15,7 @@
         <p>{{ section.content }}</p>
         <ul>
             {% for link in section.links %}
-                <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+                <li><a class="info-links" href="{{ link.url }}">{{ link.name }}</a></li>
             {% endfor %}
         </ul>
     {% endif %}

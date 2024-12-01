@@ -4,7 +4,7 @@
 <p>{{ content.description }}</p>
 <ul>
     {% for resource in content.resources %}
-    <li><a href="{{ resource.url }}">{{ resource.name }}</a></li>
+    <li><a class="info-links" href="{{ resource.url }}">{{ resource.name }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}

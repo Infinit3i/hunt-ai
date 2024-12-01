@@ -5,7 +5,7 @@
 
 <ul>
     {% for section in sections %}
-    <li><a href="/linux/{{ section.title.replace(' ', '_') }}">{{ section.title }}</a></li>
+    <li><a class="info-links" href="/linux/{{ section.title.replace(' ', '_') }}">{{ section.title }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}
