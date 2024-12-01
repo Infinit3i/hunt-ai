@@ -4,22 +4,35 @@
 
 <!-- Notebook Form -->
 <form method="POST">
-    <label for="category">Category:</label>
-    <select name="category" id="category" required>
-        <option value="notes">Notes</option>
-        <option value="ips">IPs</option>
-        <option value="domains">Domains</option>
-        <option value="services">Services</option>
-        <option value="tasks">Scheduled Tasks</option>
-    </select>
+    <!-- Category and Incident Time side by side -->
+    <div class="form-group">
+        <div class="side-by-side">
+            <div class="form-item">
+                <label for="category">Category</label>
+                <select name="category" id="category" required>
+                    <option value="notes">Notes</option>
+                    <option value="ips">IPs</option>
+                    <option value="domains">Domains</option>
+                    <option value="services">Services</option>
+                    <option value="tasks">Scheduled Tasks</option>
+                </select>
+            </div>
+
+            <div class="form-item">
+                <label for="incident_time">Incident Time</label>
+                <input type="datetime-local" id="incident_time" name="incident_time" required>
+            </div>
+        </div>
+    </div>
+
+    <!-- Note Entry below Category and Incident Time -->
+    <div class="form-group">
+        <label for="entry">Entry:</label>
+        <textarea name="entry" id="entry" rows="3" required></textarea>
+        <button type="submit">Add</button>
+    </div>
     
-    <label for="entry">Entry:</label>
-    <textarea name="entry" id="entry" rows="2" required></textarea>
-
-    <label for="incident_time">Incident Time:</label>
-    <input type="datetime-local" id="incident_time" name="incident_time" required>
-
-    <button type="submit">Add</button>
+    
 </form>
 
 <hr>
@@ -34,7 +47,7 @@
         {% if entry['category'] == 'ips' %}
             (Hostname: {{ entry['hostname'] }})
         {% endif %}
-        <a href="{{ url_for('routes.delete_entry', category=category, index=loop.index0) }}">Delete</a>
+        <a href="{{ url_for('notebook.delete_entry', category=category, index=loop.index0) }}">Delete</a>
     </li>
     {% endfor %}
 </ul>
