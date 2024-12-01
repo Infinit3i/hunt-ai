@@ -602,7 +602,6 @@ button {
     border: 1px solid #ccc;
     background-color: #007bff;
     color: white;
-    font-size: 14px;
     border-radius: 0 5px 5px 0; /* Rounded right corners */
     vertical-align: middle;
     cursor: pointer;
@@ -617,10 +616,9 @@ button {
     border-color: #007bff;
 }
 
-
-
-
-
+.search-button {
+    width: 5rem;
+}
 
 
 
@@ -707,4 +705,33 @@ button {
 
 .auth-info {
     color: gray;
+}
+
+/* Make form fields stack on each other */
+form .form-group {
+    margin-bottom: 15px; /* Space between form elements */
+    display: grid;
+    width: 100%; /* Ensure inputs take up the full width */
+    padding: 10px;
+}
+
+form label {
+    display: block; /* Ensure labels are displayed on top of inputs */
+    margin-bottom: 5px; /* Space between label and input field */
+}
+
+form .side-by-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 15px; /* Space between the two fields */
+}
+
+form .form-item {
+    display: flex;
+    flex-direction: column;
+}
+
+form button {
+    width: 100%; /* Adjust button width */
+    padding: 10px 20px; /* Adjust button padding */
 }
