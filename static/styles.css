@@ -74,10 +74,39 @@ header nav a:hover {
 }
 
 /* Dropdown Menu */
+.dropdown {
+    position: relative; /* Makes the dropdown a relative container for the dropdown-content */
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 150px; /* Width of the dropdown */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    left: 50%; /* Align the dropdown to the center of the parent */
+    transform: translateX(-50%); /* Offset by half its width for perfect centering */
+    border-radius: 5px; /* Optional: for rounded corners */
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
 .dropdown-content a:hover {
     background-color: #555;
-    text-decoration: none; /* Remove underline on hover for dropdown menu */
 }
+
+.dropdown:hover .dropdown-content {
+    display: block; /* Show dropdown on hover */
+}
+
 
 /* Header and Navigation */
 header {
@@ -501,43 +530,38 @@ button {
 
 
 
-/* Navigation Bar */
+/* Navbar */
 .nav-links {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Space between left, center, and right sections */
     align-items: center;
-    padding: 0 20px;
+    padding: 0 20px; /* Optional padding for spacing */
 }
 
 .nav-left {
+    flex: 0 0 auto; /* Prevents the nav-left (search-bar) from growing or shrinking */
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
+.nav-center {
+    flex: 1; /* Ensures the center section takes up the remaining space */
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
 
+.nav-right {
+    flex: 0 0 auto; /* Prevents the nav-right from growing or shrinking */
+    display: flex;
+    gap: 15px; /* Space between the links */
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Search Bar */
+.search-bar {
+    width: 300px; /* Fixed width for the search bar */
+}
 /* Search Bar */
 .search-bar {
     display: inline-block;
@@ -556,6 +580,7 @@ button {
     border-radius: 5px 0 0 5px; /* Rounded left corners */
     font-size: 14px;
     vertical-align: middle;
+    width: 300px; /* Set to twice the previous width (default ~150px) */
 }
 
 .search-bar button {
