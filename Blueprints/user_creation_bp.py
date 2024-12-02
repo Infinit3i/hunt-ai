@@ -55,10 +55,15 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
-        flash('Account created successfully. Please log in.', 'success')
-        return redirect(url_for('user_creation.login'))
+        # Automatically log in the new user
+        login_user(new_user)
+        flash('Account created successfully. Welcome!', 'success')
+        
+        # Redirect to the notebook page
+        return redirect(url_for('notebook.notebook'))
     
     return render_template('register.html')
+
 
 # Login route
 @user_creation_bp.route('/login', methods=['GET', 'POST'])
@@ -81,9 +86,12 @@ def login():
         # Log the user in
         login_user(user)
         flash('Login successful.', 'success')
-        return redirect(url_for('user_creation.profile'))
+        
+        # Redirect to the notebook page after successful login
+        return redirect(url_for('notebook.notebook'))
     
     return render_template('login.html')
+
 
 # Logout route
 @user_creation_bp.route('/logout', methods=['POST'])  # Added methods=['POST']
