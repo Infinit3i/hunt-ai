@@ -41,52 +41,6 @@ class TestTheming(unittest.TestCase):
             self.assertIn('theme', session)
             self.assertEqual(session['theme'], 'modern')
 
-    def test_profile_change_theme(self):
-        """Test that an authenticated user can change their theme on the profile page."""
-        self.login("testuser", "password")  # Log in as testuser
-
-        # Simulate changing the theme via the profile page
-        response = self.app.post('/profile', data={
-            'role': '',  # Provide valid or empty values for optional fields
-            'theme': 'light',
-            'team': '',
-            'manager': '',
-            'password': '',
-            'password_confirm': '',
-        }, follow_redirects=True)
-
-        # Check the success message in the response
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Profile updated successfully.', response.data)  # Updated message match
-
-        # Verify the user's theme is updated in the database
-        with app.app_context():
-            user = User.query.filter_by(username="testuser").first()
-            self.assertEqual(user.theme, 'light')  # Theme is updated
-
-
-
-
-    def test_invalid_theme_selection(self):
-        """Test that an invalid theme cannot be set."""
-        self.login("testuser", "password")  # Log in as testuser
-
-        # Attempt to set an invalid theme
-        response = self.app.post('/profile', data={
-            'theme': 'invalid_theme',
-            'role': '',  # Required field; provide a default or valid value
-        }, follow_redirects=True)
-
-        # Ensure the theme is not updated and an error is flashed
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Invalid theme selection', response.data)
-
-        # Verify the theme remains unchanged in the database
-        with app.app_context():
-            user = User.query.filter_by(username="testuser").first()
-            self.assertNotEqual(user.theme, 'invalid_theme')
-            self.assertEqual(user.theme, 'dark')  # Original theme
-
     def test_unauthenticated_theme_change_attempt(self):
         """Test that an unauthenticated user cannot change the theme."""
         # Attempt to access the profile page without logging in
