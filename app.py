@@ -1,4 +1,6 @@
 import os
+from sqlalchemy.orm import Session
+
 from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user
@@ -37,7 +39,8 @@ login_manager.login_view = 'user_creation.login'
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
+    with app.app_context():
+        return db.session.get(User, user_id)
 
 # Context processor to inject theme
 @app.context_processor

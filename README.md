@@ -56,3 +56,11 @@ HUNT-AI helps threat hunting to make sure analysts are checking their boxes and 
 
 
 #### REFACTORING
+
+
+
+
+## Run Testing
+```
+python -m unittest discover Testing
+```
