@@ -47,15 +47,50 @@ HUNT-AI helps threat hunting to make sure analysts are checking their boxes and 
 ## Todo
 
 #### IDEAS
+- notebook save
+- search
+- knowledge section
+- notebook session json encrypted
 - session management
 - add more sections
 - have ips be entered into links
 - verify what links can be used
 - checklist of all items
-- searching
+
+
+
+
+
+
+
+
+
+
 
 
 #### REFACTORING
+
+
+kept in notebook
+- from
+- to
+- time incident
+- time reported
+- file/note/scheduled/registry key
+- user
+- t-code
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
