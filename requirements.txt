@@ -1,6 +1,0 @@
-flask
-flask-login
-flask_sqlalchemy
-watchdog
-cryptography
-flask-testing
