@@ -16,7 +16,6 @@ from static.ascii_text_prompts import full_ascii_art_stripped, infinitei_strippe
 from Modules.windows import get_windows_content
 from Modules.linux import get_linux_content
 from Modules.methodology import get_methodology_content
-from Modules.rule_creation import get_rule_creation_content
 from Modules.investigate import get_investigate_content
 from Modules.Persistence.persistence import get_persistence_menu
 
@@ -120,13 +119,6 @@ def linux_section(title):
     if not section:
         abort(404)
     return render_template('section.html', section=section)
-
-
-# Rule creation routes
-@routes_bp.route('/rule_creation')
-def rule_creation():
-    content = get_rule_creation_content()
-    return render_template('rule_creation.html', content=content)
 
 
 # Windows routes
