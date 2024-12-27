@@ -22,19 +22,8 @@ HUNT-AI helps threat hunting to make sure analysts are checking their boxes and 
 2. unzip Hunt-AI.zip
 3. Go to path `*/hunt-ai/`
 	- you should see `app.py`
-4. Set Enviroment 
-	- On Windows
-		- `python -m venv hunt-ai`
-		- `hunt-ai\Scripts\activate` -cmd
-		- `.\hunt-ai\Scripts\Activate` - ps1
-	- On macOS/Linux
-		- `python3 -m venv hunt-ai`
-		- `source hunt-ai/bin/activate`
-5. Install requirements
-	- On Windows & macOS/Linux
-		- `pip install -r requirements.txt`
-	- if that fails
-		- `pip install flask flask_sqlalchemy flask_login`
+4. `cd Installation`
+5. `python3 setup.py`
 6. Start
 	- On Windows
 		- `py.exe app.py`
@@ -48,6 +37,7 @@ HUNT-AI helps threat hunting to make sure analysts are checking their boxes and 
 
 #### IDEAS
 - notebook save
+	- encrypt
 - search
 - knowledge section
 - notebook session json encrypted
@@ -79,20 +69,6 @@ kept in notebook
 - file/note/scheduled/registry key
 - user
 - t-code
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ## Run Testing
