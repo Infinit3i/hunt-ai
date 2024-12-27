@@ -1,5 +1,5 @@
-import os
 import subprocess
+
 
 def main():
     # Number of Gunicorn workers
@@ -21,6 +21,7 @@ def main():
         print(f"Failed to start Gunicorn server. Error: {e}")
     except KeyboardInterrupt:
         print("\nServer stopped by user. 👋")
+
 
 if __name__ == "__main__":
     main()

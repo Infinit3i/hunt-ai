@@ -1,20 +1,17 @@
 import os
-from sqlalchemy.orm import Session
-
+import time
+import sys
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 from flask import Flask, session
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user
+
 from Blueprints.models import db, User
 from Blueprints.user_creation_bp import user_creation_bp
 from Blueprints.routes import routes_bp
 from Blueprints.Routes.notebook_bp import notebook_bp
 
-
-from static.tips import *
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
-import time
-import sys
+from static.tips import get_random_tip_or_joke
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -37,17 +34,19 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'user_creation.login'
 
+
 @login_manager.user_loader
 def load_user(user_id):
     with app.app_context():
         return db.session.get(User, user_id)
 
-# Context processor to inject theme
-@app.context_processor
+
+@app.context_processor  # Context processor to inject theme
 def inject_theme():
     # Retrieve theme from session or default to 'modern' if not set
     theme = session.get('theme', current_user.theme if current_user.is_authenticated else 'modern')
     return {'theme': theme}
+
 
 @app.context_processor
 def inject_random_tip():
@@ -87,6 +86,7 @@ def start_watchdog():
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
+
 
 if __name__ == '__main__':
     # Start watchdog in a separate thread or process for file watching
