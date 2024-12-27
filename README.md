@@ -42,8 +42,7 @@ HUNT-AI helps threat hunting to make sure analysts are checking their boxes and 
 - have ips be entered into links
 - verify what links can be used
 - checklist of all items
-
-
+- when the notebook is put in order it creates a powerpoint and network diagram
 
 
 
