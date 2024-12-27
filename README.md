@@ -24,12 +24,8 @@ HUNT-AI helps threat hunting to make sure analysts are checking their boxes and 
 	- you should see `app.py`
 4. `cd Installation`
 5. `python3 setup.py`
-6. Start
-	- On Windows
-		- `py.exe app.py`
-	- On macOS/Linux
-		- `python3 app.py`
-		- `python3 app.py -h for help`
+6. `cd ../`
+7. `python3 start.py`
 ----
 
 
