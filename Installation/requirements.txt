@@ -6,3 +6,4 @@ watchdog==3.0.0
 cryptography==41.0.3
 flask-testing==0.8.1
 sqlalchemy==2.0.20
+gunicorn==20.1.0
