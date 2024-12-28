@@ -13,8 +13,9 @@
     text-align: center;
     width: 300px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
     position: relative;
+    cursor: pointer;
 }
 
 .mitre-box:hover {
@@ -31,12 +32,13 @@
     position: absolute;
     top: 10px;
     left: 10px;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     background-color: #ddd;
     border: 2px solid #bbb;
     cursor: pointer;
     border-radius: 4px;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .tactic-checkbox:checked + .checkbox-label {
@@ -44,22 +46,9 @@
     border-color: #4CAF50;
 }
 
-/* Resources list */
-.mitre-box ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
-}
-
-.mitre-box ul li {
-    margin-bottom: 5px;
-}
-
-.mitre-box ul li a {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-.mitre-box ul li a:hover {
-    text-decoration: underline;
+/* Highlight box when checkbox is selected */
+.tactic-checkbox:checked ~ h2,
+.tactic-checkbox:checked ~ p {
+    color: #4CAF50;
+    font-weight: bold;
 }

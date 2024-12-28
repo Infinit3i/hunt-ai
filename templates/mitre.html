@@ -6,10 +6,17 @@
 
 <div class="mitre-grid">
     {% for tactic in mitre_content %}
-    <div class="mitre-box">
+    <div class="mitre-box" data-checkbox-id="{{ tactic.title | replace(' ', '-') }}">
+        <!-- Hidden checkbox -->
         <input type="checkbox" id="{{ tactic.title | replace(' ', '-') }}" class="tactic-checkbox" />
         <label for="{{ tactic.title | replace(' ', '-') }}" class="checkbox-label"></label>
-        <h2><a href="{{ url_for('routes.mitre_tactic', tactic=tactic.title.replace(' ', '_')) }}">{{ tactic.title }}</a></h2>
+
+        <!-- Tactic title and description -->
+        <h2>
+            <a href="{{ url_for('routes.mitre_tactic', tactic=tactic.title.replace(' ', '_')) }}">
+                {{ tactic.title }}
+            </a>
+        </h2>
         <p>{{ tactic.description }}</p>
     </div>
     {% endfor %}
@@ -17,18 +24,23 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const checkboxes = document.querySelectorAll(".tactic-checkbox");
+    const tacticBoxes = document.querySelectorAll(".mitre-box");
 
-    // Load saved states from localStorage
-    checkboxes.forEach((checkbox) => {
-      const id = checkbox.id;
-      if (localStorage.getItem(id) === "true") {
+    tacticBoxes.forEach((box) => {
+      const checkboxId = box.getAttribute("data-checkbox-id");
+      const checkbox = document.getElementById(checkboxId);
+
+      // Load saved states from localStorage
+      if (localStorage.getItem(checkboxId) === "true") {
         checkbox.checked = true;
       }
 
-      // Save state to localStorage when toggled
-      checkbox.addEventListener("change", () => {
-        localStorage.setItem(id, checkbox.checked);
+      // Toggle checkbox when the box is clicked
+      box.addEventListener("click", (e) => {
+        if (e.target.tagName !== "A") { // Avoid toggling when clicking on links
+          checkbox.checked = !checkbox.checked;
+          localStorage.setItem(checkboxId, checkbox.checked);
+        }
       });
     });
   });
