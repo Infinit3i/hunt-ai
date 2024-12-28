@@ -20,8 +20,6 @@ from Modules.methodology import get_methodology_content
 from Modules.investigate import get_investigate_content
 from Modules.Persistence.persistence import get_persistence_menu
 
-from Modules.mitre import get_mitre_content
-
 from Modules.Investigate.threat import get_threat_content
 from Modules.Investigate.domain import get_domain_content
 from Modules.Investigate.ip import get_ip_content
@@ -123,18 +121,19 @@ def load_tactics():
 # Update the '/mitre' route
 @routes_bp.route('/mitre')
 def mitre():
-    mitre_content = load_tactics()  # Load sorted tactics
+    # Dynamically load tactics from the Tactics folder
+    mitre_content = load_tactics()  # This function loads all tactic data dynamically
     return render_template('mitre.html', mitre_content=mitre_content)
 
 # Define a dynamic route for individual tactics
 @routes_bp.route('/mitre/<tactic>')
 def mitre_tactic(tactic):
-    # Fetch all tactics dynamically
+    # Dynamically load tactics
     mitre_content = load_tactics()
 
     # Find the specific tactic using the tactic's title
     tactic_data = next(
-        (item for item in mitre_content if item["title"].replace(" ", "_").lower() == tactic.lower()), 
+        (item for item in mitre_content if item["title"].replace(" ", "_").lower() == tactic.lower()),
         None
     )
     if not tactic_data:
