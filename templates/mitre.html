@@ -1,57 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>MITRE Framework</h1>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mitre.css') }}" />
 
-<!-- Display MITRE Framework sections as clickable boxes -->
-<div class="content-box">
-    <div class="mitre-grid">
-        {% for tactic in mitre_content %}
-        <div class="mitre-box">
-            <h2>{{ tactic.title }}</h2>
-            <p>{{ tactic.description }}</p>
-            <a href="/mitre/{{ tactic.title.replace(' ', '_') }}" class="link-button">Learn More</a>
-        </div>
-        {% endfor %}
+<h1>MITRE Tactics</h1>
+
+<div class="mitre-grid">
+    {% for tactic in mitre_content %}
+    <div class="mitre-box">
+        <input type="checkbox" id="{{ tactic.title | replace(' ', '-') }}" class="tactic-checkbox" />
+        <label for="{{ tactic.title | replace(' ', '-') }}" class="checkbox-label"></label>
+        <h2><a href="{{ url_for('routes.mitre_tactic', tactic=tactic.title.replace(' ', '_')) }}">{{ tactic.title }}</a></h2>
+        <p>{{ tactic.description }}</p>
     </div>
+    {% endfor %}
 </div>
 
-<style>
-    /* Style for the MITRE grid layout */
-    .mitre-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-    }
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const checkboxes = document.querySelectorAll(".tactic-checkbox");
 
-    .mitre-box {
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 15px;
-        text-align: center;
-        width: 300px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
+    // Load saved states from localStorage
+    checkboxes.forEach((checkbox) => {
+      const id = checkbox.id;
+      if (localStorage.getItem(id) === "true") {
+        checkbox.checked = true;
+      }
 
-    .mitre-box:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .link-button {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 10px 15px;
-        background-color: #007BFF;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.2s;
-    }
-
-    .link-button:hover {
-        background-color: #0056b3;
-    }
-</style>
+      // Save state to localStorage when toggled
+      checkbox.addEventListener("change", () => {
+        localStorage.setItem(id, checkbox.checked);
+      });
+    });
+  });
+</script>
 {% endblock %}
