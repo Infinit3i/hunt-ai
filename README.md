@@ -36,12 +36,12 @@ DO BOTS, Cyberdefenders and letsdefend over 50 times to get a good methodology
 
 
 #### IDEAS
+- search
+
+
+- knowledge section
 - notebook save
 	- encrypt
-- search
-- knowledge section
-- notebook session json encrypted
-- session management
 - have ips be entered into links
 - verify what links can be used
 - checklist of all items
