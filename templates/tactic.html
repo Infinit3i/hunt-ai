@@ -1,16 +1,17 @@
 {% extends "base.html" %}
+
 {% block content %}
-<div class="tactic-container">
-    <h1>{{ tactic.title }}</h1>
-    <p>{{ tactic.description }}</p>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mitre.css') }}" />
 
-    <h2>Resources</h2>
-    <ul>
-        {% for resource in tactic.resources %}
-        <li><a href="{{ resource }}" target="_blank">{{ resource }}</a></li>
-        {% endfor %}
-    </ul>
+<h1>{{ tactic.title }}</h1>
+<p>{{ tactic.description }}</p>
 
-    <a href="/mitre" class="link-button">Back to MITRE</a>
-</div>
+<h2>Resources</h2>
+<ul>
+    {% for resource in tactic.resources %}
+    <li><a href="{{ resource }}" target="_blank">{{ resource }}</a></li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('routes.mitre') }}">Back to MITRE Tactics</a>
 {% endblock %}

@@ -2,6 +2,7 @@
 import os
 import random
 import socket
+import importlib.util
 from datetime import datetime
 import re
 
@@ -91,24 +92,57 @@ def home():
     )
 
 
+# Function to dynamically load tactics from the Tactics folder
+def load_tactics():
+    """
+    Dynamically loads tactics from the Tactics folder and sorts them by tactic_id.
+    """
+    tactics_path = os.path.join(os.getcwd(), 'Modules', 'Tactics')
+    tactics = []
+
+    # Iterate through all Python files in the Tactics folder
+    for file in os.listdir(tactics_path):
+        if file.endswith('.py'):
+            file_path = os.path.join(tactics_path, file)
+            module_name = file[:-3]  # Remove the .py extension
+
+            # Dynamically import the module
+            spec = importlib.util.spec_from_file_location(module_name, file_path)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+
+            # Check if the module has a `get_content` function
+            if hasattr(module, 'get_content'):
+                tactics.extend(module.get_content())
+
+    # Sort tactics by their tactic_id (e.g., TA0001, TA0002)
+    tactics.sort(key=lambda x: x.get("tactic_id", ""))
+    return tactics
+
+
+# Update the '/mitre' route
 @routes_bp.route('/mitre')
 def mitre():
-    mitre_content = get_mitre_content()
+    mitre_content = load_tactics()  # Load sorted tactics
     return render_template('mitre.html', mitre_content=mitre_content)
 
 # Define a dynamic route for individual tactics
 @routes_bp.route('/mitre/<tactic>')
 def mitre_tactic(tactic):
-    # Fetch the MITRE content
-    mitre_content = get_mitre_content()
+    # Fetch all tactics dynamically
+    mitre_content = load_tactics()
 
-    # Find the specific tactic
-    tactic_data = next((item for item in mitre_content if item["title"].replace(" ", "_").lower() == tactic.lower()), None)
+    # Find the specific tactic using the tactic's title
+    tactic_data = next(
+        (item for item in mitre_content if item["title"].replace(" ", "_").lower() == tactic.lower()), 
+        None
+    )
     if not tactic_data:
         abort(404, description="Tactic not found.")
 
-    # Render the tactic-specific page
+    # Render the tactic-specific page and pass the content
     return render_template('tactic.html', tactic=tactic_data)
+
 
 # Methodology routes
 @routes_bp.route('/methodology')
