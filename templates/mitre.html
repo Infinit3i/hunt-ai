@@ -5,11 +5,11 @@
 <!-- Display MITRE Framework sections as clickable boxes -->
 <div class="content-box">
     <div class="mitre-grid">
-        {% for mitre_section in mitre_content %}
+        {% for tactic in mitre_content %}
         <div class="mitre-box">
-            <h2>{{ mitre_section.title }}</h2>
-            <p>{{ mitre_section.description }}</p>
-            <a href="{{ mitre_section.link }}" target="_blank" class="link-button">Explore {{ mitre_section.title }}</a>
+            <h2>{{ tactic.title }}</h2>
+            <p>{{ tactic.description }}</p>
+            <a href="/mitre/{{ tactic.title.replace(' ', '_') }}" class="link-button">Learn More</a>
         </div>
         {% endfor %}
     </div>

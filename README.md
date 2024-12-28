@@ -31,6 +31,10 @@ HUNT-AI helps threat hunting to make sure analysts are checking their boxes and 
 
 ## Todo
 
+
+DO BOTS, Cyberdefenders and letsdefend over 50 times to get a good methodology
+
+
 #### IDEAS
 - notebook save
 	- encrypt
@@ -38,15 +42,12 @@ HUNT-AI helps threat hunting to make sure analysts are checking their boxes and 
 - knowledge section
 - notebook session json encrypted
 - session management
-- add more sections
 - have ips be entered into links
 - verify what links can be used
 - checklist of all items
 - when the notebook is put in order it creates a powerpoint and network diagram
-
-
-
-
+- have all the pre data go into the hunt data in its right section
+- add t codes associated with attacks so we can organize better
 
 
 

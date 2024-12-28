@@ -96,6 +96,19 @@ def mitre():
     mitre_content = get_mitre_content()
     return render_template('mitre.html', mitre_content=mitre_content)
 
+# Define a dynamic route for individual tactics
+@routes_bp.route('/mitre/<tactic>')
+def mitre_tactic(tactic):
+    # Fetch the MITRE content
+    mitre_content = get_mitre_content()
+
+    # Find the specific tactic
+    tactic_data = next((item for item in mitre_content if item["title"].replace(" ", "_").lower() == tactic.lower()), None)
+    if not tactic_data:
+        abort(404, description="Tactic not found.")
+
+    # Render the tactic-specific page
+    return render_template('tactic.html', tactic=tactic_data)
 
 # Methodology routes
 @routes_bp.route('/methodology')
