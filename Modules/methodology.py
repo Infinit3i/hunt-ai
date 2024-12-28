@@ -34,6 +34,8 @@ def get_methodology_content():
             "title": "Windows Basics",
             "content": """
 - Look for file extensions.
+- look for files that can be used in phishing.
+- look for users with many failed login attempts then successful.
 - Initial access and lateral movement are the loudest.
 - Understand how PID and PPID relate.
 - Look for 1-2 character .exe (e.g., a.exe, ab.exe).
@@ -53,6 +55,7 @@ def get_methodology_content():
             "title": "Time of Incident",
             "content": """
 - SIEM/IDS/AV alert
+- what happened around what you are looking at?
 - 3rd Party Notification
             """,
             "resources": [
@@ -64,6 +67,10 @@ def get_methodology_content():
             "title": "Network Activity",
             "content": """
 - Malicious URLs accessed
+- where is the malicious ip?
+- what port is it using?
+- what is it reaching out to?
+- is it touching multiple of your systems?
 - DNS requests for bad domains
             """,
             "resources": [
