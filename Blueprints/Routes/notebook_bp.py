@@ -1,7 +1,9 @@
 import json
 import os
 from flask import Blueprint, request, render_template, flash, redirect, url_for, session
-from flask_login import login_required, current_user
+from flask_login import login_required, current_user, login_user
+from werkzeug.security import generate_password_hash
+from Blueprints.models import User, db
 from datetime import datetime
 
 # Define the notebook blueprint
@@ -38,6 +40,39 @@ def save_notebook(data):
     save_path = get_save_path()
     with open(save_path, 'w') as file:
         json.dump(data, file, indent=4)
+
+# Helper function to create a user
+def create_user(username, password):
+    hashed_password = generate_password_hash(password)
+    new_user = User(username=username, password_hash=hashed_password)
+    db.session.add(new_user)
+    db.session.commit()
+    return new_user
+
+@notebook_bp.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = User.query.filter_by(username=username).first()
+
+        if user:
+            print(f"DEBUG: User {username} found in database.")
+            if user.check_password(password):
+                print(f"DEBUG: Password for {username} verified successfully.")
+                login_user(user)
+                flash('Logged in successfully.', 'success')
+                next_page = request.args.get('next')
+                return redirect(next_page or url_for('notebook.notebook'))
+            else:
+                print(f"DEBUG: Password verification failed for {username}.")
+        else:
+            print(f"DEBUG: User {username} not found in database.")
+
+        flash('Invalid username or password.', 'error')
+    
+    return render_template('login.html')
+
 
 # Import notebook data from a file
 @notebook_bp.route('/import', methods=['POST'])
@@ -77,6 +112,7 @@ def import_notebook():
 @notebook_bp.route('/', methods=['GET', 'POST'])
 @login_required
 def notebook():
+    # Initialize the notebook session for the user
     if 'notebook' not in session:
         session['notebook'] = load_notebook()
 
@@ -106,6 +142,41 @@ def notebook():
         flash('Entry added successfully!', 'success')
 
     return render_template('notebook.html', notebook=session['notebook'])
+
+# Registration Route
+@notebook_bp.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
+
+        # Validate inputs
+        if not username or not password or not confirm_password:
+            flash('All fields are required!', 'error')
+            return redirect(url_for('notebook.register'))
+
+        if password != confirm_password:
+            flash('Passwords do not match!', 'error')
+            return redirect(url_for('notebook.register'))
+
+        # Check if the username already exists
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            flash('Username already exists!', 'error')
+            return redirect(url_for('notebook.register'))
+
+        # Create the user
+        user = create_user(username, password)
+
+        # Log the user in
+        login_user(user)
+
+        # Redirect to notebook page
+        flash('Registration successful! Redirecting to your notebook...', 'success')
+        return redirect(url_for('notebook.notebook'))
+
+    return render_template('register.html')
 
 # Delete an entry from the notebook
 @notebook_bp.route('/delete/<category>/<int:index>', methods=['POST'])

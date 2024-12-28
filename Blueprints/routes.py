@@ -19,6 +19,8 @@ from Modules.methodology import get_methodology_content
 from Modules.investigate import get_investigate_content
 from Modules.Persistence.persistence import get_persistence_menu
 
+from Modules.mitre import get_mitre_content
+
 from Modules.Investigate.threat import get_threat_content
 from Modules.Investigate.domain import get_domain_content
 from Modules.Investigate.ip import get_ip_content
@@ -89,6 +91,10 @@ def home():
     )
 
 
+@routes_bp.route('/mitre')
+def mitre():
+    mitre_content = get_mitre_content()
+    return render_template('mitre.html', mitre_content=mitre_content)
 
 
 # Methodology routes

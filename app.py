@@ -5,6 +5,7 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from flask import Flask, session
 from flask_login import LoginManager, current_user
+from flask_session import Session
 
 from Blueprints.models import db, User
 from Blueprints.user_creation_bp import user_creation_bp
@@ -32,8 +33,18 @@ db.init_app(app)
 # Initialize login manager
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'user_creation.login'
+login_manager.login_view = 'notebook.login'  # Fixed login view to match notebook login route
 
+# Session configuration - Adjusted for Gunicorn compatibility
+app.config['SESSION_TYPE'] = 'filesystem'  # Changed from Redis to filesystem to avoid Redis errors
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_USE_SIGNER'] = True
+app.config['SESSION_FILE_DIR'] = os.path.join(os.getcwd(), 'flask_session')  # Ensure session files persist across workers
+os.makedirs(app.config['SESSION_FILE_DIR'], exist_ok=True)  # Ensure session directory exists
+Session(app)  # Initialize Flask-Session with updated configuration
+
+
+Session(app)
 
 @login_manager.user_loader
 def load_user(user_id):
