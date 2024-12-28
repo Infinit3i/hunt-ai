@@ -8,3 +8,5 @@ flask-testing==0.8.1
 sqlalchemy==2.0.20
 gunicorn==20.1.0
 requests
+flask-session
+redis
