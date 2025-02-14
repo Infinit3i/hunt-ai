@@ -125,23 +125,6 @@ def mitre():
     mitre_content = load_tactics()  # This function loads all tactic data dynamically
     return render_template('mitre.html', mitre_content=mitre_content)
 
-# Define a dynamic route for individual tactics
-@routes_bp.route('/mitre/<tactic>')
-def mitre_tactic(tactic):
-    # Dynamically load tactics
-    mitre_content = load_tactics()
-
-    # Find the specific tactic using the tactic's title
-    tactic_data = next(
-        (item for item in mitre_content if item["title"].replace(" ", "_").lower() == tactic.lower()),
-        None
-    )
-    if not tactic_data:
-        abort(404, description="Tactic not found.")
-
-    # Render the tactic-specific page and pass the content
-    return render_template('tactic.html', tactic=tactic_data)
-
 
 # Methodology routes
 @routes_bp.route('/methodology')
@@ -237,3 +220,85 @@ def persistence_method(method):
         
         
 
+
+
+
+
+def load_techniques_for_tactic(tactic_folder):
+    """
+    Dynamically loads techniques from the corresponding tactic folder (e.g., Modules/execution/).
+    """
+    techniques = {}
+    techniques_path = os.path.join(os.getcwd(), "Modules", tactic_folder)
+
+    if not os.path.exists(techniques_path):
+        print(f"❌ Folder not found: {techniques_path}")  # Debugging output
+        return techniques  # Return empty if folder doesn't exist
+
+    for file in os.listdir(techniques_path):
+        if file.endswith(".py"):
+            file_path = os.path.join(techniques_path, file)
+            module_name = file[:-3]  # Remove the .py extension
+
+            # Fix: Replace `.` with `_` when loading dynamically
+            module_name = module_name.replace(".", "_")  
+
+            print(f"🔍 Loading: {file_path}")  # Debugging output
+
+            # Dynamically import the module
+            spec = importlib.util.spec_from_file_location(module_name, file_path)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+
+            # Check if the module has a `get_content` function
+            if hasattr(module, "get_content"):
+                technique_data = module.get_content()
+                print(f"✅ Loaded: {technique_data['id']} -> {technique_data['url_id']}")  # Debugging output
+                techniques[technique_data["url_id"]] = technique_data
+
+    return techniques
+
+
+@routes_bp.route('/mitre/<tactic>')
+def mitre_tactic(tactic):
+    # Load all tactics
+    mitre_content = load_tactics()
+
+    # Find the selected tactic
+    tactic_data = next(
+        (item for item in mitre_content if item["title"].replace(" ", "_").lower() == tactic.lower()),
+        None
+    )
+    if not tactic_data:
+        abort(404, description="Tactic not found.")
+
+    # Load the associated techniques from its folder
+    tactic_folder = tactic_data["title"].lower().replace(" ", "_")
+    techniques = load_techniques_for_tactic(tactic_folder)
+
+    # Pass both tactic and its techniques to the template
+    return render_template('tactic.html', tactic=tactic_data, techniques=techniques)
+
+
+@routes_bp.route('/technique/<path:url_id>')  # Accepts slashes in the URL
+def technique_page(url_id):
+    # Load all techniques from all tactic folders
+    tactic_folders = ["execution", "initial_access", "collection", "persistence", "defense_evasion"]
+    techniques = {}
+
+    for folder in tactic_folders:
+        techniques.update(load_techniques_for_tactic(folder))
+
+    print(f"🔎 Searching for: {url_id}")  # Debugging output
+
+    # Find the technique using url_id
+    selected_technique = techniques.get(url_id)
+
+    if not selected_technique:
+        print(f"❌ Not Found in techniques: {url_id}")  # Debugging output
+        print("✅ Loaded Techniques List:")
+        for key in techniques.keys():
+            print(f"   - {key}")  # Show all loaded techniques
+        abort(404, description="Technique not found.")
+
+    return render_template('technique.html', technique=selected_technique)

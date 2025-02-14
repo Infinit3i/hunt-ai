@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mitre.css') }}" />
+
+<h1>{{ technique.title }} [{{ technique.id }}]</h1>
+<p><strong>Data Sources:</strong> {{ technique.data_sources }}</p>
+<p><strong>Protocol:</strong> {{ technique.protocol }}</p>
+<p><strong>OS:</strong> {{ technique.os }}</p>
+
+<h2>Overview</h2>
+<p><strong>Objective:</strong> {{ technique.objective }}</p>
+<p><strong>Scope:</strong> {{ technique.scope }}</p>
+<p><strong>Threat Model:</strong> {{ technique.threat_model }}</p>
+
+<h2>Hypothesis</h2>
+<ul>
+    {% for question in technique.hypothesis %}
+    <li>{{ question }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Data Sources & Log Queries</h2>
+<h3>🛠 Log Sources to Query</h3>
+<table>
+    <tr><th>Log Type</th><th>Source</th></tr>
+    {% for log in technique.log_sources %}
+    <tr><td>{{ log.type }}</td><td>{{ log.source }}</td></tr>
+    {% endfor %}
+</table>
+
+<h3>🛠 Detection Methods</h3>
+<ul>
+    {% for method in technique.detection_methods %}
+    <li>{{ method }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Hunting Queries</h2>
+<h3>🔍 SPL - Detect {{ technique.title }}</h3>
+<pre>{{ technique.spl_query }}</pre>
+<h3>🔍 Sigma [{{ technique.id }}]</h3>
+<p>{{ technique.sigma_rule }}</p>
+
+<h2>3.1.5 Hunt Execution Steps</h2>
+<ol>
+    {% for step in technique.hunt_steps %}
+    <li>{{ step }}</li>
+    {% endfor %}
+</ol>
+
+<h2>Expected Outcomes</h2>
+<ul>
+    {% for outcome in technique.expected_outcomes %}
+    <li>{{ outcome }}</li>
+    {% endfor %}
+</ul>
+
+<h2>MITRE ATT&CK Mapping</h2>
+<table>
+    <tr><th>Tactic</th><th>Technique</th><th>Example</th></tr>
+    {% for mapping in technique.mitre_mapping %}
+    <tr><td>{{ mapping.tactic }}</td><td>{{ mapping.technique }}</td><td>{{ mapping.example }}</td></tr>
+    {% endfor %}
+</table>
+
+<h2>Operationalization & Next Steps</h2>
+<h3>🚀 Watchlist & Alerting</h3>
+<ul>
+    {% for alert in technique.watchlist %}
+    <li>{{ alert }}</li>
+    {% endfor %}
+</ul>
+
+<h3>📌 Enhance Defenses</h3>
+<ul>
+    {% for defense in technique.enhancements %}
+    <li>{{ defense }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Summary & Reporting</h2>
+<ul>
+    <li><strong>Summary of Findings:</strong> {{ technique.summary }}</li>
+    <li><strong>Remediation Steps:</strong> {{ technique.remediation }}</li>
+    <li><strong>Future Improvements:</strong> {{ technique.improvements }}</li>
+</ul>
+
+<a href="{{ url_for('routes.mitre_tactic', tactic=technique.tactic.replace(' ', '_')) }}">Back to {{ technique.tactic }}</a>
+{% endblock %}

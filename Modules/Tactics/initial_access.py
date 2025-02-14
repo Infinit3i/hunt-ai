@@ -6,9 +6,5 @@ def get_content():
             "description": """
                 Techniques used by attackers to gain initial access to a target network or system.
             """,
-            "resources": [
-                "https://attack.mitre.org/tactics/TA0001/",
-                "https://www.cisa.gov/"
-            ],
         },
     ]

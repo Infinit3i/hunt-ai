@@ -1,15 +1,19 @@
 {% extends "base.html" %}
-
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/mitre.css') }}" />
 
-<h1>{{ tactic.title }}</h1>
+<h1>{{ tactic.title }}</h1>  <!-- FIXED: Dynamically shows the tactic name -->
+
 <p>{{ tactic.description }}</p>
 
-<h2>Resources</h2>
+<h2>Techniques</h2>
 <ul>
-    {% for resource in tactic.resources %}
-    <li><a href="{{ resource }}" target="_blank">{{ resource }}</a></li>
+    {% for technique in techniques.values() %}
+    <li>
+        <a href="{{ url_for('routes.technique_page', url_id=technique.url_id) }}">
+            {{ technique.title }} [{{ technique.id }}]
+        </a>
+    </li>
     {% endfor %}
 </ul>
 

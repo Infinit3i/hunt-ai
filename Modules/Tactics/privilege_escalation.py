@@ -6,9 +6,5 @@ def get_content():
             "description": """
                 Methods used to gain higher-level permissions on a system.
             """,
-            "resources": [
-                "https://attack.mitre.org/tactics/TA0004/",
-                "https://www.sans.org/"
-            ],
         },
     ]

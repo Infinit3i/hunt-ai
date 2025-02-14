@@ -6,9 +6,5 @@ def get_content():
             "description": """
                 Techniques used to gather data of interest from a target network or system.
             """,
-            "resources": [
-                "https://attack.mitre.org/tactics/TA0009/",
-                "https://www.trendmicro.com/"
-            ],
         },
     ]

@@ -6,9 +6,5 @@ def get_content():
             "description": """
                 Techniques used to steal account credentials such as passwords or keys.
             """,
-            "resources": [
-                "https://attack.mitre.org/tactics/TA0006/",
-                "https://www.kaspersky.com/"
-            ],
         },
     ]
