@@ -9,6 +9,18 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease; /* for theme switch */
 }
 
+pre {
+  white-space: pre-wrap;   /* Wrap text to fit within the container */
+  overflow: auto;          /* Adds scrollbars when needed */
+  max-width: 100%;         /* Ensures it doesn't overflow its container */
+  word-break: break-word;  /* Ensures long words wrap properly */
+}
+
+pre h2 {
+  color: black;
+}
+
+
 h1,
 h2,
 h3,

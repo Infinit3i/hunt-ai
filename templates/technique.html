@@ -7,16 +7,15 @@
 
 
 <h1>{{ technique.title }} [{{ technique.id }}]</h1>
-<div class="content-box">
-    <pre><strong>Data Sources:</strong> {{ technique.data_sources }}
+<pre>
+    <strong>Data Sources:</strong> {{ technique.data_sources }}
     <strong>Protocol:</strong> {{ technique.protocol }}
-    <strong>OS:</strong> {{ technique.os }}</pre>
-</div>
-
-<h2>Overview</h2>
-<pre><strong>Objective:</strong> {{ technique.objective }}
-<strong>Scope:</strong> {{ technique.scope }}
-<strong>Threat Model:</strong> {{ technique.threat_model }}</pre>
+    <strong>OS:</strong> {{ technique.os }}
+        <h2>Overview</h2>
+    <strong>Objective:</strong> {{ technique.objective }}
+    <strong>Scope:</strong> {{ technique.scope }}
+    <strong>Threat Model:</strong> {{ technique.threat_model }}
+</pre>
 
 <h2>Hypothesis</h2>
 <ul>
