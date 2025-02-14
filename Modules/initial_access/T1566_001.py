@@ -29,7 +29,7 @@ def get_content():
             "Identify common senders, trends, and suspicious domains."
         ],
         "spl_query": "index=email sourcetype=\"email\" attach_filename=* | stats count by sender, subject, recipient | sort - count",
-        "sigma_rule": "Sigma rule for detecting phishing attachments [T1566.001]",
+        "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1566.001",
         "hunt_steps": [
             "Run Queries in SIEM: Extract attachment file names and senders. Correlate with web traffic and endpoint logs.",
             "Investigate Attachments: Check attachment hashes in VirusTotal, Hybrid Analysis, and MISP. Identify recent file downloads from suspicious emails.",

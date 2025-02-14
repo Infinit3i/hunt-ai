@@ -1,0 +1,26 @@
+def get_content():
+    return {
+        "id": "",
+        "url_id": "",
+        "title": "",
+        "tactic": "",
+        "data_sources": "",
+        "protocol": "",
+        "os": "",
+        "objective": "",
+        "scope": "",
+        "threat_model": "",
+        "hypothesis": [],
+        "log_sources": [],
+        "detection_methods": [],
+        "spl_query": "",
+        "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=",
+        "hunt_steps": [],
+        "expected_outcomes": [],
+        "mitre_mapping": [],
+        "watchlist": [],
+        "enhancements": [],
+        "summary": "",
+        "remediation": "",
+        "improvements": ""
+    }

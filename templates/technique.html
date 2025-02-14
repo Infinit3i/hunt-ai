@@ -3,6 +3,9 @@
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/mitre.css') }}" />
 
+<a href="{{ url_for('routes.mitre_tactic', tactic=technique.tactic.replace(' ', '_')) }}">Back to {{ technique.tactic }}</a>
+
+
 <h1>{{ technique.title }} [{{ technique.id }}]</h1>
 <p><strong>Data Sources:</strong> {{ technique.data_sources }}</p>
 <p><strong>Protocol:</strong> {{ technique.protocol }}</p>
@@ -39,8 +42,7 @@
 <h2>Hunting Queries</h2>
 <h3>🔍 SPL - Detect {{ technique.title }}</h3>
 <pre>{{ technique.spl_query }}</pre>
-<h3>🔍 Sigma [{{ technique.id }}]</h3>
-<p>{{ technique.sigma_rule }}</p>
+<a href={{ technique.sigma_rule }}>🔍 Sigma [{{ technique.id }}]</a>
 
 <h2>3.1.5 Hunt Execution Steps</h2>
 <ol>

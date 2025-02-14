@@ -283,7 +283,7 @@ def mitre_tactic(tactic):
 @routes_bp.route('/technique/<path:url_id>')  # Accepts slashes in the URL
 def technique_page(url_id):
     # Load all techniques from all tactic folders
-    tactic_folders = ["execution", "initial_access", "collection", "persistence", "defense_evasion"]
+    tactic_folders = ["reconnaissance", "resource_development", "initial_access", "execution", "persistence", "privilege_escalation", "defense_evasion", "credential_access", "discovery", "lateral_movement", "collection", "command_and_control", "exfiltration", "impact"]
     techniques = {}
 
     for folder in tactic_folders:
