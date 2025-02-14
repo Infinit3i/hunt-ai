@@ -11,15 +11,18 @@ def get_content():
         "scope": "",
         "threat_model": "",
         "hypothesis": [],
-        "log_sources": [],
+        "log_sources": [
+            {"type": "", "source": "", "destination": ""}
+        ],
         "detection_methods": [],
-        "spl_query": "",
-        "spl_rule": "https://research.splunk.com/detections/tactics/<TACTIC>/",
-        "elastic_rule": "https://grep.app/search?f.repo=elastic%2Fdetection-rules&q=T####",
-        "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T####",
+        "spl_query": [],
         "hunt_steps": [],
         "expected_outcomes": [],
-        "mitre_mapping": [],
+        "false_positive":"",
+        "clearing_steps": [],
+        "mitre_mapping": [
+            {"tactic": "", "technique": "", "example": ""}
+        ],
         "watchlist": [],
         "enhancements": [],
         "summary": "",

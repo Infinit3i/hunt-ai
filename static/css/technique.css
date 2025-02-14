@@ -18,26 +18,26 @@ body {
 
 /* Content Wrapper Inside Each Section */
 .operation-content {
-    width: 60%; /* Only the content inside takes 70% of the width */
+    width: 80%; 
     margin: 0 auto; /* Centers the content within the box */
 }
 
 /* Info Box */
 .info-box {
-    padding: 15px;
+    padding: 5px;
     margin-bottom: 15px;
 }
 
 /* Tables */
 table {
-    width: 80%;
+    width: 100%;
     border-collapse: collapse;
     margin: 20px auto;
 }
 
 th, td {
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 1.5em;
     text-align: left;
 }
 
@@ -47,13 +47,13 @@ th {
 
 /* Lists */
 ul, ol {
-    margin: 10px 0;
-    padding: 10px;
+    margin: .5em 0;
+    padding: .5em 0;
     list-style-position: inside;
 }
 
 ul li, ol li {
-    margin: 5px 0;
+    margin: .5em 0;
 }
 
 /* Back Link */

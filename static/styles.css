@@ -46,7 +46,6 @@ ul li {
   margin: 10px 0;
   padding: 10px;
   border-radius: 5px;
-  width: 50%; /* Adjusted width for each item */
   text-align: center; /* Centers the text inside the list item */
   border: 1px solid #ccc; /* Border added for list items */
   display: flex;

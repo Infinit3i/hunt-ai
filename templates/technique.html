@@ -52,8 +52,8 @@
 <div class="operation-section">
     <div class="operation-content">
         <div class="links">
-            <a href="{{ technique.spl_rule }}" class="btn">🔍 SPL</a>
-            <a href="{{ technique.elastic_rule }}" class="btn">🔍 Elastic</a>
+            <a href="https://research.splunk.com/detections/tactics/{{ technique.tactic | lower }}" class="btn">🔍 SPL</a>
+            <a href="https://detection.fyi/search?q={{ technique.id }}" class="btn">🔍 Elastic</a>
             <a href="https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q={{ technique.id }}" class="btn">🔍 Sigma</a>
         </div>
 
@@ -95,16 +95,24 @@
 <h1>🧹 CLEAR</h1>
 <div class="operation-section">
     <div class="operation-content">
+        <h3>🔒 Expected Outcomes</h3>
         <ul>
             {% for outcome in technique.expected_outcomes %}
-            <li>🔒 {{ outcome }}</li>
+            <li>👽{{ outcome }}</li>
             {% endfor %}
         </ul>
+        <h3>🧼 Clearing Steps</h3>
         <ul>
             {% for clear in technique.clearing_steps %}
             <li>🧼 {{ clear }}</li>
             {% endfor %}
         </ul>
+        {% if technique.false_positive %}
+        <h3>✅ False Positive</h3>
+        <ul>
+            <li>✅ {{ technique.false_positive }}</li>
+        </ul>
+        {% endif %}
     </div>
 </div>
 

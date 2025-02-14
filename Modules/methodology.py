@@ -99,26 +99,5 @@ def get_methodology_content():
                 "https://fileinfo.com/",
                 "https://www.hybrid-analysis.com/"
             ]
-        },
-        {
-            "title": "User Account Activity",
-            "content": """
-- Identify suspicious user account activity
-            """,
-            "resources": [
-                "https://docs.microsoft.com/en-us/windows/security/identity-protection/",
-                "https://learn.microsoft.com/en-us/azure/active-directory/reports-monitoring/"
-            ]
-        },
-        {
-            "title": "Other Activity",
-            "content": """
-- Lateral Movement (Event Logs + File Copy & Execution)
-- Anti-Forensics (Wiper download, wiper execution)
-            """,
-            "resources": [
-                "https://attack.mitre.org/tactics/TA0008/",
-                "https://www.mandiant.com/resources/anti-forensic-tactics"
-            ]
         }
     ]

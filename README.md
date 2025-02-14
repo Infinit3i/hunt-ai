@@ -30,9 +30,14 @@ HUNT-AI helps threat hunting to make sure analysts are checking their boxes and 
 
 
 ## Todo
-
-
-DO BOTS, Cyberdefenders and letsdefend over 50 times to get a good methodology
+- create clear section and content
+- recreate the technique template section
+- allow multiple splunk sections
+- allow all themes to look when
+- DO BOTS, Cyberdefenders and letsdefend over 50 times to get a good methodology
+- add /Knowledge to their respective t-codes
+- create docker-compose to allow a group to sync to their server
+- top left will show what tactic is currently be working on with what box
 
 
 #### IDEAS
@@ -49,13 +54,7 @@ DO BOTS, Cyberdefenders and letsdefend over 50 times to get a good methodology
 - have all the pre data go into the hunt data in its right section
 - add t codes associated with attacks so we can organize better
 
-
-
-
-
-
 #### REFACTORING
-
 
 kept in notebook
 - from

@@ -26,8 +26,7 @@ def get_content():
             "Detect suspicious registry modifications related to event triggers.",
             "Correlate process execution logs with known event-based execution patterns."
         ],
-        "spl_query": "index=windows sourcetype=WinEventLog EventCode=4698 OR EventCode=4702 | stats count by TaskName, CreatorProcessName, User | sort - count",
-        "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1546",
+        "spl_query": ["index=windows sourcetype=WinEventLog EventCode=4698 OR EventCode=4702 | stats count by TaskName, CreatorProcessName, User | sort - count",],
         "hunt_steps": [
             "Run queries in SIEM to detect newly created scheduled tasks or WMI event subscriptions.",
             "Correlate detected tasks with known malware execution patterns.",

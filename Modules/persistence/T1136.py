@@ -25,7 +25,7 @@ def get_content():
             "Detect new accounts added to privileged groups or services.",
             "Identify patterns of multiple account creations from a single source."
         ],
-        "spl_query": "index=auth sourcetype=windows EventCode=4720 OR sourcetype=linux:auth | stats count by user, src_ip, _time | sort - count",
+        "spl_query": ["index=auth sourcetype=windows EventCode=4720 OR sourcetype=linux:auth | stats count by user, src_ip, _time | sort - count",],
         "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1136",
         "hunt_steps": [
             "Run Queries in SIEM: Detect unauthorized account creation attempts.",

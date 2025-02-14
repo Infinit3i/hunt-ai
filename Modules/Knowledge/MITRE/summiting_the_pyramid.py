@@ -1,7 +1,4 @@
 def get_content():
-    """
-    Returns structured content for MITRE's "Summit the Pyramid" framework.
-    """
     return [
         {
             "title": "MITRE's Summit the Pyramid",
