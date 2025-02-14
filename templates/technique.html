@@ -19,107 +19,123 @@
 
 <hr/>
 
-<h2>🔍 ACCESS</h2>
-<div class="info-box">
-    <p><strong>Objective:</strong> {{ technique.objective }}</p>
-    <p><strong>Scope:</strong> {{ technique.scope }}</p>
-    <p><strong>Threat Model:</strong> {{ technique.threat_model }}</p>
-    <ul>
-        {% for question in technique.hypothesis %}
-        <li>❓ {{ question }}</li>
-        {% endfor %}
-    </ul>
+<h1>🔍 ACCESS</h1>
+<div class="operation-section">
+    <div class="operation-content">
+        <div class="info-box">
+            <p><strong>Objective:</strong> {{ technique.objective }}</p>
+            <p><strong>Scope:</strong> {{ technique.scope }}</p>
+            <p><strong>Threat Model:</strong> {{ technique.threat_model }}</p>
+            <ul>
+                {% for question in technique.hypothesis %}
+                <li>❓ {{ question }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <h2>🛠 Data Sources & Log Queries</h2>
+        <div class="info-box">
+            <p><strong>Protocol:</strong> {{ technique.protocol }}</p>
+            <p><strong>OS:</strong> {{ technique.os }}</p>
+        </div>
+
+        <table>
+            <tr><th>Log Type</th><th>Source</th><th>Destination</th></tr>
+            {% for log in technique.log_sources %}
+            <tr><td>{{ log.type }}</td><td>{{ log.source }}</td><td>{{ log.destination }}</td></tr>
+            {% endfor %}
+        </table>
+    </div>
 </div>
 
-<h2>🛠 Data Sources & Log Queries</h2>
-<div class="info-box">
-    <p><strong>Data Sources:</strong> {{ technique.data_sources }}</p>
-    <p><strong>Protocol:</strong> {{ technique.protocol }}</p>
-    <p><strong>OS:</strong> {{ technique.os }}</p>
+<h1>🕵️ HUNT</h1>
+<div class="operation-section">
+    <div class="operation-content">
+        <div class="links">
+            <a href="{{ technique.spl_rule }}" class="btn">🔍 SPL</a>
+            <a href="{{ technique.elastic_rule }}" class="btn">🔍 Elastic</a>
+            <a href="https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q={{ technique.id }}" class="btn">🔍 Sigma</a>
+        </div>
+
+        <h3>🛠 Detection Methods</h3>
+        <ul class="detection-list">
+            {% for method in technique.detection_methods %}
+            <li>📌 {{ method }}</li>
+            {% endfor %}
+        </ul>
+
+        <table>
+            <tr><th>🔍 SPL - Detect {{ technique.title }}</th></tr>
+            {% for query in technique.spl_query %}
+            <tr><td>{{ query }}</td></tr>
+            {% endfor %}
+        </table>
+
+        <h3>🛠 Hunt Execution Steps</h3>
+        <ol>
+            {% for step in technique.hunt_steps %}
+            <li>🚀 {{ step }}</li>
+            {% endfor %}
+        </ol>
+
+        <h2><a href="https://center-for-threat-informed-defense.github.io/technique-inference-engine/">MITRE ATT&CK Mapping</a></h2>
+        <table>
+            <tr><th>Tactic</th><th>Technique</th><th>Example</th></tr>
+            {% for mapping in technique.mitre_mapping %}
+            <tr>
+                <td>{{ mapping.tactic }}</td>
+                <td><a href="https://attack.mitre.org/techniques/{{ technique.id }}">{{ mapping.technique }}</a></td>
+                <td>{{ mapping.example }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 </div>
 
-<table>
-    <tr><th>Log Type</th><th>Source</th></tr>
-    {% for log in technique.log_sources %}
-    <tr><td>{{ log.type }}</td><td>{{ log.source }}</td></tr>
-    {% endfor %}
-</table>
-
-<h2>🕵️ HUNT</h2>
-<div class="links">
-    <a href="{{ technique.spl_rule }}" class="btn">🔍 SPL</a>
-    <a href="{{ technique.elastic_rule }}" class="btn">🔍 Elastic</a>
-    <a href="https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q={{ technique.id }}" class="btn">🔍 Sigma</a>
+<h1>🧹 CLEAR</h1>
+<div class="operation-section">
+    <div class="operation-content">
+        <ul>
+            {% for outcome in technique.expected_outcomes %}
+            <li>🔒 {{ outcome }}</li>
+            {% endfor %}
+        </ul>
+        <ul>
+            {% for clear in technique.clearing_steps %}
+            <li>🧼 {{ clear }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 
-<h3>🛠 Detection Methods</h3>
-<ul class="detection-list">
-    {% for method in technique.detection_methods %}
-    <li>📌 {{ method }}</li>
-    {% endfor %}
-</ul>
+<h1>🛡️ HARDEN</h1>
+<div class="operation-section">
+    <div class="operation-content">
+        <h3>📌 Enhance Defenses</h3>
+        <ul>
+            {% for defense in technique.enhancements %}
+            <li>🛠️ {{ defense }}</li>
+            {% endfor %}
+        </ul>
+        <h3>🚨 Alerting</h3>
+        <ul>
+            {% for alert in technique.watchlist %}
+            <li>📢 {{ alert }}</li>
+            {% endfor %}
+        </ul>
+    </div> 
+</div>
 
-<table>
-    <tr><th>🔍 SPL - Detect {{ technique.title }}</th></tr>
-    {% for query in technique.spl_query %}
-    <tr><td>{{ query }}</td></tr>
-    {% endfor %}
-</table>
-
-<h3>🛠 Hunt Execution Steps</h3>
-<ol>
-    {% for step in technique.hunt_steps %}
-    <li>🚀 {{ step }}</li>
-    {% endfor %}
-</ol>
-
-<h2><a href="https://center-for-threat-informed-defense.github.io/technique-inference-engine/">MITRE ATT&CK Mapping</a></h2>
-<table>
-    <tr><th>Tactic</th><th>Technique</th><th>Example</th></tr>
-    {% for mapping in technique.mitre_mapping %}
-    <tr>
-        <td>{{ mapping.tactic }}</td>
-        <td><a href="https://attack.mitre.org/techniques/{{ technique.id }}">{{ mapping.technique }}</a></td>
-        <td>{{ mapping.example }}</td>
-    </tr>
-    {% endfor %}
-</table>
-
-<h2>🧹 CLEAR</h2>
-<ul>
-    {% for clear in technique.clearing_steps %}
-    <li>🧼 {{ clear }}</li>
-    {% endfor %}
-</ul>
-
-<h2>🛡️ HARDEN</h2>
-<ul>
-    {% for outcome in technique.expected_outcomes %}
-    <li>🔒 {{ outcome }}</li>
-    {% endfor %}
-</ul>
-
-<h3>📌 Enhance Defenses</h3>
-<ul>
-    {% for defense in technique.enhancements %}
-    <li>🛠️ {{ defense }}</li>
-    {% endfor %}
-</ul>
-
-<h2>📖 LESSONS LEARNED</h2>
-<h3>🚀 Watchlist & Alerting</h3>
-<ul>
-    {% for alert in technique.watchlist %}
-    <li>📢 {{ alert }}</li>
-    {% endfor %}
-</ul>
-
-<h3>📊 Summary & Reporting</h3>
-<ul>
-    <li><strong>Summary of Findings:</strong> {{ technique.summary }}</li>
-    <li><strong>Remediation Steps:</strong> {{ technique.remediation }}</li>
-    <li><strong>Future Improvements:</strong> {{ technique.improvements }}</li>
-</ul>
+<h1>📖 LESSONS LEARNED</h1>
+<div class="operation-section">
+    <div class="operation-content">
+        <ul>
+            <li><strong>Summary of Findings:</strong> {{ technique.summary }}</li>
+            <li><strong>Remediation Steps:</strong> {{ technique.remediation }}</li>
+            <li><strong>Future Improvements:</strong> {{ technique.improvements }}</li>
+        </ul>
+    </div>
+</div>
 
 <a class="back-link" href="{{ url_for('routes.mitre_tactic', tactic=technique.tactic.replace(' ', '_')) }}">
     ⬅️ Back to {{ technique.tactic }}

@@ -5,6 +5,23 @@ body {
     padding: 20px;
 }
 
+/* Section Borders */
+.operation-section {
+    border: 2px solid #00bcd4;  /* Cyan border for contrast */
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;  /* Centers the div */
+    background-color: #2c2c2c; /* Dark background to match theme */
+    box-shadow: 0px 4px 6px rgba(0, 188, 212, 0.3);
+    width: 75%; /* Limits the width of the content */
+}
+
+/* Content Wrapper Inside Each Section */
+.operation-content {
+    width: 60%; /* Only the content inside takes 70% of the width */
+    margin: 0 auto; /* Centers the content within the box */
+}
+
 /* Info Box */
 .info-box {
     padding: 15px;
