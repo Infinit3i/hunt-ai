@@ -27,7 +27,7 @@ def get_content():
             "Identify excessive SMB or NFS requests in a short period, which may indicate scanning or enumeration.",
             "Correlate unusual access attempts with known attack patterns and threat intelligence sources."
         ],
-        "spl_query": "index=network sourcetype=firewall OR sourcetype=smb_logs | stats count by src_ip, dest_ip, share_name | where count > 20",
+        "spl_query": ["index=network sourcetype=firewall OR sourcetype=smb_logs | stats count by src_ip, dest_ip, share_name | where count > 20",],
         "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1135",
         "hunt_steps": [
             "Run queries in SIEM to detect mass network share enumeration activities.",

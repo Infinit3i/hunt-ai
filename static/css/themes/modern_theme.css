@@ -1,46 +1,79 @@
-/* modern_theme.css */
+/* General Styles */
 body {
     background-color: #1c1c1c;
-    color: #000000;
+    color: #f0f0f0;
     font-family: 'Arial', sans-serif;
 }
 
+/* Headings & Text */
 h1, h2, h3, p {
     color: #f0f0f0;
+    background-color: #1c1c1c;
+    padding: 5px;
 }
 
+/* Links */
 a {
     color: #00bcd4;
+    background-color: #1c1c1c;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 3px;
 }
 
+a:hover {
+    color: #1c1c1c;
+    background-color: #00bcd4;
+}
+
+/* Buttons */
 button {
     background-color: #00796b;
-    color: white;
+    color: #f0f0f0;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+button:hover {
+    background-color: #f0f0f0;
+    color: #00796b;
+    box-shadow: 0px 4px 6px rgba(0, 188, 212, 0.3);
+}
+
+/* Navbar */
 .navbar {
     background-color: #263238;
+    padding: 10px 20px;
 }
 
 .navbar a {
     color: #ffffff;
+    background-color: #263238;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
 }
 
 .navbar a:hover {
-    color: #00bcd4;
+    color: #263238;
+    background-color: #00bcd4;
 }
 
+/* Containers */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    background-color: #2c2c2c;
+    color: #f0f0f0;
 }
 
+/* Cards */
 .card {
     background-color: #2c2c2c;
+    color: #f0f0f0;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
@@ -50,4 +83,76 @@ button {
 .card-header {
     font-size: 1.5rem;
     color: #00bcd4;
+    background-color: #1c1c1c;
+    padding: 10px;
+}
+
+/* Tables */
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #00bcd4;
+    color: #1c1c1c;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #1c1c1c;
+}
+
+tr:hover {
+    background-color: #00bcd4;
+    color: #1c1c1c;
+}
+
+/* Lists */
+ul, ol {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+    list-style-position: inside;
+}
+
+ul li, ol li {
+    margin: 5px 0;
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+/* 📌 Go to Top Button */
+.top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #00bcd4;
+    color: #1c1c1c;
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 188, 212, 0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: none; /* Hidden by default */
+}
+
+.top-btn:hover {
+    background-color: #1c1c1c;
+    color: #00bcd4;
+    transform: scale(1.1);
 }

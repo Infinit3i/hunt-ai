@@ -1,0 +1,92 @@
+/* General Styles */
+body {
+    font-family: ubuntu;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Info Box */
+.info-box {
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+/* Tables */
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    font-weight: bold;
+}
+
+/* Lists */
+ul, ol {
+    margin: 10px 0;
+    padding: 10px;
+    list-style-position: inside;
+}
+
+ul li, ol li {
+    margin: 5px 0;
+}
+
+/* Back Link */
+.back-link {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Detection List */
+.detection-list {
+    padding: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Go to Top Button */
+.top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.top-btn:hover {
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Hide button by default and show only when scrolling */
+#topBtn {
+    display: none;
+}

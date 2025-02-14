@@ -25,7 +25,7 @@ def get_content():
             "Detect abnormal access patterns to privileged resources via trusted relationships.",
             "Analyze network connections between organizations for anomalies in frequency, volume, or destinations."
         ],
-        "spl_query": "index=auth_logs sourcetype=auth_event event_type=login | stats count by user, source_ip, destination | where count > 10",
+        "spl_query": ["index=auth_logs sourcetype=auth_event event_type=login | stats count by user, source_ip, destination | where count > 10",],
         "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1199",
         "hunt_steps": [
             "Identify authentication attempts using third-party or service accounts.",

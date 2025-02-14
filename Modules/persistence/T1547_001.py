@@ -25,8 +25,7 @@ def get_content():
             "Detect unauthorized additions to the Startup folder in %APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup.",
             "Analyze process execution from autostart locations for anomalies."
         ],
-        "spl_query": "index=windows EventCode=4657 RegistryPath IN ('HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run', 'HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run')",
-        "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1547.001",
+        "spl_query": ["index=windows EventCode=4657 RegistryPath IN ('HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run', 'HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run')"],
         "hunt_steps": [
             "Run queries in SIEM to detect registry modifications and Startup folder changes.",
             "Correlate with threat intelligence feeds for known persistence mechanisms.",
