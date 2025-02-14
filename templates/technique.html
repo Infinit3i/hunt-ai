@@ -7,14 +7,16 @@
 
 
 <h1>{{ technique.title }} [{{ technique.id }}]</h1>
-<p><strong>Data Sources:</strong> {{ technique.data_sources }}</p>
-<p><strong>Protocol:</strong> {{ technique.protocol }}</p>
-<p><strong>OS:</strong> {{ technique.os }}</p>
+<div class="content-box">
+    <pre><strong>Data Sources:</strong> {{ technique.data_sources }}
+    <strong>Protocol:</strong> {{ technique.protocol }}
+    <strong>OS:</strong> {{ technique.os }}</pre>
+</div>
 
 <h2>Overview</h2>
-<p><strong>Objective:</strong> {{ technique.objective }}</p>
-<p><strong>Scope:</strong> {{ technique.scope }}</p>
-<p><strong>Threat Model:</strong> {{ technique.threat_model }}</p>
+<pre><strong>Objective:</strong> {{ technique.objective }}
+<strong>Scope:</strong> {{ technique.scope }}
+<strong>Threat Model:</strong> {{ technique.threat_model }}</pre>
 
 <h2>Hypothesis</h2>
 <ul>
@@ -25,31 +27,39 @@
 
 <h2>Data Sources & Log Queries</h2>
 <h3>🛠 Log Sources to Query</h3>
-<table>
-    <tr><th>Log Type</th><th>Source</th></tr>
-    {% for log in technique.log_sources %}
-    <tr><td>{{ log.type }}</td><td>{{ log.source }}</td></tr>
-    {% endfor %}
-</table>
+<pre>
+    <table>
+        <tr><th>Log Type</th><th>Source</th></tr>
+        {% for log in technique.log_sources %}
+        <tr><td>{{ log.type }}</td><td>{{ log.source }}</td></tr>
+        {% endfor %}
+    </table>
+</pre>
 
 <h3>🛠 Detection Methods</h3>
-<ul>
-    {% for method in technique.detection_methods %}
-    <li>{{ method }}</li>
-    {% endfor %}
-</ul>
+<pre>
+    <ul>
+        {% for method in technique.detection_methods %}
+        <li>{{ method }}</li>
+        {% endfor %}
+    </ul>
+</pre>
 
 <h2>Hunting Queries</h2>
 <h3>🔍 SPL - Detect {{ technique.title }}</h3>
 <pre>{{ technique.spl_query }}</pre>
+<a href={{ technique.spl_rule }}>🔍 SPL [{{ technique.id }}]</a>
+<a href={{ technique.elastic_rule }}>🔍 Elastic [{{ technique.id }}]</a>
 <a href={{ technique.sigma_rule }}>🔍 Sigma [{{ technique.id }}]</a>
 
 <h2>3.1.5 Hunt Execution Steps</h2>
-<ol>
-    {% for step in technique.hunt_steps %}
-    <li>{{ step }}</li>
-    {% endfor %}
-</ol>
+<pre>
+    <ol>
+        {% for step in technique.hunt_steps %}
+        <li>{{ step }}</li>
+        {% endfor %}
+    </ol>
+</pre>
 
 <h2>Expected Outcomes</h2>
 <ul>
