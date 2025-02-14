@@ -7,26 +7,26 @@
 
 
 <h1>{{ technique.title }} [{{ technique.id }}]</h1>
+<a href="https://d3fend.mitre.org/offensive-technique/attack/{{ technique.id }}">🛡️ MITRE D3FEND [{{ technique.id }}]</a>
+<a href="https://attack.mitre.org/techniques/{{ technique.id }}">⚔️ MITRE ATT&CK [{{ technique.id }}]</a>
 <pre>
-    <strong>Data Sources:</strong> {{ technique.data_sources }}
-    <strong>Protocol:</strong> {{ technique.protocol }}
-    <strong>OS:</strong> {{ technique.os }}
         <h2>Overview</h2>
     <strong>Objective:</strong> {{ technique.objective }}
     <strong>Scope:</strong> {{ technique.scope }}
     <strong>Threat Model:</strong> {{ technique.threat_model }}
+    <ul>
+        {% for question in technique.hypothesis %}
+        <li>{{ question }}</li>
+        {% endfor %}
+    </ul>
 </pre>
-
-<h2>Hypothesis</h2>
-<ul>
-    {% for question in technique.hypothesis %}
-    <li>{{ question }}</li>
-    {% endfor %}
-</ul>
 
 <h2>Data Sources & Log Queries</h2>
 <h3>🛠 Log Sources to Query</h3>
 <pre>
+    <strong>Data Sources:</strong> {{ technique.data_sources }}
+    <strong>Protocol:</strong> {{ technique.protocol }}
+    <strong>OS:</strong> {{ technique.os }}
     <table>
         <tr><th>Log Type</th><th>Source</th></tr>
         {% for log in technique.log_sources %}
