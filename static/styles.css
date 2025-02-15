@@ -1,20 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 
 html, body {
-  height: 100vh;
-  min-height: 100%;
+  font-family: 'Ubuntu', 'Roboto', 'Roboto Mono', sans-serif;
+  height: 100%;
+  min-height: 100vh; /* Ensures it covers at least the viewport */
   background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll issues */
+  box-sizing: border-box; /* Ensures padding doesn't affect overall width/height */
+  transition: background-color 0.3s ease, color 0.3s ease; /* for theme switch */
 }
 
-/* General Body and Typography */
-body {
-  font-family: 'Ubuntu', 'Roboto', 'Roboto Mono', sans-serif;
-  margin: 0;
-  padding: 0; /* Adds padding to the entire web app */
-  box-sizing: border-box; /* Ensures padding doesn't affect overall width/height */
-  background-color: #f4f4f4;
-  color: black;
-  transition: background-color 0.3s ease, color 0.3s ease; /* for theme switch */
+/* Ensure main content container doesn't add extra height */
+.main-content {
+  min-height: 100vh; /* Covers the full viewport */
+  display: flex;
+  flex-direction: column;
 }
 
 pre {

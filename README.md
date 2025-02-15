@@ -30,29 +30,22 @@ HUNT-AI helps threat hunting to make sure analysts are checking their boxes and 
 
 
 ## Todo
+- Knowledge --> t-codes
 - create clear section and content
-- recreate the technique template section
-- allow multiple splunk sections
-- allow all themes to look when
+- get windows setup done well so people on windows can setup their system
 - DO BOTS, Cyberdefenders and letsdefend over 50 times to get a good methodology
-- add /Knowledge to their respective t-codes
 - create docker-compose to allow a group to sync to their server
-- top left will show what tactic is currently be working on with what box
-
 
 #### IDEAS
 - search
 
 
-- knowledge section
 - notebook save
 	- encrypt
 - have ips be entered into links
-- verify what links can be used
 - checklist of all items
 - when the notebook is put in order it creates a powerpoint and network diagram
 - have all the pre data go into the hunt data in its right section
-- add t codes associated with attacks so we can organize better
 
 #### REFACTORING
 
@@ -70,3 +63,13 @@ kept in notebook
 ```
 python -m unittest discover Testing
 ```
+
+VERSIONS
+1.4
+[X] add t codes associated with attacks so we can organize better
+
+1.5
+[X] recreate the technique template section
+[X] allow multiple splunk sections
+[X] allow all themes to look when
+[X] top left will show what tactic is currently be working on with what box
