@@ -75,3 +75,5 @@ python -m unittest discover Testing
 - [X] allow multiple splunk sections
 - [X] allow all themes to look when
 - [X] top left will show what tactic is currently be working on with what box
+- [X] update themes
+- [X] make these span the whole page'
