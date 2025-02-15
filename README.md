@@ -67,15 +67,15 @@ pip install -r requirements.txt
 
 
 ## 📌 Roadmap / TODOs
-✅ **T-code classification** - Better organization by **techniques & attacks**.  
-✅ **Notebook Enhancements** - Track **IP addresses**, **domains**, **programs**, and **notes** easily.  
-✅ **MITRE ATT&CK Mapping** - Better **visual representation** of tactics & techniques.  
-✅ **Windows Setup Guide** - Improve installation steps for **Windows users**.  
-✅ **Docker Integration** - Sync investigations with **team servers**.  
-✅ **Advanced Search** - Quickly retrieve relevant **hunt data**.  
-✅ **Checklist System** - Ensure all **hunting steps** are **followed**.  
-✅ **Notebook Exports** - Convert investigations into **PowerPoint** and **network diagrams**.  
-✅ **Encrypted Notebook** - Securely store investigation **data & logs**.  
+- [ ] **T-code classification** - Better organization by **techniques & attacks**.  
+- [ ] **Notebook Enhancements** - Track **IP addresses**, **domains**, **programs**, and **notes** easily.  
+- [ ] **MITRE ATT&CK Mapping** - Better **visual representation** of tactics & techniques.  
+- [ ] **Windows Setup Guide** - Improve installation steps for **Windows users**.  
+- [ ] **Docker Integration** - Sync investigations with **team servers**.  
+- [ ] **Advanced Search** - Quickly retrieve relevant **hunt data**.  
+- [ ] **Checklist System** - Ensure all **hunting steps** are **followed**.  
+- [ ] **Notebook Exports** - Convert investigations into **PowerPoint** and **network diagrams**.  
+- [ ] **Encrypted Notebook** - Securely store investigation **data & logs**.  
 
 ---
 
