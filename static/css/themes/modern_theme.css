@@ -1,7 +1,20 @@
 /* Modern Theme */
 html, body {
+    height: 100%;
+    min-height: 100vh; /* Ensures it covers at least the viewport */
+    background-attachment: fixed;
     color: white;
     background: linear-gradient(to bottom right, #1f1f1f, black);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll issues */
+}
+
+/* Ensure main content container doesn't add extra height */
+.main-content {
+    min-height: 100vh; /* Covers the full viewport */
+    display: flex;
+    flex-direction: column;
 }
 
 /* Headings & Text */
@@ -13,7 +26,6 @@ h1, h2, h3, p {
 /* Links */
 a {
     color: #00bcd4;
-    background-color: #1c1c1c;
     text-decoration: none;
     padding: 5px;
     border-radius: 3px;

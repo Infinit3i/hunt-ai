@@ -1,4 +1,4 @@
-/* Style for the MITRE grid layout */
+/* 🌍 General Grid Layout for MITRE Tactics & Techniques */
 .mitre-grid {
     display: flex;
     flex-wrap: wrap;
@@ -6,6 +6,7 @@
     justify-content: center;
 }
 
+/* 📦 MITRE Box (Shared for Tactics & Techniques) */
 .mitre-box {
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -23,11 +24,13 @@
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Checkbox styling */
-.tactic-checkbox {
+/* ✅ Checkbox Styling (Tactics & Techniques) */
+.tactic-checkbox, 
+.technique-checkbox {
     display: none;
 }
 
+/* 🟩 Checkbox Label */
 .checkbox-label {
     position: absolute;
     top: 10px;
@@ -41,14 +44,70 @@
     transition: background-color .5s;
 }
 
-.tactic-checkbox:checked + .checkbox-label {
+/* ☑️ Checkbox Checked State (Tactics & Techniques) */
+.tactic-checkbox:checked + .checkbox-label,
+.technique-checkbox:checked + .checkbox-label {
     background-color: #4CAF50;
     border-color: #4CAF50;
 }
 
-/* Highlight box when checkbox is selected */
+/* 📌 Highlight Box when Checked (Tactics & Techniques) */
 .tactic-checkbox:checked ~ h2,
-.tactic-checkbox:checked ~ p {
+.tactic-checkbox:checked ~ p,
+.technique-checkbox:checked ~ h2 {
     color: #4CAF50;
     font-weight: bold;
+}
+
+/* 🔳 Technique Box (Same as MITRE Box) */
+.technique-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* 🔹 Technique Checkbox */
+.technique-checkbox:checked + .checkbox-label {
+    background-color: #00bcd4;
+    border-color: #008ba3;
+}
+
+/* 📌 Selected Tactics Container */
+#selected-tactics-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #1c1c1c;
+    border-radius: 8px;
+    width: 300px;
+}
+
+/* 📋 Selected Tactics List */
+#selected-tactics {
+    list-style-type: none;
+    padding: 0;
+}
+
+#selected-tactics li {
+    background-color: #333;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+/* 🔗 Selected Tactic Links */
+#selected-tactics ul {
+    list-style-type: disc;
+    padding-left: 15px;
+}
+
+#selected-tactics a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+#selected-tactics a:hover {
+    text-decoration: underline;
 }

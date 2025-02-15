@@ -18,7 +18,6 @@ from Modules.methodology import get_methodology_content
 from Modules.investigate import get_investigate_content
 from Modules.Persistence.persistence import get_persistence_menu
 
-from Modules.Investigate.threat import get_threat_content
 from Modules.Investigate.domain import get_domain_content
 from Modules.Investigate.ip import get_ip_content
 from Modules.Investigate.malware import get_malware_content
@@ -175,11 +174,6 @@ def investigate():
     content = get_investigate_content()
     return render_template('investigate.html', content=content)
 
-@routes_bp.route('/investigate/threat')
-def investigate_threat():
-    content = get_threat_content()
-    return render_template('investigate.html', content=content)
-
 @routes_bp.route('/investigate/domain')
 def investigate_domain():
     content = get_domain_content()
@@ -303,3 +297,12 @@ def technique_page(url_id):
         abort(404, description="Technique not found.")
 
     return render_template('technique.html', technique=selected_technique)
+
+
+@routes_bp.route('/tactic_techniques/<tactic>')
+def tactic_techniques(tactic):
+    # Load the tactic's techniques
+    tactic_folder = tactic.lower().replace(" ", "_")
+    techniques = load_techniques_for_tactic(tactic_folder)
+    
+    return jsonify(list(techniques.values()))

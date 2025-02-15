@@ -2,20 +2,27 @@
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/mitre.css') }}" />
 
-<h1>{{ tactic.title }}</h1>  <!-- FIXED: Dynamically shows the tactic name -->
-
+<h1>{{ tactic.title }}</h1>
 <p>{{ tactic.description }}</p>
 
 <h2>Techniques</h2>
-<ul>
+
+<div class="mitre-grid">  <!-- Ensures grid layout for techniques -->
     {% for technique in techniques.values() %}
-    <li>
-        <a href="{{ url_for('routes.technique_page', url_id=technique.url_id) }}">
-            {{ technique.title }} [{{ technique.id }}]
-        </a>
-    </li>
+    <div class="mitre-box technique-box" data-checkbox-id="{{ technique.id }}">
+        <!-- Hidden checkbox -->
+        <input type="checkbox" id="{{ technique.id }}" class="technique-checkbox" />
+        <label for="{{ technique.id }}" class="checkbox-label"></label>
+
+        <!-- Technique title -->
+        <h2>
+            <a href="{{ url_for('routes.technique_page', url_id=technique.url_id) }}">
+                {{ technique.title }} [{{ technique.id }}]
+            </a>
+        </h2>
+    </div>
     {% endfor %}
-</ul>
+</div>
 
 <a href="{{ url_for('routes.mitre') }}">Back to MITRE Tactics</a>
 {% endblock %}

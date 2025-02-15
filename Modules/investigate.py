@@ -6,7 +6,7 @@ def get_investigate_content():
         "title": "Investigate",
         "description": "Explore and analyze potential threats using the resources and tools provided.",
         "resources": [
-            {"name": "Threat Intel", "url": "/investigate/threat"},
+            {"name": "IP", "url": "https://start.me/p/qbzw4e/cyber-security"},
             {"name": "IP", "url": "/investigate/ip"},
             {"name": "Domain", "url": "/investigate/domain"},
             {"name": "File Hash", "url": "/investigate/filehash"},
