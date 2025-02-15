@@ -75,7 +75,64 @@ pip install -r requirements.txt
 - [ ] **Advanced Search** - Quickly retrieve relevant **hunt data**.  
 - [ ] **Checklist System** - Ensure all **hunting steps** are **followed**.  
 - [ ] **Notebook Exports** - Convert investigations into **PowerPoint** and **network diagrams**.  
-- [ ] **Encrypted Notebook** - Securely store investigation **data & logs**.  
+- [ ] **Encrypted Notebook** - Securely store investigation **data & logs**.
+- [ ] T-code - pass the hash, 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 
