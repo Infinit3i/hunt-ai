@@ -64,6 +64,27 @@ pip install -r requirements.txt
    ```
 ---
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 📌 Roadmap / TODOs
 ✅ **T-code classification** - Better organization by **techniques & attacks**.  
 ✅ **Notebook Enhancements** - Track **IP addresses**, **domains**, **programs**, and **notes** easily.  
