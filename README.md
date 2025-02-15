@@ -52,8 +52,7 @@ pip install -r requirements.txt
 1️⃣ **Download ZIP** 📦 (top right of GitHub page)  
 2️⃣ **Extract** `Hunt-AI.zip`  
 3️⃣ **Navigate to the folder**:
-   ```bash
-   cd hunt-ai/
+   `cd hunt-ai/`
 
 4️⃣ **Run setup** 🏗️:
    ```bash
