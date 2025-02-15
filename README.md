@@ -81,7 +81,7 @@ pip install -r requirements.txt
       S-1-5-113: NT AUTHORITY\Local account
       S-1-5-114: NT AUTHORITY\Local account in Administrators group
 
-      pass the session
+      pass the session/ token smuggling
 
       pass the pass (word) - wdigest, live, tspkg, kerberos - SeDebugPrivilege or SYSTEM priviledges
 
