@@ -76,12 +76,12 @@ pip install -r requirements.txt
 - [ ] **Checklist System** - Ensure all **hunting steps** are **followed**.  
 - [ ] **Notebook Exports** - Convert investigations into **PowerPoint** and **network diagrams**.  
 - [ ] **Encrypted Notebook** - Securely store investigation **data & logs**.
-- [ ] T-code - pass the hash
+- [ ] T-code - pass the hash - is local account
       block these for pass the has
       S-1-5-113: NT AUTHORITY\Local account
       S-1-5-114: NT AUTHORITY\Local account in Administrators group
 
-      pass the session/ token smuggling
+      pass the session/ token smuggling - can be domain account
 
       pass the pass (word) - wdigest, live, tspkg, kerberos - SeDebugPrivilege or SYSTEM priviledges
 
