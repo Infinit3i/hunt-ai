@@ -3,7 +3,6 @@
 body {
     background-color: #ffffff; /* White background for snow-like effect */
     color: #006400; /* Dark green text */
-    font-family: 'Arial', sans-serif;
     background-image: url('/static/Pictures/xmas_tree.jpg'); /* Tree PNG for festive vibe */
     background-size: cover; /* Cover the whole screen */
     background-attachment: fixed; /* Fixed background */

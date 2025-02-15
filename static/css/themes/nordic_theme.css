@@ -1,9 +1,8 @@
-/* vampire_theme.css (updated with nordic_theme.css color values) */
-
-body {
-    background-color: #e0f7fa; /* Light blue background */
-    color: #01579b; /* Dark blue text */
-    font-family: 'Arial', sans-serif;
+/* nordic_theme.css */
+html, body {
+    height: 100%;
+    color: darkgray;
+    background: linear-gradient(to bottom right, #01579b, white);
 }
 
 h1, h2, h3, p {

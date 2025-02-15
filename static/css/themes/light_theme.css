@@ -1,8 +1,7 @@
 /* light_theme.css */
-body {
-    background-color: #f4f4f4;
+html, body {
+    background: linear-gradient(to bottom right, #b4b4b3, white);
     color: black;
-    font-family: 'Arial', sans-serif;
 }
 
 h1, h2, h3, p {

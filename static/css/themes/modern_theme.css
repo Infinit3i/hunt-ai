@@ -1,8 +1,8 @@
-/* General Styles */
-body {
-    background-color: #1c1c1c;
-    color: #f0f0f0;
-    font-family: 'Arial', sans-serif;
+/* Modern Theme */
+html, body {
+    height: 100%;
+    color: white;
+    background: linear-gradient(to bottom right, #1f1f1f, black);
 }
 
 /* Headings & Text */

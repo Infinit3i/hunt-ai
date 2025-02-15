@@ -1,9 +1,10 @@
 /* dark_theme.css */
-body {
-    background-color: #121212;
+html, body {
+    height: 100%;
     color: white;
-    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom right, #121212, black);
 }
+
 
 h1, h2, h3, p {
     color: white;
