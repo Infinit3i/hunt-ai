@@ -2,7 +2,7 @@ Here's your **enhanced** `README.md` with **more details**, **more emojis**, and
 
 ---
 
-```markdown
+
 # 🛡️ Threat Hunting Artificial Intelligence - HUNT-AI 🕵️‍♂️💻
 
 ### **TL;DR:** *Find threats & track your hunt, boosting efficiency by **5x**!* 🚀
@@ -41,9 +41,9 @@ Before running, make sure you have **Python** installed:
 ✅ [Download Python](https://www.python.org/downloads/)  
 
 Install required dependencies:  
-```bash
+
 pip install -r requirements.txt
-```
+
 
 ---
 
@@ -54,7 +54,7 @@ pip install -r requirements.txt
 3️⃣ **Navigate to the folder**:
    ```bash
    cd hunt-ai/
-   ```
+
 4️⃣ **Run setup** 🏗️:
    ```bash
    cd Installation && python3 setup.py
