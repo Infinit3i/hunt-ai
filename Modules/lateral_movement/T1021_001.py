@@ -58,9 +58,9 @@ def get_content():
             "Correlate RDP activity with account usage to detect compromised credentials."
         ],
         "spl_query": [
-            "index=windows EventCode=4624 LogonType=10 | stats count by user, src_ip, dest_ip",
-            "index=windows EventCode=4625 LogonType=10 | stats count by user, src_ip | where count > 5",
-            "index=network protocol=RDP | stats count by src_ip, dest_ip"
+            "index=windows EventCode=4624 LogonType=10 \n| stats count by user, src_ip, dest_ip",
+            "index=windows EventCode=4625 LogonType=10 \n| stats count by user, src_ip \n| where count > 5",
+            "index=network protocol=RDP \n| stats count by src_ip, dest_ip"
         ],
         "hunt_steps": [
             "Analyze RDP login events (4624) to identify unauthorized access.",
@@ -81,10 +81,10 @@ def get_content():
             "Harden RDP access controls (e.g., enable MFA, restrict to VPN users)."
         ],
         "mitre_mapping": [
-            {"tactic": "Lateral Movement", "technique": "T1021.001 (Remote Desktop Protocol)", "example": "Adversary uses RDP to move laterally by logging into another system with stolen credentials."},
-            {"tactic": "Credential Access", "technique": "T1110 (Brute Force)", "example": "Adversary attempts multiple RDP login attempts to gain access via brute-force."},
-            {"tactic": "Defense Evasion", "technique": "T1070 (Indicator Removal on Host)", "example": "Adversary clears Windows event logs to hide RDP activity."},
-            {"tactic": "Persistence", "technique": "T1133 (External Remote Services)", "example": "Adversary maintains persistent access via RDP."}
+            {"tactic": "Lateral Movement", "technique": "T1021.001", "example": "Adversary uses RDP to move laterally by logging into another system with stolen credentials."},
+            {"tactic": "Credential Access", "technique": "T1110", "example": "Adversary attempts multiple RDP login attempts to gain access via brute-force."},
+            {"tactic": "Defense Evasion", "technique": "T1070", "example": "Adversary clears Windows event logs to hide RDP activity."},
+            {"tactic": "Persistence", "technique": "T1133", "example": "Adversary maintains persistent access via RDP."}
         ],
         "watchlist": [
             "Monitor for RDP sessions initiated from unknown or foreign IP addresses.",
