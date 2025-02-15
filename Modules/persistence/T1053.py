@@ -27,7 +27,7 @@ def get_content():
             "Identify persistence mechanisms through automated or hidden scheduled tasks.",
             "Detect execution of scripts or executables from unusual locations via scheduled tasks."
         ],
-        "spl_query": "index=windows EventCode=4698 OR EventCode=4702 OR EventCode=4699 | stats count by TaskName, User, Command",
+        "spl_query": ["index=windows EventCode=4698 OR EventCode=4702 OR EventCode=4699 | stats count by TaskName, User, Command"],
         "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1053",
         "hunt_steps": [
             "Run Queries in SIEM to detect newly created or modified scheduled tasks.",

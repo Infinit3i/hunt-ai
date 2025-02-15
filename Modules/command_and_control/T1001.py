@@ -26,8 +26,7 @@ def get_content():
             "Detect large compressed or encrypted outbound traffic sessions.",
             "Identify abnormal HTTP headers, DNS queries, or non-standard packet structures."
         ],
-        "spl_query": "index=network sourcetype=firewall_logs | search payload=*base64* OR payload=*xor* OR payload=*gzip* | stats count by src_ip, dest_ip, payload",
-        "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1001",
+        "spl_query": ["index=network sourcetype=firewall_logs | search payload=*base64* OR payload=*xor* OR payload=*gzip* | stats count by src_ip, dest_ip, payload"],
         "hunt_steps": [
             "Run Queries in SIEM: Identify obfuscated payloads in network traffic.",
             "Analyze Encoded Data: Decode and analyze encoded strings in network logs.",

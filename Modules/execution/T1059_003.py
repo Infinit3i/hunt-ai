@@ -25,8 +25,7 @@ def get_content():
             "Detect abnormal use of command-line scripting for automation or administrative tasks.",
             "Identify execution of commands that disable security controls or alter system configurations."
         ],
-        "spl_query": "index=windows sourcetype=WinEventLog EventCode=4688 Image=""C:\\Windows\\System32\\cmd.exe"" | stats count by ParentImage, CommandLine, User",
-        "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1059.003",
+        "spl_query": ["index=windows sourcetype=WinEventLog EventCode=4688 Image=""C:\\Windows\\System32\\cmd.exe"" | stats count by ParentImage, CommandLine, User"],
         "hunt_steps": [
             "Run Queries in SIEM: Identify unauthorized command-line executions and suspicious script activity.",
             "Correlate with Threat Intelligence: Validate suspicious command activity against known attack patterns.",

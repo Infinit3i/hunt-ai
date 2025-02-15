@@ -81,9 +81,9 @@
         <table>
             <tr><th>🔍 SPL - Detect {{ technique.title }}</th></tr>
             {% for query in technique.spl_query %}
-            <tr><td>{{ query }}</td></tr>
+            <tr><td><pre class="spl-query">{{ query }}</pre></td></tr>
             {% endfor %}
-        </table>
+        </table>        
 
         <h3>🛠 Hunt Execution Steps</h3>
         <ol>

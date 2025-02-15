@@ -26,8 +26,7 @@ def get_content():
             "Detect DNS queries with long subdomains, which may indicate tunneling.",
             "Analyze TCP traffic for suspicious C2-like behavior."
         ],
-        "spl_query": "index=firewall sourcetype=firewall_logs (dest_port=80 OR dest_port=443) | stats count by src_ip, dest_ip, http_method, url | sort - count",
-        "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1071",
+        "spl_query": ["index=firewall sourcetype=firewall_logs (dest_port=80 OR dest_port=443) | stats count by src_ip, dest_ip, http_method, url | sort - count"],
         "hunt_steps": [
             "Run Queries in SIEM: Detect unusual HTTP request methods and persistent HTTPS sessions.",
             "Identify long DNS queries that may indicate tunneling.",

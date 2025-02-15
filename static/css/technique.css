@@ -1,8 +1,6 @@
 /* General Styles */
 body {
     font-family: ubuntu;
-    margin: 0;
-    padding: 20px;
 }
 
 /* Section Borders */
@@ -116,4 +114,15 @@ table {
     table-layout: fixed; /* Ensures each column takes up a fixed width */
     width: 100%; /* Ensures the table does not exceed its container */
     border-collapse: collapse;
+}
+
+.spl-query {
+    background-color: #2b2b2b; /* Dark gray background for contrast */
+    color: #00ffcc; /* Bright cyan text for visibility */
+    font-family: 'Courier New', monospace; /* Makes it look like code */
+    padding: 10px;
+    border-radius: 5px;
+    white-space: pre-wrap; /* Ensures line breaks are respected */
+    overflow-x: auto; /* Enables horizontal scrolling for long queries */
+    font-size: 14px; /* Adjusts readability */
 }

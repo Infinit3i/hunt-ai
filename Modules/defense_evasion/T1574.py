@@ -26,8 +26,7 @@ def get_content():
             "Detect registry modifications that indicate execution hijacking (e.g., Image File Execution Options).",
             "Correlate process execution patterns with known hijacking techniques."
         ],
-        "spl_query": "index=sysmon sourcetype=\"Sysmon\" EventCode=7 | where Image like \"%\\Temp\\%\" OR Image like \"%\\Users\\Public\\%\" | stats count by Image, ProcessId, ProcessName",
-        "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1574",
+        "spl_query": ["index=sysmon sourcetype=\"Sysmon\" EventCode=7 | where Image like \"%\\Temp\\%\" OR Image like \"%\\Users\\Public\\%\" | stats count by Image, ProcessId, ProcessName"],
         "hunt_steps": [
             "Run Queries in SIEM: Detect execution flow hijacking via DLL injection or registry modifications.",
             "Correlate with Threat Intelligence Feeds: Validate loaded DLLs and modified registry entries against known attack techniques.",

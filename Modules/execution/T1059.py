@@ -22,8 +22,7 @@ def get_content():
             "Analyze PowerShell execution",
             "Monitor Bash scripts on Linux endpoints"
         ],
-        "spl_query": "index=endpoint sourcetype=sysmon EventCode=1 | stats count by CommandLine",
-        "sigma_rule": "T1059 Sigma Rule",
+        "spl_query": ["index=endpoint sourcetype=sysmon EventCode=1\n| stats count by CommandLine"],
         "hunt_steps": [
             "Run SIEM queries to find CLI activity",
             "Correlate with endpoint logs",

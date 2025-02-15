@@ -28,7 +28,7 @@ def get_content():
             "Identify suspicious processes executing during boot or user login.",
             "Analyze scheduled tasks for anomalous execution patterns."
         ],
-        "spl_query": "index=windows EventCode=4657 RegistryPath=\"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run*\" | stats count by RegistryPath, ProcessName",
+        "spl_query": ["index=windows EventCode=4657 RegistryPath=\"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run*\" | stats count by RegistryPath, ProcessName",],
         "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1547",
         "hunt_steps": [
             "Run Queries in SIEM: Identify registry modifications, startup folder changes, and scheduled tasks.",

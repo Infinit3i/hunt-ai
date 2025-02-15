@@ -27,8 +27,7 @@ def get_content():
             "Analyze script block logging for malicious behavior.",
             "Identify persistent PowerShell usage across multiple hosts."
         ],
-        "spl_query": "index=windows EventCode=4104 OR EventCode=4688 CommandLine=*PowerShell* | stats count by User, CommandLine, ComputerName",
-        "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1059.001",
+        "spl_query": ["index=windows EventCode=4104 OR EventCode=4688 CommandLine=*PowerShell* | stats count by User, CommandLine, ComputerName"],
         "hunt_steps": [
             "Run Queries in SIEM: Detect anomalous PowerShell command execution patterns.",
             "Investigate Scripts: Analyze PowerShell scripts and detect obfuscation techniques.",
