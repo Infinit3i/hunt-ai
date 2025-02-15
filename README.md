@@ -64,11 +64,13 @@ kept in notebook
 python -m unittest discover Testing
 ```
 
-VERSIONS
-1.4
+## VERSIONS
+
+
+### 1.4
 - [X] add t codes associated with attacks so we can organize better
 
-1.5
+### 1.5
 - [X] recreate the technique template section
 - [X] allow multiple splunk sections
 - [X] allow all themes to look when
