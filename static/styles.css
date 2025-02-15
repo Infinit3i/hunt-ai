@@ -752,3 +752,28 @@ form button {
   width: 100%; /* Adjust button width */
   padding: 10px 20px; /* Adjust button padding */
 }
+
+.selected-tactics {
+  position: absolute;
+  top: 6em;
+  left: 1.5em;
+  background: rgba(55, 58, 59, 0.2);
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #1a2020;
+  z-index: 1000;
+  max-width: 250px;
+}
+
+.selected-tactics ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+}
+
+.selected-tactics li {
+  font-size: 16px;
+  padding: 5px 0;
+}

@@ -1,14 +1,12 @@
 # Standard library imports
 import os
 import random
-import socket
 import importlib.util
 from datetime import datetime
-import re
 
 # Third-party imports
-from flask import Blueprint, render_template, request, redirect, url_for, flash, abort, session
-from flask_login import login_required, current_user
+from flask import Blueprint, render_template, abort, session
+
 
 from static.tips import get_random_tip_or_joke
 
@@ -257,7 +255,7 @@ def load_techniques_for_tactic(tactic_folder):
                 techniques[technique_data["url_id"]] = technique_data
 
     return techniques
-
+from flask import session  # Import session
 
 @routes_bp.route('/mitre/<tactic>')
 def mitre_tactic(tactic):
@@ -272,12 +270,15 @@ def mitre_tactic(tactic):
     if not tactic_data:
         abort(404, description="Tactic not found.")
 
-    # Load the associated techniques from its folder
+    # Store selected tactic in session
+    session['selected_tactic'] = tactic_data
+
+    # Load associated techniques from its folder
     tactic_folder = tactic_data["title"].lower().replace(" ", "_")
     techniques = load_techniques_for_tactic(tactic_folder)
 
-    # Pass both tactic and its techniques to the template
     return render_template('tactic.html', tactic=tactic_data, techniques=techniques)
+
 
 
 @routes_bp.route('/technique/<path:url_id>')  # Accepts slashes in the URL

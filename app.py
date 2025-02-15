@@ -60,6 +60,11 @@ def inject_theme():
 
 
 @app.context_processor
+def inject_selected_tactic():
+    return {'selected_tactic': session.get('selected_tactic', None)}
+
+
+@app.context_processor
 def inject_random_tip():
     random_tip, random_tip_type = get_random_tip_or_joke()
     return {

@@ -80,6 +80,10 @@
             </div>
         </nav>
     </header>
+    <div class="selected-tactics">
+        <h2>🔎 Selected Tactics:</h2>
+        <ul id="selected-tactic-list"></ul>
+    </div>
     <div class="tip 
     {% if random_tip_type == 't-code' %} tcode-tip 
     {% elif random_tip_type == 'joke' %} joke-tip 
@@ -126,6 +130,65 @@
                 console.error('Error updating theme on the backend:', error);
             }
         });
-    </script>     
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const tacticBoxes = document.querySelectorAll(".mitre-box");
+          const tacticListElement = document.getElementById("selected-tactic-list");
+      
+          // Load saved selected tactics from localStorage
+          let selectedTactics = JSON.parse(localStorage.getItem("selected_tactics")) || [];
+      
+          // Function to update the displayed selected tactics
+          function updateTacticDisplay() {
+            tacticListElement.innerHTML = ""; // Clear existing list
+      
+            if (selectedTactics.length === 0) {
+              tacticListElement.innerHTML = "<li>No tactics selected</li>";
+            } else {
+              selectedTactics.forEach((tactic) => {
+                const li = document.createElement("li");
+                li.textContent = `🔹 ${tactic}`;
+                tacticListElement.appendChild(li);
+              });
+            }
+          }
+      
+          // Initialize checkboxes and tactic list
+          updateTacticDisplay();
+      
+          tacticBoxes.forEach((box) => {
+            const checkboxId = box.getAttribute("data-checkbox-id");
+            const checkbox = document.getElementById(checkboxId);
+            const tacticTitle = box.querySelector("h2 a").textContent;
+      
+            // Load checkbox state from localStorage
+            if (selectedTactics.includes(tacticTitle)) {
+              checkbox.checked = true;
+            }
+      
+            // Handle checkbox selection
+            box.addEventListener("click", (e) => {
+              if (e.target.tagName !== "A") { // Avoid toggling when clicking links
+                checkbox.checked = !checkbox.checked;
+      
+                if (checkbox.checked) {
+                  if (!selectedTactics.includes(tacticTitle)) {
+                    selectedTactics.push(tacticTitle);
+                  }
+                } else {
+                  selectedTactics = selectedTactics.filter((t) => t !== tacticTitle);
+                }
+      
+                // Save updated list to localStorage
+                localStorage.setItem("selected_tactics", JSON.stringify(selectedTactics));
+      
+                // Update UI
+                updateTacticDisplay();
+              }
+            });
+          });
+        });
+      </script>     
 </body>
 </html>

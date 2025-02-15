@@ -22,27 +22,5 @@
     {% endfor %}
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const tacticBoxes = document.querySelectorAll(".mitre-box");
 
-    tacticBoxes.forEach((box) => {
-      const checkboxId = box.getAttribute("data-checkbox-id");
-      const checkbox = document.getElementById(checkboxId);
-
-      // Load saved states from localStorage
-      if (localStorage.getItem(checkboxId) === "true") {
-        checkbox.checked = true;
-      }
-
-      // Toggle checkbox when the box is clicked
-      box.addEventListener("click", (e) => {
-        if (e.target.tagName !== "A") { // Avoid toggling when clicking on links
-          checkbox.checked = !checkbox.checked;
-          localStorage.setItem(checkboxId, checkbox.checked);
-        }
-      });
-    });
-  });
-</script>
 {% endblock %}
