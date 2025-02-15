@@ -61,16 +61,52 @@ kept in notebook
 python -m unittest discover Testing
 ```
 
-## VERSIONS
 
 
-### 1.4
-- [X] add t codes associated with attacks so we can organize better
 
-### 1.5
-- [X] recreate the technique template section
-- [X] allow multiple splunk sections
-- [X] allow all themes to look when
-- [X] top left will show what tactic is currently be working on with what box
-- [X] update themes
-- [X] make these span the whole page'
+
+# 📌 Changelog
+
+## ✅ 1.1.3 (2025/02/14)
+- [X] Recreate the technique template section
+- [X] Allow multiple Splunk sections
+- [X] Ensure all themes display correctly
+- [X] Show selected tactic in the **top left** along with active boxes
+- [X] Update and refine theme styles
+- [X] Ensure background spans the whole page
+- [X] Make techniques display like **tactics**, with checkboxes
+- [X] Allow techniques to be grouped under their selected tactics
+- [X] Fix the issue where the **gradient didn't cover the whole viewport**
+- [X] Optimize CSS for correct **checkbox alignment** in grids
+
+## ✅ 1.1.2
+- [X] Add **T-codes** associated with attacks to improve organization
+
+## ✅ 1.1.1 (2024/11/28)
+- [X] Change methodology page
+
+## ✅ 1.1.0 (2024/11/27)
+- [X] Change to web browser instead of terminal
+
+## ✅ 1.0.5 (2024/11/26)
+- [X] Add searching functionality
+- [X] Create `common_ui.py` file for reusable functions
+
+## ✅ 1.0.4 (2024/11/25)
+- [X] Add analyst notebook:
+    - [X] Add IP tracking
+    - [X] Add Domain tracking
+    - [X] Add Notes
+    - [X] Add Programs
+- [X] Add About section:
+    - [X] Add `start.me` integration
+    - [X] Add website link
+
+## ✅ 1.0.3 (2024/11/24)
+- [X] Highlight, unmark, and color marked sections
+- [X] Add emojis to the main page
+- [X] Simplify backend code to improve performance
+
+## ✅ 1.0.0 (2024/11/23)
+- [X] Started this project
+
