@@ -36,8 +36,12 @@ table {
 }
 
 th, td {
-    border: 1px solid #ddd;
+    word-wrap: break-word; /* Allows text to break inside the cell */
+    overflow-wrap: break-word; /* Ensures words wrap properly */
+    white-space: normal; /* Allows text to wrap instead of staying on one line */
+    max-width: 200px; /* Adjust this value to your preferred column width */
     padding: 1.5em;
+    border: 1px solid #ddd;
     text-align: left;
 }
 
@@ -106,4 +110,10 @@ ul li, ol li {
 /* Hide button by default and show only when scrolling */
 #topBtn {
     display: none;
+}
+
+table {
+    table-layout: fixed; /* Ensures each column takes up a fixed width */
+    width: 100%; /* Ensures the table does not exceed its container */
+    border-collapse: collapse;
 }

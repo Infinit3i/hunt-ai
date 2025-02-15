@@ -33,16 +33,30 @@
             </ul>
         </div>
 
+        
+
         <h2>🛠 Data Sources & Log Queries</h2>
         <div class="info-box">
             <p><strong>Protocol:</strong> {{ technique.protocol }}</p>
             <p><strong>OS:</strong> {{ technique.os }}</p>
         </div>
 
+            <table>
+                <tr><th>Log Type</th><th>Source</th><th>Destination</th></tr>
+                {% for log in technique.log_sources %}
+                <tr><td>{{ log.type }}</td><td>{{ log.source }}</td><td>{{ log.destination }}</td></tr>
+                {% endfor %}
+            </table>
         <table>
-            <tr><th>Log Type</th><th>Source</th><th>Destination</th></tr>
-            {% for log in technique.log_sources %}
-            <tr><td>{{ log.type }}</td><td>{{ log.source }}</td><td>{{ log.destination }}</td></tr>
+            <tr><th>Source Artifact</th><th>location</th><th>info</th></tr>
+            {% for log in technique.source_artifacts %}
+            <tr><td>{{ log.type }}</td><td>{{ log.location }}</td><td>{{ log.identify }}</td></tr>
+            {% endfor %}
+        </table>
+        <table>
+            <tr><th>Destination Artifact</th><th>location</th><th>info</th></tr>
+            {% for log in technique.destination_artifacts %}
+            <tr><td>{{ log.type }}</td><td>{{ log.location }}</td><td>{{ log.identify }}</td></tr>
             {% endfor %}
         </table>
     </div>

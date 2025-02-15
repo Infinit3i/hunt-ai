@@ -1,31 +1,39 @@
 def get_content():
     return {
-        "id": "",           # T1556.001
-        "url_id": "",       # 1556/001
-        "title": "",
-        "tactic": "",
-        "data_sources": "",
-        "protocol": "",
-        "os": "",
-        "objective": "",
-        "scope": "",
-        "threat_model": "",
-        "hypothesis": [],
-        "log_sources": [
+        "id": "",  # Tactic Technique ID (e.g., T1556.001)
+        "url_id": "",  # URL segment for technique reference (e.g., 1556/001)
+        "title": "",  # Name of the attack technique
+        "tactic": "",  # Associated MITRE ATT&CK tactic
+        "data_sources": "",  # Data sources required for detection
+        "protocol": "",  # Protocol used in the attack technique
+        "os": "",  # Targeted operating systems
+        "objective": "",  # Purpose of adversary using this technique
+        "scope": "",  # Scope of monitoring and investigation
+        "threat_model": "",  # Threat model describing potential adversary behaviors
+        "hypothesis": [],  # Questions to ask during threat hunting
+        "tips": [],  # Additional investigation and mitigation tips
+        "log_sources": [  # Logs necessary for detection
             {"type": "", "source": "", "destination": ""}
         ],
-        "detection_methods": [],
-        "spl_query": [], # spl queries to detect the technique
-        "hunt_steps": [], # steps to hunt for the technique
-        "expected_outcomes": [],
-        "false_positive":"",
-        "clearing_steps": [], # steps on machine to remove the technique
-        "mitre_mapping": [
-            {"tactic": "", "technique": "", "example": ""} # next technique that would happen after
+        "source_artifacts": [  # Artifacts generated on the source machine
+            {"type": "", "location": "", "identify": ""}
         ],
-        "watchlist": [],
-        "enhancements": [],
-        "summary": "",
-        "remediation": "",
-        "improvements": ""
+        "destination_artifacts": [  # Artifacts generated on the destination machine
+            {"type": "", "location": "", "identify": ""}
+        ],
+        "detection_methods": [],  # Techniques for identifying the attack
+        "spl_query": [],  # Splunk queries to detect the technique
+        "hunt_steps": [],  # Steps to proactively hunt for threats
+        "expected_outcomes": [],  # Expected results from detection/hunting
+        "false_positive": "",  # Known false positives and how to handle them
+        "clearing_steps": [],  # Steps for remediation and clearing traces
+        "mitre_mapping": [  # Mapping to related MITRE techniques
+            {"tactic": "", "technique": "", "example": ""}
+        ],
+        "watchlist": [],  # Indicators to monitor for potential threats
+        "enhancements": [],  # Suggested improvements to detection
+        "summary": "",  # High-level summary of the technique
+        "remediation": "",  # Recommended actions to mitigate risk
+        "improvements": ""  # Suggested ways to improve detection and response
     }
+
