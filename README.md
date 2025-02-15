@@ -63,10 +63,7 @@ pip install -r requirements.txt
    cd ../ && python3 start.py
    ```
 
-# &nbsp;
-# &nbsp;
-# &nbsp;
-
+<div style="margin: 50px 0;"></div>
 
 
 ## 📌 Roadmap / TODOs
