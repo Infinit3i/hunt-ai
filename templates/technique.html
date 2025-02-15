@@ -98,7 +98,11 @@
             {% for mapping in technique.mitre_mapping %}
             <tr>
                 <td>{{ mapping.tactic }}</td>
-                <td><a href="https://attack.mitre.org/techniques/{{ technique.id }}">{{ mapping.technique }}</a></td>
+                <td>
+                    <a href="javascript:void(0);" onclick="navigateToTechnique('{{ mapping.technique.split(' ')[0] }}')">
+                        {{ mapping.technique.split(' ')[0] }}
+                    </a>
+                </td>
                 <td>{{ mapping.example }}</td>
             </tr>
             {% endfor %}
@@ -183,6 +187,19 @@
         } else {
             topBtn.style.display = "none";
         }
+    }
+</script>
+<script>
+    function navigateToTechnique(techniqueId) {
+        fetch(`/technique/${techniqueId}`)
+            .then(response => {
+                if (response.status === 404) {
+                    console.log(`Technique ${techniqueId} not found. Staying on the current page.`);
+                } else {
+                    window.location.href = `/technique/${techniqueId}`;
+                }
+            })
+            .catch(error => console.error("Error fetching technique:", error));
     }
 </script>
 
