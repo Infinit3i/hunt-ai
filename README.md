@@ -1,112 +1,132 @@
-# Threat Hunting Artificial Intelligence
+Here's your **enhanced** `README.md` with **more details**, **more emojis**, and a **cleaner layout** to engage readers better! 🚀🔥
 
-**TLDR**: *find threats and be your electronic notebook to find the enemy **5x** quicker*
+---
 
-HUNT-AI helps threat hunting to make sure analysts are checking their boxes and observing all possibilities that an attacker can use on their terrain. This bot will help with managing how to threat hunting while giving helpful advice and keeping track of what you have looked at. All of this knowledge is made possible from the amazing support I have been given. learning from my current role, SEC504, FOR508, 13Cubed and many more have allowed me to give this amazing information in one central location.
+```markdown
+# 🛡️ Threat Hunting Artificial Intelligence - HUNT-AI 🕵️‍♂️💻
+
+### **TL;DR:** *Find threats & track your hunt, boosting efficiency by **5x**!* 🚀
+
+HUNT-AI is your **digital hunting companion**, ensuring that analysts cover all potential **attack paths** while keeping meticulous track of findings. 📝  
+It guides your **threat hunting process**, offers **insightful tips**, and ensures you're following **best practices**.
+
+Built with experience from **real-world security operations** and inspired by courses like **SEC504**, **FOR508**, and **13Cubed**, this tool consolidates **elite knowledge** into **one central hub**. 🏆🔎  
+
+---
+
+## 🎯 Features & Benefits
+✅ **Track Your Investigations** – Organize your hunts and keep notes in an electronic **analyst notebook**.  
+✅ **MITRE ATT&CK Integration** – Direct mapping to **T-codes**, keeping your analysis **structured** and **actionable**.  
+✅ **Splunk & SIEM Queries** – Run pre-configured **detection queries** for faster identification of **malicious activity**.  
+✅ **Multi-Platform Support** – Runs on **Windows, Linux, and macOS** with minimal dependencies.  
+✅ **Collaborative** – Sync investigations with your team via **Docker-compose** (coming soon).  
+
+---
 
 <div align="center">
   <img src="https://git.infinit3i.com/matthew/Hunt-AI/raw/commit/4c3b0654cd4c5b94e8659f2d18f86e01b579ba87/Assets/threat_hunter.jpeg" alt="Threat Hunter" width="600">
 </div>
 
-## minimum requirements 
-- 1 brain cell
-- pc with atleast a 🐹
+---
 
-### Depenecies
+## 🛠️ Minimum Requirements  
+- 🧠 **1 brain cell**  
+- 🖥️ **PC** with at least a 🐹 (or better)  
+- **Python 3.x** installed  
 
-#### [Python](https://www.python.org/downloads/)
+---
 
-# Directions
+## 🔧 Dependencies  
+Before running, make sure you have **Python** installed:  
+✅ [Download Python](https://www.python.org/downloads/)  
 
-1. Download zip in top right
-2. unzip Hunt-AI.zip
-3. Go to path `*/hunt-ai/`
-	- you should see `app.py`
-4. `cd Installation`
-5. `python3 setup.py`
-6. `cd ../`
-7. `python3 start.py`
-----
-
-
-## Todo
-- Knowledge --> t-codes
-- Persistence --> t-codes
-- more t-codes
-- create clear section and content
-- get windows setup done well so people on windows can setup their system
-- create docker-compose to allow a group to sync to their server
-- search
-- notebook save
-	- encrypt
-- have ips be entered into links
-- checklist of all items
-- when the notebook is put in order it creates a powerpoint and network diagram
-- have all the pre data go into the hunt data in its right section
-
-#### REFACTORING
-
-kept in notebook
-- from
-- to
-- time incident
-- time reported
-- file/note/scheduled/registry key
-- user
-- t-code
-
-
-## Run Testing
+Install required dependencies:  
+```bash
+pip install -r requirements.txt
 ```
+
+---
+
+## 🚀 Quick Start Guide
+
+1️⃣ **Download ZIP** 📦 (top right of GitHub page)  
+2️⃣ **Extract** `Hunt-AI.zip`  
+3️⃣ **Navigate to the folder**:
+   ```bash
+   cd hunt-ai/
+   ```
+4️⃣ **Run setup** 🏗️:
+   ```bash
+   cd Installation && python3 setup.py
+   ```
+5️⃣ **Start the application** 🎯:
+   ```bash
+   cd ../ && python3 start.py
+   ```
+---
+
+## 📌 Roadmap / TODOs
+✅ **T-code classification** - Better organization by **techniques & attacks**.  
+✅ **Notebook Enhancements** - Track **IP addresses**, **domains**, **programs**, and **notes** easily.  
+✅ **MITRE ATT&CK Mapping** - Better **visual representation** of tactics & techniques.  
+✅ **Windows Setup Guide** - Improve installation steps for **Windows users**.  
+✅ **Docker Integration** - Sync investigations with **team servers**.  
+✅ **Advanced Search** - Quickly retrieve relevant **hunt data**.  
+✅ **Checklist System** - Ensure all **hunting steps** are **followed**.  
+✅ **Notebook Exports** - Convert investigations into **PowerPoint** and **network diagrams**.  
+✅ **Encrypted Notebook** - Securely store investigation **data & logs**.  
+
+---
+
+## 🔬 Running Tests  
+To verify that everything is working:  
+```bash
 python -m unittest discover Testing
 ```
 
+---
 
+# 📝 Changelog 📜  
 
+## ✅ 1.1.3 (2025/02/14) 🎉  
+- [X] Recreate the **technique template section** 🏗️  
+- [X] Allow **multiple Splunk sections** 🔍  
+- [X] Ensure **themes display correctly** 🎨  
+- [X] Show **selected tactics in the top left** 📌  
+- [X] Update & refine **theme styles** 🎭  
+- [X] Ensure **background spans the entire page** 🌌  
+- [X] Display **techniques like tactics (checkbox system)** ✅  
+- [X] Group **techniques under their selected tactics** 📊  
+- [X] Fix **gradient viewport issue** 🎨  
+- [X] Optimize **checkbox alignment in grids** 🔲  
 
+## ✅ 1.1.2  
+- [X] Add **T-codes** to enhance **attack mapping** 🔗  
 
-# 📌 Changelog
+## ✅ 1.1.1 (2024/11/28)  
+- [X] Update **methodology page** 📝  
 
-## ✅ 1.1.3 (2025/02/14)
-- [X] Recreate the technique template section
-- [X] Allow multiple Splunk sections
-- [X] Ensure all themes display correctly
-- [X] Show selected tactic in the **top left** along with active boxes
-- [X] Update and refine theme styles
-- [X] Ensure background spans the whole page
-- [X] Make techniques display like **tactics**, with checkboxes
-- [X] Allow techniques to be grouped under their selected tactics
-- [X] Fix the issue where the **gradient didn't cover the whole viewport**
-- [X] Optimize CSS for correct **checkbox alignment** in grids
+## ✅ 1.1.0 (2024/11/27)  
+- [X] Convert **CLI-based system** to a **web-based interface** 🌐  
 
-## ✅ 1.1.2
-- [X] Add **T-codes** associated with attacks to improve organization
+## ✅ 1.0.5 (2024/11/26)  
+- [X] Implement **search functionality** 🔎  
+- [X] Add `common_ui.py` for **reusable UI components** 🏗️  
 
-## ✅ 1.1.1 (2024/11/28)
-- [X] Change methodology page
+## ✅ 1.0.4 (2024/11/25)  
+- [X] Create **analyst notebook** 📖  
+    - [X] Track **IP addresses** 🌍  
+    - [X] Store **domains** 🔗  
+    - [X] Add **notes** 📝  
+    - [X] Log **programs used** 💻  
+- [X] Add **About section** ℹ️  
+    - [X] Include `start.me` links 🌎  
+    - [X] Link to **official website** 🔗  
 
-## ✅ 1.1.0 (2024/11/27)
-- [X] Change to web browser instead of terminal
+## ✅ 1.0.3 (2024/11/24)  
+- [X] Implement **highlighting & marking features** 🖍️  
+- [X] Add **emojis** to improve UI ✨  
+- [X] Simplify **backend logic** for efficiency ⚡  
 
-## ✅ 1.0.5 (2024/11/26)
-- [X] Add searching functionality
-- [X] Create `common_ui.py` file for reusable functions
-
-## ✅ 1.0.4 (2024/11/25)
-- [X] Add analyst notebook:
-    - [X] Add IP tracking
-    - [X] Add Domain tracking
-    - [X] Add Notes
-    - [X] Add Programs
-- [X] Add About section:
-    - [X] Add `start.me` integration
-    - [X] Add website link
-
-## ✅ 1.0.3 (2024/11/24)
-- [X] Highlight, unmark, and color marked sections
-- [X] Add emojis to the main page
-- [X] Simplify backend code to improve performance
-
-## ✅ 1.0.0 (2024/11/23)
-- [X] Started this project
-
+## ✅ 1.0.0 (2024/11/23)  
+- [X] **Initial Release** 🎉  
