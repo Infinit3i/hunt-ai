@@ -31,6 +31,7 @@ HUNT-AI helps threat hunting to make sure analysts are checking their boxes and 
 
 ## Todo
 - Knowledge --> t-codes
+- Persistence --> t-codes
 - create clear section and content
 - get windows setup done well so people on windows can setup their system
 - create docker-compose to allow a group to sync to their server
