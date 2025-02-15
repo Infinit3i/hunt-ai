@@ -89,7 +89,19 @@ pip install -r requirements.txt
 
 
 
+add values judge soc anlaysts
 
+```
+Time to detection
+Time to resolution
+Escalation rate
+False positive rate
+Incident recurrence rate
+Compliance with SLAs
+Team productivity & efficiency
+Customer or stakeholder satisfaction
+
+```
 
 
 
