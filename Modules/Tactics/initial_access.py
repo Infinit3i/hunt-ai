@@ -3,8 +3,6 @@ def get_content():
         {
             "title": "Initial Access",
             "tactic_id": "TA0001",
-            "description": """
-                Techniques used by attackers to gain initial access to a target network or system.
-            """,
+            "description": "Gain initial access to a target network or system.",
         },
     ]

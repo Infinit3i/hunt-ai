@@ -3,8 +3,6 @@ def get_content():
         {
             "title": "Credential Access",
             "tactic_id": "TA0006",
-            "description": """
-                Techniques used to steal account credentials such as passwords or keys.
-            """,
+            "description": "Steal account credentials such as passwords or keys.",
         },
     ]

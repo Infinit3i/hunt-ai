@@ -3,8 +3,6 @@ def get_content():
         {
             "title": "Discovery",
             "tactic_id": "TA0007",
-            "description": """
-                Methods to gather information about the system, network, or domain.
-            """,
+            "description": "Gather information about the system, network, or domain.",
         },
     ]

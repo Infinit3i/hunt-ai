@@ -3,8 +3,6 @@ def get_content():
         {
             "title": "Lateral Movement",
             "tactic_id": "TA0008",
-            "description": """
-                Techniques used to move through a network from one system to another.
-            """,
+            "description": "Move through a network from one system to another.",
         },
     ]

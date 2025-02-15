@@ -3,8 +3,6 @@ def get_content():
         {
             "title": "Defense Evasion",
             "tactic_id": "TA0005",
-            "description": """
-                Techniques employed to avoid detection and hide activities.
-            """,
+            "description": "Avoid detection and hide activities.",
         },
     ]

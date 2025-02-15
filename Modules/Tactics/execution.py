@@ -3,8 +3,6 @@ def get_content():
         {
             "title": "Execution",
             "tactic_id": "TA0002",
-            "description": """
-                Methods used by attackers to execute malicious code on a target system.
-            """,
+            "description": "Execute malicious code on a target system.",
         },
     ]
