@@ -11,12 +11,12 @@ body {
     margin: 20px auto;  /* Centers the div */
     background-color: #2c2c2c; /* Dark background to match theme */
     box-shadow: 0px 4px 6px rgba(0, 188, 212, 0.3);
-    width: 75%; /* Limits the width of the content */
+    width: 85%; /* Limits the width of the content */
 }
 
 /* Content Wrapper Inside Each Section */
 .operation-content {
-    width: 80%; 
+    width: 90%; 
     margin: 0 auto; /* Centers the content within the box */
 }
 
