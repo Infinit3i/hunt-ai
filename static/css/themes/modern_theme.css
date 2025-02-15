@@ -1,6 +1,5 @@
 /* Modern Theme */
 html, body {
-    height: 400vh;
     color: white;
     background: linear-gradient(to bottom right, #1f1f1f, black);
 }

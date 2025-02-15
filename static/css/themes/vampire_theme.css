@@ -1,6 +1,5 @@
 /* vampire_theme.css */
 html, body {
-    height: 100%;
     color: white;
     background: linear-gradient(to bottom right, #610361, black);
 }

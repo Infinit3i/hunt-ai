@@ -1,6 +1,5 @@
 /* nordic_theme.css */
 html, body {
-    height: 100%;
     color: darkgray;
     background: linear-gradient(to bottom right, #01579b, white);
 }
