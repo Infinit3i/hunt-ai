@@ -83,7 +83,7 @@ pip install -r requirements.txt
 
       pass the session
 
-      pass the pass (word) - wdigest
+      pass the pass (word) - wdigest, live, tspkg, kerberos
 
 
 
