@@ -67,21 +67,18 @@ pip install -r requirements.txt
 
 
 ## 📌 Roadmap / TODOs
-- [ ] **T-code classification** - Better organization by **techniques & attacks**.  
 - [ ] **Notebook Enhancements** - Track **IP addresses**, **domains**, **programs**, and **notes** easily.  
-- [ ] **MITRE ATT&CK Mapping** - Better **visual representation** of tactics & techniques.  
+- [ ] Knowledge DIR --> t-codes
+- [ ] **Checklist System** - allow hunt execution steps to be checked and clearing steps 
 - [ ] **Windows Setup Guide** - Improve installation steps for **Windows users**.  
 - [ ] **Docker Integration** - Sync investigations with **team servers**.  
 - [ ] **Advanced Search** - Quickly retrieve relevant **hunt data**.  
-- [ ] **Checklist System** - Ensure all **hunting steps** are **followed**.  
 - [ ] **Notebook Exports** - Convert investigations into **PowerPoint** and **network diagrams**.  
 - [ ] **Encrypted Notebook** - Securely store investigation **data & logs**.
 - [ ] T-code - pass the hash - is local account
       block these for pass the has
       S-1-5-113: NT AUTHORITY\Local account
       S-1-5-114: NT AUTHORITY\Local account in Administrators group
-
-      pass the session/ token smuggling - can be domain account
 
       pass the pass (word) - wdigest, live, tspkg, kerberos - SeDebugPrivilege or SYSTEM priviledges
 
@@ -136,23 +133,6 @@ Customer or stakeholder satisfaction
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
 ## 🔬 Running Tests  
@@ -166,6 +146,9 @@ python -m unittest discover Testing
 # 📝 Changelog 📜  
 
 ## ✅ 1.1.4 (2025/02/16) 🚀  
+- [X] **T-code classification** - Better organization by **techniques & attacks**.  
+- [X] **MITRE ATT&CK Mapping** - Better 
+- [X] **visual representation** of tactics & techniques.  
 - [X] **Massively expanded T-code coverage** 📌  
   - Added **over 20 new T-code technique files** 🛠️  
   - Ensured **each technique follows the updated template** 📜  

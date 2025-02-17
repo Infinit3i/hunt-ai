@@ -24,11 +24,6 @@ def get_methodology_content():
 - Investigate `/var/log/auth.log` for failed or unauthorized access.
 - Check for hidden files and directories using `find / -type f -name ".*"`.
             """,
-            "resources": [
-                "https://www.linux.org/",
-                "https://www.cyberciti.biz/",
-                "https://www.linuxsecurity.com/"
-            ]
         },
         {
             "title": "Windows Basics",
@@ -45,11 +40,6 @@ def get_methodology_content():
 - Know where attackers store files.
 - C:\\windows\\system32: Exe files are not usually stored here.
             """,
-            "resources": [
-                "https://www.microsoft.com/en-us/security",
-                "https://attack.mitre.org/",
-                "https://learn.microsoft.com/en-us/sysinternals/"
-            ]
         },
         {
             "title": "Time of Incident",
@@ -58,10 +48,6 @@ def get_methodology_content():
 - what happened around what you are looking at?
 - 3rd Party Notification
             """,
-            "resources": [
-                "https://www.splunk.com/",
-                "https://owasp.org/www-project-intrusion-detection-systems/"
-            ]
         },
         {
             "title": "Network Activity",
@@ -73,21 +59,13 @@ def get_methodology_content():
 - is it touching multiple of your systems?
 - DNS requests for bad domains
             """,
-            "resources": [
-                "https://www.virustotal.com/gui/home/url",
-                "https://www.cloudflare.com/dns/"
-            ]
         },
         {
             "title": "Process Activity",
             "content": """
 - Running process related to incident
 - DLL injection detected
-            """,
-            "resources": [
-                "https://processhacker.sourceforge.io/",
-                "https://www.sciencedirect.com/topics/computer-science/dll-injection"
-            ]
+            """
         },
         {
             "title": "Name of a File",
@@ -95,9 +73,5 @@ def get_methodology_content():
 - File name of interest (e.g., p.exe, r1.exe)
 - File type of interest (e.g., .rar, .py, .ps1)
             """,
-            "resources": [
-                "https://fileinfo.com/",
-                "https://www.hybrid-analysis.com/"
-            ]
         }
     ]

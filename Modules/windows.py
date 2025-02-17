@@ -14,10 +14,6 @@ def get_windows_content():
                 - a.exe
                 - ab.exe - shorter names since mal devs are lazy
             """,
-            "resources": [
-                "https://malwaredb.malwarebytes.com/",
-                "https://www.trendmicro.com/vinfo/us/security/definition/malware"
-            ]
         },
         {
             "title": "Malware Locations",
@@ -36,10 +32,6 @@ def get_windows_content():
                 - \\Program Files (x86)
                 - [Added Directories by APTs]
             """,
-            "resources": [
-                "https://www.microsoft.com/en-us/wdsi",
-                "https://www.bleepingcomputer.com/"
-            ]
         },
         {
             "title": "File Types",
@@ -61,8 +53,6 @@ def get_windows_content():
                 - CommandLineTemplate
                 - ScriptText
             """,
-            "resources": [
-            ]
         },
         {
             "title": "Security Events",
@@ -77,10 +67,6 @@ def get_windows_content():
                 - 7036 Service changed
                 - 7040 Service startup type changed
             """,
-            "resources": [
-                "https://www.ultimatewindowssecurity.com/",
-                "https://www.splunk.com/en_us/blog.html"
-            ]
         },
         {
             "title": "Sysmon Events",
@@ -96,19 +82,5 @@ def get_windows_content():
                 5. **Event ID 10**: WMI activity.
                    - Monitors suspicious or unauthorized WMI queries.
             """,
-            "resources": [
-                "https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon",
-                "https://thedfirreport.com/"
-            ]
-        },
-        {
-            "title": persistence_menu["title"],
-            "content": persistence_menu["description"],
-            "resources": [
-                "",
-            ],
-            "links": [
-                {"name": method["name"], "url": method["url"]} for method in persistence_menu["methods"]
-            ]
-        },
+        }
     ]
