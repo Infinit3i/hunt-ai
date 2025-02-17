@@ -1,8 +1,5 @@
-from Modules.Persistence.persistence import get_persistence_menu
 
 def get_windows_content():
-
-    persistence_menu = get_persistence_menu()
     
     return [
         {

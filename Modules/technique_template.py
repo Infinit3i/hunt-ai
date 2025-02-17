@@ -22,12 +22,13 @@ def get_content():
             {"type": "", "location": "", "identify": ""}
         ],
         "detection_methods": [],  # Techniques for identifying the attack
-        "spl_query": [],  # Splunk queries to detect the technique
+        "apt": [], # APT groups known to use this technique typically start with G#### (e.g., G0016) - do not show the S####
+        "spl_query": [],  # Splunk queries to detect the technique, multiple can be added
         "hunt_steps": [],  # Steps to proactively hunt for threats
         "expected_outcomes": [],  # Expected results from detection/hunting
         "false_positive": "",  # Known false positives and how to handle them
         "clearing_steps": [],  # Steps for remediation and clearing traces
-        "mitre_mapping": [  # Mapping to related MITRE techniques
+        "mitre_mapping": [  # Next Mitre Technique that could be used after this technique
             {"tactic": "", "technique": "", "example": ""}
         ],
         "watchlist": [],  # Indicators to monitor for potential threats

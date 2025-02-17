@@ -5,16 +5,17 @@
 <h1>{{ tactic.title }}</h1>
 <p>{{ tactic.description }}</p>
 
-<h2>Techniques</h2>
+{% if current_tactic %}
+    <h2>Techniques for {{ current_tactic }}</h2>
+{% else %}
+    <h2>Techniques</h2>
+{% endif %}
 
-<div class="mitre-grid">  <!-- Ensures grid layout for techniques -->
+<div class="mitre-grid">
     {% for technique in techniques.values() %}
     <div class="mitre-box technique-box" data-checkbox-id="{{ technique.id }}">
-        <!-- Hidden checkbox -->
         <input type="checkbox" id="{{ technique.id }}" class="technique-checkbox" />
         <label for="{{ technique.id }}" class="checkbox-label"></label>
-
-        <!-- Technique title -->
         <h2>
             <a href="{{ url_for('routes.technique_page', url_id=technique.url_id) }}">
                 {{ technique.title }} [{{ technique.id }}]
@@ -23,6 +24,7 @@
     </div>
     {% endfor %}
 </div>
+
 
 <a href="{{ url_for('routes.mitre') }}">Back to MITRE Tactics</a>
 {% endblock %}

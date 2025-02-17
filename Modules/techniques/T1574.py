@@ -8,8 +8,8 @@ def get_content():
         "protocol": "N/A",
         "os": "Windows, Linux, macOS",
         "objective": "Detect and mitigate hijack execution flow attacks, where adversaries manipulate the normal execution flow of processes to execute malicious code.",
-        "scope": "Monitor process injections, DLL hijacking, and other execution flow modifications. Detect unauthorized modifications to registry keys or system binaries that control execution flow.",
-        "threat_model": "Adversaries hijack execution flow to load malicious code into trusted processes, bypass security mechanisms, and persist on a system by leveraging execution hijacking techniques.",
+        "scope": "Monitor process injections, DLL hijacking, and other execution flow modifications.",
+        "threat_model": "Adversaries hijack execution flow to load malicious code into trusted processes, bypass security mechanisms, and persist using execution hijacking techniques.",
         "hypothesis": [
             "Are there unauthorized DLLs loaded by critical system processes?",
             "Are legitimate processes exhibiting unusual execution patterns?",
@@ -26,7 +26,7 @@ def get_content():
             "Detect registry modifications that indicate execution hijacking (e.g., Image File Execution Options).",
             "Correlate process execution patterns with known hijacking techniques."
         ],
-        "spl_query": ["index=sysmon sourcetype=\"Sysmon\" EventCode=7 | where Image like \"%\\Temp\\%\" OR Image like \"%\\Users\\Public\\%\" | stats count by Image, ProcessId, ProcessName"],
+        "spl_query": "index=sysmon sourcetype=\"Sysmon\" EventCode=7 | where Image like '%\\Temp\\%' OR Image like '%\\Users\\Public\\%' | stats count by Image, ProcessId, ProcessName",
         "hunt_steps": [
             "Run Queries in SIEM: Detect execution flow hijacking via DLL injection or registry modifications.",
             "Correlate with Threat Intelligence Feeds: Validate loaded DLLs and modified registry entries against known attack techniques.",
@@ -36,12 +36,12 @@ def get_content():
         ],
         "expected_outcomes": [
             "Execution Flow Hijack Detected: Block or remove the hijacked execution flow modification. Investigate further for malware persistence or lateral movement.",
-            "No Malicious Activity Found: Improve baseline monitoring for legitimate execution flow changes. Strengthen file integrity monitoring and logging configurations."
+            "No Malicious Activity Found: Improve baseline monitoring for legitimate execution flow changes."
         ],
         "mitre_mapping": [
-            {"tactic": "Defense Evasion", "technique": "T1574 (Hijack Execution Flow)", "example": "Attackers modify execution flow to inject malicious code."},
-            {"tactic": "Persistence", "technique": "T1098 (Account Manipulation)", "example": "Attackers modify user accounts to maintain access."},
-            {"tactic": "Privilege Escalation", "technique": "T1068 (Exploiting Privileged Execution)", "example": "Hijacking execution flow may allow privilege escalation."}
+            {"tactic": "Defense Evasion", "technique": "T1574 (Hijack Execution Flow)", "example": "Adversaries modify execution flow to run malicious code."},
+            {"tactic": "Execution", "technique": "T1204.002 (User Execution - Malicious File)", "example": "Hijacked processes may execute unauthorized payloads."},
+            {"tactic": "Persistence", "technique": "T1098 (Account Manipulation)", "example": "Attackers may modify user accounts to maintain access."}
         ],
         "watchlist": [
             "Flag execution flow modifications involving DLL injection or registry edits.",
@@ -53,7 +53,7 @@ def get_content():
             "Deploy endpoint detection for hijacking-based persistence techniques.",
             "Harden registry and process execution policies to prevent manipulation."
         ],
-        "summary": "Monitor and detect execution flow hijacking through process injection, registry modifications, and DLL hijacking.",
-        "remediation": "Block suspicious modifications, revoke unauthorized changes, and improve monitoring on critical system processes.",
-        "improvements": "Enhance endpoint detection capabilities and refine detection thresholds for execution hijacking techniques."
+        "summary": "Monitor and detect execution flow hijacking attempts by analyzing process execution, DLL loading, and registry modifications.",
+        "remediation": "Block unauthorized execution flow modifications, investigate further for malware persistence, and improve detection baselines.",
+        "improvements": "Strengthen process monitoring policies and enhance security configurations to prevent execution hijacking."
     }

@@ -6,9 +6,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/technique.css') }}">
 </head>
 
-<a class="back-link" href="{{ url_for('routes.mitre_tactic', tactic=technique.tactic.replace(' ', '_')) }}">
-    ⬅️ Back to {{ technique.tactic }}
+<a class="back-link" href="{{ url_for('routes.mitre_tactic', tactic=session.get('selected_tactic', technique.tactic.split(',')[0].strip()).replace(' ', '_')) }}">
+    ⬅️ Back to {{ session.get('selected_tactic', technique.tactic.split(',')[0].strip()) }}
 </a>
+
 
 <h1>{{ technique.title }} [{{ technique.id }}]</h1>
 
@@ -163,33 +164,36 @@
     </div>
 </div>
 
-<a class="back-link" href="{{ url_for('routes.mitre_tactic', tactic=technique.tactic.replace(' ', '_')) }}">
-    ⬅️ Back to {{ technique.tactic }}
+<a class="back-link" href="{{ url_for('routes.mitre_tactic', tactic=session.get('selected_tactic', technique.tactic.split(',')[0].strip()).replace(' ', '_')) }}">
+    ⬅️ Back to {{ session.get('selected_tactic', technique.tactic.split(',')[0].strip()) }}
 </a>
+
 
 <!-- Go to Top Button -->
 <button onclick="scrollToTop()" id="topBtn" class="top-btn">⬆️ Go to Top</button>
 
 <!-- JavaScript for Smooth Scroll & Visibility -->
 <script>
-    // Smooth Scroll to Top
+// Smooth Scroll to Top
     function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-    // Show/hide button on scroll
-    window.onscroll = function() { toggleScrollButton() };
+        // Show/hide button on scroll
+        window.onscroll = function() { toggleScrollButton() };
 
-    function toggleScrollButton() {
+        function toggleScrollButton() {
         let topBtn = document.getElementById("topBtn");
-        if (document.documentElement.scrollTop > 200) {
-            topBtn.style.display = "block";
+
+        if (!topBtn) return;  // Ensure the button exists before modifying
+
+        if (window.scrollY > 200) {
+            topBtn.style.display = "block";  // Show when scrolling down
         } else {
-            topBtn.style.display = "none";
+            topBtn.style.display = "none";   // Hide when at the top
         }
     }
-</script>
-<script>
+
     function navigateToTechnique(techniqueId) {
         fetch(`/technique/${techniqueId}`)
             .then(response => {

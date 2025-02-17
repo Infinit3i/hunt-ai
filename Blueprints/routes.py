@@ -5,8 +5,7 @@ import importlib.util
 from datetime import datetime
 
 # Third-party imports
-from flask import Blueprint, render_template, abort, session
-
+from flask import Blueprint, render_template, abort, session, jsonify
 
 from static.tips import get_random_tip_or_joke
 
@@ -16,7 +15,6 @@ from Modules.windows import get_windows_content
 from Modules.linux import get_linux_content
 from Modules.methodology import get_methodology_content
 from Modules.investigate import get_investigate_content
-from Modules.Persistence.persistence import get_persistence_menu
 
 from Modules.Investigate.domain import get_domain_content
 from Modules.Investigate.ip import get_ip_content
@@ -25,8 +23,6 @@ from Modules.Investigate.filehash import get_filehash_content
 
 # Blueprint definition
 routes_bp = Blueprint('routes', __name__)
-
-
 
 # Helper functions
 def get_readme_description():
@@ -195,45 +191,21 @@ def investigate_malware():
     return render_template('investigate.html', content=content)
 
 
-# Persistence routes
-@routes_bp.route('/persistence')
-def persistence_submenu():
-    menu = get_persistence_menu()
-    return render_template('persistence_submenu.html', menu=menu)
-
-@routes_bp.route('/persistence/<method>')
-def persistence_method(method):
-    try:
-        module = __import__(f"Modules.Persistence.{method}", fromlist=["get_content"])
-        content = module.get_content()
-        return render_template('persistence_method.html', content=content)
-    except ModuleNotFoundError:
-        abort(404, description=f"Persistence method '{method}' not found.")
-        
-        
-
-
-
-
-
-def load_techniques_for_tactic(tactic_folder):
+def load_techniques():
     """
-    Dynamically loads techniques from the corresponding tactic folder (e.g., Modules/execution/).
+    Dynamically loads all techniques from the /Modules/techniques/ folder.
     """
     techniques = {}
-    techniques_path = os.path.join(os.getcwd(), "Modules", tactic_folder)
+    techniques_path = os.path.join(os.getcwd(), "Modules", "techniques")
 
     if not os.path.exists(techniques_path):
-        print(f"❌ Folder not found: {techniques_path}")  # Debugging output
+        print(f"❌ Folder not found: {techniques_path}")
         return techniques  # Return empty if folder doesn't exist
 
     for file in os.listdir(techniques_path):
         if file.endswith(".py"):
             file_path = os.path.join(techniques_path, file)
             module_name = file[:-3]  # Remove the .py extension
-
-            # Fix: Replace `.` with `_` when loading dynamically
-            module_name = module_name.replace(".", "_")  
 
             print(f"🔍 Loading: {file_path}")  # Debugging output
 
@@ -245,11 +217,21 @@ def load_techniques_for_tactic(tactic_folder):
             # Check if the module has a `get_content` function
             if hasattr(module, "get_content"):
                 technique_data = module.get_content()
-                print(f"✅ Loaded: {technique_data['id']} -> {technique_data['url_id']}")  # Debugging output
-                techniques[technique_data["url_id"]] = technique_data
+
+                # Ensure valid technique format
+                if isinstance(technique_data, dict) and "id" in technique_data and "url_id" in technique_data:
+                    # Normalize tactics to lowercase and replace spaces
+                    tactic_list = [
+                        t.strip().replace(" ", "_").lower()
+                        for t in technique_data["tactic"].split(",")
+                    ]
+                    technique_data["normalized_tactics"] = tactic_list  # Store normalized tactics for filtering
+                    techniques[technique_data["url_id"]] = technique_data
+                else:
+                    print(f"⚠️ Skipping invalid technique file: {file_path}")
 
     return techniques
-from flask import session  # Import session
+
 
 @routes_bp.route('/mitre/<tactic>')
 def mitre_tactic(tactic):
@@ -264,39 +246,46 @@ def mitre_tactic(tactic):
     if not tactic_data:
         abort(404, description="Tactic not found.")
 
-    # Store selected tactic in session
-    session['selected_tactic'] = tactic_data
+    # Store **only one** tactic in the session (first one listed in techniques)
+    session['selected_tactic'] = tactic_data["title"].split(",")[0].strip()
 
-    # Load associated techniques from its folder
-    tactic_folder = tactic_data["title"].lower().replace(" ", "_")
-    techniques = load_techniques_for_tactic(tactic_folder)
+    # Load all techniques and filter only those that contain the tactic
+    all_techniques = load_techniques()
+    filtered_techniques = {
+        key: value
+        for key, value in all_techniques.items()
+        if tactic.lower() in value["normalized_tactics"]  # Use the normalized tactic list
+    }
 
-    return render_template('tactic.html', tactic=tactic_data, techniques=techniques)
+    print(f"🔍 Found {len(filtered_techniques)} techniques for tactic: {tactic}")  # Debugging output
 
+    return render_template(
+        'tactic.html',
+        tactic=tactic_data,
+        techniques=filtered_techniques,
+        current_tactic=tactic_data["title"]
+    )
 
 
 @routes_bp.route('/technique/<path:url_id>')  # Accepts slashes in the URL
 def technique_page(url_id):
-    # Load all techniques from all tactic folders
-    tactic_folders = ["reconnaissance", "resource_development", "initial_access", "execution", "persistence", "privilege_escalation", "defense_evasion", "credential_access", "discovery", "lateral_movement", "collection", "command_and_control", "exfiltration", "impact"]
-    techniques = {}
-
-    for folder in tactic_folders:
-        techniques.update(load_techniques_for_tactic(folder))
+    # Load all techniques from the /Modules/techniques/ folder
+    all_techniques = load_techniques()
 
     print(f"🔎 Searching for: {url_id}")  # Debugging output
 
     # Find the technique using url_id
-    selected_technique = techniques.get(url_id)
+    selected_technique = all_techniques.get(url_id)
 
     if not selected_technique:
         print(f"❌ Not Found in techniques: {url_id}")  # Debugging output
         print("✅ Loaded Techniques List:")
-        for key in techniques.keys():
+        for key in all_techniques.keys():
             print(f"   - {key}")  # Show all loaded techniques
         abort(404, description="Technique not found.")
 
     return render_template('technique.html', technique=selected_technique)
+
 
 
 @routes_bp.route('/tactic_techniques/<tactic>')
