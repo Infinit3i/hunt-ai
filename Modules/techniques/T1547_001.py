@@ -15,17 +15,37 @@ def get_content():
             "Are registry keys being modified to insert persistence mechanisms?",
             "Are adversaries leveraging the Startup folder for automatic execution?"
         ],
+        "tips": [
+            "Monitor Windows Registry Run keys for unauthorized modifications.",
+            "Detect new files appearing in the Startup folder that do not match baseline applications.",
+            "Investigate parent-child process relationships originating from autostart locations."
+        ],
         "log_sources": [
-            {"type": "Windows Registry", "source": "Sysmon Event ID 13, Windows Event Logs 4657"},
-            {"type": "File Monitoring", "source": "Sysmon Event ID 11, File Integrity Monitoring (FIM)"},
-            {"type": "Process Execution", "source": "Sysmon Event ID 1, Windows Event Logs 4688"}
+            {"type": "Windows Registry", "source": "Sysmon Event ID 13, Windows Event Logs 4657", "destination": "SIEM"},
+            {"type": "File Monitoring", "source": "Sysmon Event ID 11, File Integrity Monitoring (FIM)", "destination": "Endpoint Security Platform"},
+            {"type": "Process Execution", "source": "Sysmon Event ID 1, Windows Event Logs 4688", "destination": "SIEM"}
+        ],
+        "source_artifacts": [
+            {"type": "Registry Key", "location": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", "identify": "Persistence via Registry Run Keys"},
+            {"type": "File", "location": "%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup", "identify": "Malicious file added to Startup folder"}
+        ],
+        "destination_artifacts": [
+            {"type": "Process Execution", "location": "Sysmon Event ID 1", "identify": "Process execution from autostart locations"},
+            {"type": "Registry Modification", "location": "Windows Event ID 4657", "identify": "Registry changes to persistence locations"}
         ],
         "detection_methods": [
             "Monitor modifications to registry keys: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run and HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run.",
             "Detect unauthorized additions to the Startup folder in %APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup.",
             "Analyze process execution from autostart locations for anomalies."
         ],
-        "spl_query": ["index=windows EventCode=4657 RegistryPath IN ('HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run', 'HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run')"],
+        "apt": [
+            "G0007 - APT28: Known to use registry run keys for persistence.",
+            "G0016 - APT29: Uses startup folders to execute malicious payloads at logon."
+        ],
+        "spl_query": [
+            "index=windows EventCode=4657 RegistryPath IN ('HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run', 'HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run')",
+            "index=windows EventCode=4688 \n| search ParentImage IN ('C:\\\\Windows\\\\explorer.exe', 'C:\\\\Windows\\\\system32\\\\userinit.exe') \n| stats count by Image, ParentImage"
+        ],
         "hunt_steps": [
             "Run queries in SIEM to detect registry modifications and Startup folder changes.",
             "Correlate with threat intelligence feeds for known persistence mechanisms.",
@@ -37,14 +57,22 @@ def get_content():
             "Persistence Mechanism Detected: Remove unauthorized registry entries and Startup folder modifications.",
             "No Malicious Activity Found: Improve detection baselines and refine alerting thresholds."
         ],
+        "false_positive": "Legitimate software installers and enterprise applications may modify autostart locations for persistence.",
+        "clearing_steps": [
+            "Remove unauthorized registry keys under Run and RunOnce.",
+            "Delete malicious files in the Startup folder.",
+            "Revoke compromised credentials and reset account permissions.",
+            "Apply registry and file monitoring to prevent future persistence."
+        ],
         "mitre_mapping": [
-            {"tactic": "Persistence", "technique": "T1547.001 (Registry Run Keys / Startup Folder)", "example": "Malware uses registry keys for persistence."},
-            {"tactic": "Privilege Escalation", "technique": "T1548 (Abuse Elevation Control Mechanism)", "example": "Attackers escalate privileges using persistent execution."}
+            {"tactic": "Privilege Escalation", "technique": "T1548 (Abuse Elevation Control Mechanism)", "example": "Attackers escalate privileges using persistent execution."},
+            {"tactic": "Defense Evasion", "technique": "T1070.004 (Indicator Removal on Host)", "example": "Adversaries may delete logs related to registry and startup persistence."},
+            {"tactic": "Execution", "technique": "T1204.002 (User Execution - Malicious File)", "example": "Adversaries may execute scripts from startup locations."}
         ],
         "watchlist": [
-            "Monitor Windows Registry Run keys for unauthorized modifications.",
-            "Detect new files appearing in the Startup folder that do not match baseline applications.",
-            "Investigate parent-child process relationships originating from autostart locations."
+            "New or modified registry keys under Run and RunOnce.",
+            "Execution of unusual processes from the Startup folder.",
+            "Correlate process lineage from known autostart locations."
         ],
         "enhancements": [
             "Restrict modification access to registry keys commonly used for persistence.",
@@ -55,3 +83,55 @@ def get_content():
         "remediation": "Remove unauthorized registry keys and Startup folder entries, revoke compromised credentials, and improve monitoring.",
         "improvements": "Strengthen endpoint monitoring, apply least-privilege principles, and enforce application control policies."
     }
+
+
+
+
+
+
+'''
+        {
+            "title": "Registry Run Keys",
+            "content": """
+The most common ASEPs (AutoStart Extension Points) are the “Run” Registry keys:
+- NTUSER.DAT\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+- NTUSER.DAT\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce
+- Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce
+- Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run
+
+These keys are executed when a user logs on. Monitoring these keys is crucial for detecting persistence mechanisms.
+"""
+        },
+        {
+            "title": "Winlogon Userinit",
+            "content": """
+The Winlogon Userinit key can be used to maintain persistence:
+- SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Userinit
+
+This key typically contains:
+- C:\\Windows\\system32\\userinit.exe
+
+However, it can be modified to include malicious binaries:
+- Example: C:\\Windows\\system32\\userinit.exe,C:\\Temp\\malicious.exe
+"""
+        },
+        {
+            "title": "Startup Folder",
+            "content": """
+The Startup folder allows for persistence by placing shortcuts in this folder:
+- %AppData%\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup
+
+Files in this folder automatically execute when a user logs on. Malware often uses this location for persistence.
+"""
+        },
+        {
+            "title": "Investigative Notes",
+            "content": """
+Investigating ASEPs across multiple systems can help identify compromised hosts. Key notes:
+- ASEPs are numerous and diverse, requiring thorough examination.
+- Tools like Registry Explorer and RegRipper can retrieve additional ASEPs from Registry hives.
+- Analyzing data across systems may reveal outliers indicative of malicious activity.
+"""
+        }
+    ]
+'''
