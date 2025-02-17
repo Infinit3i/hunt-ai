@@ -21,8 +21,6 @@ def get_content():
         {
             "title": "Autonomous SOC Expectations",
             "content": """
-- Fully autonomous SOCs are unrealistic.
-- SOC analysts need creativity to solve problems and handle manual tasks effectively.
 - Agile/DevOps approaches are being implemented in 84% of organizations to improve processes.
             """
         }

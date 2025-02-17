@@ -2,7 +2,80 @@ def get_content():
     """
     Returns structured content for the Service-based persistence method.
     """
-    return [
+    return {
+        "id": "T1543.003",
+        "url_id": "T1543/003",
+        "title": "Create or Modify System Process: Windows Service",
+        "tactic": "Persistence, Privilege Escalation",
+        "data_sources": "Windows Event Logs, Registry, File System",
+        "protocol": "N/A",
+        "os": "Windows",
+        "objective": "Adversaries may create or modify Windows services for persistence or privilege escalation.",
+        "scope": "Monitor service creation and modification events.",
+        "threat_model": "Attackers can install malicious services or modify existing ones to maintain persistence.",
+        "hypothesis": [
+            "Are new services being created with unusual names?",
+            "Are existing services being modified unexpectedly?",
+            "Are attackers abusing service misconfigurations for privilege escalation?"
+        ],
+        "tips": [
+            "Monitor Event ID 7045 (service installation) and 4697 (non-default service creation).",
+            "Check for services with unusual startup types (e.g., auto-start with unsigned binaries).",
+            "Detect suspicious service binaries placed in writable directories."
+        ],
+        "log_sources": [
+            {"type": "Windows Event Logs", "source": "Security.evtx", "destination": "System.evtx"},
+            {"type": "Registry", "source": "SYSTEM\\CurrentControlSet\\Services"},
+            {"type": "File System", "source": "Prefetch, Service Executables"}
+        ],
+        "source_artifacts": [
+            {"type": "Prefetch", "location": "C:\\Windows\\Prefetch", "identify": "sc.exe, services.exe"}
+        ],
+        "destination_artifacts": [
+            {"type": "Service Executables", "location": "C:\\Windows\\System32", "identify": "Malicious service binaries"}
+        ],
+        "detection_methods": [
+            "Monitor new services registered in the registry.",
+            "Analyze service executable paths for anomalies.",
+            "Check for unsigned service executables."
+        ],
+        "apt": ["G0007", "G0032"],
+        "spl_query": [
+            "index=windows EventCode=7045 | table Time, ServiceName, ImagePath",
+            "index=windows EventCode=4697 | table Time, ServiceName, User"
+        ],
+        "hunt_steps": [
+            "Search for recently created services in the registry.",
+            "Check for suspicious or unsigned service binaries.",
+            "Investigate service accounts with abnormal privileges."
+        ],
+        "expected_outcomes": [
+            "Unauthorized service detected and mitigated.",
+            "No suspicious activity found, improving baseline detection."
+        ],
+        "false_positive": "Legitimate administrators may create new services as part of IT operations.",
+        "clearing_steps": [
+            "sc delete <ServiceName>",
+            "Remove malicious binaries from C:\\Windows\\System32."
+        ],
+        "mitre_mapping": [
+            {"tactic": "Persistence", "technique": "T1547.001 (Registry Run Keys)", "example": "Adversaries may use registry keys for persistence."}
+        ],
+        "watchlist": [
+            "Monitor service creation and modification attempts.",
+            "Detect unauthorized service startup entries."
+        ],
+        "enhancements": [
+            "Enable logging for service creation and modification.",
+            "Restrict service installation permissions."
+        ],
+        "summary": "Attackers may create or modify Windows services for persistence or privilege escalation.",
+        "remediation": "Remove unauthorized services and audit permissions on service-related registry keys.",
+        "improvements": "Enhance monitoring for suspicious service creation and execution."
+    }
+
+
+'''
         {
             "title": "Source Event Logs",
             "content": """
@@ -138,3 +211,22 @@ Windows services can be exploited in the following ways:
             """
         }
     ]
+    
+{
+            "title": "Drivers",
+            "content": """
+### Drivers
+Malicious drivers can be used to escalate privileges or maintain persistence.
+
+#### Detection Techniques:
+1. **Registry Key**:
+   - `HKLM\\SYSTEM\\CurrentControlSet\\Services\\<DriverName>`
+   - Look for unsigned or newly installed drivers.
+2. **Event IDs**:
+   - Event ID `7045` (Service Installed): Tracks driver installation.
+3. **Artifacts**:
+   - Examine `C:\\Windows\\System32\\drivers` for unauthorized or unsigned drivers.
+"""
+        },
+    
+'''

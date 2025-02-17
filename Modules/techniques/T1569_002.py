@@ -1,9 +1,89 @@
 def get_content():
     """
-    Returns structured content for the PsExec persistence method.
+    Returns structured content for the PsExec execution method.
     """
-    return [
-        {
+    return {
+        "id": "T1569.002",
+        "url_id": "1569/002",
+        "title": "System Services: Remote Service Execution (PsExec)",
+        "tactic": "Execution",
+        "data_sources": "Windows Event Logs, File Monitoring, Process Execution, Network Traffic",
+        "protocol": "SMB, RPC",
+        "os": "Windows",
+        "objective": "Detect and mitigate adversaries leveraging PsExec for remote execution and lateral movement.",
+        "scope": "Monitor unauthorized usage of PsExec for executing commands on remote systems.",
+        "threat_model": "Attackers use PsExec to execute commands remotely via SMB and create temporary Windows services for execution.",
+        "hypothesis": [
+            "Is PsExec being used for unauthorized execution?",
+            "Are there multiple instances of PsExec activity across the network?",
+            "Are administrative shares (ADMIN$ and C$) accessed unexpectedly?"
+        ],
+        "tips": [
+            "Monitor Event ID 7045 for unexpected service installations.",
+            "Analyze SMB traffic for PsExec-related file transfers.",
+            "Correlate event logs from source and destination machines to detect lateral movement."
+        ],
+        "log_sources": [
+            {"type": "Security Event Log", "source": "Event ID 4648, 4624, 4672, 5140", "destination": "PsExec authentication and service installation logs"},
+            {"type": "System Event Log", "source": "Event ID 7045, 7036", "destination": "Service installation and execution logs"},
+            {"type": "Network Traffic", "source": "SMB traffic analysis", "destination": "Port 445 and ADMIN$ access"}
+        ],
+        "source_artifacts": [
+            {"type": "Prefetch", "location": "C:\\Windows\\Prefetch\\", "identify": "psexec.exe-{hash}.pf"},
+            {"type": "Registry", "location": "NTUSER.DAT\\Software\\SysInternals\\PsExec", "identify": "EulaAccepted"}
+        ],
+        "destination_artifacts": [
+            {"type": "File System", "location": "C:\\Windows\\System32\\psexesvc.exe", "identify": "Service created by PsExec"},
+            {"type": "Registry", "location": "SYSTEM\\CurrentControlSet\\Services\\PSEXESVC", "identify": "Temporary Windows service created by PsExec"}
+        ],
+        "detection_methods": [
+            "Monitor Event ID 7045 for newly installed services with random names.",
+            "Analyze SMB traffic for unauthorized file transfers to ADMIN$.",
+            "Correlate Event ID 4624 and 4672 to identify privileged remote executions."
+        ],
+        "apt": ["G0016", "G0032"],  # Example APT groups that use PsExec
+        "spl_query": [
+            "index=windows EventCode=7045 ServiceName=PSEXESVC \n| stats count by host, user",
+            "index=windows EventCode=5140 ShareName='ADMIN$' \n| stats count by host, user"
+        ],
+        "hunt_steps": [
+            "Identify Event ID 7045 in system logs for unexpected service installations.",
+            "Check SMB traffic logs for unauthorized file transfers to ADMIN$.",
+            "Analyze Event ID 4624, 4672 for privilege escalation via PsExec."
+        ],
+        "expected_outcomes": [
+            "Unauthorized PsExec activity detected and mitigated.",
+            "No malicious activity found, improving detection baselines."
+        ],
+        "false_positive": "Legitimate administrators may use PsExec for IT operations.",
+        "clearing_steps": [
+            "Remove unauthorized services from SYSTEM\\CurrentControlSet\\Services\\PSEXESVC",
+            "Delete PsExec artifacts from C:\\Windows\\System32\\",
+            "Block PsExec execution using AppLocker or Windows Defender."
+        ],
+        "mitre_mapping": [
+            {"tactic": "Execution", "technique": "T1569.002 (Remote Service Execution)", "example": "Attackers use PsExec for remote execution."},
+            {"tactic": "Lateral Movement", "technique": "T1021.002 (SMB/Windows Admin Shares)", "example": "Adversaries leverage SMB to execute PsExec remotely."}
+        ],
+        "watchlist": [
+            "Detect unusual PsExec service installations (Event ID 7045).",
+            "Monitor SMB access to ADMIN$ and C$.",
+            "Investigate repeated logins with administrative privileges."
+        ],
+        "enhancements": [
+            "Restrict access to ADMIN$ and C$ shares.",
+            "Use endpoint protection to block unauthorized PsExec execution.",
+            "Monitor for unusual service creation events."
+        ],
+        "summary": "Detect unauthorized use of PsExec for remote command execution and lateral movement.",
+        "remediation": "Restrict administrative share access, implement endpoint protection, and monitor service installations.",
+        "improvements": "Enhance security baselines by limiting execution of administrative tools to authorized users only."
+    }
+          
+  
+  
+            
+'''           
             "title": "Source Event Logs",
             "content": """
 ### Source Event Logs
@@ -173,6 +253,4 @@ def get_content():
     - Sudden increase in Event IDs 4624, 4672, and 5140 across multiple systems.
     - Unusual services with short, random names.
     - Files with mismatched creation and modification times in ADMIN$.
-            """
-        }
-    ]
+'''
