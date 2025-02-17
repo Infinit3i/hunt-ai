@@ -1,4 +1,7 @@
 def get_content():
+    """
+    Returns structured content for PowerShell execution analysis and persistence techniques.
+    """
     return {
         "id": "T1059.001",
         "url_id": "T1059/001",
@@ -15,11 +18,26 @@ def get_content():
             "Is PowerShell being used for credential dumping or lateral movement?",
             "Are there obfuscated or encoded PowerShell commands being executed?"
         ],
+        "tips": [
+            "Monitor PowerShell script block logs (Event ID 4104).",
+            "Detect execution of encoded commands via base64.",
+            "Analyze remote execution attempts using PowerShell Remoting (Event ID 4688, 4103).",
+            "PowerShell (v5 and later) Logging will automatically logs suspicious scripts for analysis and ConsoleHost_history.txt records the last 4096 PowerShell commands.",
+        ],
         "log_sources": [
-            {"type": "Process Execution", "source": "Sysmon (Event ID 1)"},
-            {"type": "Command-Line Logging", "source": "Windows Event ID 4688"},
-            {"type": "PowerShell Script Execution", "source": "Event ID 4104, 4103"},
-            {"type": "Endpoint Security Logs", "source": "CrowdStrike, Defender ATP"}
+            {"type": "Process Execution", "source": "Sysmon (Event ID 1)", "destination": "Amcache, Shimcache"},
+            {"type": "Command-Line Logging", "source": "Windows Event ID 4688", "destination": "Amcache, Shimcache"},
+            {"type": "PowerShell Script Execution", "source": "Event ID 4104, 4103", "destination": "Console History, PowerShell Logs"},
+            {"type": "Endpoint Security Logs", "source": "CrowdStrike, Defender ATP", "destination": "Security Monitoring Logs"}
+        ],
+        "source_artifacts": [
+            {"type": "AppCompatCache", "location": "SYSTEM Registry Hive", "identify": "Tracks execution of PowerShell executables."},
+            {"type": "Console History", "location": "C:\\Users\\<Username>\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadline\\ConsoleHost_history.txt", "identify": "Last 4096 PowerShell commands."},
+            {"type": "ShimCache", "location": "SYSTEM Registry Hive", "identify": "Records execution of PowerShell executables, including timestamps."},
+            {"type": "AmCache", "location": "C:\\Windows\\AppCompat\\Programs\\Amcache.hve", "identify": "Stores metadata for PowerShell.exe execution, including first-time execution timestamps."}
+        ],
+        "destination_artifacts": [
+            {"type": "Registry Modification", "location": "HKEY_CURRENT_USER\\Software\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell", "identify": "Possible policy changes to execution settings."}
         ],
         "detection_methods": [
             "Monitor PowerShell command-line parameters for encoded or obfuscated commands.",
@@ -27,7 +45,14 @@ def get_content():
             "Analyze script block logging for malicious behavior.",
             "Identify persistent PowerShell usage across multiple hosts."
         ],
-        "spl_query": ["index=windows EventCode=4104 OR EventCode=4688 CommandLine=*PowerShell* | stats count by User, CommandLine, ComputerName"],
+        "apt": ["G0016", "G0032"],  # Example APT groups using PowerShell
+        "spl_query": [
+            "index=windows EventCode=4104 OR EventCode=4688 CommandLine=*PowerShell* \n| stats count by User, CommandLine, ComputerName",
+            # Detect encoded PowerShell commands (base64 encoded payloads)
+            "index=windows EventCode=4104 OR EventCode=4688 CommandLine=* -enc * \n| table _time, User, CommandLine, ComputerName",
+            # Identify PowerShell script execution from non-standard locations
+            "index=windows EventCode=4104 OR EventCode=4688 CommandLine=*PowerShell* NOT (CommandLine=*C:\\Windows\\System32\\WindowsPowerShell*) | table _time, User, CommandLine, ParentProcess, ComputerName"
+        ],
         "hunt_steps": [
             "Run Queries in SIEM: Detect anomalous PowerShell command execution patterns.",
             "Investigate Scripts: Analyze PowerShell scripts and detect obfuscation techniques.",
@@ -38,6 +63,12 @@ def get_content():
         "expected_outcomes": [
             "Malicious PowerShell Activity Detected: Block execution, investigate affected systems, and contain the threat.",
             "No Malicious Activity Found: Improve PowerShell monitoring and refine detection rules."
+        ],
+        "false_positive": "PowerShell is used by administrators and security teams for automation; investigate deviations from normal usage patterns.",
+        "clearing_steps": [
+            "Disable PowerShell for non-administrators using GPO.",
+            "Set PowerShell execution policy to `Restricted`.",
+            "Enable deep script block logging for better visibility."
         ],
         "mitre_mapping": [
             {"tactic": "Execution", "technique": "T1059.001 (PowerShell)", "example": "Executing malicious PowerShell scripts."},
@@ -58,3 +89,6 @@ def get_content():
         "remediation": "Restrict PowerShell execution policies, block malicious scripts, and enforce logging.",
         "improvements": "Enhance PowerShell monitoring by integrating machine learning-based anomaly detection."
     }
+
+
+

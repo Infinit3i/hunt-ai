@@ -165,6 +165,18 @@ python -m unittest discover Testing
 
 # 📝 Changelog 📜  
 
+## ✅ 1.1.4 (2025/02/16) 🚀  
+- [X] **Massively expanded T-code coverage** 📌  
+  - Added **over 20 new T-code technique files** 🛠️  
+  - Ensured **each technique follows the updated template** 📜  
+- [X] **Refined and optimized attack mappings** 🔗  
+- [X] **Fixed missing technique displays** 🖥️  
+- [X] **Improved tactic-lookup functionality** 🔍  
+- [X] **Ensured correct association of techniques under tactics** 🏗️  
+- [X] **Optimized technique loading and JSON structure** ⚡  
+- [X] **Improved UI consistency for technique pages** 🎨  
+
+
 ## ✅ 1.1.3 (2025/02/14) 🎉  
 - [X] Recreate the **technique template section** 🏗️  
 - [X] Allow **multiple Splunk sections** 🔍  
