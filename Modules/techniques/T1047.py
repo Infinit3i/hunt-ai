@@ -42,7 +42,7 @@ def get_content():
         "apt": ["G0096", "G0045"],
         "spl_query": [
             "index=windows EventCode=5857 OR EventCode=5861 | table Time, User, Operation, FilterName, ConsumerName",
-            "index=windows process="wmiprvse.exe" OR process="scrcons.exe" | table Time, Process, ParentProcess, Command"
+            "index=windows process='wmiprvse.exe' OR process='scrcons.exe' \n| table Time, Process, ParentProcess, Command"
         ],
         "hunt_steps": [
             "Search for recently created WMI Event Consumers and Event Filters.",
