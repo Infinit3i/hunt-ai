@@ -1,18 +1,4 @@
-def get_content():
-    """
-    Returns structured content for threat detection trends and sector-specific insights.
-    """
-    return [
-        {
-            "title": "Top Threat Detection Trends",
-            "content": """
-- Top 20 techniques are common across all industries.
-- Most attacks target 10% of T-Codes.
-- Detection challenges:
-    - Volume of detections.
-    - Technique variance and persistence.
-            """
-        },
+'''
         {
             "title": "Industry-Specific Insights",
             "content": """
@@ -33,3 +19,4 @@ def get_content():
             """
         }
     ]
+'''
