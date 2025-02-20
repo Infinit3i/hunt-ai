@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
 <h1>Search Results for "{{ query }}"</h1>
 
@@ -13,6 +12,9 @@
     {% endfor %}
 </ul>
 {% else %}
-<p>No results found.</p>
+<script>
+  // No results; go back to the previous page
+  window.history.back();
+</script>
 {% endif %}
 {% endblock %}

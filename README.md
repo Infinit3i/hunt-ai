@@ -66,10 +66,11 @@ sleep 2 && google-chrome http://localhost:31337 &
 
 
 ## 📌 Roadmap / TODOs
-- [ ] **Notebook Enhancements** - Track **IP addresses**, **domains**, **programs**, and **notes** easily.  
+
+- [ ] technique pages - verify tags, spl queries, clearing, event codes
 - [ ] Knowledge DIR --> t-codes
-- [ ] create tags section
 - [ ] **Advanced Search** - Quickly retrieve relevant **hunt data**.  
+- [ ] **Notebook Enhancements** - Track **IP addresses**, **domains**, **programs**, and **notes** easily.  
 - [ ] **Notebook Exports** - Convert investigations into **PowerPoint** and **network diagrams**.  
 - [ ] **Encrypted Notebook** - Securely store investigation **data & logs**.
 - [ ] T-code - pass the hash - is local account
@@ -143,10 +144,9 @@ python -m unittest discover Testing
 # 📝 Changelog 📜  
 
 
-
-
-
 ## ✅ 1.1.5 (2025/02/19) 🚀  
+- [X] added the basics of the search feature
+- [X] add url_id to all tactics and get all tactics and techniques to link to their pages in the top left
 - [X] **Windows Setup Guide** - Improve installation steps for **Windows users**.  
 - [X] **Docker Integration** - Sync investigations with **team servers**.  
 - [X] **Intel Additions** - Added new intelligence updates 🔍  

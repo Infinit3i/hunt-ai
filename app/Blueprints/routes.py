@@ -5,7 +5,7 @@ import importlib.util
 from datetime import datetime
 
 # Third-party imports
-from flask import Blueprint, render_template, abort, session, jsonify
+from flask import Blueprint, render_template, abort, session, jsonify, request, redirect, flash, url_for
 
 from static.tips import get_random_tip_or_joke
 
@@ -48,6 +48,16 @@ def get_readme_description():
         return f"Error reading README.md: {e}"
 
     return " ".join(description) if description else "No description available."
+
+def perform_search(query):
+    # Dummy implementation for testing:
+    # Return an empty list to simulate no results, or dummy data.
+    # For instance, you might return a dummy result if query is not empty:
+    if query:
+        return [{"title": "Dummy Result", "snippet": "This is a dummy snippet."}]
+    else:
+        return []
+
 
 
 @routes_bp.route('/')
@@ -295,3 +305,14 @@ def tactic_techniques(tactic):
     techniques = load_techniques_for_tactic(tactic_folder)
     
     return jsonify(list(techniques.values()))
+
+
+@routes_bp.route('/search')
+def search():
+    query = request.args.get('query')
+    results = perform_search(query)  # Your search function
+    if not results:
+        flash("No results found", "warning")
+        # Redirect back to the referring page or a default route if no referrer is available.
+        return redirect(request.referrer or url_for('routes.home'))
+    return render_template('search_results.html', query=query, results=results)
