@@ -48,18 +48,38 @@
                 <tr><td>{{ log.type }}</td><td>{{ log.source }}</td><td>{{ log.destination }}</td></tr>
                 {% endfor %}
             </table>
-        <table>
-            <tr><th>Source Artifact</th><th>location</th><th>info</th></tr>
-            {% for log in technique.source_artifacts %}
-            <tr><td>{{ log.type }}</td><td>{{ log.location }}</td><td>{{ log.identify }}</td></tr>
-            {% endfor %}
-        </table>
-        <table>
-            <tr><th>Destination Artifact</th><th>location</th><th>info</th></tr>
-            {% for log in technique.destination_artifacts %}
-            <tr><td>{{ log.type }}</td><td>{{ log.location }}</td><td>{{ log.identify }}</td></tr>
-            {% endfor %}
-        </table>
+            {% if technique.source_artifacts %}
+            <table>
+                <tr>
+                    <th>Source Artifact</th>
+                    <th>location</th>
+                    <th>info</th>
+                </tr>
+                {% for log in technique.source_artifacts %}
+                <tr>
+                    <td>{{ log.type }}</td>
+                    <td>{{ log.location }}</td>
+                    <td>{{ log.identify }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+            {% if technique.destination_artifacts %}
+            <table>
+                <tr>
+                    <th>Destination Artifact</th>
+                    <th>location</th>
+                    <th>info</th>
+                </tr>
+                {% for log in technique.destination_artifacts %}
+                <tr>
+                    <td>{{ log.type }}</td>
+                    <td>{{ log.location }}</td>
+                    <td>{{ log.identify }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}  
     </div>
 </div>
 
