@@ -157,6 +157,18 @@ python -m unittest discover Testing
 
 # 📝 Changelog 📜  
 
+
+
+
+
+## ✅ 1.1.5 (2025/02/19) 🚀  
+- [X] **Intel Additions** - Added new intelligence updates 🔍  
+- [X] **Updated T1021** - Improvements and refinements 🛠️  
+- [X] **Installation Improvements** - Changed installation process from Python to shell script ⚡  
+- [X] **Enhanced Log Tracking** - Ensured `source` and `destination` fields are correctly handled in logs 📜  
+- [X] **Setup Optimization** - Shortened and improved setup steps 🚀  
+- [X] **Multi-Platform Support** - Added Windows and Linux setup instructions 💻  
+
 ## ✅ 1.1.4 (2025/02/16) 🚀  
 - [X] **Checklist System** - allow hunt execution steps to be checked and clearing steps 
 - [X] **T-code classification** - Better organization by **techniques & attacks**.  
@@ -171,7 +183,6 @@ python -m unittest discover Testing
 - [X] **Ensured correct association of techniques under tactics** 🏗️  
 - [X] **Optimized technique loading and JSON structure** ⚡  
 - [X] **Improved UI consistency for technique pages** 🎨  
-
 
 ## ✅ 1.1.3 (2025/02/14) 🎉  
 - [X] Recreate the **technique template section** 🏗️  
