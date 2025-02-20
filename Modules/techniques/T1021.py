@@ -27,11 +27,10 @@ def get_content():
             "Identify patterns of remote access outside normal business hours."
         ],
         "spl_query": {
-            "Detect Remote Logins Over RDP": "index=windows sourcetype=WinEventLog:Security EventCode=4624 LogonType=10 | stats count by user, src_ip, host | where count > 5",
-            "Detect Failed Remote Login Attempts": "index=windows sourcetype=WinEventLog:Security EventCode=4625 LogonType=10 | stats count by src_ip, user | where count > 10",
-            "Detect Remote Access Outside Business Hours": "index=windows sourcetype=WinEventLog:Security EventCode=4624 LogonType=10 | eval hour=strftime(_time, '%H') | where hour < 6 OR hour > 22 | stats count by user, src_ip, host"
+            "index=windows sourcetype=WinEventLog:Security EventCode=4624 LogonType=10 \n| stats count by user, src_ip, host \n| where count > 5",
+            "index=windows sourcetype=WinEventLog:Security EventCode=4625 LogonType=10 \n| stats count by src_ip, user \n| where count > 10",
+            "index=windows sourcetype=WinEventLog:Security EventCode=4624 LogonType=10 \n| eval hour=strftime(_time, '%H') \n| where hour < 6 OR hour > 22 \n| stats count by user, src_ip, host"
         },
-        "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1021",
         "hunt_steps": [
             "Run Queries in SIEM: Detect unusual remote login patterns and failed authentication attempts.",
             "Correlate with Threat Intelligence Feeds: Validate suspicious IPs against known threat actor infrastructure.",
@@ -44,11 +43,10 @@ def get_content():
             "No Malicious Activity Found: Improve baseline monitoring for remote access behaviors."
         ],
         "mitre_mapping": [
-            {"tactic": "Persistence", "technique": "T1078 (Valid Accounts)", "example": "Adversaries may maintain access using compromised credentials."},
-            {"tactic": "Defense Evasion", "technique": "T1070.004 (Indicator Removal on Host)", "example": "Attackers may delete logs to cover their remote access trail."},
-            {"tactic": "Lateral Movement", "technique": "T1021.001 (Remote Desktop Protocol)", "example": "Attackers may pivot to other machines using remote services."},
-            {"tactic": "Privilege Escalation", "technique": "T1068 (Exploiting Privileged Execution)", "example": "Attackers may escalate privileges after gaining remote access."},
-            {"tactic": "Execution", "technique": "T1204.002 (User Execution - Malicious File)", "example": "Adversaries may execute scripts after remote access."}
+            {"tactic": "Execution", "technique": "T1059", "example": "Remote command execution via PowerShell or Bash to control target systems."},
+            {"tactic": "Initial Access", "technique": "T1190", "example": "Exploitation of vulnerabilities in public-facing remote services to gain initial access"},
+            {"tactic": "Credential Access", "technique": "T1003", "example": "Dumping credentials from LSASS memory to escalate privileges after remote access is achieved."},
+            {"tactic": "Defense Evasion", "technique": "T1036", "example": "Masquerading malicious files as legitimate system processes to avoid detection during remote sessions."},      
         ],
         "watchlist": [
             "Flag unusual remote login attempts from unapproved IPs.",
