@@ -43,6 +43,8 @@ Before running, make sure you have **Python** installed:
 Install required dependencies:  
 
 pip install -r requirements.txt
+source hunt-ai/bin/activate  # For Unix/macOS
+.\hunt-ai\Scripts\activate
 
 
 ---
@@ -58,6 +60,17 @@ pip install -r requirements.txt
    ```bash
    cd Installation && python3 setup.py
    ```
+   
+### For Unix/macOS
+```
+   source hunt-ai/bin/activate  
+```
+
+### For Windows
+```
+.\hunt-ai\Scripts\activate
+```
+
 5️⃣ **Start the application** 🎯:
    ```bash
    cd ../ && python3 start.py
