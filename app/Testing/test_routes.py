@@ -1,5 +1,5 @@
 import unittest
-from app import app
+from app.app import app
 from flask import session
 
 class TestRoutes(unittest.TestCase):

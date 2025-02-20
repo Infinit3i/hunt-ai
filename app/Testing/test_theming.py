@@ -1,5 +1,5 @@
 import unittest
-from app import app
+from app.app import app
 from Blueprints.models import db, User
 from flask import session
 

@@ -1,0 +1,9 @@
+lib
+lib64
+include
+bin
+pyvenv.cfg
+__pycache__
+users.db
+*.json
+/flask_session

@@ -1,7 +1,7 @@
 import unittest
 import io  # Add this import at the top of your test file
 import json  # Ensure json is imported
-from app import app
+from app.app import app
 from Blueprints.models import db, User
 from werkzeug.security import generate_password_hash
 
