@@ -58,7 +58,7 @@ Before running, make sure you have the following installed:
 ```bash
 docker build -t hunt-ai .
 docker run -d -p 31337:31337 hunt-ai
-sleep 2 && firefox http://localhost:31337 &
+sleep 2 && google-chrome http://localhost:31337 &
 ```
 
 
@@ -69,7 +69,6 @@ sleep 2 && firefox http://localhost:31337 &
 - [ ] **Notebook Enhancements** - Track **IP addresses**, **domains**, **programs**, and **notes** easily.  
 - [ ] Knowledge DIR --> t-codes
 - [ ] create tags section
-- [ ] **Windows Setup Guide** - Improve installation steps for **Windows users**.  
 - [ ] **Advanced Search** - Quickly retrieve relevant **hunt data**.  
 - [ ] **Notebook Exports** - Convert investigations into **PowerPoint** and **network diagrams**.  
 - [ ] **Encrypted Notebook** - Securely store investigation **data & logs**.
@@ -148,6 +147,7 @@ python -m unittest discover Testing
 
 
 ## ✅ 1.1.5 (2025/02/19) 🚀  
+- [X] **Windows Setup Guide** - Improve installation steps for **Windows users**.  
 - [X] **Docker Integration** - Sync investigations with **team servers**.  
 - [X] **Intel Additions** - Added new intelligence updates 🔍  
 - [X] **Updated T1021** - Improvements and refinements 🛠️  

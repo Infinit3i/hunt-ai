@@ -3,6 +3,7 @@ def get_content():
         "id": "",  # Tactic Technique ID (e.g., T1556.001)
         "url_id": "",  # URL segment for technique reference (e.g., 1556/001)
         "title": "",  # Name of the attack technique
+        "tags": [],  # Tags associated with the technique
         "tactic": "",  # Associated MITRE ATT&CK tactic
         "data_sources": "",  # Data sources required for detection
         "protocol": "",  # Protocol used in the attack technique
