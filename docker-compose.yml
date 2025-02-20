@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  hunt-ai:
+    container_name: hunt-ai  # Set the container name
+    build: .
+    ports:
+      - "31337:31337"
+    volumes:
+      - ./notebooks:/app/notebooks
