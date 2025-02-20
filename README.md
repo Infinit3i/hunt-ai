@@ -66,7 +66,7 @@ sleep 2 && google-chrome http://localhost:31337 &
 
 
 ## 📌 Roadmap / TODOs
-
+- [ ] allow all tactics and techniques to be selected and show on the left side of the screen
 - [ ] technique pages - verify tags, spl queries, clearing, event codes
 - [ ] Knowledge DIR --> t-codes
 - [ ] **Advanced Search** - Quickly retrieve relevant **hunt data**.  
