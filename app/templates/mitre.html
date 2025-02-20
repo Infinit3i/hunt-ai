@@ -6,19 +6,19 @@
 
 <div class="mitre-grid">
     {% for tactic in mitre_content %}
-    <div class="mitre-box" data-checkbox-id="{{ tactic.title | replace(' ', '-') }}">
+    <div class="mitre-box tactic-box" data-checkbox-id="{{ tactic.url_id }}" data-url-id="{{ tactic.url_id }}">
         <!-- Hidden checkbox -->
-        <input type="checkbox" id="{{ tactic.title | replace(' ', '-') }}" class="tactic-checkbox" />
-        <label for="{{ tactic.title | replace(' ', '-') }}" class="checkbox-label"></label>
-
+        <input type="checkbox" id="{{ tactic.url_id }}" class="checkbox-box" />
+        <label for="{{ tactic.url_id }}" class="checkbox-label"></label>
+    
         <!-- Tactic title and description -->
         <h2>
-            <a href="{{ url_for('routes.mitre_tactic', tactic=tactic.title.replace(' ', '_')) }}">
+            <a href="{{ url_for('routes.mitre_tactic', tactic=tactic.url_id) }}">
                 {{ tactic.title }}
             </a>
         </h2>
         <p>{{ tactic.description }}</p>
-    </div>
+    </div>    
     {% endfor %}
 </div>
 

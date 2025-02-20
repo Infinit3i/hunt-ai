@@ -132,63 +132,94 @@
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-          const tacticBoxes = document.querySelectorAll(".mitre-box");
-          const tacticListElement = document.getElementById("selected-tactic-list");
-      
-          // Load saved selected tactics from localStorage
-          let selectedTactics = JSON.parse(localStorage.getItem("selected_tactics")) || [];
-      
-          // Function to update the displayed selected tactics
-          function updateTacticDisplay() {
-            tacticListElement.innerHTML = ""; // Clear existing list
-      
-            if (selectedTactics.length === 0) {
-              tacticListElement.innerHTML = "<li>No tactics selected</li>";
-            } else {
-              selectedTactics.forEach((tactic) => {
-                const li = document.createElement("li");
-                li.textContent = `🔹 ${tactic}`;
-                tacticListElement.appendChild(li);
-              });
-            }
-          }
-      
-          // Initialize checkboxes and tactic list
-          updateTacticDisplay();
-      
-          tacticBoxes.forEach((box) => {
-            const checkboxId = box.getAttribute("data-checkbox-id");
-            const checkbox = document.getElementById(checkboxId);
-            const tacticTitle = box.querySelector("h2 a").textContent;
-      
-            // Load checkbox state from localStorage
-            if (selectedTactics.includes(tacticTitle)) {
-              checkbox.checked = true;
-            }
-      
-            // Handle checkbox selection
-            box.addEventListener("click", (e) => {
-              if (e.target.tagName !== "A") { // Avoid toggling when clicking links
-                checkbox.checked = !checkbox.checked;
-      
-                if (checkbox.checked) {
-                  if (!selectedTactics.includes(tacticTitle)) {
-                    selectedTactics.push(tacticTitle);
-                  }
-                } else {
-                  selectedTactics = selectedTactics.filter((t) => t !== tacticTitle);
-                }
-      
-                // Save updated list to localStorage
-                localStorage.setItem("selected_tactics", JSON.stringify(selectedTactics));
-      
-                // Update UI
-                updateTacticDisplay();
-              }
+      document.addEventListener("DOMContentLoaded", () => {
+        // Select both tactic boxes and technique boxes
+        const allBoxes = document.querySelectorAll(".tactic-box, .technique-box");
+        const tacticListElement = document.getElementById("selected-tactic-list");
+        
+        // Load saved items from localStorage.
+        // Each item is stored as: { title: "...", url_id: "...", type: "tactic" or "technique" }
+        let selectedItems = JSON.parse(localStorage.getItem("selected_tactics")) || [];
+        
+        // Function to update the displayed list of selected items
+        function updateDisplay() {
+          tacticListElement.innerHTML = ""; // Clear existing list
+        
+          if (selectedItems.length === 0) {
+            tacticListElement.innerHTML = "<li>No tactics selected</li>";
+          } else {
+            selectedItems.forEach((item) => {
+              const li = document.createElement("li");
+              const anchor = document.createElement("a");
+        
+              // Build the correct link based on type:
+              // For tactics, use the stored url_id; for techniques, use the stored url_id.
+              if (item.type === "tactic") {
+                anchor.href = `http://localhost:31337/mitre/${item.url_id}`;
+              } else (item.type === "technique") {
+                anchor.href = `http://localhost:31337/technique/${item.url_id}`;
+              } 
+        
+              anchor.textContent = `🔹 ${item.title}`;
+              li.appendChild(anchor);
+              tacticListElement.appendChild(li);
             });
+          }
+        }
+        
+        // Initialize the display on page load
+        updateDisplay();
+        
+        // Process each box (tactic or technique)
+        allBoxes.forEach((box) => {
+          const checkboxId = box.getAttribute("data-checkbox-id");
+          const checkbox = document.getElementById(checkboxId);
+        
+          // Grab the anchor inside the box to get the title and base URL
+          const anchor = box.querySelector("h2 a");
+          const originalTitle = anchor.textContent.trim();
+          let computedUrlId = "";
+          const isTactic = box.classList.contains("tactic-box");
+          const isTechnique = box.classList.contains("technique-box");
+        
+          if (isTactic) {
+            // For tactics, use the data attribute for the URL id.
+            computedUrlId = box.getAttribute("data-url-id");
+            console.log("Tactic:", originalTitle, "->", computedUrlId); // Debug log
+          } else if (isTechnique) {
+            // For techniques, assume the anchor href is like "http://localhost:31337/technique/T1053"
+            const parts = anchor.href.split("/");
+            computedUrlId = parts[parts.length - 1];
+          }
+        
+          // Check if this item is already stored (by title)
+          if (selectedItems.some(item => item.title === originalTitle)) {
+            checkbox.checked = true;
+          }
+        
+          // Toggle checkbox selection on box click (unless clicking the link)
+          box.addEventListener("click", (e) => {
+            if (e.target.tagName !== "A") {
+              checkbox.checked = !checkbox.checked;
+        
+              if (checkbox.checked) {
+                if (!selectedItems.some(item => item.title === originalTitle)) {
+                  selectedItems.push({
+                    title: originalTitle,
+                    url_id: computedUrlId,
+                    type: isTactic ? "tactic" : isTechnique ? "technique" : "unknown"
+                  });
+                }
+              } else {
+                selectedItems = selectedItems.filter(item => item.title !== originalTitle);
+              }
+        
+              localStorage.setItem("selected_tactics", JSON.stringify(selectedItems));
+              updateDisplay();
+            }
           });
         });
-      </script>     
+      });
+      </script>          
 </body>
 </html>

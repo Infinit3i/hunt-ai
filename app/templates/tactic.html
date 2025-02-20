@@ -14,7 +14,7 @@
 <div class="mitre-grid">
     {% for technique in techniques.values() %}
     <div class="mitre-box technique-box" data-checkbox-id="{{ technique.id }}">
-        <input type="checkbox" id="{{ technique.id }}" class="technique-checkbox" />
+        <input type="checkbox" id="{{ technique.id }}" class="checkbox-box" />
         <label for="{{ technique.id }}" class="checkbox-label"></label>
         <h2>
             <a href="{{ url_for('routes.technique_page', url_id=technique.url_id) }}">

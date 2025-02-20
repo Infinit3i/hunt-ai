@@ -3,6 +3,7 @@ def get_content():
         {
             "title": "Impact",
             "tactic_id": "TA0040",
+            "url_id": "impact",
             "description": "Disrupt availability or compromise the integrity of systems and data. This includes activities like data encryption, destruction, and service disruption to impact operations.",
         },
     ]
