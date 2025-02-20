@@ -9,11 +9,6 @@ def get_methodology_content():
             "link": "https://docs.google.com/spreadsheets/d/1s2ggAq69Z5UcZen1Q-o8gBHBv6UiJHaeFW3QwtTLnq4/edit?usp=sharing",
         },
         {
-            "title": "MITRE TIE",
-            "description": "MITRE AI to predict next T-Code.",
-            "link": "https://center-for-threat-informed-defense.github.io/technique-inference-engine/#/",
-        },
-        {
             "title": "Linux Basics",
             "content": """
 - Understand typical file paths and permission settings.
