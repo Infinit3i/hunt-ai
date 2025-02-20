@@ -1,5 +1,9 @@
 import subprocess
+import sys
+import os
 
+# Fix import path issues
+sys.path.append("/app")
 
 def main():
     # Number of Gunicorn workers
@@ -8,9 +12,9 @@ def main():
     # Bind address and port
     bind_address = "0.0.0.0:31337"
     
-    # Application entry point (format: module_name:app_name)
-    app_entry = "app:app"
-    
+    # Application entry point (adjusted to app.app)
+    app_entry = "app.app:app"
+
     # Command to run Gunicorn
     command = f"gunicorn -w {workers} -b {bind_address} {app_entry}"
     
@@ -21,7 +25,6 @@ def main():
         print(f"Failed to start Gunicorn server. Error: {e}")
     except KeyboardInterrupt:
         print("\nServer stopped by user. 👋")
-
 
 if __name__ == "__main__":
     main()

@@ -4,6 +4,7 @@ include
 bin
 pyvenv.cfg
 __pycache__
+__init__.py
 users.db
 *.json
 /flask_session

@@ -7,10 +7,12 @@ from flask import Flask, session
 from flask_login import LoginManager, current_user
 from flask_session import Session
 
-from Blueprints.models import db, User
-from Blueprints.user_creation_bp import user_creation_bp
-from Blueprints.routes import routes_bp
-from Blueprints.Routes.notebook_bp import notebook_bp
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+from app.Blueprints.models import db, User
+from app.Blueprints.user_creation_bp import user_creation_bp
+from app.Blueprints.routes import routes_bp
+from app.Blueprints.Routes.notebook_bp import notebook_bp
 
 from static.tips import get_random_tip_or_joke
 
@@ -22,6 +24,10 @@ app.secret_key = os.urandom(24)
 app.register_blueprint(user_creation_bp)
 app.register_blueprint(routes_bp)
 app.register_blueprint(notebook_bp, url_prefix='/notebook')
+
+
+from sqlalchemy import inspect  # Add this import
+from sqlalchemy.exc import OperationalError  # Add this import
 
 # SQLAlchemy configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
@@ -75,8 +81,16 @@ def inject_random_tip():
 
 # Ensure database tables are created
 with app.app_context():
-    db.create_all()
-    print("Database tables created successfully.")
+    try:
+        inspector = inspect(db.engine)  # Create an inspector object
+        if not inspector.has_table("user"):  # Check if table exists
+            db.create_all()
+            print("Database tables created successfully.")
+        else:
+            print("Database tables already exist. Skipping creation.")
+    except OperationalError as e:
+        print(f"Database error: {e}")
+
 
 # Watchdog event handler class
 class FlaskReloadHandler(FileSystemEventHandler):

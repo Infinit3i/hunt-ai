@@ -52,7 +52,7 @@ def get_readme_description():
 
 @routes_bp.route('/')
 def home():
-    cover_images_path = os.path.join('static', 'Pictures', 'Cover_Images')
+    cover_images_path = os.path.join('app', 'static', 'Pictures', 'Cover_Images')
     cover_images = [os.path.join('Pictures', 'Cover_Images', filename) 
                     for filename in os.listdir(cover_images_path) 
                     if filename.lower().endswith(('png', 'jpg', 'jpeg', 'gif'))]
@@ -88,7 +88,7 @@ def load_tactics():
     """
     Dynamically loads tactics from the Tactics folder and sorts them by tactic_id.
     """
-    tactics_path = os.path.join(os.getcwd(), 'Modules', 'Tactics')
+    tactics_path = os.path.join(os.getcwd(),'app', 'Modules', 'Tactics')
     tactics = []
 
     # Iterate through all Python files in the Tactics folder
@@ -196,7 +196,7 @@ def load_techniques():
     Dynamically loads all techniques from the /Modules/techniques/ folder.
     """
     techniques = {}
-    techniques_path = os.path.join(os.getcwd(), "Modules", "techniques")
+    techniques_path = os.path.join(os.getcwd(),"app", "Modules", "techniques")
 
     if not os.path.exists(techniques_path):
         print(f"❌ Folder not found: {techniques_path}")

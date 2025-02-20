@@ -10,8 +10,10 @@ from datetime import datetime
 notebook_bp = Blueprint('notebook', __name__, url_prefix='/notebook')
 
 # Ensure the notebooks directory exists
-if not os.path.exists('notebooks'):
-    os.makedirs('notebooks')
+NOTEBOOKS_DIR = "/app/notebooks"
+if not os.path.exists(NOTEBOOKS_DIR):
+    os.makedirs(NOTEBOOKS_DIR, exist_ok=True)
+
 
 # Generate the JSON file path dynamically based on user and date
 def get_save_path():
@@ -38,8 +40,11 @@ def load_notebook():
 # Save notebook data to the user-specific file
 def save_notebook(data):
     save_path = get_save_path()
-    with open(save_path, 'w') as file:
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)  # Ensure directory exists
+
+    with open(save_path, 'w', encoding='utf-8') as file:
         json.dump(data, file, indent=4)
+
 
 
 # Import notebook data from a file
@@ -80,8 +85,8 @@ def import_notebook():
 @notebook_bp.route('/', methods=['GET', 'POST'])
 @login_required
 def notebook():
-    # Initialize the notebook session for the user
-    if 'notebook' not in session:
+    # Initialize the notebook session for the user if missing
+    if 'notebook' not in session or not isinstance(session['notebook'], dict):
         session['notebook'] = load_notebook()
 
     if request.method == 'POST':
@@ -94,7 +99,6 @@ def notebook():
             return redirect(url_for('notebook.notebook'))
 
         try:
-            # Validate time format
             incident_datetime = datetime.strptime(incident_time, '%Y-%m-%dT%H:%M')
         except ValueError:
             flash('Invalid incident time format!', 'error')
@@ -104,12 +108,13 @@ def notebook():
             'data': entry,
             'time': incident_datetime.strftime('%Y-%m-%d %H:%M')
         })
-
         session.modified = True
         save_notebook(session['notebook'])
+
         flash('Entry added successfully!', 'success')
 
     return render_template('notebook.html', notebook=session['notebook'])
+
 
 # Delete an entry from the notebook
 @notebook_bp.route('/delete/<category>/<int:index>', methods=['POST'])

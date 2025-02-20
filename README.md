@@ -37,14 +37,13 @@ Built with experience from **real-world security operations** and inspired by co
 ---
 
 ## 🔧 Dependencies  
-Before running, make sure you have **Python** installed:  
-✅ [Download Python](https://www.python.org/downloads/)  
+Before running, make sure you have the following installed:
 
-Install required dependencies:  
+✅ **Python** (3.x or higher) → [Download Python](https://www.python.org/downloads/)  
+✅ **Docker** (for containerized execution) → [Download Docker](https://www.docker.com/get-started/)  
 
-pip install -r requirements.txt
-source hunt-ai/bin/activate  # For Unix/macOS
-.\hunt-ai\Scripts\activate
+> **💡 Note:**  
+> If you’re new to Docker, follow the **[official installation guide](https://docs.docker.com/get-docker/)** to set it up on **Windows, macOS, or Linux**.
 
 
 ---
@@ -56,25 +55,12 @@ source hunt-ai/bin/activate  # For Unix/macOS
 3️⃣ **Navigate to the folder**:
    `cd hunt-ai/`
 
-4️⃣ **Run setup** 🏗️:
-   ```bash
-   cd Installation && python3 setup.py
-   ```
-   
-### For Unix/macOS
-```
-   source hunt-ai/bin/activate  
+```bash
+docker build -t hunt-ai .
+docker run -d -p 31337:31337 hunt-ai
+sleep 2 && firefox http://localhost:31337 &
 ```
 
-### For Windows
-```
-.\hunt-ai\Scripts\activate
-```
-
-5️⃣ **Start the application** 🎯:
-   ```bash
-   cd ../ && python3 start.py
-   ```
 
 &nbsp;
 
@@ -82,8 +68,8 @@ source hunt-ai/bin/activate  # For Unix/macOS
 ## 📌 Roadmap / TODOs
 - [ ] **Notebook Enhancements** - Track **IP addresses**, **domains**, **programs**, and **notes** easily.  
 - [ ] Knowledge DIR --> t-codes
+- [ ] create tags section
 - [ ] **Windows Setup Guide** - Improve installation steps for **Windows users**.  
-- [ ] **Docker Integration** - Sync investigations with **team servers**.  
 - [ ] **Advanced Search** - Quickly retrieve relevant **hunt data**.  
 - [ ] **Notebook Exports** - Convert investigations into **PowerPoint** and **network diagrams**.  
 - [ ] **Encrypted Notebook** - Securely store investigation **data & logs**.
@@ -162,6 +148,7 @@ python -m unittest discover Testing
 
 
 ## ✅ 1.1.5 (2025/02/19) 🚀  
+- [X] **Docker Integration** - Sync investigations with **team servers**.  
 - [X] **Intel Additions** - Added new intelligence updates 🔍  
 - [X] **Updated T1021** - Improvements and refinements 🛠️  
 - [X] **Installation Improvements** - Changed installation process from Python to shell script ⚡  
