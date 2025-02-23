@@ -1,6 +1,6 @@
 # 🛡️ Threat Hunting Artificial Intelligence - HUNT-AI 🕵️‍♂️💻
 
-### **TL;DR:** *Runbook to find threats & track your hunt 🚀
+### **TL;DR:** Runbook to find threats & track your hunt 🚀
 
 HUNT-AI is your **digital hunting companion** using MITRE ATT&CK as a framework. This ensures that analysts cover all potential **attack paths** while keeping meticulous track of findings. 📝  
 It guides your **threat hunting process**, offers **insightful tips**, and ensures you're following **best practices**.
