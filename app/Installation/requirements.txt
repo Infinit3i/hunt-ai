@@ -1,12 +1,12 @@
-cryptography
+cryptography==44.0.1
 flask
 flask-login
 flask-session
 flask-sqlalchemy
 flask-testing
-gunicorn
+gunicorn==22.0.0
 redis
 requests
 sqlalchemy
 watchdog
-werkzeug
+werkzeug==3.0.6
