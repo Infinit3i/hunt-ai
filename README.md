@@ -96,38 +96,6 @@ Customer or stakeholder satisfaction
 ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
 ## 🔬 Running Tests  
@@ -135,21 +103,3 @@ To verify that everything is working:
 ```bash
 python -m unittest discover Testing
 ```
-
----
-
-# 📝 Changelog 📜  
-
-
-## ✅ 1.1.5 (2025/02/19) 🚀  
-- [X] added the basics of the search feature
-- [X] add url_id to all tactics and get all tactics and techniques to link to their pages in the top left
-- [X] **Windows Setup Guide** - Improve installation steps for **Windows users**.  
-- [X] **Docker Integration** - Sync investigations with **team servers**.  
-- [X] **Intel Additions** - Added new intelligence updates 🔍  
-- [X] **Updated T1021** - Improvements and refinements 🛠️  
-- [X] **Installation Improvements** - Changed installation process from Python to shell script ⚡  
-- [X] **Enhanced Log Tracking** - Ensured `source` and `destination` fields are correctly handled in logs 📜  
-- [X] **Setup Optimization** - Shortened and improved setup steps 🚀  
-- [X] **Multi-Platform Support** - Added Windows and Linux setup instructions 💻  
-
