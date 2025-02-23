@@ -3,7 +3,7 @@ flask-login==0.6.2
 flask-sqlalchemy==3.0.5
 werkzeug==2.2.3
 watchdog==3.0.0
-cryptography==41.0.3
+cryptography==44.0.1
 flask-testing==0.8.1
 sqlalchemy==2.0.20
 gunicorn==20.1.0
