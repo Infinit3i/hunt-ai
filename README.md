@@ -4,7 +4,7 @@
   <img src="https://git.infinit3i.com/matthew/Hunt-AI/raw/commit/4c3b0654cd4c5b94e8659f2d18f86e01b579ba87/Assets/threat_hunter.jpeg" alt="Threat Hunter" width="400">
 </div>
 
-![example workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+![example workflow](https://github.com/infinit3i/hunt-ai/actions/workflows/WORKFLOW-FILE/badge.svg)
 
 ### 🎯 **Key Features & Benefits**
 
