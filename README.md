@@ -4,6 +4,12 @@
 
 ---
 
+<div align="center">
+  <img src="https://git.infinit3i.com/matthew/Hunt-AI/raw/commit/4c3b0654cd4c5b94e8659f2d18f86e01b579ba87/Assets/threat_hunter.jpeg" alt="Threat Hunter" width="600">
+</div>
+
+---
+
 ## 🎯 **Key Features & Benefits**
 
 - ✅ **Comprehensive Runbook** – A step-by-step guide designed to optimize your threat-hunting process and establish a **streamlined workflow**.  
@@ -13,13 +19,6 @@
 - ✅ **Insightful Tips & Best Practices** – Receive expert guidance and actionable advice to enhance your threat-hunting strategies and decision-making.  
 - ✅ **Multi-Platform Support** – Compatible with **Windows**, **Linux**, and **macOS**, offering versatility with minimal setup and dependencies.  
 - ✅ **Collaborative Features** – Work together with your team by syncing investigations using **Docker Compose** (coming soon), improving collaboration and shared insights.
-
-
----
-
-<div align="center">
-  <img src="https://git.infinit3i.com/matthew/Hunt-AI/raw/commit/4c3b0654cd4c5b94e8659f2d18f86e01b579ba87/Assets/threat_hunter.jpeg" alt="Threat Hunter" width="600">
-</div>
 
 ---
 
