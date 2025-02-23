@@ -39,11 +39,3 @@ docker build -t hunt-ai .
 docker run -d -p 31337:31337 hunt-ai
 sleep 2 && google-chrome http://localhost:31337 &
 ```
-
----
-
-#### 🔬 Running Tests  
-To verify that everything is working:  
-```bash
-python -m unittest discover Testing
-```
