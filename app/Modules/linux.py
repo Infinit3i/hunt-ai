@@ -10,10 +10,7 @@ cryptonight
 apache2 (unexpected locations)
 mysql (unexpected locations)
             """,
-            "resources": [
-                "https://www.trendmicro.com/vinfo/",
-                "https://unit42.paloaltonetworks.com/"
-            ]
+            "resources": [],
         },
         {
             "title": "Common Malware Locations",
@@ -28,10 +25,7 @@ mysql (unexpected locations)
 /usr/bin/
 /var/spool/cron/crontabs/
             """,
-            "resources": [
-                "https://www.linuxsecurity.com/",
-                "https://attack.mitre.org/"
-            ]
+            "resources": [],
         },
         {
             "title": "Interesting Search Terms",
@@ -72,10 +66,7 @@ SSH Keys
     - `~/.ssh/`
     - `/root/.ssh/`
             """,
-            "resources": [
-                "https://www.tecmint.com/",
-                "https://www.cyberciti.biz/"
-            ]
+            "resources": []
         },
         {
             "title": "Types of Persistence",
@@ -87,10 +78,7 @@ Kernel Module Hijacking
 Backdoor Network Configurations
 LD_PRELOAD Hijacking
             """,
-            "resources": [
-                "https://www.linux.com/",
-                "https://redhat.com/"
-            ]
+            "resources": []
         },
         {
             "title": "Advanced Persistence",
@@ -101,10 +89,7 @@ Custom Kernel Modules
 Firmware Tampering
 Hidden Partitions or Volumes
             """,
-            "resources": [
-                "https://www.kernel.org/",
-                "https://www.sans.org/"
-            ]
+            "resources": []
         },
         {
             "title": "Event IDs to Watch",
@@ -115,10 +100,7 @@ Monitor important Linux system logs:
 /var/log/syslog for suspicious processes or activity
 /var/log/messages for kernel-level logs
             """,
-            "resources": [
-                "https://www.linuxjournal.com/",
-                "https://www.securityfocus.com/"
-            ]
+            "resources": []
         },
         {
             "title": "Memory Acquisition",
@@ -131,10 +113,7 @@ Monitor important Linux system logs:
 - `/dev/mem` for memory dump
 - `/proc/<pid>/maps` for process memory mapping
             """,
-            "resources": [
-                "https://volatilityfoundation.org/",
-                "https://github.com/504ensicslabs/LiME"
-            ]
+            "resources": []
         },
         {
             "title": "Filesystem Artifacts",
@@ -145,9 +124,6 @@ Hidden Files: `find / -name ".*"`
 Unusual Permissions: `find / -perm 777`
 Root-level Scripts or Configurations: `/etc/`, `/usr/local/`
             """,
-            "resources": [
-                "https://www.loggly.com/",
-                "https://splunk.com/"
-            ]
+            "resources": []
         },
     ]
