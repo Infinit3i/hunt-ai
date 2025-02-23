@@ -1,20 +1,15 @@
-Here's your **enhanced** `README.md` with **more details**, **more emojis**, and a **cleaner layout** to engage readers better! 🚀🔥
-
----
-
-
 # 🛡️ Threat Hunting Artificial Intelligence - HUNT-AI 🕵️‍♂️💻
 
-### **TL;DR:** *Find threats & track your hunt, boosting efficiency by **5x**!* 🚀
+### **TL;DR:** *Runbook to find threats & track your hunt 🚀
 
-HUNT-AI is your **digital hunting companion**, ensuring that analysts cover all potential **attack paths** while keeping meticulous track of findings. 📝  
+HUNT-AI is your **digital hunting companion** using MITRE ATT&CK as a framework. This ensures that analysts cover all potential **attack paths** while keeping meticulous track of findings. 📝  
 It guides your **threat hunting process**, offers **insightful tips**, and ensures you're following **best practices**.
-
-Built with experience from **real-world security operations** and inspired by courses like **SEC504**, **FOR508**, and **13Cubed**, this tool consolidates **elite knowledge** into **one central hub**. 🏆🔎  
+Built with experience from **real-world security operations** and inspired by cyber security **knowledge** into **one central hub**. 🏆🔎  
 
 ---
 
 ## 🎯 Features & Benefits
+✅ **Runbook** – Follow steps to optomize threat hunting.  
 ✅ **Track Your Investigations** – Organize your hunts and keep notes in an electronic **analyst notebook**.  
 ✅ **MITRE ATT&CK Integration** – Direct mapping to **T-codes**, keeping your analysis **structured** and **actionable**.  
 ✅ **SIEM Queries** – Run pre-configured **detection queries** for faster identification of **malicious activity**.  
