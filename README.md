@@ -6,7 +6,7 @@
 
 
 
-### 🎯 **Key Features & Benefits** - Runbook to find threats & track your hunt
+### 🎯 **Key Features & Benefits**
 
 - ✅ **Comprehensive Runbook** – A step-by-step guide designed to optimize your threat-hunting process and establish a **streamlined workflow**.  
 - ✅ **Investigation Tracking** – Organize and document your investigations with an electronic **analyst notebook**, enabling efficient **data management** and **reference**.  
