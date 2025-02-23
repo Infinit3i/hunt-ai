@@ -17,7 +17,7 @@ Built with experience from **real-world security operations** and inspired by co
 ## 🎯 Features & Benefits
 ✅ **Track Your Investigations** – Organize your hunts and keep notes in an electronic **analyst notebook**.  
 ✅ **MITRE ATT&CK Integration** – Direct mapping to **T-codes**, keeping your analysis **structured** and **actionable**.  
-✅ **Splunk & SIEM Queries** – Run pre-configured **detection queries** for faster identification of **malicious activity**.  
+✅ **SIEM Queries** – Run pre-configured **detection queries** for faster identification of **malicious activity**.  
 ✅ **Multi-Platform Support** – Runs on **Windows, Linux, and macOS** with minimal dependencies.  
 ✅ **Collaborative** – Sync investigations with your team via **Docker-compose** (coming soon).  
 
@@ -32,7 +32,9 @@ Built with experience from **real-world security operations** and inspired by co
 ## 🛠️ Minimum Requirements  
 - 🧠 **1 brain cell**  
 - 🖥️ **PC** with at least a 🐹 (or better)  
-- **Python 3.x** installed  
+- **Python 3.x** installed
+- Docker Compose v2
+- Docker
 
 ---
 
@@ -44,7 +46,6 @@ Before running, make sure you have the following installed:
 
 > **💡 Note:**  
 > If you’re new to Docker, follow the **[official installation guide](https://docs.docker.com/get-docker/)** to set it up on **Windows, macOS, or Linux**.
-
 
 ---
 
@@ -74,6 +75,7 @@ sleep 2 && google-chrome http://localhost:31337 &
 - [ ] **Notebook Exports** - Convert investigations into **PowerPoint** and **network diagrams**.  
 - [ ] **Encrypted Notebook** - Securely store investigation **data & logs**.
 - [ ] T-code - pass the hash - is local account
+
       block these for pass the has
       S-1-5-113: NT AUTHORITY\Local account
       S-1-5-114: NT AUTHORITY\Local account in Administrators group
