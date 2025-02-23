@@ -6,7 +6,9 @@
 <ul>
     {% for result in results %}
     <li>
-        <strong>{{ result.title }}</strong><br>
+        <a href="{{ result.url }}">
+            <strong>{{ result.title }}</strong>
+        </a><br>
         <p>{{ result.snippet }}</p>
     </li>
     {% endfor %}

@@ -50,14 +50,44 @@ def get_readme_description():
     return " ".join(description) if description else "No description available."
 
 def perform_search(query):
-    # Dummy implementation for testing:
-    # Return an empty list to simulate no results, or dummy data.
-    # For instance, you might return a dummy result if query is not empty:
-    if query:
-        return [{"title": "Dummy Result", "snippet": "This is a dummy snippet."}]
-    else:
-        return []
+    """
+    Searches through all technique fields to match the query.
+    """
+    query = query.lower()
+    techniques = load_techniques()  # Load all techniques
+    results = []
 
+    for technique in techniques.values():
+        for key, value in technique.items():
+            if isinstance(value, str) and query in value.lower():
+                results.append({
+                    "title": technique["title"],
+                    "snippet": f"Match found in {key}: {value[:200]}...",
+                    "url": url_for("routes.technique_page", url_id=technique["url_id"])
+                })
+                break  # Stop checking after the first match
+
+            elif isinstance(value, list):  # Handle lists like `hypothesis`, `log_sources`
+                for item in value:
+                    if isinstance(item, str) and query in item.lower():
+                        results.append({
+                            "title": technique["title"],
+                            "snippet": f"Match found in {key}: {item[:200]}...",
+                            "url": url_for("routes.technique_page", url_id=technique["url_id"])
+                        })
+                        break
+
+                    elif isinstance(item, dict):  # Handle dictionaries like `log_sources`
+                        for field_value in item.values():
+                            if isinstance(field_value, str) and query in field_value.lower():
+                                results.append({
+                                    "title": technique["title"],
+                                    "snippet": f"Match found in {key}: {field_value[:200]}...",
+                                    "url": url_for("routes.technique_page", url_id=technique["url_id"])
+                                })
+                                break
+
+    return results
 
 
 @routes_bp.route('/')
