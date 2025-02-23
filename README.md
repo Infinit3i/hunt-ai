@@ -1,4 +1,4 @@
-# 🛡️ Threat Hunting Artificial Intelligence - HUNT-AI 🕵️‍♂️💻
+# 🛡️ Threat Hunting Artificial Intelligence - HUNT-AI
 
 ### **TL;DR:** Runbook to find threats & track your hunt 🚀
 
