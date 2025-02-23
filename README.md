@@ -5,7 +5,7 @@
 </div>
 
 
-## 🎯 **Key Features & Benefits**
+### 🎯 **Key Features & Benefits**
 
 - ✅ **Comprehensive Runbook** – A step-by-step guide designed to optimize your threat-hunting process and establish a **streamlined workflow**.  
 - ✅ **Investigation Tracking** – Organize and document your investigations with an electronic **analyst notebook**, enabling efficient **data management** and **reference**.  
@@ -17,10 +17,10 @@
 
 ---
 
-## **TL;DR:** Runbook to find threats & track your hunt 🚀
+### **TL;DR:** Runbook to find threats & track your hunt 🚀
 
 
-## 🛠️ **Minimum Requirements**
+### 🛠️ **Minimum Requirements**
 
 - 🖥️ **PC** with at least **8 GB RAM**  
 - 🐍 **Python 3.x**: [Download Python](https://www.python.org/downloads/)  
@@ -29,7 +29,7 @@
 
 ---
 
-## 🚀 Quick Start Guide
+### 🚀 Quick Start Guide
 
 1️⃣ **Download ZIP** 📦 (top right of GitHub page)  
 2️⃣ **Extract** `Hunt-AI.zip`  
@@ -44,7 +44,7 @@ sleep 2 && google-chrome http://localhost:31337 &
 
 ---
 
-## 🔬 Running Tests  
+#### 🔬 Running Tests  
 To verify that everything is working:  
 ```bash
 python -m unittest discover Testing
