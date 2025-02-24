@@ -56,5 +56,5 @@
 
 ### Windows
 ```powershell
-./run_docker.ps1
+.\run_docker.ps1
 ```
