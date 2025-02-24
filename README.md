@@ -6,8 +6,7 @@
 
 <p align="center">
 <br><br>
-<a title="Build Status" target="_blank" href="https://github.com/infinit3i/hunt-ai/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/infinit3i/hunt-ai/cd.yml?style=flat-square"></a>
-<a title="Releases" target="_blank" href="https://github.com/infinit3i/hunt-ai/releases"><img src="https://img.shields.io/github/release/siyuan-note/siyuan.svg?style=flat-square&color=9CF"></a>
+<a title="Releases" target="_blank" href="https://github.com/infinit3i/hunt-ai/releases"><img src="https://img.shields.io/github/release/infinit3i/hunt-ai.svg?style=flat-square&color=9CF"></a>
 <a title="Downloads" target="_blank" href="https://github.com/infinit3i/hunt-ai/releases"><img src="https://img.shields.io/github/downloads/siyuan-note/siyuan/total.svg?style=flat-square&color=blueviolet"></a>
 <br>
 <a title="Docker Pulls" target="_blank" href="https://hub.docker.com/r/b3log/siyuan"><img src="https://img.shields.io/docker/pulls/b3log/siyuan.svg?style=flat-square&color=green"></a> /* change */
