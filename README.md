@@ -16,8 +16,8 @@
 <a title="Code Size" target="_blank" href="https://github.com/infinit3i/hunt-ai"><img src="https://img.shields.io/github/languages/code-size/infinit3i/hunt-ai.svg?style=flat-square&color=yellow"></a>
 <a title="GitHub Pull Requests" target="_blank" href="https://github.com/infinit3i/hunt-ai/pulls"><img src="https://img.shields.io/github/issues-pr-closed/infinit3i/hunt-ai.svg?style=flat-square&color=FF9966"></a>
 <br>
-<a title="GitHub Commits" target="_blank" href="https://github.com/infinit3i/hunt-ai/commits/master"><img src="https://img.shields.io/github/commit-activity/m/siyuan-note/siyuan.svg?style=flat-square"></a>
-<a title="Last Commit" target="_blank" href="https://github.com/infinit3i/hunt-ai/commits/master"><img src="https://img.shields.io/github/last-commit/siyuan-note/siyuan.svg?style=flat-square&color=FF9900"></a>
+<a title="GitHub Commits" target="_blank" href="https://github.com/infinit3i/hunt-ai/commits/master"><img src="https://img.shields.io/github/commit-activity/m/infinit3i/hunt-ai.svg?style=flat-square"></a>
+<a title="Last Commit" target="_blank" href="https://github.com/infinit3i/hunt-ai/commits/master"><img src="https://img.shields.io/github/last-commit/infinit3i/hunt-ai.svg?style=flat-square&color=FF9900"></a>
 <br><br>
 <a title="Twitter" target="_blank" href="https://x.com/infinit3i"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/b3logos?label=Follow&style=social"></a>
 <a title="Discord" target="_blank" href="https://discord.gg/rzSTrk39yE"><img alt="Chat on Discord" src="https://img.shields.io/discord/805844406920806440?label=Discord&logo=Discord&style=social"></a>
