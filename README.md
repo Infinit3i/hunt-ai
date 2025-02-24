@@ -49,8 +49,12 @@
 3️⃣ **Navigate to the folder**:
    `cd hunt-ai/`
 
+### Linux
 ```bash
-docker build -t hunt-ai .
-docker run -d -p 31337:31337 hunt-ai
-sleep 2 && google-chrome http://localhost:31337 &
+./run_docker.sh
+```
+
+### Windows
+```powershell
+./run_docker.ps1
 ```
