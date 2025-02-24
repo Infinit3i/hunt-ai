@@ -23,13 +23,12 @@
 
 ### 🎯 **Key Features & Benefits**
 
-- ✅ **Comprehensive Runbook** – A step-by-step guide designed to optimize your threat-hunting process and establish a **streamlined workflow**.  
-- ✅ **Investigation Tracking** – Organize and document your investigations with an electronic **analyst notebook**, enabling efficient **data management** and **reference**.  
-- ✅ **MITRE ATT&CK Integration** – Seamlessly mapped to **T-codes**, ensuring your analysis remains **structured**, **comprehensive**, and **actionable**.  
-- ✅ **Pre-configured SIEM Queries** – Quickly identify **malicious activity** with **detection queries**, accelerating your response time and improving **threat visibility**.  
-- ✅ **Insightful Tips & Best Practices** – Receive expert guidance and actionable advice to enhance your threat-hunting strategies and decision-making.  
-- ✅ **Multi-Platform Support** – Compatible with **Windows**, **Linux**, and **macOS**, offering versatility with minimal setup and dependencies.  
-- ✅ **Collaborative Features** – Work together with your team by syncing investigations using **Docker Compose** (coming soon), improving collaboration and shared insights.
+- ✅ **Runbook** – A step-by-step guide designed to optimize your threat-hunting process.
+- ✅ **Tracking** – Organize and document your investigations with an electronic **analyst notebook**.
+- ✅ **MITRE ATT&CK** – Attack path is mapped to **T-codes**.
+- ✅ **SIEM Queries** – Quickly identify **malicious activity** with **detection queries**. 
+- ✅ **Tip Notifications** – Receive expert guidance to enhance your threat-hunting strategies and decision-making.  
+- ✅ **Multi-Platform Support** – Compatible with Many operating systems.
 
 ---
 
