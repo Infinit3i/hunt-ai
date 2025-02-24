@@ -7,7 +7,7 @@
 <p align="center">
 <br><br>
 <a title="Releases" target="_blank" href="https://github.com/infinit3i/hunt-ai/releases"><img src="https://img.shields.io/github/release/infinit3i/hunt-ai.svg?style=flat-square&color=9CF"></a>
-<a title="Downloads" target="_blank" href="https://github.com/infinit3i/hunt-ai/releases"><img src="https://img.shields.io/github/downloads/siyuan-note/siyuan/total.svg?style=flat-square&color=blueviolet"></a>
+<a title="Downloads" target="_blank" href="https://github.com/infinit3i/hunt-ai/releases"><img src="https://img.shields.io/github/downloads/infinit3i/hunt-ai/total.svg?style=flat-square&color=blueviolet"></a>
 <br>
 <a title="Docker Pulls" target="_blank" href="https://hub.docker.com/r/b3log/siyuan"><img src="https://img.shields.io/docker/pulls/b3log/siyuan.svg?style=flat-square&color=green"></a> /* change */
 <a title="Docker Image Size" target="_blank" href="https://hub.docker.com/r/b3log/siyuan"><img src="https://img.shields.io/docker/image-size/b3log/siyuan.svg?style=flat-square&color=ff96b4"></a> /* change */
