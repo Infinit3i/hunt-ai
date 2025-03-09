@@ -13,12 +13,6 @@
 
 <h1>{{ technique.title }} [{{ technique.id }}]</h1>
 
-<div class="technique-box" data-log-sources="{{ ','.join(technique.log_sources|map(attribute='type')) }}">
-    <h2><a href="/technique/{{ technique.id }}">{{ technique.title }}</a></h2>
-    <p><strong>Tactic:</strong> {{ technique.tactic }}</p>
-    <p><strong>Log Sources:</strong> {{ ', '.join(technique.log_sources|map(attribute='type')) }}</p>
-</div>
-
 <div class="links">
     <a href="https://d3fend.mitre.org/offensive-technique/attack/{{ technique.id }}" class="btn">🛡️ MITRE D3FEND</a>
     <a href="https://attack.mitre.org/techniques/{{ technique.id }}" class="btn">⚔️ MITRE ATT&CK</a>
