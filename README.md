@@ -23,11 +23,11 @@
 
 ### 🎯 **Key Features & Benefits**
 
-- ✅ **Runbook** – A step-by-step guide designed to optimize your threat-hunting process.
+- ✅ **Runbook** – Optimize your threat-hunting process.
 - ✅ **Tracking** – Organize and document your investigations with an electronic **analyst notebook**.
 - ✅ **MITRE ATT&CK** – Attack path is mapped to **T-codes**.
 - ✅ **SIEM Queries** – Quickly identify **malicious activity** with **detection queries**. 
-- ✅ **Tip Notifications** – Receive expert guidance to enhance your threat-hunting strategies and decision-making.  
+- ✅ **Tip Notifications** – Receive expert guidance to enhance your threat-hunting strategies.
 - ✅ **Multi-Platform Support** – Compatible with Many operating systems.
 
 ---
