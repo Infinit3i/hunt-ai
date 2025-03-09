@@ -3,28 +3,37 @@ def get_content():
         "id": "T1001.001",
         "url_id": "T1001/001",
         "title": "Data Obfuscation: Junk Data",
+        "description": "Adversaries may add junk data to protocols used for command and control to make detection more difficult. By adding random or meaningless data to the protocols used for command and control, adversaries can prevent trivial methods for decoding, deciphering, or otherwise analyzing the traffic. Examples may include appending/prepending data with junk characters or writing junk characters between significant characters.",
+        "tags": ["data obfuscation", "junk data", "command and control", "detection"],
         "tactic": "Command and Control",
-        "data_sources": "Network Traffic, Firewall Logs, Proxy Logs, Endpoint Logs",
+        "data_sources": "Zeek, Suricata, Firewall, Proxy, Sysmon",
         "protocol": "HTTP, HTTPS, DNS, TCP, UDP",
         "os": "Platform Agnostic",
-        "objective": "Detect and mitigate adversaries inserting junk data to obfuscate command-and-control (C2) communications and evade detection.",
-        "scope": "Identify network traffic patterns containing excessive or random junk data used for obfuscation.",
-        "threat_model": "Adversaries insert junk data into communication channels to bypass security controls, disguise real payloads, and evade network inspection.",
         "hypothesis": [
             "Are there network packets containing excessive padding or junk data?",
             "Is there an unusual amount of entropy in network payloads?",
             "Are adversaries using junk data to mask command-and-control traffic?"
         ],
+        "tips": [
+            "Review baseline network traffic to determine normal padding levels.",
+            "Correlate suspicious data with known C2 patterns.",
+            "Verify with endpoint logs to distinguish benign from malicious events."
+        ],
         "log_sources": [
-            {"type": "Network Traffic", "source": "Zeek (Bro), Suricata, Wireshark"},
-            {"type": "Firewall Logs", "source": "Palo Alto, Fortinet, Cisco ASA"},
-            {"type": "Proxy Logs", "source": "Zscaler, Bluecoat, McAfee Web Gateway"},
-            {"type": "Endpoint Logs", "source": "Sysmon (Event ID 1, 3), EDR (CrowdStrike, Defender ATP)"}
+            {"type": "Zeek", "source": "", "destination": ""},
+            {"type": "Suricata", "source": "", "destination": ""},
+            {"type": "Firewall", "source": "Palo Alto, Fortinet, Cisco ASA", "destination": ""},
+            {"type": "Proxy", "source": "Zscaler, Bluecoat, McAfee Web Gateway", "destination": ""},
+            {"type": "Sysmon", "source": "1, 3", "destination": "1, 3"}
         ],
         "detection_methods": [
             "Monitor for network packets with excessive random padding.",
             "Detect unusual entropy levels in encrypted payloads.",
             "Identify anomalies in packet size distributions and unexpected data patterns."
+        ],
+        "apt": [
+            "Fancy Bear",
+            "Cozy Bear"
         ],
         "spl_query": [
             "index=network sourcetype=firewall_logs \n| search payload=*random* OR payload=*junk* OR payload=*padding* \n| stats count by src_ip, dest_ip, payload"
@@ -37,8 +46,13 @@ def get_content():
             "Validate & Escalate: If malicious activity is found → Escalate to Incident Response."
         ],
         "expected_outcomes": [
-            "Junk Data Identified: Block and investigate obfuscated communications.",
-            "No Malicious Activity Found: Improve detection methods for junk data obfuscation."
+            "Junk Data Identified: Block and investigate obfuscated communications."
+        ],
+        "false_positive": "May include benign padding from legitimate applications or normal network overhead.",
+        "clearing_steps": [
+            "Review affected systems for compromise.",
+            "Investigate and correlate logs across endpoints and network devices.",
+            "Reset affected credentials and apply necessary patches."
         ],
         "mitre_mapping": [
             {"tactic": "Command and Control", "technique": "T1001.001 (Junk Data)", "example": "Excessive padding used in HTTP payloads to disguise commands."},

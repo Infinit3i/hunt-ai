@@ -24,9 +24,7 @@
 <div class="operation-section">
     <div class="operation-content">
         <div class="info-box">
-            <p><strong>Objective:</strong> {{ technique.objective }}</p>
-            <p><strong>Scope:</strong> {{ technique.scope }}</p>
-            <p><strong>Threat Model:</strong> {{ technique.threat_model }}</p>
+            <p><strong>Description:</strong> {{ technique.description }}</p>
             <ul>
                 {% for question in technique.hypothesis %}
                 <li>❓ {{ question }}</li>
@@ -34,9 +32,6 @@
             </ul>
         </div>
 
-        
-
-        <h2>🛠 Data Sources & Log Queries</h2>
         <div class="info-box">
             <p><strong>Protocol:</strong> {{ technique.protocol }}</p>
             <p><strong>OS:</strong> {{ technique.os }}</p>
