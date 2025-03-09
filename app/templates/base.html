@@ -1,318 +1,830 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{{ title }}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-        <link id="theme-stylesheet" rel="stylesheet" href="{{ url_for('static', filename='css/themes/' + theme + '_theme.css') }}">
-        
-        <!-- Favicon Links -->
-        <link rel="icon" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}" type="image/png" sizes="32x32">
-        <link rel="icon" href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}" type="image/png" sizes="96x96">
-        <link rel="icon" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}" type="image/png" sizes="16x16">
-        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-57x57.png') }}" sizes="57x57">
-        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-60x60.png') }}" sizes="60x60">
-        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-72x72.png') }}" sizes="72x72">
-        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-76x76.png') }}" sizes="76x76">
-        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-114x114.png') }}" sizes="114x114">
-        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-120x120.png') }}" sizes="120x120">
-        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-144x144.png') }}" sizes="144x144">
-        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-152x152.png') }}" sizes="152x152">
-        <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-icon-180x180.png') }}" sizes="180x180">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <link
+      id="theme-stylesheet"
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/themes/' + theme + '_theme.css') }}"
+    />
 
-        <!-- Android Icon -->
-        <link rel="icon" href="{{ url_for('static', filename='favicon/android-icon-192x192.png') }}" type="image/png" sizes="192x192">
+    <!-- Favicon Links -->
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}"
+      type="image/png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}"
+      type="image/png"
+      sizes="96x96"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}"
+      type="image/png"
+      sizes="16x16"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ url_for('static', filename='favicon/apple-icon-57x57.png') }}"
+      sizes="57x57"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ url_for('static', filename='favicon/apple-icon-60x60.png') }}"
+      sizes="60x60"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ url_for('static', filename='favicon/apple-icon-72x72.png') }}"
+      sizes="72x72"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ url_for('static', filename='favicon/apple-icon-76x76.png') }}"
+      sizes="76x76"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ url_for('static', filename='favicon/apple-icon-114x114.png') }}"
+      sizes="114x114"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ url_for('static', filename='favicon/apple-icon-120x120.png') }}"
+      sizes="120x120"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ url_for('static', filename='favicon/apple-icon-144x144.png') }}"
+      sizes="144x144"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ url_for('static', filename='favicon/apple-icon-152x152.png') }}"
+      sizes="152x152"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ url_for('static', filename='favicon/apple-icon-180x180.png') }}"
+      sizes="180x180"
+    />
 
-        <!-- Manifest File -->
-        <link rel="manifest" href="{{ url_for('static', filename='favicon/manifest.json') }}">
+    <!-- Android Icon -->
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon/android-icon-192x192.png') }}"
+      type="image/png"
+      sizes="192x192"
+    />
 
-        <!-- Windows Tile and Theme Color -->
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="{{ url_for('static', filename='favicon/ms-icon-144x144.png') }}">
-        <meta name="theme-color" content="#ffffff">
-    </head>
-<body>
+    <!-- Manifest File -->
+    <link
+      rel="manifest"
+      href="{{ url_for('static', filename='favicon/manifest.json') }}"
+    />
+
+    <!-- Windows Tile and Theme Color -->
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta
+      name="msapplication-TileImage"
+      content="{{ url_for('static', filename='favicon/ms-icon-144x144.png') }}"
+    />
+    <meta name="theme-color" content="#ffffff" />
+  </head>
+  <body>
     <header>
-        <!-- Navigation menu -->
-        <nav class="nav-links">
-            <div class="nav-left">
-                <!-- Search Bar -->
-                <div class="search-bar">
-                    <form action="/search" method="GET">
-                        <input type="text" name="query" placeholder="Search..." aria-label="Search">
-                        <button class="search-button" type="submit">🔍</button>
-                    </form>
-                </div>
+      <!-- Navigation menu -->
+      <nav class="nav-links">
+        <div class="nav-left">
+          <!-- Search Bar -->
+          <div class="search-bar">
+            <form action="/search" method="GET">
+              <input
+                type="text"
+                name="query"
+                placeholder="Search..."
+                aria-label="Search"
+              />
+              <button class="search-button" type="submit">🔍</button>
+            </form>
+          </div>
+        </div>
+        <!-- Centered Links -->
+        <div class="nav-center">
+          <a class="nav-link" href="/">HUNT-AI</a>
+          <!--  <a class="nav-link" href="/intel">Intel</a> -->
+          <div class="dropdown">
+            <a class="nav-link" href="/methodology">Planning</a>
+            <div class="dropdown-content">
+              <a class="nav-link" href="/windows">Windows</a>
+              <a class="nav-link" href="/linux">Linux</a>
             </div>
-            <!-- Centered Links -->
-            <div class="nav-center">
-
-                <a class="nav-link" href="/">HUNT-AI</a>
-                <!--  <a class="nav-link" href="/intel">Intel</a> -->
-                <div class="dropdown">
-                    <a class="nav-link" href="/methodology">Planning</a>
-                    <div class="dropdown-content">
-                        <a class="nav-link" href="/windows">Windows</a>
-                        <a class="nav-link" href="/linux">Linux</a>
-                    </div>
-                </div>
-                <a class="nav-link" href="/mitre">Hunt</a>
-                <div class="dropdown">
-                    <a class="nav-link" href="/investigate">Triage</a>
-                    <div class="dropdown-content">
-                        <a class="nav-link" href="/investigate/ip">IP</a>
-                        <a class="nav-link" href="/investigate/domain">Domain</a>
-                        <a class="nav-link" href="/investigate/filehash">File Hash</a>
-                        <a class="nav-link" href="/investigate/malware">Malware</a>
-                    </div>
-                </div>
+          </div>
+          <a class="nav-link" href="/mitre">Hunt</a>
+          <div class="dropdown">
+            <a class="nav-link" href="/investigate">Triage</a>
+            <div class="dropdown-content">
+              <a class="nav-link" href="/investigate/ip">IP</a>
+              <a class="nav-link" href="/investigate/domain">Domain</a>
+              <a class="nav-link" href="/investigate/filehash">File Hash</a>
+              <a class="nav-link" href="/investigate/malware">Malware</a>
             </div>
-            <!-- Right-Aligned Links -->
-            <div class="nav-right">
-                {% if current_user.is_authenticated %}
-                    <a class="nav-link" href="/notebook">Notebook</a>
-                    <a class="nav-link" href="/profile">{{ current_user.username }}</a>
-                {% else %}
-                    <a class="nav-link" href="/register">Register</a>
-                    <a class="nav-link" href="/login">Login</a>
-                {% endif %}
-            </div>
-        </nav>
+          </div>
+        </div>
+        <!-- Right-Aligned Links -->
+        <div class="nav-right">
+          {% if current_user.is_authenticated %}
+          <a class="nav-link" href="/notebook">Notebook</a>
+          <a class="nav-link" href="/profile">{{ current_user.username }}</a>
+          {% else %}
+          <a class="nav-link" href="/register">Register</a>
+          <a class="nav-link" href="/login">Login</a>
+          {% endif %}
+        </div>
+      </nav>
     </header>
     <div class="selected-tactics">
-        <h2>🔎 Selected Tactics:</h2>
-        <ul id="selected-tactic-list"></ul>
+      <h2>🔎 Selected Tactics:</h2>
+      <ul id="selected-tactic-list"></ul>
     </div>
-    <div class="tip 
-    {% if random_tip_type == 't-code' %} tcode-tip 
-    {% elif random_tip_type == 'joke' %} joke-tip 
-    {% endif %}">
-    {{ random_tip | safe }}  <!-- Only output the formatted tip -->
+    <div
+      class="tip {% if random_tip_type == 't-code' %} tcode-tip {% elif random_tip_type == 'joke' %} joke-tip {% endif %}"
+    >
+      {{ random_tip | safe }}
+      <!-- Only output the formatted tip -->
     </div>
-    
+
     <div class="log-source-filter">
       <h3>🔍 Filter by Log Sources:</h3>
       <div>
-        <label><input type="checkbox" class="log-source-checkbox" value="all" checked> All Log Sources</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Windows Security" checked>Windows Security</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Windows Application" checked>Windows Application</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Windows System" checked>Windows System</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Windows Powershell" checked>Windows Powershell</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Sysmon" checked>Sysmon</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Zeek" checked>Zeek</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Suricata" checked>Suricata</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Syslog" checked>Syslog</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Active Directory" checked> Active Directory</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Application Log" checked> Application Log</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Application Vetting" checked> Application Vetting</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Asset" checked> Asset</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Certificate" checked> Certificate</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Cloud Service" checked> Cloud Service</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Cloud Storage" checked> Cloud Storage</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Command" checked> Command</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Container" checked> Container</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Domain Name" checked> Domain Name</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Drive" checked> Drive</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Driver" checked> Driver</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="File" checked> File</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Firewall" checked> Firewall</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Firmware" checked> Firmware</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Group" checked> Group</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Image" checked> Image</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Instance" checked> Instance</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Internet Scan" checked> Internet Scan</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Kernel" checked> Kernel</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Logon Session" checked> Logon Session</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Malware Repository" checked> Malware Repository</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Module" checked> Module</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Named Pipe" checked> Named Pipe</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Network Share" checked> Network Share</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Network Traffic" checked> Network Traffic</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Operational Databases" checked> Operational Databases</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Persona" checked> Persona</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Pod" checked> Pod</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Process" checked> Process</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Scheduled Job" checked> Scheduled Job</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Script" checked> Script</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Sensor Health" checked> Sensor Health</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Service" checked> Service</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Snapshot" checked> Snapshot</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="User Account" checked> User Account</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="User Interface" checked> User Interface</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Volume" checked> Volume</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Web Credential" checked> Web Credential</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="Windows Registry" checked> Windows Registry</label>
-        <label><input type="checkbox" class="log-source-checkbox" value="WMI" checked> WMI</label>
+        <!-- “All” Checkbox -->
+        <label>
+          <input
+            type="checkbox"
+            class="log-source-checkbox"
+            value="all"
+            checked
+          />
+          All
+        </label>
+
+        <!-- Windows Logs Group -->
+        <details>
+          <summary>Windows Logs</summary>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Windows Security"
+              checked
+            />
+            Windows Security
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Windows Application"
+              checked
+            />
+            Windows Application
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Windows System"
+              checked
+            />
+            Windows System
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Windows Powershell"
+              checked
+            />
+            Windows Powershell
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Sysmon"
+              checked
+            />
+            Sysmon
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Windows Registry"
+              checked
+            />
+            Windows Registry
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="WMI"
+              checked
+            />
+            WMI
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Named Pipe"
+              checked
+            />
+            Named Pipe
+          </label>
+        </details>
+
+        <!-- Network Logs Group -->
+        <details>
+          <summary>Network Logs</summary>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Zeek"
+              checked
+            />
+            Zeek
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Suricata"
+              checked
+            />
+            Suricata
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Syslog"
+              checked
+            />
+            Syslog
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Firewall"
+              checked
+            />
+            Firewall
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Internet Scan"
+              checked
+            />
+            Internet Scan
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Domain Name"
+              checked
+            />
+            Domain Name
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Network Share"
+              checked
+            />
+            Network Share
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Network Traffic"
+              checked
+            />
+            Network Traffic
+          </label>
+        </details>
+
+        <!-- Authentication & Directory Group -->
+        <details>
+          <summary>Authentication &amp; Directory</summary>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Active Directory"
+              checked
+            />
+            Active Directory
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Logon Session"
+              checked
+            />
+            Logon Session
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="User Account"
+              checked
+            />
+            User Account
+          </label>
+        </details>
+
+        <!-- Application & Process Group -->
+        <details>
+          <summary>Application &amp; Process</summary>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Application Log"
+              checked
+            />
+            Application Log
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Application Vetting"
+              checked
+            />
+            Application Vetting
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Process"
+              checked
+            />
+            Process
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Script"
+              checked
+            />
+            Script
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Scheduled Job"
+              checked
+            />
+            Scheduled Job
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Command"
+              checked
+            />
+            Command
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Service"
+              checked
+            />
+            Service
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Module"
+              checked
+            />
+            Module
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="User Interface"
+              checked
+            />
+            User Interface
+          </label>
+        </details>
+
+        <!-- Infrastructure & Asset Group -->
+        <details>
+          <summary>Infrastructure &amp; Asset</summary>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Asset"
+              checked
+            />
+            Asset
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Certificate"
+              checked
+            />
+            Certificate
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Cloud Service"
+              checked
+            />
+            Cloud Service
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Cloud Storage"
+              checked
+            />
+            Cloud Storage
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Container"
+              checked
+            />
+            Container
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Drive"
+              checked
+            />
+            Drive
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Driver"
+              checked
+            />
+            Driver
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="File"
+              checked
+            />
+            File
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Firmware"
+              checked
+            />
+            Firmware
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Group"
+              checked
+            />
+            Group
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Image"
+              checked
+            />
+            Image
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Instance"
+              checked
+            />
+            Instance
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Kernel"
+              checked
+            />
+            Kernel
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Malware Repository"
+              checked
+            />
+            Malware Repository
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Operational Databases"
+              checked
+            />
+            Operational Databases
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Persona"
+              checked
+            />
+            Persona
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Pod"
+              checked
+            />
+            Pod
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Sensor Health"
+              checked
+            />
+            Sensor Health
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Snapshot"
+              checked
+            />
+            Snapshot
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Volume"
+              checked
+            />
+            Volume
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              class="log-source-checkbox"
+              value="Web Credential"
+              checked
+            />
+            Web Credential
+          </label>
+        </details>
       </div>
     </div>
-  
-  
-
 
     <main class="{{ theme }}-theme main-content">
-        {% block content %}{% endblock %}
+      {% block content %}{% endblock %}
     </main>
 
     <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
+      const themeToggle = document.getElementById("theme-toggle");
+      const body = document.body;
 
-        // Initialize theme on page load
-        const currentTheme = localStorage.getItem('theme') || '{{ theme }}';  // Flask variable for initial theme
-        body.classList.add(`${currentTheme}-theme`);
-        themeToggle.checked = currentTheme === 'light';
+      // Initialize theme on page load
+      const currentTheme = localStorage.getItem("theme") || "{{ theme }}"; // Flask variable for initial theme
+      body.classList.add(`${currentTheme}-theme`);
+      themeToggle.checked = currentTheme === "light";
 
-        // Event listener for theme toggle
-        themeToggle.addEventListener('change', async function () {
-            const newTheme = this.checked ? 'light' : 'modern';
+      // Event listener for theme toggle
+      themeToggle.addEventListener("change", async function () {
+        const newTheme = this.checked ? "light" : "modern";
 
-            // Apply theme immediately
-            body.classList.remove('modern-theme', 'light-theme');
-            body.classList.add(`${newTheme}-theme`);
+        // Apply theme immediately
+        body.classList.remove("modern-theme", "light-theme");
+        body.classList.add(`${newTheme}-theme`);
 
-            // Save the new theme locally
-            localStorage.setItem('theme', newTheme);
+        // Save the new theme locally
+        localStorage.setItem("theme", newTheme);
 
-            // Send the update to the backend asynchronously
-            try {
-                const response = await fetch('/set_theme', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ theme: newTheme }),
-                });
+        // Send the update to the backend asynchronously
+        try {
+          const response = await fetch("/set_theme", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ theme: newTheme }),
+          });
 
-                if (!response.ok) {
-                    console.error('Failed to update theme on the server:', response.statusText);
-                }
-            } catch (error) {
-                console.error('Error updating theme on the backend:', error);
-            }
-        });
+          if (!response.ok) {
+            console.error(
+              "Failed to update theme on the server:",
+              response.statusText
+            );
+          }
+        } catch (error) {
+          console.error("Error updating theme on the backend:", error);
+        }
+      });
     </script>
-    
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-          const checkboxes = document.querySelectorAll(".log-source-checkbox");
-          const allCheckbox = document.querySelector(".log-source-checkbox[value='all']");
-          const allTechniques = document.querySelectorAll(".technique-box");
-  
-          // Load saved selections from localStorage
-          let selectedLogSources = JSON.parse(localStorage.getItem("selected_log_sources")) || ["all"];
-  
-          // Restore checkbox selections from localStorage
-          checkboxes.forEach(checkbox => {
-              checkbox.checked = selectedLogSources.includes(checkbox.value);
-          });
-  
-          function updateSelections() {
-              selectedLogSources = Array.from(checkboxes)
-                  .filter(checkbox => checkbox.checked)
-                  .map(checkbox => checkbox.value);
-  
-              // If all sources are checked, select "All" and deselect others
-              if (selectedLogSources.length === checkboxes.length - 1) {
-                  allCheckbox.checked = true;
-                  checkboxes.forEach(cb => {
-                      if (cb !== allCheckbox) cb.checked = false;
-                  });
-                  selectedLogSources = ["all"];
-              } else {
-                  allCheckbox.checked = false;
-              }
-  
-              // Save selected sources
-              localStorage.setItem("selected_log_sources", JSON.stringify(selectedLogSources));
-  
-              // Apply filtering
-              filterTechniques();
+        const checkboxes = document.querySelectorAll(".log-source-checkbox");
+        const allCheckbox = document.querySelector(
+          ".log-source-checkbox[value='all']"
+        );
+        const allTechniques = document.querySelectorAll(".technique-box");
+
+        // Load saved selections from localStorage
+        let selectedLogSources = JSON.parse(
+          localStorage.getItem("selected_log_sources")
+        ) || ["all"];
+
+        // Restore checkbox selections from localStorage
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = selectedLogSources.includes(checkbox.value);
+        });
+
+        function updateSelections() {
+          selectedLogSources = Array.from(checkboxes)
+            .filter((checkbox) => checkbox.checked)
+            .map((checkbox) => checkbox.value);
+
+          // If all sources are checked, select "All" and deselect others
+          if (selectedLogSources.length === checkboxes.length - 1) {
+            allCheckbox.checked = true;
+            checkboxes.forEach((cb) => {
+              if (cb !== allCheckbox) cb.checked = false;
+            });
+            selectedLogSources = ["all"];
+          } else {
+            allCheckbox.checked = false;
           }
-  
-          function filterTechniques() {
-              allTechniques.forEach(technique => {
-                  const techniqueLogSources = technique.getAttribute("data-log-sources").split(",");
-  
-                  // Only show techniques that contain at least one of the selected log sources
-                  if (selectedLogSources.includes("all") || techniqueLogSources.some(source => selectedLogSources.includes(source.trim()))) {
-                      technique.style.display = "block"; // Show technique
-                  } else {
-                      technique.style.display = "none"; // Hide technique
-                  }
-              });
-          }
-  
-          // Attach event listeners to checkboxes
-          checkboxes.forEach(checkbox => {
-              checkbox.addEventListener("change", () => {
-                  if (checkbox.value === "all") {
-                      if (checkbox.checked) {
-                          // Select all and uncheck others
-                          checkboxes.forEach(cb => cb.checked = true);
-                          selectedLogSources = ["all"];
-                      }
-                  } else {
-                      updateSelections();
-                  }
-              });
-          });
-  
-          // Apply filter on page load
+
+          // Save selected sources
+          localStorage.setItem(
+            "selected_log_sources",
+            JSON.stringify(selectedLogSources)
+          );
+
+          // Apply filtering
           filterTechniques();
+        }
+
+        function filterTechniques() {
+          allTechniques.forEach((technique) => {
+            const techniqueLogSources = technique
+              .getAttribute("data-log-sources")
+              .split(",");
+
+            // Only show techniques that contain at least one of the selected log sources
+            if (
+              selectedLogSources.includes("all") ||
+              techniqueLogSources.some((source) =>
+                selectedLogSources.includes(source.trim())
+              )
+            ) {
+              technique.style.display = "block"; // Show technique
+            } else {
+              technique.style.display = "none"; // Hide technique
+            }
+          });
+        }
+
+        // Attach event listeners to checkboxes
+        checkboxes.forEach((checkbox) => {
+          checkbox.addEventListener("change", () => {
+            if (checkbox.value === "all") {
+              if (checkbox.checked) {
+                // Select all and uncheck others
+                checkboxes.forEach((cb) => (cb.checked = true));
+                selectedLogSources = ["all"];
+              }
+            } else {
+              updateSelections();
+            }
+          });
+        });
+
+        // Apply filter on page load
+        filterTechniques();
       });
-  </script>
-  
+    </script>
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         // Select both tactic boxes and technique boxes
         const allBoxes = document.querySelectorAll(".tactic-box, .technique-box");
         const tacticListElement = document.getElementById("selected-tactic-list");
-        
+
         // Load saved items from localStorage.
         // Each item is stored as: { title: "...", url_id: "...", type: "tactic" or "technique" }
         let selectedItems = JSON.parse(localStorage.getItem("selected_tactics")) || [];
-        
+
         // Function to update the displayed list of selected items
         function updateDisplay() {
           tacticListElement.innerHTML = ""; // Clear existing list
-        
+
           if (selectedItems.length === 0) {
             tacticListElement.innerHTML = "<li>No tactics selected</li>";
           } else {
             selectedItems.forEach((item) => {
               const li = document.createElement("li");
               const anchor = document.createElement("a");
-        
+
               // Build the correct link based on type:
               // For tactics, use the stored url_id; for techniques, use the stored url_id.
               if (item.type === "tactic") {
                 anchor.href = `http://localhost:31337/mitre/${item.url_id}`;
               } else (item.type === "technique") {
                 anchor.href = `http://localhost:31337/technique/${item.url_id}`;
-              } 
-        
+              }
+
               anchor.textContent = `🔹 ${item.title}`;
               li.appendChild(anchor);
               tacticListElement.appendChild(li);
             });
           }
         }
-        
+
         // Initialize the display on page load
         updateDisplay();
-        
+
         // Process each box (tactic or technique)
         allBoxes.forEach((box) => {
           const checkboxId = box.getAttribute("data-checkbox-id");
           const checkbox = document.getElementById(checkboxId);
-        
+
           // Grab the anchor inside the box to get the title and base URL
           const anchor = box.querySelector("h2 a");
           const originalTitle = anchor.textContent.trim();
           let computedUrlId = "";
           const isTactic = box.classList.contains("tactic-box");
           const isTechnique = box.classList.contains("technique-box");
-        
+
           if (isTactic) {
             // For tactics, use the data attribute for the URL id.
             computedUrlId = box.getAttribute("data-url-id");
@@ -322,17 +834,17 @@
             const parts = anchor.href.split("/");
             computedUrlId = parts[parts.length - 1];
           }
-        
+
           // Check if this item is already stored (by title)
           if (selectedItems.some(item => item.title === originalTitle)) {
             checkbox.checked = true;
           }
-        
+
           // Toggle checkbox selection on box click (unless clicking the link)
           box.addEventListener("click", (e) => {
             if (e.target.tagName !== "A") {
               checkbox.checked = !checkbox.checked;
-        
+
               if (checkbox.checked) {
                 if (!selectedItems.some(item => item.title === originalTitle)) {
                   selectedItems.push({
@@ -344,13 +856,13 @@
               } else {
                 selectedItems = selectedItems.filter(item => item.title !== originalTitle);
               }
-        
+
               localStorage.setItem("selected_tactics", JSON.stringify(selectedItems));
               updateDisplay();
             }
           });
         });
       });
-      </script>          
-</body>
+    </script>
+  </body>
 </html>

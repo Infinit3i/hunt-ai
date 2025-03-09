@@ -794,19 +794,21 @@ form button {
   top: 6em;
   right: 1.5em;
   background: rgba(55, 58, 59, 0.2);
-  padding: 15px;
+  padding: 30px;
   border-radius: 5px;
   font-size: 16px;
   font-weight: bold;
-  color: #1a2020;
+  color: white;
   z-index: 1000;
   max-width: 250px;
+  margin: 20px;
 }
 
 .log-source-filter label {
   display: block;
   font-weight: normal;
   cursor: pointer;
+  padding: 3px;
 }
 
 .log-source-filter input {
