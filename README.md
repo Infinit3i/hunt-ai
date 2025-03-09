@@ -43,11 +43,12 @@
 
 ### 🚀 Quick Start Guide
 
-1️⃣ **Download ZIP** 📦 (top right of GitHub page)  
-2️⃣ **Extract** `Hunt-AI.zip`  
-3️⃣ **Navigate to the folder**
+- 1️⃣ **Download ZIP** 📦 (top right of GitHub page)  
+- 2️⃣ **Extract** `Hunt-AI.zip`  
+- 3️⃣ **Navigate to the folder**
    `cd hunt-ai/`
-4️⃣ **Build Docker Compose**
+
+- 4️⃣ **Build Docker Compose**
 ```
 docker compose build
 docker compose up
