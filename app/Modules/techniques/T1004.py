@@ -1,7 +1,4 @@
 def get_content():
-    """
-    Returns structured content for the Winlogon Helper DLL persistence method.
-    """
     return {
         "id": "T1004",
         "url_id": "T1004",
@@ -24,9 +21,11 @@ def get_content():
             "Check for suspicious modifications in Windows startup DLL configurations."
         ],
         "log_sources": [
-            {"type": "Windows Registry", "source": "Sysmon Event ID 13, Windows Event Logs 4657"},
-            {"type": "File Monitoring", "source": "Sysmon Event ID 11, File Integrity Monitoring (FIM)"},
-            {"type": "Process Execution", "source": "Sysmon Event ID 1, Windows Event Logs 4688"}
+            {"type": "Network Traffic", "source": "Network Sensor (e.g., router, switch, dedicated sensor)", "destination": ""},
+            { "type": "Firewall", "source": "Firewall Appliance (e.g., Palo Alto, Fortinet, Cisco ASA)", "destination": ""},
+            { "type": "Sysmon", "source": "1, 3, 13", "destination": ""},
+            {"type": "Windows Security", "source": "4657, 4688", "destination": "" },
+            {"type": "Windows Registry", "source": "Windows Registry (Event ID 4657 for Registry Value Modified)", "destination": ""}
         ],
         "source_artifacts": [
             {"type": "Registry Key", "location": "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon", "identify": "Modified DLL path"}
@@ -41,7 +40,9 @@ def get_content():
         ],
         "apt": ["G0016", "G0045"],
         "spl_query": [
-            "index=windows EventCode=4657 RegistryPath=HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"
+            "index=windows EventCode=4657 RegistryPath=HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+            '(source="WinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode="1") OR (source="WinEventLog:Security" EventCode="4688") | where (CommandLine LIKE "%Microsoft\Windows NT\CurrentVersion\Winlogon%" AND (CommandLine LIKE "%Userinit%" OR CommandLine LIKE "%Shell%" OR CommandLine LIKE "%Notify%")) AND (CommandLine LIKE "%reg%" OR CommandLine LIKE "%add%" OR CommandLine LIKE "%/d%" OR CommandLine LIKE "%Set-ItemProperty%" OR CommandLine LIKE "%New-ItemProperty%" CommandLine LIKE "%-value%")',
+            'source="WinEventLog:Security" EventCode="4657" (ObjectValueName="Userinit" OR ObjectValueName="Shell" OR ObjectValueName="Notify") OR source="WinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode="13" (TargetObject="Userinit" OR TargetObject="Shell" OR TargetObject="*Notify")'
         ],
         "hunt_steps": [
             "Query registry for unexpected modifications to Winlogon keys.",
