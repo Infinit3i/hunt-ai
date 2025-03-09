@@ -16,11 +16,11 @@ def get_content():
             "Are adversaries leveraging steganography to mask C2 traffic?"
         ],
         "log_sources": [
-            {"type": "File Analysis", "source": "YARA Rules, Forensic Analysis"},
-            {"type": "Network Traffic", "source": "Zeek (Bro), Suricata, Wireshark"},
-            {"type": "Firewall Logs", "source": "Palo Alto, Fortinet, Cisco ASA"},
-            {"type": "Proxy Logs", "source": "Zscaler, Bluecoat, McAfee Web Gateway"},
-            {"type": "Endpoint Logs", "source": "Sysmon (Event ID 1, 3), EDR (CrowdStrike, Defender ATP)"}
+            {"type": "Suricata"},
+            {"type": "Zeek "},
+            {"type": "Firewall", "source": "Palo Alto, Fortinet, Cisco ASA"},
+            {"type": "Proxy ", "source": "Zscaler, Bluecoat, McAfee Web Gateway"},
+            {"type": "Sysmon", "source": "Sysmon (Event ID 1, 3), EDR (CrowdStrike, Defender ATP)"}
         ],
         "detection_methods": [
             "Monitor for unusual image, audio, or video file sizes in transit.",
