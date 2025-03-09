@@ -45,15 +45,10 @@
 
 1️⃣ **Download ZIP** 📦 (top right of GitHub page)  
 2️⃣ **Extract** `Hunt-AI.zip`  
-3️⃣ **Navigate to the folder**:
+3️⃣ **Navigate to the folder**
    `cd hunt-ai/`
-
-### Linux
-```bash
-./run_docker.sh
+4️⃣ **Build Docker Compose**
 ```
-
-### Windows
-```powershell
-.\run_docker.ps1
+docker compose build
+docker compose up
 ```
