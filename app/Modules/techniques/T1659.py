@@ -41,7 +41,7 @@ def get_content():
         "apt": [
             "Lazarus Group", "FIN7", "APT32"
         ],
-        "spl_query": "index=web_logs (uri=* | file_modification=*) | search unauthorized changes",
+        "spl_query": ["index=web_logs (uri=* \n| file_modification=*) \n| search unauthorized changes"],
         "hunt_steps": [
             "Identify recent modifications to critical web content or system scripts.",
             "Correlate file modifications with recent user authentication events.",
@@ -50,10 +50,8 @@ def get_content():
         ],
         "expected_outcomes": [
             "Malicious Content Injection Detected: Remove unauthorized modifications, restore from backups, and implement monitoring.",
-            "No Malicious Activity Found: Improve content monitoring and logging policies."
         ],
-        "false_positive": "Legitimate content updates by administrators or scheduled application updates may trigger alerts."
-        ,
+        "false_positive": "Legitimate content updates by administrators or scheduled application updates may trigger alerts.",
         "clearing_steps": [
             "Restore modified files from backups.",
             "Terminate unauthorized processes modifying web content.",

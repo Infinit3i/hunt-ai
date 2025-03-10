@@ -7,14 +7,8 @@ def get_content():
         "data_sources": "Authentication Logs, Process Creation Logs, Network Traffic Logs, Security Monitoring Tools",
         "protocol": "DCOM, RPC, SMB",
         "os": "Windows",
-        "objective": "Detect and mitigate adversaries leveraging DCOM for lateral movement and remote code execution.",
-        "scope": "Identify unauthorized DCOM connections, remote object execution, and suspicious privilege escalations.",
-        "threat_model": "Adversaries abuse DCOM objects to execute commands remotely on target machines by leveraging COM-based interactions over the network.",
-        "hypothesis": [
-            "Are there unauthorized DCOM activations on remote systems?",
-            "Are adversaries leveraging DCOM to execute malicious commands remotely?",
-            "Is there an increase in privilege escalations associated with DCOM activity?"
-        ],
+        "description": "Adversaries may use Distributed Component Object Model (DCOM) for lateral movement within an environment. DCOM is a proprietary Microsoft technology that allows communication between software components distributed across a network. Adversaries may abuse DCOM for remote code execution, privilege escalation, and lateral movement to other systems.",
+        "tips": [],
         "log_sources": [
             {"type": "Authentication Logs", "source": "Windows Event Logs (Event ID 4624, 4672, 4688)"},
             {"type": "Process Creation Logs", "source": "Sysmon (Event ID 1, 11), Windows Security Logs (Event ID 4688)"},

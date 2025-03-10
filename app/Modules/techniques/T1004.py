@@ -4,25 +4,15 @@ def get_content():
         "url_id": "T1004",
         "title": "Winlogon Helper DLL",
         "tactic": "Persistence",
-        "data_sources": "Windows Registry, File Monitoring, Process Execution",
+        "data_sources": "Windows Registry, Sysmon, Windows Security",
         "protocol": "N/A",
         "os": "Windows",
-        "objective": "Adversaries may establish persistence by inserting a malicious DLL into Winlogon Helper DLLs.",
-        "scope": "Monitor registry modifications and DLL loads within the Winlogon process.",
-        "threat_model": "Malicious DLLs loaded by Winlogon can provide persistent access and privilege escalation.",
-        "hypothesis": [
-            "Are unauthorized DLLs being loaded by Winlogon?",
-            "Are registry values modified to point to malicious DLLs?",
-            "Are attackers leveraging Winlogon for stealthy persistence?"
-        ],
         "tips": [
             "Monitor registry modifications to 'HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon'.",
             "Detect unauthorized DLL files loaded into the Winlogon process.",
             "Check for suspicious modifications in Windows startup DLL configurations."
         ],
         "log_sources": [
-            {"type": "Network Traffic", "source": "Network Sensor (e.g., router, switch, dedicated sensor)", "destination": ""},
-            { "type": "Firewall", "source": "Firewall Appliance (e.g., Palo Alto, Fortinet, Cisco ASA)", "destination": ""},
             { "type": "Sysmon", "source": "1, 3, 13", "destination": ""},
             {"type": "Windows Security", "source": "4657, 4688", "destination": "" },
             {"type": "Windows Registry", "source": "Windows Registry (Event ID 4657 for Registry Value Modified)", "destination": ""}

@@ -7,19 +7,13 @@ def get_content():
         "data_sources": "Windows Event, Sysmon, VPN Logs, Remote Access Logs, Firewall",
         "protocol": "RDP, SSH, VNC, SMB",
         "os": "Windows, Linux, macOS",
-        "objective": "Detect and mitigate unauthorized or anomalous remote service access, which may indicate compromised credentials, lateral movement, or persistence mechanisms used by attackers.",
-        "scope": "Monitor remote login attempts for anomalies, such as unusual IP addresses, off-hours access, or logins from unapproved geographic locations.",
-        "threat_model": "Adversaries exploit remote services to gain unauthorized access, move laterally, and establish persistence using RDP, SSH, or VNC.",
-        "hypothesis": [
-            "Are there repeated remote login attempts from unknown or blacklisted IPs?",
-            "Is there unusual remote access activity outside business hours?",
-            "Are legitimate remote access tools being used in unexpected ways?"
-        ],
+        "description": "Adversaries may use remote services like RDP, SSH, VNC, or SMB to move laterally within an environment. Remote services allow attackers to control target systems, escalate privileges, and exfiltrate data over encrypted channels.",
+        "tips": [],
         "log_sources": [
-            {"type": "Authentication Logs", "source": "Windows Security Logs (Event ID 4624, 4648), Linux SSH Logs"},
-            {"type": "Remote Access Logs", "source": "VPN Logs, RDP, SSH, VNC, SMB"},
-            {"type": "Firewall Logs", "source": "Palo Alto, Fortinet, Cisco ASA"},
-            {"type": "Threat Intelligence Feeds", "source": "VirusTotal, AlienVault OTX, AbuseIPDB"}
+            {"type": "Authentication ", "source": "Windows Security Logs (Event ID 4624, 4648), Linux SSH Logs"},
+            {"type": "Remote Access ", "source": "VPN Logs, RDP, SSH, VNC, SMB"},
+            {"type": "Firewall", "source": "Palo Alto, Fortinet, Cisco ASA"},
+            {"type": "Threat Intel", "source": "VirusTotal, AlienVault OTX, AbuseIPDB"}
         ],
         "detection_methods": [
             "Monitor remote access attempts with unusual geolocation or IP address.",

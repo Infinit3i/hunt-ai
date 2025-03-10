@@ -7,13 +7,6 @@ def get_content():
         "data_sources": "Network Traffic, System Logs",
         "protocol": "Varies (Bluetooth, Cellular, Radio, etc.)",
         "os": "Windows, Linux, macOS",
-        "objective": "Adversaries exfiltrate data using alternate network mediums to evade detection.",
-        "scope": "Monitor non-traditional network traffic for anomalies.",
-        "threat_model": "Adversaries may use covert channels, such as radio frequencies, cellular data, or infrared, to exfiltrate data outside the primary monitored network.",
-        "hypothesis": [
-            "Are there unauthorized Bluetooth or cellular connections on critical systems?",
-            "Is there unexpected outbound network traffic to unfamiliar destinations?"
-        ],
         "tips": [
             "Monitor for unusual peripheral device connections.",
             "Analyze network traffic for unexpected data transmissions.",

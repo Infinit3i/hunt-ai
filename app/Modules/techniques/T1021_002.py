@@ -7,14 +7,7 @@ def get_content():
         "data_sources": "Windows Event Logs, Registry, File Monitoring, Network Traffic Analysis",
         "protocol": "SMB",
         "os": "Windows",
-        "objective": "Detect and mitigate adversaries using SMBExec to execute commands remotely over SMB shares.",
-        "scope": "Monitor logon events, service installations, and network activity for unauthorized SMB-based execution.",
-        "threat_model": "Adversaries leverage SMBExec to gain lateral movement capabilities within a network by executing commands remotely without dropping files on disk.",
-        "hypothesis": [
-            "Are there unauthorized service installations via SMB?",
-            "Is there abnormal SMB traffic indicating potential lateral movement?",
-            "Are attackers leveraging SMBExec to evade detection?"
-        ],
+        "description": "Adversaries may use SMBExec to execute commands remotely over SMB without writing files to disk, making it a stealthy lateral movement technique.",
         "tips": [
             "Monitor Event ID 7045 for unusual service installations.",
             "Analyze ADMIN$ access logs to detect suspicious SMB connections.",

@@ -4,26 +4,19 @@ def get_content():
         "url_id": "T1021/006",
         "title": "Remote Services: PowerShell Remoting",
         "tactic": "Lateral Movement",
-        "data_sources": "Windows Security Logs, PowerShell Logs, WinRM Logs, Prefetch, Registry Keys",
+        "data_sources": "Windows System, Windows PowerShell, Windows Registry",
         "protocol": "WinRM, PowerShell Remoting",
         "os": "Windows",
-        "objective": "Detect and mitigate adversaries leveraging PowerShell Remoting for lateral movement and remote command execution.",
-        "scope": "Monitor PowerShell execution, WinRM authentication, and remote script execution logs.",
-        "threat_model": "Attackers use PowerShell Remoting to execute commands remotely, often leveraging administrative privileges.",
-        "hypothesis": [
-            "Are there unauthorized PowerShell remoting sessions?",
-            "Are there signs of lateral movement using WinRM?",
-            "Are attackers changing execution policies to bypass security controls?"
-        ],
+        "description": "Adversaries may use PowerShell Remoting to execute commands on remote systems. PowerShell Remoting is a powerful tool for system administrators, but adversaries can abuse it for lateral movement and remote",
         "tips": [
             "Enable PowerShell Script Block Logging (Event ID 4104) for deeper visibility.",
             "Restrict PowerShell execution policy to prevent unauthorized scripts.",
             "Monitor WinRM logs for abnormal session creation (Event ID 91, 142)."
         ],
         "log_sources": [
-            {"type": "Authentication Logs", "source": "Windows Security Logs (Event ID 4648, 4624, 4672)", "destination": "SIEM"},
+            {"type": "Authentication", "source": "Windows Security Logs (Event ID 4648, 4624, 4672)", "destination": "SIEM"},
             {"type": "Process Execution", "source": "PowerShell Operational Logs (Event ID 40961, 40962, 8193, 8194)", "destination": "SIEM"},
-            {"type": "System Logs", "source": "WinRM Operational Logs (Event ID 161, 6, 8, 15, 16, 33)", "destination": "SIEM"}
+            {"type": "Windows System", "source": "WinRM Operational Logs (Event ID 161, 6, 8, 15, 16, 33)", "destination": "SIEM"}
         ],
         "source_artifacts": [
             {"type": "Command History", "location": "C:\\Users\\<Username>\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadline\\ConsoleHost_history.txt", "identify": "Tracks PowerShell commands used by an attacker."},

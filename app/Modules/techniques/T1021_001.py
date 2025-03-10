@@ -7,15 +7,7 @@ def get_content():
         "data_sources": "Authentication Logs, Network Traffic Logs, Process Monitoring, Windows Event Logs",
         "protocol": "RDP (TCP/3389)",
         "os": "Windows",
-        "objective": "Detect unauthorized or suspicious RDP access attempts that may indicate lateral movement.",
-        "scope": "Monitor for unusual RDP authentication patterns, new RDP sessions from unknown hosts, and excessive failed logins.",
-        "threat_model": "Adversaries may abuse RDP to move laterally within a network, gaining access to remote systems by using stolen credentials or brute-force attacks.",
-        "hypothesis": [
-            "Are there unauthorized RDP sessions being established?",
-            "Are multiple failed RDP login attempts occurring in a short timeframe?",
-            "Is RDP being used from uncommon source locations or outside business hours?",
-            "Are new RDP connections occurring from hosts that don't usually initiate them?"
-        ],
+        "description": "Adversaries may use RDP to move laterally within an environment. RDP is a common protocol used by system administrators to remotely manage Windows systems. Adversaries may abuse RDP to access systems within a network after obtaining valid credentials, allowing them to move laterally and maintain persistence on a victim network.",
         "tips": ["RDP authentication happens prior to session establishment (NLA)",
                  "RDP Event Flow: 1149 --> 4624 (type 10) OR 7 (reconnect) --> 21 --> 22",
                  "1149: Authentication succeeded",

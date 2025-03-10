@@ -159,21 +159,51 @@ table {
 /* Protocol Tag: Purple */
 .tag-protocol {
     background-color: purple;
+    opacity: .7;
+}
+
+.tag-protocol:hover {
+    background-color: #800080;
+    opacity: 1;
 }
 
 .tag-data_sources {
     background-color: #ff6600;
+    opacity: .7;
+}
+
+.tag-data_sources:hover {
+    background-color: #ff6600;
+    opacity: 1;
 }
 
 /* OS Tags */
 .tag-windows {
     background-color: blue;
+    opacity: .7;
+}
+
+.tag-windows:hover {
+    background-color: #0000ff;
+    opacity: 1;
 }
 
 .tag-linux {
     background-color: orange;
+    opacity: .7;
+}
+
+.tag-linux:hover {
+    background-color: #ff6600;
+    opacity: 1;
 }
 
 .tag-mac {
     background-color: red;
+    opacity: .7;
+}
+
+.tag-mac:hover {
+    background-color: #ff0000;
+    opacity: 1;
 }

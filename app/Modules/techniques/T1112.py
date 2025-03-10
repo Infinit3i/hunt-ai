@@ -42,8 +42,8 @@ def get_content():
         ],
         "apt": ["G0016", "G0045"],
         "spl_query": [
-            "index=windows EventCode=4657 | table Time, RegistryKey, User",
-            "index=sysmon EventCode=13 | table Time, RegistryPath, ProcessName"
+            "index=windows EventCode=4657 \n| table Time, RegistryKey, User",
+            "index=sysmon EventCode=13 \n| table Time, RegistryPath, ProcessName"
         ],
         "hunt_steps": [
             "Analyze registry modifications from security logs.",

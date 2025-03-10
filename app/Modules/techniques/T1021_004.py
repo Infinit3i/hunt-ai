@@ -7,14 +7,8 @@ def get_content():
         "data_sources": "Authentication Logs, Process Creation Logs, Network Traffic Logs, Security Monitoring Tools",
         "protocol": "SSH, OpenSSH, Secure Shell",
         "os": "Windows, Linux, macOS",
-        "objective": "Detect and mitigate adversaries leveraging SSH hijacking techniques to move laterally within an environment, gaining unauthorized access to remote systems.",
-        "scope": "Identify unauthorized SSH sessions, hijacked credentials, and compromised secure shell connections used for lateral movement.",
-        "threat_model": "Adversaries may hijack active SSH sessions, steal SSH keys, or reuse legitimate credentials to gain unauthorized access to remote systems and execute commands stealthily.",
-        "hypothesis": [
-            "Are there unauthorized SSH connections originating from compromised hosts?",
-            "Are adversaries leveraging stolen SSH keys or hijacked sessions for lateral movement?",
-            "Is there an increase in SSH activity from unexpected or untrusted sources?"
-        ],
+        "description": "Adversaries may use SSH hijacking to move laterally within an environment. SSH hijacking involves an attacker stealing or hijacking SSH keys to gain unauthorized access to remote systems. Adversaries may abuse SSH keys to maintain persistence, escalate privileges, or exfiltrate data over encrypted channels.",
+        "tips": [],
         "log_sources": [
             {"type": "Authentication Logs", "source": "/var/log/auth.log, Windows Event Logs (Event ID 4648, 4624)"},
             {"type": "Process Creation Logs", "source": "Sysmon (Event ID 1, 11), Linux Auditd"},
