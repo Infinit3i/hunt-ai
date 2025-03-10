@@ -18,24 +18,56 @@
     <a href="https://attack.mitre.org/techniques/{{ technique.id }}" class="btn">⚔️ MITRE ATT&CK</a>
 </div>
 
-<hr/>
-
 <h1>🔍 ACCESS</h1>
 <div class="operation-section">
     <div class="operation-content">
         <div class="info-box">
-            <p><strong>Description:</strong> {{ technique.description }}</p>
+            <p>{{ technique.description }}</p>
             <ul>
-                {% for question in technique.hypothesis %}
-                <li>❓ {{ question }}</li>
+                {% for tip in technique.tips %}
+                <li>❓ {{ tip }}</li>
                 {% endfor %}
             </ul>
         </div>
 
         <div class="info-box">
-            <p><strong>Protocol:</strong> {{ technique.protocol }}</p>
-            <p><strong>OS:</strong> {{ technique.os }}</p>
+            {% if technique.data_sources %}
+            <div class="tag-container">
+                {% for proto in technique.data_sources.split(',') %}
+                <span class="tag tag-data_sources">{{ proto.strip() }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+
+            {% if technique.protocol %}
+            <div class="tag-container">
+                {% for proto in technique.protocol.split(',') %}
+                <span class="tag tag-protocol">{{ proto.strip() }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        
+            {% if technique.os %}
+            <div class="tag-container">
+                {% for system in technique.os.split(',') %}
+                    {% set os_clean = system.strip()|lower %}
+                    {% if 'windows' in os_clean %}
+                    <span class="tag tag-windows">{{ system.strip() }}</span>
+                    {% elif 'linux' in os_clean %}
+                    <span class="tag tag-linux">{{ system.strip() }}</span>
+                    {% elif 'mac' in os_clean %}
+                    <span class="tag tag-mac">{{ system.strip() }}</span>
+                    {% else %}
+                    <span class="tag">{{ system.strip() }}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
+        
+        
+        
 
             <table>
                 <tr><th>Log Type</th><th>Source</th><th>Destination</th></tr>
