@@ -6,12 +6,11 @@ def get_content():
         "description": "",  # Description of the attack technique
         "tags": [],  # Tags associated with the technique
         "tactic": "",  # Associated MITRE ATT&CK tactic
-        "data_sources": "",  # Windows Security, Windows Powershell, Windows Application, Windows System, Sysmon, Zeek, Suricata, Active Directory, Application Log, Application Vetting, Asset, Certificate, Cloud Service, Cloud Storage, Command, Container, Domain Name, Drive, Driver, File, Firewall, Firmware, Group, Image, Instance, Internet Scan, Kernel, Logon Session, Malware Repository, Module, Named Pipe, Network Share, Network Traffic, Operational Databases, Persona, Pod, Process, Scheduled Job, Script, Sensor Health, Service, Snapshot, User Account, User Interface, Volume, Web Credential, Windows Registry, WMI
         "protocol": "",  # Protocol used in the attack technique
         "os": "",  # Targeted operating systems
-        "hypothesis": [],  # Questions to ask during threat hunting
         "tips": [],  # Additional investigation and mitigation tips
-        "log_sources": [  # Logs necessary for detection
+        "data_sources": "",  # Windows Security, Windows Powershell, Windows Application, Windows System, Sysmon, Zeek, Suricata, Active Directory, Application Log, Application Vetting, Asset, Certificate, Cloud Service, Cloud Storage, Command, Container, Domain Name, Drive, Driver, File, Firewall, Firmware, Group, Image, Instance, Internet Scan, Kernel, Logon Session, Malware Repository, Module, Named Pipe, Network Share, Network Traffic, Operational Databases, Persona, Pod, Process, Scheduled Job, Script, Sensor Health, Service, Snapshot, User Account, User Interface, Volume, Web Credential, Windows Registry, WMI
+        "log_sources": [  # Logs necessary for detection the type should be the same as data sources
             {"type": "", "source": "", "destination": ""} # Windows Security, Windows Powershell, Windows Application, Windows System, Sysmon, Zeek, Suricata, Active Directory, Application Log, Application Vetting, Asset, Certificate, Cloud Service, Cloud Storage, Command, Container, Domain Name, Drive, Driver, File, Firewall, Firmware, Group, Image, Instance, Internet Scan, Kernel, Logon Session, Malware Repository, Module, Named Pipe, Network Share, Network Traffic, Operational Databases, Persona, Pod, Process, Scheduled Job, Script, Sensor Health, Service, Snapshot, User Account, User Interface, Volume, Web Credential, Windows Registry, WMI
         ],
         "source_artifacts": [  # Artifacts generated on the source machine

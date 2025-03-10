@@ -8,12 +8,7 @@ def get_content():
         "tactic": "Command and Control",
         "data_sources": "Zeek, Suricata, Firewall, Proxy, Sysmon",
         "protocol": "HTTP, HTTPS, DNS, TCP, UDP",
-        "os": "Platform Agnostic",
-        "hypothesis": [
-            "Are there network packets containing excessive padding or junk data?",
-            "Is there an unusual amount of entropy in network payloads?",
-            "Are adversaries using junk data to mask command-and-control traffic?"
-        ],
+        "os": "Mac, Linux, Windows",
         "tips": [
             "Review baseline network traffic to determine normal padding levels.",
             "Correlate suspicious data with known C2 patterns.",

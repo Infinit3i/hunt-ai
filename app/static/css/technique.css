@@ -126,3 +126,54 @@ table {
     overflow-x: auto; /* Enables horizontal scrolling for long queries */
     font-size: 14px; /* Adjusts readability */
 }
+
+/* Tag Container: ensures tags flow and are centered horizontally */
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center; /* Centers the tags horizontally */
+}
+
+/* Base Tag styling (example) */
+.tag {
+    background-color: #7a1f1f; /* fallback color for non-Windows/Linux/Mac tags */
+    color: #fff;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    cursor: default;
+    user-select: none;
+    transition: transform 0.2s ease;
+}
+
+.tag:hover {
+    transform: scale(1.05);
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Protocol Tag: Purple */
+.tag-protocol {
+    background-color: purple;
+}
+
+.tag-data_sources {
+    background-color: #ff6600;
+}
+
+/* OS Tags */
+.tag-windows {
+    background-color: blue;
+}
+
+.tag-linux {
+    background-color: orange;
+}
+
+.tag-mac {
+    background-color: red;
+}

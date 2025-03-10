@@ -3,18 +3,11 @@ def get_content():
         "id": "T1001.002",
         "url_id": "T1001/002",
         "title": "Data Obfuscation: Steganography",
+        "description": "Adversaries may use steganography to hide malicious data within image, audio, or video files. By embedding commands or data within multimedia files, adversaries can bypass traditional",
         "tactic": "Command and Control",
-        "data_sources": "File Analysis, Network Traffic, Firewall Logs, Proxy Logs, Endpoint Logs",
+        "data_sources": "Suricata, zeek, Firewall, Proxy, Sysmon",
         "protocol": "HTTP, HTTPS, DNS, TCP, UDP",
-        "os": "Platform Agnostic",
-        "objective": "Detect and mitigate adversaries using steganography to hide command-and-control (C2) communications within legitimate file formats.",
-        "scope": "Identify network and file artifacts that indicate hidden data transmission using steganography.",
-        "threat_model": "Adversaries embed hidden data in images, audio, or video files to evade detection and bypass security controls.",
-        "hypothesis": [
-            "Are there unusual image, audio, or video files being transmitted over the network?",
-            "Is there hidden data within commonly shared files?",
-            "Are adversaries leveraging steganography to mask C2 traffic?"
-        ],
+        "os": "Mac, Linux, Windows",
         "log_sources": [
             {"type": "Suricata"},
             {"type": "Zeek "},

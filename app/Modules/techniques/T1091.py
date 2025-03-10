@@ -35,7 +35,7 @@ def get_content():
             "Monitor USB insertions for anomalous activity."
         ],
         "apt": ["Stuxnet", "DarkHotel", "Equation Group"],
-        "spl_query": "index=windows EventCode=4663 ObjectType=File AND (ObjectName=\\\\Device\\Harddisk* OR ObjectName=*\\USB)",
+        "spl_query": ["index=windows EventCode=4663 ObjectType=File AND (ObjectName=\\\\Device\\Harddisk* OR ObjectName=*\\USB)"],
         "hunt_steps": [
             "Identify unusual file modifications or execution from removable media.",
             "Correlate USB insertions with unexpected process executions.",
