@@ -154,7 +154,7 @@
       </nav>
     </header>
     <div class="selected-tactics">
-      <h2>🔎 Selected Tactics:</h2>
+      <h2>🔎 Selected T-Codes:</h2>
       <ul id="selected-tactic-list"></ul>
     </div>
     <div
@@ -774,95 +774,85 @@
       });
     </script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Select both tactic boxes and technique boxes
-        const allBoxes = document.querySelectorAll(".tactic-box, .technique-box");
-        const tacticListElement = document.getElementById("selected-tactic-list");
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const allBoxes = document.querySelectorAll(".tactic-box, .technique-box");
+    const tacticListElement = document.getElementById("selected-tactic-list");
 
-        // Load saved items from localStorage.
-        // Each item is stored as: { title: "...", url_id: "...", type: "tactic" or "technique" }
-        let selectedItems = JSON.parse(localStorage.getItem("selected_tactics")) || [];
+    // Load saved items from localStorage.
+    let selectedItems = JSON.parse(localStorage.getItem("selected_tactics")) || [];
 
-        // Function to update the displayed list of selected items
-        function updateDisplay() {
-          tacticListElement.innerHTML = ""; // Clear existing list
+    // Function to update the displayed list of selected items
+    function updateDisplay() {
+      tacticListElement.innerHTML = "";
+      if (selectedItems.length === 0) {
+        tacticListElement.innerHTML = "<li>No tactics selected</li>";
+      } else {
+        selectedItems.forEach((item) => {
+          const li = document.createElement("li");
+          const anchor = document.createElement("a");
+          if (item.type === "tactic") {
+            anchor.href = `http://localhost:31337/mitre/${item.url_id}`;
+          } else if (item.type === "technique") {
+            anchor.href = `http://localhost:31337/technique/${item.url_id}`;
+          }
+          anchor.textContent = `🔹 ${item.title}`;
+          li.appendChild(anchor);
+          tacticListElement.appendChild(li);
+        });
+      }
+    }
 
-          if (selectedItems.length === 0) {
-            tacticListElement.innerHTML = "<li>No tactics selected</li>";
-          } else {
-            selectedItems.forEach((item) => {
-              const li = document.createElement("li");
-              const anchor = document.createElement("a");
+    updateDisplay();
 
-              // Build the correct link based on type:
-              // For tactics, use the stored url_id; for techniques, use the stored url_id.
-              if (item.type === "tactic") {
-                anchor.href = `http://localhost:31337/mitre/${item.url_id}`;
-              } else (item.type === "technique") {
-                anchor.href = `http://localhost:31337/technique/${item.url_id}`;
-              }
+    allBoxes.forEach((box) => {
+      const checkboxId = box.getAttribute("data-checkbox-id");
+      const checkbox = document.getElementById(checkboxId);
+      const anchor = box.querySelector("h2 a");
+      const originalTitle = anchor.textContent.trim();
+      let computedUrlId = "";
+      const isTactic = box.classList.contains("tactic-box");
+      const isTechnique = box.classList.contains("technique-box");
 
-              anchor.textContent = `🔹 ${item.title}`;
-              li.appendChild(anchor);
-              tacticListElement.appendChild(li);
+      if (isTactic) {
+        computedUrlId = box.getAttribute("data-url-id");
+      } else if (isTechnique) {
+        const parts = anchor.href.split("/");
+        computedUrlId = parts[parts.length - 1];
+      }
+
+      // Initialize checkbox if already selected
+      if (selectedItems.some(item => item.title === originalTitle)) {
+        checkbox.checked = true;
+      }
+
+      // Attach a change event to the checkbox for updating selections
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+          if (!selectedItems.some(item => item.title === originalTitle)) {
+            selectedItems.push({
+              title: originalTitle,
+              url_id: computedUrlId,
+              type: isTactic ? "tactic" : isTechnique ? "technique" : "unknown"
             });
           }
+        } else {
+          selectedItems = selectedItems.filter(item => item.title !== originalTitle);
         }
-
-        // Initialize the display on page load
+        localStorage.setItem("selected_tactics", JSON.stringify(selectedItems));
         updateDisplay();
-
-        // Process each box (tactic or technique)
-        allBoxes.forEach((box) => {
-          const checkboxId = box.getAttribute("data-checkbox-id");
-          const checkbox = document.getElementById(checkboxId);
-
-          // Grab the anchor inside the box to get the title and base URL
-          const anchor = box.querySelector("h2 a");
-          const originalTitle = anchor.textContent.trim();
-          let computedUrlId = "";
-          const isTactic = box.classList.contains("tactic-box");
-          const isTechnique = box.classList.contains("technique-box");
-
-          if (isTactic) {
-            // For tactics, use the data attribute for the URL id.
-            computedUrlId = box.getAttribute("data-url-id");
-            console.log("Tactic:", originalTitle, "->", computedUrlId); // Debug log
-          } else if (isTechnique) {
-            // For techniques, assume the anchor href is like "http://localhost:31337/technique/T1053"
-            const parts = anchor.href.split("/");
-            computedUrlId = parts[parts.length - 1];
-          }
-
-          // Check if this item is already stored (by title)
-          if (selectedItems.some(item => item.title === originalTitle)) {
-            checkbox.checked = true;
-          }
-
-          // Toggle checkbox selection on box click (unless clicking the link)
-          box.addEventListener("click", (e) => {
-            if (e.target.tagName !== "A") {
-              checkbox.checked = !checkbox.checked;
-
-              if (checkbox.checked) {
-                if (!selectedItems.some(item => item.title === originalTitle)) {
-                  selectedItems.push({
-                    title: originalTitle,
-                    url_id: computedUrlId,
-                    type: isTactic ? "tactic" : isTechnique ? "technique" : "unknown"
-                  });
-                }
-              } else {
-                selectedItems = selectedItems.filter(item => item.title !== originalTitle);
-              }
-
-              localStorage.setItem("selected_tactics", JSON.stringify(selectedItems));
-              updateDisplay();
-            }
-          });
-        });
       });
-    </script>
+
+      // Attach a click event to the box that toggles the checkbox if clicking outside INPUT and A elements
+      box.addEventListener("click", (e) => {
+        if (!["A", "INPUT", "LABEL"].includes(e.target.tagName)) {
+          checkbox.checked = !checkbox.checked;
+          checkbox.dispatchEvent(new Event("change"));
+        }
+      });
+    });
+  });
+</script>
+
   </body>
 </html>
