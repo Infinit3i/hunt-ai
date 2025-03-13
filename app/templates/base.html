@@ -774,85 +774,98 @@
       });
     </script>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const allBoxes = document.querySelectorAll(".tactic-box, .technique-box");
-    const tacticListElement = document.getElementById("selected-tactic-list");
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const allBoxes = document.querySelectorAll(
+          ".tactic-box, .technique-box"
+        );
+        const tacticListElement = document.getElementById(
+          "selected-tactic-list"
+        );
 
-    // Load saved items from localStorage.
-    let selectedItems = JSON.parse(localStorage.getItem("selected_tactics")) || [];
+        // Load saved items from localStorage.
+        let selectedItems =
+          JSON.parse(localStorage.getItem("selected_tactics")) || [];
 
-    // Function to update the displayed list of selected items
-    function updateDisplay() {
-      tacticListElement.innerHTML = "";
-      if (selectedItems.length === 0) {
-        tacticListElement.innerHTML = "<li>No tactics selected</li>";
-      } else {
-        selectedItems.forEach((item) => {
-          const li = document.createElement("li");
-          const anchor = document.createElement("a");
-          if (item.type === "tactic") {
-            anchor.href = `http://localhost:31337/mitre/${item.url_id}`;
-          } else if (item.type === "technique") {
-            anchor.href = `http://localhost:31337/technique/${item.url_id}`;
-          }
-          anchor.textContent = `🔹 ${item.title}`;
-          li.appendChild(anchor);
-          tacticListElement.appendChild(li);
-        });
-      }
-    }
-
-    updateDisplay();
-
-    allBoxes.forEach((box) => {
-      const checkboxId = box.getAttribute("data-checkbox-id");
-      const checkbox = document.getElementById(checkboxId);
-      const anchor = box.querySelector("h2 a");
-      const originalTitle = anchor.textContent.trim();
-      let computedUrlId = "";
-      const isTactic = box.classList.contains("tactic-box");
-      const isTechnique = box.classList.contains("technique-box");
-
-      if (isTactic) {
-        computedUrlId = box.getAttribute("data-url-id");
-      } else if (isTechnique) {
-        const parts = anchor.href.split("/");
-        computedUrlId = parts[parts.length - 1];
-      }
-
-      // Initialize checkbox if already selected
-      if (selectedItems.some(item => item.title === originalTitle)) {
-        checkbox.checked = true;
-      }
-
-      // Attach a change event to the checkbox for updating selections
-      checkbox.addEventListener("change", () => {
-        if (checkbox.checked) {
-          if (!selectedItems.some(item => item.title === originalTitle)) {
-            selectedItems.push({
-              title: originalTitle,
-              url_id: computedUrlId,
-              type: isTactic ? "tactic" : isTechnique ? "technique" : "unknown"
+        // Function to update the displayed list of selected items
+        function updateDisplay() {
+          tacticListElement.innerHTML = "";
+          if (selectedItems.length === 0) {
+            tacticListElement.innerHTML = "<li>No tactics selected</li>";
+          } else {
+            selectedItems.forEach((item) => {
+              const li = document.createElement("li");
+              const anchor = document.createElement("a");
+              if (item.type === "tactic") {
+                anchor.href = `http://localhost:31337/mitre/${item.url_id}`;
+              } else if (item.type === "technique") {
+                anchor.href = `http://localhost:31337/technique/${item.url_id}`;
+              }
+              anchor.textContent = `🔹 ${item.title}`;
+              li.appendChild(anchor);
+              tacticListElement.appendChild(li);
             });
           }
-        } else {
-          selectedItems = selectedItems.filter(item => item.title !== originalTitle);
         }
-        localStorage.setItem("selected_tactics", JSON.stringify(selectedItems));
+
         updateDisplay();
-      });
 
-      // Attach a click event to the box that toggles the checkbox if clicking outside INPUT and A elements
-      box.addEventListener("click", (e) => {
-        if (!["A", "INPUT", "LABEL"].includes(e.target.tagName)) {
-          checkbox.checked = !checkbox.checked;
-          checkbox.dispatchEvent(new Event("change"));
-        }
-      });
-    });
-  });
-</script>
+        allBoxes.forEach((box) => {
+          const checkboxId = box.getAttribute("data-checkbox-id");
+          const checkbox = document.getElementById(checkboxId);
+          const anchor = box.querySelector("h2 a");
+          const originalTitle = anchor.textContent.trim();
+          let computedUrlId = "";
+          const isTactic = box.classList.contains("tactic-box");
+          const isTechnique = box.classList.contains("technique-box");
 
+          if (isTactic) {
+            computedUrlId = box.getAttribute("data-url-id");
+          } else if (isTechnique) {
+            const parts = anchor.href.split("/");
+            computedUrlId = parts[parts.length - 1];
+          }
+
+          // Initialize checkbox if already selected
+          if (selectedItems.some((item) => item.title === originalTitle)) {
+            checkbox.checked = true;
+          }
+
+          // Attach a change event to the checkbox for updating selections
+          checkbox.addEventListener("change", () => {
+            if (checkbox.checked) {
+              if (!selectedItems.some((item) => item.title === originalTitle)) {
+                selectedItems.push({
+                  title: originalTitle,
+                  url_id: computedUrlId,
+                  type: isTactic
+                    ? "tactic"
+                    : isTechnique
+                    ? "technique"
+                    : "unknown",
+                });
+              }
+            } else {
+              selectedItems = selectedItems.filter(
+                (item) => item.title !== originalTitle
+              );
+            }
+            localStorage.setItem(
+              "selected_tactics",
+              JSON.stringify(selectedItems)
+            );
+            updateDisplay();
+          });
+
+          // Attach a click event to the box that toggles the checkbox if clicking outside INPUT and A elements
+          box.addEventListener("click", (e) => {
+            if (!["A", "INPUT", "LABEL"].includes(e.target.tagName)) {
+              checkbox.checked = !checkbox.checked;
+              checkbox.dispatchEvent(new Event("change"));
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>
