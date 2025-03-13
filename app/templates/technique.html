@@ -4,6 +4,7 @@
 
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/technique.css') }}">
+    <title>{{ technique.title }}</title>
 </head>
 
 <a class="back-link" href="{{ url_for('routes.mitre_tactic', tactic=session.get('selected_tactic', technique.tactic.split(',')[0].strip()).replace(' ', '_')) }}">
