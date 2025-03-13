@@ -4,18 +4,10 @@ def get_content():
         "url_id": "T1566",
         "title": "Phishing",
         "tactic": "Initial Access",
-        "tags": ["Social Engineering", "Email Attack", "Credential Theft"],
+        "tags": ["social engineering", "email attack", "credential theft", "whaling", "phishing", "email"],
         "data_sources": "Email logs, Web proxy logs, Network traffic analysis, Endpoint monitoring",
-        "protocol": "SMTP, HTTP, HTTPS",
+        "protocol": "SMTP, IMAP, POP3, HTTP, HTTPS",
         "os": "Windows, macOS, Linux",
-        "objective": "Detect and mitigate phishing attempts aimed at credential theft, malware delivery, or social engineering attacks.",
-        "scope": "Monitor email communications, web traffic, and endpoint behavior for indicators of phishing.",
-        "threat_model": "Adversaries use phishing emails to trick users into revealing sensitive information, executing malicious payloads, or redirecting them to attacker-controlled websites.",
-        "hypothesis": [
-            "Are employees receiving emails with suspicious links or attachments?",
-            "Are users entering credentials on non-approved websites?",
-            "Are email attachments being opened and executing unauthorized scripts?"
-        ],
         "tips": [
             "Implement DMARC, DKIM, and SPF to prevent spoofed emails.",
             "Educate employees on phishing tactics and encourage reporting of suspicious emails.",
