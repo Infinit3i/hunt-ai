@@ -33,13 +33,13 @@ def get_content():
             "Detect execution of scripts or executables from unusual locations via scheduled tasks."
         ],
         "apt": [ "Earth Lusca", ],
-        "spl_query": ["index=windows EventCode=4698 OR EventCode=4702 OR EventCode=4699 | stats count by TaskName, User, Command",
-                      'index=security (sourcetype="WinEventLog:Security" OR sourcetype="linux_secure" OR sourcetype="macos_secure" OR sourcetype="container_logs")| eval CommandLine = coalesce(CommandLine, process)| where (sourcetype="WinEventLog:Security" AND EventCode IN (4697, 4702, 4698)) OR (sourcetype="linux_secure" AND CommandLine LIKE "%cron%" OR CommandLine LIKE "%at%") OR (sourcetype="macos_secure" AND CommandLine LIKE "%launchctl%" OR CommandLine LIKE "%cron%") OR (sourcetype="container_logs" AND (CommandLine LIKE "%cron%" OR CommandLine LIKE "%at%"))| where (sourcetype="WinEventLog:Security" AND (CommandLine LIKE "%/create%" OR CommandLine LIKE "%/delete%" OR CommandLine LIKE "%/change%")) OR (sourcetype="linux_secure" AND (CommandLine LIKE "%-f%" OR CommandLine LIKE "%-m%" OR CommandLine LIKE "%--env%")) OR (sourcetype="macos_secure" AND (CommandLine LIKE "%/Library/LaunchDaemons%" OR CommandLine LIKE "%/Library/LaunchAgents%" OR CommandLine LIKE "%/System/Library/LaunchDaemons%" OR CommandLine LIKE "%/System/Library/LaunchAgents%")) OR (sourcetype="container_logs" AND (CommandLine LIKE "%-f%" OR CommandLine LIKE "%--schedule%" OR CommandLine LIKE "%--env%"))',
-                      'index=container_logs sourcetype="docker_events" OR sourcetype="kubernetes_events"| eval event_action=coalesce(action, status)| where (event_action="create" OR event_action="start")| search event_type="container"| search (parameters="--privileged" OR parameters="--cap-add=" OR parameters="--volume=" OR parameters="--network=host" OR parameters="--device")',
-                      'index=security_logs OR index=system_logs(sourcetype="docker_events" OR sourcetype="kubernetes_events" OR sourcetype="wineventlog:security" OR sourcetype="linux_secure" OR sourcetype="syslog" OR sourcetype="file_monitoring")| eval platform=case( sourcetype=="docker_events" OR sourcetype=="kubernetes_events", "Containers", sourcetype=="wineventlog:security", "Windows", sourcetype=="linux_secure" OR sourcetype=="syslog", "Linux", sourcetype=="mac_os_events", "macOS")| search ( (platform="Containers" AND (event_type="file_create" AND (file_path="/etc/cron.d/" OR file_path="/etc/systemd/system/"))) OR (platform="Windows" AND EventCode=4663 AND (ObjectName="C:\Windows\System32\Tasks\" OR ObjectName="C:\Windows\Tasks\")) OR (platform="Linux" AND (file_path="/etc/cron.d/" OR file_path="/etc/systemd/system/")) OR (platform="macOS" AND (file_path="/Library/LaunchDaemons/" OR file_path="/Library/LaunchAgents/")))',
-                      'index=security_logs OR index=system_logs(sourcetype="docker_events" OR sourcetype="kubernetes_events" OR sourcetype="wineventlog:security" OR sourcetype="linux_secure" OR sourcetype="syslog" OR sourcetype="file_monitoring")| eval platform=case( sourcetype=="docker_events" OR sourcetype=="kubernetes_events", "Containers", sourcetype=="wineventlog:security", "Windows", sourcetype=="linux_secure" OR sourcetype=="syslog", "Linux", sourcetype=="mac_os_events", "macOS")| search ( (platform="Containers" AND (event_type="file_modify" AND (file_path="/etc/cron.d/" OR file_path="/etc/systemd/system/" OR file_path="/etc/crontab"))) OR (platform="Windows" AND EventCode=4663 AND (ObjectName="C:\Windows\System32\Tasks\" OR ObjectName="C:\Windows\Tasks\")) OR (platform="Linux" AND (file_path="/etc/cron.d/" OR file_path="/etc/systemd/system/" OR file_path="/etc/crontab")) OR (platform="macOS" AND (file_path="/Library/LaunchDaemons/" OR file_path="/Library/LaunchAgents/")))',
-                      '(sourcetype="WinEventLog:Microsoft-Windows-Sysmon/Operational" OR sourcetype="WinEventLog:Security" OR sourcetype="linux_auditd" OR sourcetype="syslog") | where Image IN ("schtasks.exe", "at.exe", "Taskeng.exe", "cron", "crontab", "systemd-timers")',
-                      'source="*WinEventLog:Security" EventCode="4698" | where NOT (TaskName IN ("\Microsoft\Windows\UpdateOrchestrator\Reboot", "\Microsoft\Windows\Defrag\ScheduledDefrag"))| search TaskContent="powershell.exe" OR TaskContent="cmd.exe"',
+        "spl_query": ["index=windows EventCode=4698 OR EventCode=4702 OR EventCode=4699 \n| stats count by TaskName, User, Command",
+                      'index=security (sourcetype="WinEventLog:Security" OR sourcetype="linux_secure" OR sourcetype="macos_secure" OR sourcetype="container_logs")\n| eval CommandLine = coalesce(CommandLine, process)\n| where (sourcetype="WinEventLog:Security" AND EventCode IN (4697, 4702, 4698)) OR (sourcetype="linux_secure" AND CommandLine LIKE "%cron%" OR CommandLine LIKE "%at%") OR (sourcetype="macos_secure" AND CommandLine LIKE "%launchctl%" OR CommandLine LIKE "%cron%") OR (sourcetype="container_logs" AND (CommandLine LIKE "%cron%" OR CommandLine LIKE "%at%"))\n| where (sourcetype="WinEventLog:Security" AND (CommandLine LIKE "%/create%" OR CommandLine LIKE "%/delete%" OR CommandLine LIKE "%/change%")) OR (sourcetype="linux_secure" AND (CommandLine LIKE "%-f%" OR CommandLine LIKE "%-m%" OR CommandLine LIKE "%--env%")) OR (sourcetype="macos_secure" AND (CommandLine LIKE "%/Library/LaunchDaemons%" OR CommandLine LIKE "%/Library/LaunchAgents%" OR CommandLine LIKE "%/System/Library/LaunchDaemons%" OR CommandLine LIKE "%/System/Library/LaunchAgents%")) OR (sourcetype="container_logs" AND (CommandLine LIKE "%-f%" OR CommandLine LIKE "%--schedule%" OR CommandLine LIKE "%--env%"))',
+                      'index=container_logs sourcetype="docker_events" OR sourcetype="kubernetes_events"\n| eval event_action=coalesce(action, status)\n| where (event_action="create" OR event_action="start")\n| search event_type="container"\n| search (parameters="--privileged" OR parameters="--cap-add=" OR parameters="--volume=" OR parameters="--network=host" OR parameters="--device")',
+                      'index=security_logs OR index=system_logs(sourcetype="docker_events" OR sourcetype="kubernetes_events" OR sourcetype="wineventlog:security" OR sourcetype="linux_secure" OR sourcetype="syslog" OR sourcetype="file_monitoring")\n| eval platform=case( sourcetype=="docker_events" OR sourcetype=="kubernetes_events", "Containers", sourcetype=="wineventlog:security", "Windows", sourcetype=="linux_secure" OR sourcetype=="syslog", "Linux", sourcetype=="mac_os_events", "macOS")\n| search ( (platform="Containers" AND (event_type="file_create" AND (file_path="/etc/cron.d/" OR file_path="/etc/systemd/system/"))) OR (platform="Windows" AND EventCode=4663 AND (ObjectName="C:\Windows\System32\Tasks\" OR ObjectName="C:\Windows\Tasks\")) OR (platform="Linux" AND (file_path="/etc/cron.d/" OR file_path="/etc/systemd/system/")) OR (platform="macOS" AND (file_path="/Library/LaunchDaemons/" OR file_path="/Library/LaunchAgents/")))',
+                      'index=security_logs OR index=system_logs(sourcetype="docker_events" OR sourcetype="kubernetes_events" OR sourcetype="wineventlog:security" OR sourcetype="linux_secure" OR sourcetype="syslog" OR sourcetype="file_monitoring")\n| eval platform=case( sourcetype=="docker_events" OR sourcetype=="kubernetes_events", "Containers", sourcetype=="wineventlog:security", "Windows", sourcetype=="linux_secure" OR sourcetype=="syslog", "Linux", sourcetype=="mac_os_events", "macOS")\n| search ( (platform="Containers" AND (event_type="file_modify" AND (file_path="/etc/cron.d/" OR file_path="/etc/systemd/system/" OR file_path="/etc/crontab"))) OR (platform="Windows" AND EventCode=4663 AND (ObjectName="C:\Windows\System32\Tasks\" OR ObjectName="C:\Windows\Tasks\")) OR (platform="Linux" AND (file_path="/etc/cron.d/" OR file_path="/etc/systemd/system/" OR file_path="/etc/crontab")) OR (platform="macOS" AND (file_path="/Library/LaunchDaemons/" OR file_path="/Library/LaunchAgents/")))',
+                      '(sourcetype="WinEventLog:Microsoft-Windows-Sysmon/Operational" OR sourcetype="WinEventLog:Security" OR sourcetype="linux_auditd" OR sourcetype="syslog") \n| where Image IN ("schtasks.exe", "at.exe", "Taskeng.exe", "cron", "crontab", "systemd-timers")',
+                      '(index=windows_logs OR index=sysmon) ((source="WinEventLog:Security" EventCode IN (4698, 4702, 4699)) OR (source="WinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1 AND (CommandLine="*schtasks*" OR CommandLine="*at*" OR Image="*taskeng.exe*"))) \n| table _time, host, user, EventCode, Image, CommandLine, TaskName, TaskContent \n| sort -_time'
                       ],
         "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1053",
         "hunt_steps": [
@@ -54,6 +54,7 @@ def get_content():
             "Identification of adversaries using scheduled tasks for persistence.",
             "Prevention of unauthorized code execution via scheduled tasks."
         ],
+        "clearing_steps": [],  # Steps for remediation and clearing traces - do commands also on machines locally
         "mitre_mapping": [
             {"tactic": "Execution", "technique": "T1059 (Command & Scripting Interpreter)", "example": "Adversaries may abuse command-line interfaces and scripting environments to execute malicious code."},
             {"tactic": "Initial Access", "technique": "T1566 (Phishing)", "example": "Attackers may send malicious emails with links or attachments to gain initial access to a target system."},
@@ -63,6 +64,40 @@ def get_content():
             "Monitor scheduled task creation by unauthorized users.",
             "Detect scheduled tasks executing from suspicious directories.",
             "Analyze task execution frequency for hidden persistence mechanisms."
+        ],
+        "clearing_steps": [
+            "🔍 Identify Malicious Scheduled Tasks: List all scheduled tasks and compare against known authorized tasks.",
+            
+            "🪟 Windows: Remove Malicious Scheduled Tasks",
+            "schtasks /query /fo LIST /v > C:\\Windows\\Temp\\scheduled_tasks.txt",
+            "schtasks /delete /tn <task_name> /f",  
+            "wevtutil cl Microsoft-Windows-TaskScheduler/Operational",  
+            "wevtutil cl Security",
+
+            "🐧 Linux: Remove Malicious Cron Jobs & Systemd Timers**",
+            "crontab -l > /tmp/cron_backup.txt",
+            "crontab -r",  
+            "rm -f /etc/cron.d/<malicious_task>",  
+            "systemctl disable <malicious_timer>.timer",  
+            "rm -f /etc/systemd/system/<malicious_timer>.timer",  
+
+            "🍏 macOS: Remove Malicious LaunchDaemons/LaunchAgents",
+            "launchctl list | grep <malicious_task>",
+            "launchctl remove <malicious_task>",
+            "rm -f /Library/LaunchAgents/<malicious_task>.plist",
+            "rm -f /Library/LaunchDaemons/<malicious_task>.plist",
+
+            "📜 Log Cleanup & Traces Removal",
+            "Clear logs to remove traces of the malicious task:",
+            "rm -f /var/log/cron",
+            "truncate -s 0 /var/log/syslog",
+            "log stream --predicate 'eventMessage contains \"task\"' --debug",
+
+            "🔒 Post-Clearing Security Measures",
+            "✅ Implement restrictive permissions on scheduled tasks.",
+            "✅ Enable logging and SIEM alerts for unauthorized task modifications.",
+            "✅ Conduct forensic analysis to ensure no backdoors remain.",
+            "✅ Audit all scheduled tasks periodically."
         ],
         "enhancements": [
             "Restrict task creation to authorized administrators only.",
