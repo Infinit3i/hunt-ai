@@ -10,14 +10,7 @@ def get_content():
         "data_sources": "Process monitoring, Windows Event Logs, Memory forensic analysis",
         "protocol": "N/A",
         "os": "Windows, Linux, macOS",
-        "objective": "Adversaries inject malicious code into legitimate processes to evade detection and gain higher privileges.",
-        "scope": "Monitor process creation and memory modifications for unauthorized injections.",
-        "threat_model": "Attackers leverage process injection to execute arbitrary code within another process, bypassing security controls and maintaining stealth.",
-        "hypothesis": [
-            "Are there unexpected process injections occurring on critical systems?",
-            "Are security tools being targeted for injection to disable defenses?",
-            "Are legitimate processes executing unexpected code?"
-        ],
+        "description": "Process Injection is a technique used by adversaries to execute malicious code within legitimate processes to evade detection and escalate privileges.",
         "tips": [
             "Monitor API calls related to process injection, such as VirtualAllocEx, WriteProcessMemory, and CreateRemoteThread.",
             "Enable event logging for process creation (Event ID 4688) and command-line auditing.",
@@ -40,8 +33,8 @@ def get_content():
         ],
         "apt": ["G0032", "G0096"],
         "spl_query": [
-            "index=windows EventCode=4688 | search NewProcessName IN (*rundll32.exe*, *regsvr32.exe*, *powershell.exe*)",
-            "index=windows EventCode=10 | table Time, ProcessName, ParentProcess, InjectedThread"
+            "index=windows EventCode=4688 \n| search NewProcessName IN (*rundll32.exe*, *regsvr32.exe*, *powershell.exe*)",
+            "index=windows EventCode=10 \n| table Time, ProcessName, ParentProcess, InjectedThread"
         ],
         "hunt_steps": [
             "Identify processes exhibiting unusual memory modifications.",
@@ -50,7 +43,6 @@ def get_content():
         ],
         "expected_outcomes": [
             "Process injection attempts detected and mitigated.",
-            "No malicious activity found, improving baseline detection."
         ],
         "false_positive": "Legitimate security tools and software updates may perform process injection as part of their normal operation.",
         "clearing_steps": [
