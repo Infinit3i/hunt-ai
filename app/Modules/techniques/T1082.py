@@ -5,6 +5,8 @@ def get_content():
         "title": "System Information Discovery",
         "tactic": "discovery",
         "data_sources": "Process monitoring, API monitoring, File monitoring, Windows Registry",
+        "description": "Adversaries may attempt to get detailed information about the target system, including version, hardware, and software. This information can help adversaries tailor their attacks and maximize their chances of success.",
+        "tags": ["System Information Discovery"],
         "protocol": "N/A",
         "os": "Windows, Linux, macOS",
         "objective": "Identify details about the target system for further exploitation or persistence.",
@@ -14,9 +16,11 @@ def get_content():
             "An adversary may attempt to collect system details using built-in commands or malicious scripts."
         ],
         "log_sources": [
-            {"type": "Process", "source": "Process Creation", "destination": "Security Log"},
-            {"type": "Registry", "source": "Registry Key Access", "destination": "Sysmon Event ID 12"},
-            {"type": "API", "source": "System API Calls", "destination": "ETW Logs"}
+            {"type": "Sysmon", "source": "", "destination": "12" },
+            {"type": "API", "source": "", "destination": "System API Calls"}
+        ],
+        "destination_artifacts": [
+            {"type": "System Registry", "location": "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography\MachineGuid", "identify": "Machine GUID"},
         ],
         "detection_methods": [
             "Monitor process execution for reconnaissance commands",
@@ -30,7 +34,9 @@ def get_content():
             "Lazarus Group"
         ],
         "spl_query": [
-            'index=security EventCode=4688 CommandLine IN (\"systeminfo\", \"wmic os get\", \"hostname\")'
+            'index=security EventCode=4688 CommandLine IN ("systeminfo", "wmic os get", "hostname")',
+            'index=security EventCode=4688 CommandLine="wmic computersystem get model,manufacturer"',
+            'index=security EventCode=4688 CommandLine="reg query HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion"'
         ],
         "hunt_steps": [
             "Identify and review execution of system discovery commands",
@@ -38,8 +44,7 @@ def get_content():
             "Analyze registry modifications indicative of reconnaissance activities"
         ],
         "expected_outcomes": [
-            "Suspicious system information gathering attempts detected",
-            "Legitimate administrative commands distinguished from malicious activity"
+            "Suspicious system information gathering attempts detected"
         ],
         "clearing_steps": [
             "Clear executed command history (e.g., using PowerShell or shell history commands)",
