@@ -1,238 +1,291 @@
 /* General Styles */
 body {
-    font-family: ubuntu;
+  font-family: ubuntu;
 }
 
 /* Section Borders */
 .operation-section {
-    border: 2px solid #00bcd4;  /* Cyan border for contrast */
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px auto;  /* Centers the div */
-    background-color: #2c2c2c; /* Dark background to match theme */
-    box-shadow: 0px 4px 6px rgba(0, 188, 212, 0.3);
-    width: 85%; /* Limits the width of the content */
+  border: 2px solid #00bcd4; /* Cyan border for contrast */
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto; /* Centers the div */
+  background-color: #2c2c2c; /* Dark background to match theme */
+  box-shadow: 0px 4px 6px rgba(0, 188, 212, 0.3);
+  width: 85%; /* Limits the width of the content */
 }
 
 /* Content Wrapper Inside Each Section */
 .operation-content {
-    width: 90%; 
-    margin: 0 auto; /* Centers the content within the box */
+  width: 90%;
+  margin: 0 auto; /* Centers the content within the box */
 }
 
 /* Info Box */
 .info-box {
-    padding: 5px;
-    margin-bottom: 15px;
+  padding: 5px;
+  margin-bottom: 15px;
 }
 
 /* Tables */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px auto;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px auto;
 }
 
-th, td {
-    word-wrap: break-word; /* Allows text to break inside the cell */
-    overflow-wrap: break-word; /* Ensures words wrap properly */
-    white-space: normal; /* Allows text to wrap instead of staying on one line */
-    max-width: 200px; /* Adjust this value to your preferred column width */
-    padding: 1.5em;
-    border: 1px solid #ddd;
-    text-align: left;
+th,
+td {
+  word-wrap: break-word; /* Allows text to break inside the cell */
+  overflow-wrap: break-word; /* Ensures words wrap properly */
+  white-space: normal; /* Allows text to wrap instead of staying on one line */
+  max-width: 200px; /* Adjust this value to your preferred column width */
+  padding: 1.5em;
+  border: 1px solid #ddd;
+  text-align: left;
 }
 
 th {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 /* Lists */
-ul, ol {
-    margin: .5em 0;
-    padding: .5em 0;
-    list-style-position: inside;
+ul,
+ol {
+  margin: 0.5em 0;
+  padding: 0.5em 0;
+  list-style-position: inside;
 }
 
-ul li, ol li {
-    margin: .5em 0;
+ul li,
+ol li {
+  margin: 0.5em 0;
 }
 
 /* Back Link */
 .back-link {
-    display: inline-block;
-    margin-top: 10px;
-    text-decoration: none;
-    font-weight: bold;
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 /* Buttons */
 .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover {
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Detection List */
 .detection-list {
-    padding: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Go to Top Button */
 .top-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    border: none;
-    padding: 10px 15px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .top-btn:hover {
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Hide button by default and show only when scrolling */
 #topBtn {
-    display: none;
+  display: none;
 }
 
 table {
-    table-layout: fixed; /* Ensures each column takes up a fixed width */
-    width: 100%; /* Ensures the table does not exceed its container */
-    border-collapse: collapse;
+  table-layout: fixed; /* Ensures each column takes up a fixed width */
+  width: 100%; /* Ensures the table does not exceed its container */
+  border-collapse: collapse;
 }
 
 .spl-query {
-    background-color: #2b2b2b; /* Dark gray background for contrast */
-    color: #00ffcc; /* Bright cyan text for visibility */
-    font-family: 'Courier New', monospace; /* Makes it look like code */
-    padding: 10px;
-    border-radius: 5px;
-    white-space: pre-wrap; /* Ensures line breaks are respected */
-    overflow-x: auto; /* Enables horizontal scrolling for long queries */
-    font-size: 14px; /* Adjusts readability */
+  background-color: #2b2b2b; /* Dark gray background for contrast */
+  color: #00ffcc; /* Bright cyan text for visibility */
+  font-family: "Courier New", monospace; /* Makes it look like code */
+  padding: 10px;
+  border-radius: 5px;
+  white-space: pre-wrap; /* Ensures line breaks are respected */
+  overflow-x: auto; /* Enables horizontal scrolling for long queries */
+  font-size: 14px; /* Adjusts readability */
 }
 
 /* Tag Container: ensures tags flow and are centered horizontally */
 .tag-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    justify-content: center; /* Centers the tags horizontally */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  justify-content: center; /* Centers the tags horizontally */
 }
 
 /* Base Tag styling (example) */
 .tag {
-    background-color: #7a1f1f; /* fallback color for non-Windows/Linux/Mac tags */
-    color: #fff;
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    font-weight: 500;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
-    cursor: default;
-    user-select: none;
-    transition: transform 0.2s ease;
+  background-color: #7a1f1f; /* fallback color for non-Windows/Linux/Mac tags */
+  color: #fff;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  cursor: default;
+  user-select: none;
+  transition: transform 0.2s ease;
 }
 
 .tag:hover {
-    transform: scale(1.05);
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 /* Protocol Tag: Purple */
 .tag-protocol {
-    background-color: purple;
-    opacity: .7;
+  background-color: purple;
+  opacity: 0.7;
 }
 
 .tag-protocol:hover {
-    background-color: #800080;
-    opacity: 1;
+  background-color: #800080;
+  opacity: 1;
 }
 
 .tag-data_sources {
-    background-color: #ff6600;
-    opacity: .7;
+  background-color: #ff6600;
+  opacity: 0.7;
 }
 
 .tag-data_sources:hover {
-    background-color: #ff6600;
-    opacity: 1;
+  background-color: #ff6600;
+  opacity: 1;
 }
 
 /* OS Tags */
 .tag-windows {
-    background-color: blue;
-    opacity: .7;
+  background-color: blue;
+  opacity: 0.7;
 }
 
 .tag-windows:hover {
-    background-color: #0000ff;
-    opacity: 1;
+  background-color: #0000ff;
+  opacity: 1;
 }
 
 .tag-linux {
-    background-color: orange;
-    opacity: .7;
+  background-color: orange;
+  opacity: 0.7;
 }
 
 .tag-linux:hover {
-    background-color: #ff6600;
-    opacity: 1;
+  background-color: #ff6600;
+  opacity: 1;
 }
 
 .tag-mac {
-    background-color: red;
-    opacity: .7;
+  background-color: red;
+  opacity: 0.7;
 }
 
 .tag-mac:hover {
-    background-color: #ff0000;
-    opacity: 1;
+  background-color: #ff0000;
+  opacity: 1;
 }
 
-
-
 .spl-container {
-    position: relative;
-    display: inline-block;
-    min-width: 94%;
-    width: 300px;
-    overflow-x: auto;
+  position: relative;
+  display: inline-block;
+  min-width: 94%;
+  width: 300px;
+  overflow-x: auto;
 }
 
 .copy-btn {
-    position: absolute;
-    top: .6rem;
-    right: 1.5rem;
-    background: rgba(0, 0, 0, 0.6); /* Dark semi-transparent */
-    color: white;
-    border: none;
-    padding: 4px 8px;
-    font-size: 12px;
-    border-radius: 4px;
-    opacity: 0.4; /* 40% opacity */
-    cursor: pointer;
-    transition: opacity 0.6s;
+  position: absolute;
+  top: 0.6rem;
+  right: 1.5rem;
+  background: rgba(0, 0, 0, 0.6); /* Dark semi-transparent */
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  opacity: 0.4; /* 40% opacity */
+  cursor: pointer;
+  transition: opacity 0.6s;
 }
 
 .copy-btn:hover {
-    opacity: 1; /* Full opacity on hover */
+  opacity: 1; /* Full opacity on hover */
+}
+
+/* ✅ Dark Gray Header with Icon */
+.operation-header {
+    align-items: center;
+    padding: 15px; /* Double height */
+    color: #fff;
+    font-size: 1.4em;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* ✅ Green Background when Collapsed */
+.operation-header.collapsed {
+    background: #155724; /* Dark Green */
+}
+
+/* ✅ Toggle Icons */
+.toggle-icon {
+    font-size: 1.3rem;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+/* Ensure button is positioned correctly */
+.top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(34, 34, 34, 0.8);  /* Dark gray with slight transparency */
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: none; /* Initially hidden */
+    transition: opacity 0.3s ease-in-out;
+    z-index: 9999;
+}
+
+/* Show button when visible */
+.top-btn.show {
+    display: block;
+    opacity: 1;
+}
+
+/* Hover effect */
+.top-btn:hover {
+    background: rgba(34, 34, 34, 1);
 }

@@ -1,299 +1,349 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/technique.css') }}">
-    <title>{{ technique.title }}</title>
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/technique.css') }}"
+  />
+  <title>{{ technique.title }}</title>
 </head>
 
-<a class="back-link" href="{{ url_for('routes.mitre_tactic', tactic=session.get('selected_tactic', technique.tactic.split(',')[0].strip()).replace(' ', '_')) }}">
-    ⬅️ Back to {{ session.get('selected_tactic', technique.tactic.split(',')[0].strip()) }}
+<a
+  class="back-link"
+  href="{{ url_for('routes.mitre_tactic', tactic=session.get('selected_tactic', technique.tactic.split(',')[0].strip()).replace(' ', '_')) }}"
+>
+  ⬅️ Back to {{ session.get('selected_tactic',
+  technique.tactic.split(',')[0].strip()) }}
 </a>
-
 
 <h1>{{ technique.title }} [{{ technique.id }}]</h1>
 
 <div class="links">
-    <a href="https://d3fend.mitre.org/offensive-technique/attack/{{ technique.id }}" class="btn">🛡️ MITRE D3FEND</a>
-    <a href="https://attack.mitre.org/techniques/{{ technique.id }}" class="btn">⚔️ MITRE ATT&CK</a>
+  <a
+    href="https://d3fend.mitre.org/offensive-technique/attack/{{ technique.id }}"
+    class="btn"
+    >🛡️ MITRE D3FEND</a
+  >
+  <a href="https://attack.mitre.org/techniques/{{ technique.id }}" class="btn"
+    >⚔️ MITRE ATT&CK</a
+  >
 </div>
 
-<h1>🔍 ACCESS</h1>
+<h1 class="operation-header">🔍 ACCESS</h1>
 <div class="operation-section">
-    <div class="operation-content">
-        <div class="info-box">
-            <p>{{ technique.description }}</p>
-            <ul>
-                {% for tip in technique.tips %}
-                <li>❓ {{ tip }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div class="info-box">
-            {% if technique.data_sources %}
-            <div class="tag-container">
-                {% for proto in technique.data_sources.split(',') %}
-                <span class="tag tag-data_sources">{{ proto.strip() }}</span>
-                {% endfor %}
-            </div>
-            {% endif %}
-
-
-            {% if technique.protocol %}
-            <div class="tag-container">
-                {% for proto in technique.protocol.split(',') %}
-                <span class="tag tag-protocol">{{ proto.strip() }}</span>
-                {% endfor %}
-            </div>
-            {% endif %}
-        
-            {% if technique.os %}
-            <div class="tag-container">
-                {% for system in technique.os.split(',') %}
-                    {% set os_clean = system.strip()|lower %}
-                    {% if 'windows' in os_clean %}
-                    <span class="tag tag-windows">{{ system.strip() }}</span>
-                    {% elif 'linux' in os_clean %}
-                    <span class="tag tag-linux">{{ system.strip() }}</span>
-                    {% elif 'mac' in os_clean %}
-                    <span class="tag tag-mac">{{ system.strip() }}</span>
-                    {% else %}
-                    <span class="tag">{{ system.strip() }}</span>
-                    {% endif %}
-                {% endfor %}
-            </div>
-            {% endif %}
-        </div>
-        
-        
-        
-
-            <table>
-                <tr><th>Log Type</th><th>Source</th><th>Destination</th></tr>
-                {% for log in technique.log_sources %}
-                <tr><td>{{ log.type }}</td><td>{{ log.source }}</td><td>{{ log.destination }}</td></tr>
-                {% endfor %}
-            </table>
-            {% if technique.source_artifacts %}
-            <table>
-                <tr>
-                    <th>Source Artifact</th>
-                    <th>location</th>
-                    <th>info</th>
-                </tr>
-                {% for log in technique.source_artifacts %}
-                <tr>
-                    <td>{{ log.type }}</td>
-                    <td>{{ log.location }}</td>
-                    <td>{{ log.identify }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            {% endif %}
-            {% if technique.destination_artifacts %}
-            <table>
-                <tr>
-                    <th>Destination Artifact</th>
-                    <th>location</th>
-                    <th>info</th>
-                </tr>
-                {% for log in technique.destination_artifacts %}
-                <tr>
-                    <td>{{ log.type }}</td>
-                    <td>{{ log.location }}</td>
-                    <td>{{ log.identify }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            {% endif %}  
+  <div class="operation-content">
+    <div class="info-box">
+      <p>{{ technique.description }}</p>
+      <ul>
+        {% for tip in technique.tips %}
+        <li>❓ {{ tip }}</li>
+        {% endfor %}
+      </ul>
     </div>
-</div>
 
-<h1>🕵️ HUNT</h1>
-<div class="operation-section">
-    <div class="operation-content">
-        <div class="links">
-            <a href="https://research.splunk.com/detections/tactics/{{ technique.tactic | lower }}" class="btn">🔍 SPL</a>
-            <a href="https://detection.fyi/search?q={{ technique.id }}" class="btn">🔍 Elastic</a>
-            <a href="https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q={{ technique.id }}" class="btn">🔍 Sigma</a>
-        </div>
-
-        <h3>🛠 Detection Methods</h3>
-        <ul class="detection-list">
-            {% for method in technique.detection_methods %}
-            <li>📌 {{ method }}</li>
-            {% endfor %}
-        </ul>
-
-        <table>
-            <tr><th>🔍 SPL - Detect {{ technique.title }}</th></tr>
-            {% for query in technique.spl_query %}
-            <tr>
-                <td class="spl-container">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy</button>
-                    <pre class="spl-query">{{ query }}</pre>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>        
-
-        <h3>🛠 Hunt Execution Steps</h3>
-        <ul>
-            {% for step in technique.hunt_steps %}
-            <li><input type="checkbox" class="hunt-checkbox" data-technique-id="{{ technique.id }}" data-step="{{ step }}"> 🚀 {{ step }}</li>
-            {% endfor %}
-        </ul>
-
-        <h3>🔗 Weird Process Names</h3>
-        <a href="https://wtfbins.wtf/">WTFBins?!</a>
-        <a href="https://strontic.github.io/xcyclopedia/"> xCyclopedia Index (EXEs)</a>
-
-        <h2><a href="https://center-for-threat-informed-defense.github.io/technique-inference-engine/">MITRE ATT&CK Mapping</a></h2>
-        <h3>Next likely technique</h3>
-        <table>
-            <tr><th>Tactic</th><th>Technique</th><th>Example</th></tr>
-            {% for mapping in technique.mitre_mapping %}
-            <tr>
-                <td>{{ mapping.tactic }}</td>
-                <td>
-                    <a href="javascript:void(0);" onclick="navigateToTechnique('{{ mapping.technique.split(' ')[0] }}')">
-                        {{ mapping.technique.split(' ')[0] }}
-                    </a>
-                </td>
-                <td>{{ mapping.example }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+    <div class="info-box">
+      {% if technique.data_sources %}
+      <div class="tag-container">
+        {% for proto in technique.data_sources.split(',') %}
+        <span class="tag tag-data_sources">{{ proto.strip() }}</span>
+        {% endfor %}
+      </div>
+      {% endif %} {% if technique.protocol %}
+      <div class="tag-container">
+        {% for proto in technique.protocol.split(',') %}
+        <span class="tag tag-protocol">{{ proto.strip() }}</span>
+        {% endfor %}
+      </div>
+      {% endif %} {% if technique.os %}
+      <div class="tag-container">
+        {% for system in technique.os.split(',') %} {% set os_clean =
+        system.strip()|lower %} {% if 'windows' in os_clean %}
+        <span class="tag tag-windows">{{ system.strip() }}</span>
+        {% elif 'linux' in os_clean %}
+        <span class="tag tag-linux">{{ system.strip() }}</span>
+        {% elif 'mac' in os_clean %}
+        <span class="tag tag-mac">{{ system.strip() }}</span>
+        {% else %}
+        <span class="tag">{{ system.strip() }}</span>
+        {% endif %} {% endfor %}
+      </div>
+      {% endif %}
     </div>
+
+    <table>
+      <tr>
+        <th>Log Type</th>
+        <th>Source</th>
+        <th>Destination</th>
+      </tr>
+      {% for log in technique.log_sources %}
+      <tr>
+        <td>{{ log.type }}</td>
+        <td>{{ log.source }}</td>
+        <td>{{ log.destination }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% if technique.source_artifacts %}
+    <table>
+      <tr>
+        <th>Source Artifact</th>
+        <th>location</th>
+        <th>info</th>
+      </tr>
+      {% for log in technique.source_artifacts %}
+      <tr>
+        <td>{{ log.type }}</td>
+        <td>{{ log.location }}</td>
+        <td>{{ log.identify }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %} {% if technique.destination_artifacts %}
+    <table>
+      <tr>
+        <th>Destination Artifact</th>
+        <th>location</th>
+        <th>info</th>
+      </tr>
+      {% for log in technique.destination_artifacts %}
+      <tr>
+        <td>{{ log.type }}</td>
+        <td>{{ log.location }}</td>
+        <td>{{ log.identify }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </div>
 </div>
 
-<h1>🧹 CLEAR</h1>
+<h1 class="operation-header">🕵️ HUNT</h1>
 <div class="operation-section">
-    <div class="operation-content">
-        <h3>🔒 Expected Outcomes</h3>
-        <ul>
-            {% for outcome in technique.expected_outcomes %}
-            <li>👽{{ outcome }}</li>
-            {% endfor %}
-        </ul>
-        <h3>🧼 Clearing Steps</h3>
-        <ul>
-            {% for clear in technique.clearing_steps %}
-            <li><input type="checkbox" class="clear-checkbox" data-technique-id="{{ technique.id }}" data-step="{{ clear }}"> 🧼 {{ clear }}</li>
-            {% endfor %}
-        </ul>
-        {% if technique.false_positive %}
-        <h3>✅ False Positive</h3>
-        <ul>
-            <li>✅ {{ technique.false_positive }}</li>
-        </ul>
-        {% endif %}
+  <div class="operation-content">
+    <div class="links">
+      <a
+        href="https://research.splunk.com/detections/tactics/{{ technique.tactic | lower }}"
+        class="btn"
+        >🔍 SPL</a
+      >
+      <a href="https://detection.fyi/search?q={{ technique.id }}" class="btn"
+        >🔍 Elastic</a
+      >
+      <a
+        href="https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q={{ technique.id }}"
+        class="btn"
+        >🔍 Sigma</a
+      >
     </div>
+
+    <h3>🛠 Detection Methods</h3>
+    <ul class="detection-list">
+      {% for method in technique.detection_methods %}
+      <li>📌 {{ method }}</li>
+      {% endfor %}
+    </ul>
+
+    <table>
+      <tr>
+        <th>🔍 SPL - Detect {{ technique.title }}</th>
+      </tr>
+      {% for query in technique.spl_query %}
+      <tr>
+        <td class="spl-container">
+          <button class="copy-btn" onclick="copyToClipboard(this)">
+            📋 Copy
+          </button>
+          <pre class="spl-query">{{ query }}</pre>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <h3>🛠 Hunt Execution Steps</h3>
+    <ul>
+      {% for step in technique.hunt_steps %}
+      <li>
+        <input
+          type="checkbox"
+          class="hunt-checkbox"
+          data-technique-id="{{ technique.id }}"
+          data-step="{{ step }}"
+        />
+        🚀 {{ step }}
+      </li>
+      {% endfor %}
+    </ul>
+
+    <h3>🔗 Weird Process Names</h3>
+    <a href="https://wtfbins.wtf/">WTFBins?!</a>
+    <a href="https://strontic.github.io/xcyclopedia/">
+      xCyclopedia Index (EXEs)</a
+    >
+
+    <h2>
+      <a
+        href="https://center-for-threat-informed-defense.github.io/technique-inference-engine/"
+        >MITRE ATT&CK Mapping</a
+      >
+    </h2>
+    <h3>Next likely technique</h3>
+    <table>
+      <tr>
+        <th>Tactic</th>
+        <th>Technique</th>
+        <th>Example</th>
+      </tr>
+      {% for mapping in technique.mitre_mapping %}
+      <tr>
+        <td>{{ mapping.tactic }}</td>
+        <td>
+          <a
+            href="javascript:void(0);"
+            onclick="navigateToTechnique('{{ mapping.technique.split(' ')[0] }}')"
+          >
+            {{ mapping.technique.split(' ')[0] }}
+          </a>
+        </td>
+        <td>{{ mapping.example }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 </div>
 
-<h1>🛡️ HARDEN</h1>
+<h1 class="operation-header">🧹 CLEAR</h1>
 <div class="operation-section">
-    <div class="operation-content">
-        <h3>📌 Enhance Defenses</h3>
-        <ul>
-            {% for defense in technique.enhancements %}
-            <li>🛠️ {{ defense }}</li>
-            {% endfor %}
-        </ul>
-        <h3>🚨 Alerting</h3>
-        <ul>
-            {% for alert in technique.watchlist %}
-            <li>📢 {{ alert }}</li>
-            {% endfor %}
-        </ul>
-    </div> 
+  <div class="operation-content">
+    <h3>🔒 Expected Outcomes</h3>
+    <ul>
+      {% for outcome in technique.expected_outcomes %}
+      <li>👽{{ outcome }}</li>
+      {% endfor %}
+    </ul>
+    <h3>🧼 Clearing Steps</h3>
+    <ul>
+      {% for clear in technique.clearing_steps %}
+      <li>
+        <input
+          type="checkbox"
+          class="clear-checkbox"
+          data-technique-id="{{ technique.id }}"
+          data-step="{{ clear }}"
+        />
+        🧼 {{ clear }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% if technique.false_positive %}
+    <h3>✅ False Positive</h3>
+    <ul>
+      <li>✅ {{ technique.false_positive }}</li>
+    </ul>
+    {% endif %}
+  </div>
 </div>
 
-<h1>📖 LESSONS LEARNED</h1>
+<h1 class="operation-header">🛡️ HARDEN</h1>
 <div class="operation-section">
-    <div class="operation-content">
-        <ul>
-            <li><strong>Summary of Findings:</strong> {{ technique.summary }}</li>
-            <li><strong>Remediation Steps:</strong> {{ technique.remediation }}</li>
-            <li><strong>Future Improvements:</strong> {{ technique.improvements }}</li>
-        </ul>
-    </div>
+  <div class="operation-content">
+    <h3>📌 Enhance Defenses</h3>
+    <ul>
+      {% for defense in technique.enhancements %}
+      <li>🛠️ {{ defense }}</li>
+      {% endfor %}
+    </ul>
+    <h3>🚨 Alerting</h3>
+    <ul>
+      {% for alert in technique.watchlist %}
+      <li>📢 {{ alert }}</li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 
-<a class="back-link" href="{{ url_for('routes.mitre_tactic', tactic=session.get('selected_tactic', technique.tactic.split(',')[0].strip()).replace(' ', '_')) }}">
-    ⬅️ Back to {{ session.get('selected_tactic', technique.tactic.split(',')[0].strip()) }}
+<h1 class="operation-header">📖 LESSONS LEARNED</h1>
+<div class="operation-section">
+  <div class="operation-content">
+    <ul>
+      <li><strong>Summary of Findings:</strong> {{ technique.summary }}</li>
+      <li><strong>Remediation Steps:</strong> {{ technique.remediation }}</li>
+      <li>
+        <strong>Future Improvements:</strong> {{ technique.improvements }}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<a
+  class="back-link"
+  href="{{ url_for('routes.mitre_tactic', tactic=session.get('selected_tactic', technique.tactic.split(',')[0].strip()).replace(' ', '_')) }}"
+>
+  ⬅️ Back to {{ session.get('selected_tactic',
+  technique.tactic.split(',')[0].strip()) }}
 </a>
 
-
-<!-- Go to Top Button -->
-<button onclick="scrollToTop()" id="topBtn" class="top-btn">⬆️ Go to Top</button>
-
-<!-- JavaScript for Smooth Scroll & Visibility -->
 <script>
-// Smooth Scroll to Top
-    function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+  function copyToClipboard(button) {
+    let queryText = button.nextElementSibling.textContent; // Get text from <pre>
+
+    navigator.clipboard
+      .writeText(queryText)
+      .then(() => {
+        button.textContent = "✅ Copied!";
+        setTimeout(() => {
+          button.textContent = "📋 Copy";
+        }, 2000);
+      })
+      .catch((err) => {
+        console.error("Copy failed", err);
+      });
+  }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".operation-header").forEach((header) => {
+        let section = header.nextElementSibling;
+  
+        // Create toggle icon (✅ / ❌)
+        let toggleIcon = document.createElement("span");
+        toggleIcon.classList.add("toggle-icon");
+        toggleIcon.innerHTML = "❌"; // Default to open state
+  
+        // Insert icon AFTER the header text
+        header.appendChild(toggleIcon);
+  
+        // Retrieve stored state
+        let sectionTitle = header.textContent.trim();
+        let storedState = localStorage.getItem(sectionTitle);
+        let isCollapsed = storedState ? JSON.parse(storedState).collapsed : false;
+  
+        if (isCollapsed) {
+          section.style.display = "none";
+          toggleIcon.innerHTML = "✅"; // ✅ When collapsed
         }
-
-        // Show/hide button on scroll
-        window.onscroll = function() { toggleScrollButton() };
-
-        function toggleScrollButton() {
-        let topBtn = document.getElementById("topBtn");
-
-        if (!topBtn) return;  // Ensure the button exists before modifying
-
-        if (window.scrollY > 200) {
-            topBtn.style.display = "block";  // Show when scrolling down
-        } else {
-            topBtn.style.display = "none";   // Hide when at the top
-        }
-    }
-
-    function navigateToTechnique(techniqueId) {
-        fetch(`/technique/${techniqueId}`)
-            .then(response => {
-                if (response.status === 404) {
-                    console.log(`Technique ${techniqueId} not found. Staying on the current page.`);
-                } else {
-                    window.location.href = `/technique/${techniqueId}`;
-                }
-            })
-            .catch(error => console.error("Error fetching technique:", error));
-    }
-
-
-    document.querySelectorAll(".hunt-checkbox, .clear-checkbox").forEach(checkbox => {
-        checkbox.addEventListener("change", function() {
-            fetch("/update-checkbox", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
-                    technique_id: this.dataset.techniqueId,
-                    step: this.dataset.step,
-                    checked: this.checked
-                })
-            });
+  
+        // Toggle section on click
+        header.addEventListener("click", function () {
+          let isCurrentlyCollapsed = section.style.display === "none";
+  
+          if (isCurrentlyCollapsed) {
+            section.style.display = "block";
+            toggleIcon.innerHTML = "❌"; // ❌ When open
+          } else {
+            section.style.display = "none";
+            toggleIcon.innerHTML = "✅"; // ✅ When closed
+          }
+  
+          saveState(sectionTitle, section.style.display === "none");
         });
+  
+        function saveState(sectionTitle, collapsed) {
+          localStorage.setItem(sectionTitle, JSON.stringify({ collapsed }));
+        }
+      });
     });
-</script>
-<script>
-    function copyToClipboard(button) {
-        let queryText = button.nextElementSibling.textContent; // Get text from <pre>
-        
-        navigator.clipboard.writeText(queryText).then(() => {
-            button.textContent = "✅ Copied!";
-            setTimeout(() => {
-                button.textContent = "📋 Copy";
-            }, 2000);
-        }).catch(err => {
-            console.error("Copy failed", err);
-        });
-    }
-</script>
-
-
+  </script>  
 
 {% endblock %}
