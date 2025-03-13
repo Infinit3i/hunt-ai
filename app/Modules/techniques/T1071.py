@@ -7,13 +7,11 @@ def get_content():
         "data_sources": "Firewall, Proxy, DNS, PCAP",
         "protocol": "HTTP, HTTPS, DNS, TCP",
         "os": "Platform Agnostic",
-        "objective": "Detect and investigate suspicious application layer communications, which may indicate covert channels, command-and-control (C2) traffic, or exfiltration attempts.",
-        "scope": "Monitor application layer protocols (HTTP, HTTPS, DNS, TCP) for anomalies. Identify deviations from baseline network behavior, including irregular HTTP headers and DNS queries.",
-        "threat_model": "Adversaries may abuse application layer protocols for covert C2 communication, data exfiltration, or persistence.",
-        "hypothesis": [
-            "Are there unexpected HTTP methods or unusual HTTP headers in network traffic?",
-            "Are there suspicious DNS queries that could indicate DNS tunneling?",
-            "Is encrypted HTTPS traffic unusually persistent or higher in volume than normal?"
+        "description": "Adversaries may communicate using application layer protocols to avoid detection and blend in with normal network traffic.",
+        "tips": [
+            "Monitor HTTP/S traffic for unusual request methods or headers.",
+            "Detect DNS queries with long subdomains, which may indicate tunneling.",
+            "Analyze TCP traffic for suspicious C2-like behavior."
         ],
         "log_sources": [
             {"type": "Firewall Logs", "source": "Palo Alto, Fortinet, Cisco ASA, CheckPoint"},
@@ -26,7 +24,7 @@ def get_content():
             "Detect DNS queries with long subdomains, which may indicate tunneling.",
             "Analyze TCP traffic for suspicious C2-like behavior."
         ],
-        "spl_query": ["index=firewall sourcetype=firewall_logs (dest_port=80 OR dest_port=443) | stats count by src_ip, dest_ip, http_method, url | sort - count"],
+        "spl_query": ["index=firewall sourcetype=firewall_logs (dest_port=80 OR dest_port=443) \n| stats count by src_ip, dest_ip, http_method, url | sort - count"],
         "hunt_steps": [
             "Run Queries in SIEM: Detect unusual HTTP request methods and persistent HTTPS sessions.",
             "Identify long DNS queries that may indicate tunneling.",
@@ -37,8 +35,8 @@ def get_content():
         ],
         "expected_outcomes": [
             "Malicious Application Layer Traffic Detected: Block C2 traffic and investigate affected hosts.",
-            "No Malicious Activity Found: Improve network monitoring rules for application-layer traffic."
         ],
+        "false_positive": "Legitimate applications may use non-standard ports or protocols for communication.",
         "mitre_mapping": [
             {"tactic": "Command & Control", "technique": "T1095 (Non-Standard Port Usage)", "example": "Attackers may switch to alternate ports to avoid detection."},
             {"tactic": "Exfiltration", "technique": "T1048 (Exfiltration Over Alternative Protocol)", "example": "Data may be transmitted using HTTP/S or DNS tunnels."},
