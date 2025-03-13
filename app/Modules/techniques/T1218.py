@@ -7,7 +7,7 @@ def get_content():
         "data_sources": "Process monitoring, Command-line monitoring, File monitoring",
         "protocol": "N/A",
         "os": "Windows",
-        
+        "data_sources": ["Process Execution", "Command-line Monitoring", "File Monitoring"],
         "tips": [
             "Monitor the execution of `rundll32.exe`, `regsvr32.exe`, and `mshta.exe`.",
             "Analyze command-line arguments for suspicious behavior.",
@@ -31,8 +31,8 @@ def get_content():
         ],
         "apt": ["G0007", "G0032"],
         "spl_query": [
-            "index=windows EventCode=1 Image=*\\rundll32.exe | table Time, ParentProcess, CommandLine",
-            "index=windows EventCode=1 Image=*\\regsvr32.exe | table Time, ParentProcess, CommandLine"
+            "index=windows EventCode=1 Image=*\\rundll32.exe \n| table Time, ParentProcess, CommandLine",
+            "index=windows EventCode=1 Image=*\\regsvr32.exe \n| table Time, ParentProcess, CommandLine"
         ],
         "hunt_steps": [
             "Identify processes using system binaries with suspicious parameters.",

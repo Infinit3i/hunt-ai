@@ -10,14 +10,8 @@ def get_content():
         "data_sources": "Windows Event Logs, Process Monitoring, File Monitoring, Registry, Memory Analysis",
         "protocol": "N/A",
         "os": "Windows, Linux, macOS",
-        "objective": "Adversaries attempt to extract credentials stored in memory, registry, or system files to escalate privileges or facilitate lateral movement.",
-        "scope": "Monitor credential access attempts and unusual process behavior.",
-        "threat_model": "Attackers dump credentials to gain unauthorized access to privileged accounts and spread within a network.",
-        "hypothesis": [
-            "Are credential stores being accessed unexpectedly?",
-            "Are unauthorized tools attempting to dump credentials?",
-            "Are system processes accessing LSASS memory or security databases?"
-        ],
+        "tags": ["Credential Dumping", "Memory Dumping", "SAM Dumping", "LSASS Memory Dumping"],
+        "description": "Adversaries may attempt to dump credentials to obtain account information, passwords, and other sensitive details.",
         "tips": [
             "Enable LSASS protection to prevent credential dumping.",
             "Monitor processes interacting with LSASS, SAM, and memory dumps.",
