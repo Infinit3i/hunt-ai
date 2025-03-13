@@ -129,7 +129,12 @@
         <table>
             <tr><th>🔍 SPL - Detect {{ technique.title }}</th></tr>
             {% for query in technique.spl_query %}
-            <tr><td><pre class="spl-query">{{ query }}</pre></td></tr>
+            <tr>
+                <td class="spl-container">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy</button>
+                    <pre class="spl-query">{{ query }}</pre>
+                </td>
+            </tr>
             {% endfor %}
         </table>        
 
@@ -140,7 +145,12 @@
             {% endfor %}
         </ul>
 
+        <h3>🔗 Weird Process Names</h3>
+        <a href="https://wtfbins.wtf/">WTFBins?!</a>
+        <a href="https://strontic.github.io/xcyclopedia/"> xCyclopedia Index (EXEs)</a>
+
         <h2><a href="https://center-for-threat-informed-defense.github.io/technique-inference-engine/">MITRE ATT&CK Mapping</a></h2>
+        <h3>Next likely technique</h3>
         <table>
             <tr><th>Tactic</th><th>Technique</th><th>Example</th></tr>
             {% for mapping in technique.mitre_mapping %}
@@ -268,5 +278,21 @@
         });
     });
 </script>
+<script>
+    function copyToClipboard(button) {
+        let queryText = button.nextElementSibling.textContent; // Get text from <pre>
+        
+        navigator.clipboard.writeText(queryText).then(() => {
+            button.textContent = "✅ Copied!";
+            setTimeout(() => {
+                button.textContent = "📋 Copy";
+            }, 2000);
+        }).catch(err => {
+            console.error("Copy failed", err);
+        });
+    }
+</script>
+
+
 
 {% endblock %}

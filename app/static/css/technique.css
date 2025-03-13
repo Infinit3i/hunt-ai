@@ -207,3 +207,32 @@ table {
     background-color: #ff0000;
     opacity: 1;
 }
+
+
+
+.spl-container {
+    position: relative;
+    display: inline-block;
+    min-width: 94%;
+    width: 300px;
+    overflow-x: auto;
+}
+
+.copy-btn {
+    position: absolute;
+    top: .6rem;
+    right: 1.5rem;
+    background: rgba(0, 0, 0, 0.6); /* Dark semi-transparent */
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    opacity: 0.4; /* 40% opacity */
+    cursor: pointer;
+    transition: opacity 0.6s;
+}
+
+.copy-btn:hover {
+    opacity: 1; /* Full opacity on hover */
+}
