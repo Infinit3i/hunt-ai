@@ -1,7 +1,4 @@
 def get_content():
-    """
-    Returns structured content for the System Binary Proxy Execution (T1218) technique.
-    """
     return {
         "id": "T1218",
         "url_id": "T1218",
@@ -10,14 +7,7 @@ def get_content():
         "data_sources": "Process monitoring, Command-line monitoring, File monitoring",
         "protocol": "N/A",
         "os": "Windows",
-        "objective": "Adversaries may use trusted, signed binaries to execute malicious payloads and bypass security controls.",
-        "scope": "Monitor execution of known proxy binaries and analyze anomalies.",
-        "threat_model": "Attackers can abuse system binaries like `rundll32.exe`, `regsvr32.exe`, and `mshta.exe` to execute malicious code.",
-        "hypothesis": [
-            "Are system utilities executing unexpected scripts or binaries?",
-            "Are signed Windows binaries being used to execute remote code?",
-            "Are there process anomalies related to system binary execution?"
-        ],
+        
         "tips": [
             "Monitor the execution of `rundll32.exe`, `regsvr32.exe`, and `mshta.exe`.",
             "Analyze command-line arguments for suspicious behavior.",
