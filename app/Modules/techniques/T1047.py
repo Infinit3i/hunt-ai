@@ -1,7 +1,4 @@
 def get_content():
-    """
-    Returns structured content for the Windows Management Instrumentation (WMI) persistence method.
-    """
     return {
         "id": "T1047",
         "url_id": "T1047",
