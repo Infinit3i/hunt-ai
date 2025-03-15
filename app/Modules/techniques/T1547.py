@@ -3,18 +3,25 @@ def get_content():
         "id": "T1547",
         "url_id": "T1547",
         "title": "Boot or Logon Autostart Execution",
-        "tactic": "Persistence",
-        "data_sources": "Registry, File System, Process Monitoring, Windows Event Logs, Sysmon, EDR",
-        "protocol": "N/A",
+        "description": (
+            "Adversaries may configure system settings to automatically execute a program during system boot or logon"
+            " to maintain persistence or gain higher-level privileges on compromised systems."
+            " Operating systems may have mechanisms for automatically running a program on system boot or account logon."
+            " These mechanisms may include automatically executing programs that are placed in specially designated"
+            " directories or are referenced by repositories that store configuration information, such as the Windows Registry."
+        ),
+        "tags": ["Persistence", "Privilege Escalation", "Windows", "Linux", "macOS"],
+        "tactic": "Persistence, Privilege Escalation",
+        "protocol": "Windows, Linux, macOS, Network",
         "os": "Windows, Linux, macOS",
-        "objective": "Detect and mitigate persistence mechanisms that leverage system boot or logon processes to execute malicious code.",
-        "scope": "Monitor registry keys, startup folder modifications, and scheduled tasks for unauthorized autostart mechanisms.",
-        "threat_model": "Adversaries may abuse system autostart execution mechanisms to maintain persistence across reboots or logons.",
-        "hypothesis": [
-            "Are there unauthorized modifications to startup registry keys or folders?",
-            "Are suspicious processes executing during system boot or user logon?",
-            "Are scheduled tasks or login scripts being abused for persistence?"
+        "tips": [
+            "Monitor for additions or modifications of autostart execution mechanisms in the Registry.",
+            "Use Sysinternals Autoruns to detect system autostart configuration changes.",
+            "Analyze abnormal process behavior and DLL loads by monitoring execution flows."
         ],
+        "data_sources": "Command: Command Execution, Driver: Driver Load, File: File Creation, File: File Modification,"
+                        "Kernel: Kernel Module Load, Module: Module Load, Process: OS API Execution, Process: Process Creation,"
+                        "Windows Registry: Windows Registry Key Creation, Windows Registry: Windows Registry Key Modification",
         "log_sources": [
             {"type": "Registry Monitoring", "source": "Sysmon (Event ID 13 - Registry Modification)"},
             {"type": "File System Monitoring", "source": "Sysmon (Event ID 11 - File Create)"},

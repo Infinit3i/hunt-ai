@@ -7,14 +7,6 @@ def get_content():
         "data_sources": "Network Traffic, Firewall Logs, Proxy Logs, Endpoint Logs",
         "protocol": "HTTP, HTTPS, DNS, TCP, UDP",
         "os": "Platform Agnostic",
-        "objective": "Detect and mitigate data obfuscation techniques used by adversaries to evade detection and exfiltrate data covertly.",
-        "scope": "Identify obfuscated network traffic patterns, encoded payloads, and disguised command-and-control (C2) channels.",
-        "threat_model": "Adversaries use data obfuscation techniques to bypass security controls, encrypt payloads, and evade network inspection.",
-        "hypothesis": [
-            "Are there unusual encoded payloads in network traffic?",
-            "Is data being exfiltrated using steganography, encryption, or compression?",
-            "Are adversaries leveraging non-standard encoding techniques to evade detection?"
-        ],
         "log_sources": [
             {"type": "Network Traffic", "source": "Zeek (Bro), Suricata, Wireshark"},
             {"type": "Firewall Logs", "source": "Palo Alto, Fortinet, Cisco ASA"},

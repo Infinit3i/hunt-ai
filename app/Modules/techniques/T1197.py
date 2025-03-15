@@ -1,59 +1,68 @@
 def get_content():
     return {
         "id": "T1197",
-        "url_id": "T1197",
+        "url_id": "1197",
         "title": "BITS Jobs",
-        "tactic": "Persistence",
-        "data_sources": "Windows Event Logs, Process Monitoring, Registry, File System",
-        "protocol": "N/A",
+        "description": (
+            "Adversaries may abuse BITS jobs to persistently execute code and perform various background tasks."
+            " Windows Background Intelligent Transfer Service (BITS) is a low-bandwidth, asynchronous file transfer mechanism"
+            " exposed through Component Object Model (COM). BITS is commonly used by updaters, messengers, and other applications"
+            " that prefer to operate in the background without interrupting other networked applications."
+        ),
+        "tags": ["Persistence", "Defense Evasion", "Windows"],
+        "tactic": "Defense Evasion, Persistence",
+        "protocol": "Windows",
         "os": "Windows",
-        "objective": "Detect and mitigate the misuse of Background Intelligent Transfer Service (BITS) jobs for persistence or command execution.",
-        "scope": "Monitor for unauthorized BITS jobs that may be used for malicious persistence or command execution.",
-        "threat_model": "Adversaries may abuse BITS to create malicious jobs that download or execute malicious payloads while blending in with legitimate network activity.",
-        "hypothesis": [
-            "Are there unauthorized BITS jobs executing commands or downloading suspicious files?",
-            "Are BITS jobs executing payloads outside normal software update behavior?",
-            "Are attackers leveraging BITS for persistence mechanisms?"
+        "tips": [
+            "Monitor the status of BITS service using 'sc query bits'.",
+            "Check for active BITS jobs using 'bitsadmin /list /allusers /verbose'."
         ],
+        "data_sources": "Command: Command Execution, Network Traffic: Network Connection Creation, Process: Process Creation, Service: Service Metadata",
         "log_sources": [
-            {"type": "Windows Event Logs", "source": "Event ID 4688 (Process Creation), Event ID 7045 (New Service Installed)"},
-            {"type": "Registry", "source": "BITS Job registry keys"},
-            {"type": "File System", "source": "BITS job payloads and execution files"}
+            {"type": "Command", "source": "BITSAdmin", "destination": "SIEM"},
+            {"type": "Service", "source": "Windows Event Logs", "destination": "Security Monitoring"}
+        ],
+        "source_artifacts": [
+            {"type": "Log", "location": "C:\\Windows\\System32\\bits.log", "identify": "BITS job records"}
+        ],
+        "destination_artifacts": [
+            {"type": "Log", "location": "C:\\Windows\\System32\\EventViewer", "identify": "BITS Execution Logs"}
         ],
         "detection_methods": [
-            "Monitor for BITS jobs creating executable files outside of expected locations.",
-            "Detect scheduled BITS tasks that persist beyond normal system behavior.",
-            "Correlate BITS job execution with known malware or unauthorized scripts."
+            "Monitor usage of BITSAdmin tool and its commands.",
+            "Analyze network traffic for unusual HTTP(S) and SMB-based BITS jobs."
         ],
-        "spl_query": "index=windows sourcetype=WinEventLog EventCode=4688 CommandLine=*bitsadmin* OR CommandLine=*Add-File*",
-        "sigma_rule": "https://grep.app/search?f.repo=SigmaHQ%2Fsigma&q=T1197",
+        "apt": ["APT39", "APT41", "PLATINUM", "FIN12"],
+        "spl_query": [
+            "index=windows_logs | search EventID=7045 | stats count by ImagePath, ServiceName",
+            "index=process_creation | search ParentProcessName=bitsadmin.exe | stats count by ProcessName"
+        ],
         "hunt_steps": [
-            "Identify BITS jobs that persist or execute unauthorized payloads.",
-            "Correlate BITS job activities with threat intelligence feeds.",
-            "Analyze system persistence mechanisms linked to BITS job executions.",
-            "Investigate process execution chains related to suspicious BITS activities.",
-            "If unauthorized BITS activity is detected → Escalate to Incident Response."
+            "Identify long-standing BITS jobs with extended lifetimes.",
+            "Check for BITS jobs triggering execution of suspicious binaries."
         ],
         "expected_outcomes": [
-            "BITS Job Abuse Detected: Block unauthorized BITS jobs and remove associated files.",
-            "No Malicious Activity Found: Improve BITS monitoring and implement stricter policies."
+            "Detection of malicious BITS jobs used for persistence.",
+            "Identification of unauthorized downloads or executions."
+        ],
+        "false_positive": "Legitimate software updates may use BITS jobs for file transfers.",
+        "clearing_steps": [
+            "Terminate suspicious BITS jobs using 'bitsadmin /cancel'.",
+            "Disable unauthorized BITS usage via Group Policy."
         ],
         "mitre_mapping": [
-            {"tactic": "Persistence", "technique": "T1197 (BITS Jobs)", "example": "BITS jobs used for malware download and execution."},
-            {"tactic": "Execution", "technique": "T1204.002 (User Execution - Malicious File)", "example": "BITS job executes unauthorized scripts or payloads."},
-            {"tactic": "Defense Evasion", "technique": "T1070.004 (Indicator Removal on Host)", "example": "BITS job logs are deleted to evade detection."}
+            {"tactic": "Execution", "technique": "T1059.001", "example": "PowerShell Execution via BITS"},
+            {"tactic": "Exfiltration", "technique": "T1048", "example": "Exfiltration Over Alternative Protocol"}
         ],
         "watchlist": [
-            "Monitor new BITS jobs created in Windows Task Scheduler.",
-            "Detect suspicious command-line usage of bitsadmin or PowerShell BITS commands.",
-            "Alert on unexpected file downloads initiated by BITS jobs."
+            "Monitor BITS job creations and modifications by non-administrative users.",
+            "Alert on unexpected command-line usage of bitsadmin.exe."
         ],
         "enhancements": [
-            "Restrict BITS job creation to authorized applications.",
-            "Enforce logging and alerting on BITS job modifications.",
-            "Regularly audit and clean up unauthorized or orphaned BITS jobs."
+            "Implement logging of BITS jobs to track execution history.",
+            "Restrict BITSAdmin execution to authorized administrators."
         ],
-        "summary": "BITS job abuse is a stealthy persistence mechanism used by attackers to download or execute malicious payloads.",
-        "remediation": "Disable unnecessary BITS services, monitor BITS job creation, and implement security policies for job execution.",
-        "improvements": "Enhance SIEM detections for BITS job execution patterns and integrate with behavioral analytics."
+        "summary": "BITS jobs can be exploited by adversaries to persist on a system and execute malicious code covertly.",
+        "remediation": "Restrict BITS job creation and execution using policy settings.",
+        "improvements": "Regularly audit BITS job database for unauthorized entries."
     }

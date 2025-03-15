@@ -4,22 +4,17 @@ def get_content():
         "url_id": "T1547/001",
         "title": "Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder",
         "tactic": "Persistence",
-        "data_sources": "Windows Registry, File Monitoring, Process Execution, Windows Event Logs",
-        "protocol": "N/A",
+        "description": "Adversaries may achieve persistence by adding a program to a startup folder or referencing it with a Registry run key.",
+        "tags": ["Autostart", "registry run keys", "startup folder", "Persistence", "Privilege Escalation", "Windows"],
+        "tactic": "Persistence, Privilege Escalation",
+        "protocol": "Windows",
         "os": "Windows",
-        "objective": "Detect and mitigate adversaries leveraging Registry Run keys or the Startup folder to execute malicious code on system boot or user logon.",
-        "scope": "Monitor registry changes and modifications to the Startup folder for unauthorized entries.",
-        "threat_model": "Adversaries may persist on a system by adding executable files or scripts to the Windows Registry Run keys or the Startup folder, ensuring execution at boot or logon.",
-        "hypothesis": [
-            "Are unauthorized programs executing at system startup or user logon?",
-            "Are registry keys being modified to insert persistence mechanisms?",
-            "Are adversaries leveraging the Startup folder for automatic execution?"
-        ],
         "tips": [
-            "Monitor Windows Registry Run keys for unauthorized modifications.",
-            "Detect new files appearing in the Startup folder that do not match baseline applications.",
-            "Investigate parent-child process relationships originating from autostart locations."
+            "Monitor Registry changes to run keys that do not correlate with known software.",
+            "Track modifications in user and system startup folders.",
+            "Use Sysinternals Autoruns to detect system changes to startup locations."
         ],
+        "data_sources": "Command: Command Execution, File: File Modification, Process: Process Creation, Windows Registry: Windows Registry Key Creation, Windows Registry: Windows Registry Key Modification",
         "log_sources": [
             {"type": "Windows Registry", "source": "Sysmon Event ID 13, Windows Event Logs 4657", "destination": "SIEM"},
             {"type": "File Monitoring", "source": "Sysmon Event ID 11, File Integrity Monitoring (FIM)", "destination": "Endpoint Security Platform"},
