@@ -1,75 +1,43 @@
 def get_content():
-    """
-    Returns structured content for the Brute-Force Credential Access (T1110) method.
-    """
     return {
-        "id": "T1110",
-        "url_id": "T1110",
-        "title": "Brute-Force Credential Access",
-        "tactic": "Credential Access",
-        "data_sources": "Authentication Logs, Windows Event Logs, Network Traffic",
-        "protocol": "Various (RDP, SMB, SSH, HTTP, etc.)",
-        "os": "Windows, Linux, macOS",
-        "objective": "Adversaries may attempt to gain unauthorized access to accounts by systematically guessing passwords.",
-        "scope": "Monitor authentication logs and network traffic for repeated failed login attempts.",
-        "threat_model": "Attackers systematically attempt different username and password combinations to gain unauthorized access.",
-        "hypothesis": [
-            "Are multiple failed login attempts occurring in rapid succession?",
-            "Are login attempts originating from unusual geographic locations?",
-            "Are known compromised credentials being used in authentication attempts?"
-        ],
+        "id": "T1110",  # Tactic Technique ID
+        "url_id": "1110",  # URL segment for technique reference
+        "title": "Brute Force",  # Name of the attack technique
+        "description": "Adversaries may use brute force techniques to gain access to accounts when passwords are unknown or when password hashes are obtained. Without knowledge of the password for an account or set of accounts, an adversary may systematically guess the password using a repetitive or iterative mechanism. Brute forcing passwords can take place via interaction with a service that will check the validity of those credentials or offline against previously acquired credential data, such as password hashes. Brute forcing credentials may take place at various points during a breach. For example, adversaries may attempt to brute force access to Valid Accounts within a victim environment leveraging knowledge gathered from other post-compromise behaviors such as OS Credential Dumping, Account Discovery, or Password Policy Discovery. Adversaries may also combine brute forcing activity with behaviors such as External Remote Services as part of Initial Access.",  
+        "tags": [],  
+        "tactic": "Credential Access",  
+        "protocol": "Containers, IaaS, Identity Provider, Linux, Network, Office Suite, SaaS, Windows, macOS",  
+        "os": "Linux, Windows, macOS",  
         "tips": [
-            "Monitor for Event ID 4625 (failed logon attempts) and 4768 (TGT request failures).",
-            "Analyze network traffic for high-volume authentication attempts.",
-            "Implement account lockout policies to prevent brute-force attacks."
-        ],
-        "log_sources": [
-            {"type": "Windows Event Logs", "source": "Security.evtx", "destination": "System.evtx"},
-            {"type": "Network Traffic", "source": "Firewall Logs", "destination": "Authentication Systems"},
-            {"type": "Authentication Logs", "source": "Domain Controller", "destination": "SIEM"}
-        ],
-        "source_artifacts": [
-            {"type": "Authentication Logs", "location": "Domain Controller", "identify": "Failed login attempts"}
-        ],
-        "destination_artifacts": [
-            {"type": "Firewall Logs", "location": "Perimeter Network", "identify": "High-volume authentication requests"}
-        ],
-        "detection_methods": [
-            "Analyze failed authentication attempts over time.",
-            "Monitor for anomalous login attempts from different geographic regions.",
-            "Correlate failed logins with known breached credentials."
-        ],
-        "apt": ["G0016", "G0032"],
-        "spl_query": [
-            "index=windows EventCode=4625 | stats count by Account_Name, Source_Network_Address",
-            "index=firewall_logs action=blocked | search authentication failure | table Source_IP, Destination"
-        ],
-        "hunt_steps": [
-            "Identify high-frequency failed login attempts.",
-            "Correlate login attempts with known compromised credential databases.",
-            "Investigate login sources and determine legitimacy."
-        ],
-        "expected_outcomes": [
-            "Unauthorized access attempts detected and mitigated.",
-            "False positives minimized with improved detection baselines."
-        ],
-        "false_positive": "Users may mistype their passwords multiple times, triggering failed login alerts.",
-        "clearing_steps": [
-            "Disable compromised accounts and enforce password changes.",
-            "Update firewall rules to block repeated brute-force attempts from malicious IPs."
-        ],
+            "Monitor authentication logs for system and application login failures of Valid Accounts.",
+            "If authentication failures are high, then there may be a brute force attempt to gain access using legitimate credentials.",
+            "Monitor for many failed authentication attempts across various accounts that may result from password spraying attempts.",
+            "It is difficult to detect when hashes are cracked, since this is generally done outside the scope of the target network."
+        ],  
+        "data_sources": "Application Log: Application Log Content, Command: Command Execution, User Account: User Account Authentication",  
+        "log_sources": [  
+            {"type": "Authentication Logs", "source": "Failed Login Attempts", "destination": "Security Logs"}  
+        ],  
+        "source_artifacts": [  
+            {"type": "Password Hash", "location": "/etc/shadow", "identify": "Linux Password Hashes"},  
+            {"type": "Credential Store", "location": "HKEY_LOCAL_MACHINE\\SAM", "identify": "Windows SAM Database"}  
+        ],  
+        "destination_artifacts": [  
+            {"type": "Log File", "location": "/var/log/auth.log", "identify": "Linux Authentication Logs"}  
+        ],  
+        "detection_methods": ["Failed Authentication Monitoring", "User Behavior Analytics"],  
+        "apt": ["APT39", "Lebanese Cedar", "Lazarus", "Qakbot", "FIN5"],  
+        "spl_query": ["index=auth_logs | search brute_force_attempts"],  
+        "hunt_steps": ["Check for high volumes of failed login attempts.", "Analyze patterns of login attempts across multiple accounts."],  
+        "expected_outcomes": ["Detection of brute force attacks attempting to gain unauthorized access."],  
+        "false_positive": "Legitimate users may trigger failed logins due to forgotten passwords.",  
+        "clearing_steps": ["Enforce strong password policies and lockout mechanisms.", "Reset affected accounts and investigate potential breaches."],  
         "mitre_mapping": [
-            {"tactic": "Credential Access", "technique": "T1556 (Modify Authentication Process)", "example": "Attackers attempt to bypass authentication by modifying login mechanisms."}
-        ],
-        "watchlist": [
-            "Monitor for repeated authentication failures in a short time frame.",
-            "Detect multiple login attempts from different locations for the same account."
-        ],
-        "enhancements": [
-            "Implement Multi-Factor Authentication (MFA) to prevent brute-force attacks.",
-            "Enforce account lockout policies after multiple failed login attempts."
-        ],
-        "summary": "Adversaries may attempt to gain unauthorized access by brute-forcing credentials.",
-        "remediation": "Implement MFA, strong password policies, and lockout mechanisms to prevent brute-force attacks.",
-        "improvements": "Improve monitoring for failed login attempts and correlate with known threat intelligence sources."
+            {"tactic": "Credential Access", "technique": "T1110", "example": "Brute force attacks used to gain unauthorized access to valid accounts."}
+        ],  
+        "watchlist": ["Multiple failed authentication attempts", "Unusual login attempts from different IP addresses"],  
+        "enhancements": ["Implement multi-factor authentication (MFA).", "Monitor for patterns of automated login attempts."],  
+        "summary": "Brute force attacks allow adversaries to systematically guess passwords or crack password hashes to gain unauthorized access to accounts.",  
+        "remediation": "Monitor authentication logs and enforce strong password policies to prevent brute force attacks.",  
+        "improvements": "Enhance detection rules for abnormal login activity and implement account lockout mechanisms."  
     }
