@@ -7,14 +7,13 @@ def get_content():
         "data_sources": "Process Monitoring, Command-Line Logging, Windows Event Logs, Sysmon",
         "protocol": "CLI",
         "os": "Windows",
-        "objective": "Detect and mitigate malicious usage of the Windows Command Shell for execution of unauthorized commands or scripts.",
-        "scope": "Monitor command-line activity for suspicious execution patterns, unauthorized script execution, and potential abuse of built-in system utilities.",
-        "threat_model": "Adversaries may use the Windows Command Shell to execute malicious commands, scripts, and binaries to establish persistence, escalate privileges, or move laterally.",
-        "hypothesis": [
-            "Are there unauthorized command executions occurring on critical systems?",
-            "Are there command-line activities deviating from normal usage patterns?",
-            "Are built-in utilities like cmd.exe being abused for lateral movement or privilege escalation?"
+        "tips": [
+            "Monitor cmd.exe usage for suspicious command-line arguments or unexpected process trees.",
+            "Capture and analyze batch files (.bat/.cmd) that appear in unusual directories.",
+            "Restrict or disable script execution for non-admin users if not needed.",
+            "Baseline legitimate cmd.exe usage to differentiate from malicious activity."
         ],
+        "data_sources": "Windows Security, Windows System, Sysmon, EDR telemetry",
         "log_sources": [
             {"type": "Process Monitoring", "source": "Sysmon (Event ID 1 - Process Creation)"},
             {"type": "Command-Line Logging", "source": "Windows Security Logs (Event ID 4688)"},
@@ -25,7 +24,16 @@ def get_content():
             "Detect abnormal use of command-line scripting for automation or administrative tasks.",
             "Identify execution of commands that disable security controls or alter system configurations."
         ],
-        "spl_query": ["index=windows sourcetype=WinEventLog EventCode=4688 Image=""C:\\Windows\\System32\\cmd.exe"" | stats count by ParentImage, CommandLine, User"],
+        "apt": [
+            "APT41",
+            "Gamaredon",
+            "FIN7",
+            "Cobalt Group"
+        ],
+        "spl_query": [
+            '`windows` EventCode=4688 Image=""C:\\Windows\\System32\\cmd.exe" \n| stats count by ParentImage, CommandLine, User',
+            "`windows-security` EventCode=4688 CommandLine=*cmd.exe* \n| stats count by Host, AccountName, CommandLine"
+            ],
         "hunt_steps": [
             "Run Queries in SIEM: Identify unauthorized command-line executions and suspicious script activity.",
             "Correlate with Threat Intelligence: Validate suspicious command activity against known attack patterns.",

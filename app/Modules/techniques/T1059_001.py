@@ -10,20 +10,13 @@ def get_content():
         "data_sources": "Process Monitoring, Command-Line Logging, PowerShell Logs, Script Block Logging",
         "protocol": "PowerShell",
         "os": "Windows",
-        "objective": "Detect and mitigate malicious PowerShell activity used for execution, automation, or post-exploitation.",
-        "scope": "Monitor PowerShell command execution for anomalies, detect script-based threats, and analyze malicious PowerShell payloads.",
-        "threat_model": "Adversaries use PowerShell for malicious execution, automation, reconnaissance, and payload delivery.",
-        "hypothesis": [
-            "Are there unauthorized PowerShell script executions?",
-            "Is PowerShell being used for credential dumping or lateral movement?",
-            "Are there obfuscated or encoded PowerShell commands being executed?"
-        ],
         "tips": [
-            "Monitor PowerShell script block logs (Event ID 4104).",
-            "Detect execution of encoded commands via base64.",
-            "Analyze remote execution attempts using PowerShell Remoting (Event ID 4688, 4103).",
-            "PowerShell (v5 and later) Logging will automatically logs suspicious scripts for analysis and ConsoleHost_history.txt records the last 4096 PowerShell commands.",
+            "Enable PowerShell script block logging for greater visibility.",
+            "Monitor changes to PowerShell execution policy via the Registry or command line.",
+            "Look for suspicious usage of System.Management.Automation.dll in unusual processes.",
+            "Block or restrict PowerShell usage in environments where it is not required."
         ],
+        "data_sources": "Windows Powershell, Windows Security, Windows System, Sysmon",
         "log_sources": [
             {"type": "Process Execution", "source": "Sysmon (Event ID 1)", "destination": "Amcache, Shimcache"},
             {"type": "Command-Line Logging", "source": "Windows Event ID 4688", "destination": "Amcache, Shimcache"},

@@ -7,14 +7,13 @@ def get_content():
         "data_sources": "File System Logs, Removable Media Logs, Endpoint Logs, Intrusion Detection Systems (IDS)",
         "protocol": "USB, SD Card, External Hard Drive, Custom Offline Transfer Mechanisms",
         "os": "Windows, Linux, macOS",
-        "objective": "Detect and mitigate adversaries using removable media as a command-and-control (C2) channel to bypass network-based detection mechanisms.",
-        "scope": "Identify file transfers, scripts, or payloads being executed from removable media devices as part of offline C2 communications.",
-        "threat_model": "Adversaries leverage removable media devices to transfer C2 instructions, payloads, or exfiltrated data in environments where direct network communication is restricted.",
-        "hypothesis": [
-            "Are there unauthorized script executions or file modifications from removable media?",
-            "Are adversaries leveraging USB drives to establish offline C2 communication?",
-            "Is there an increase in removable media activity on air-gapped systems?"
+        "tips": [
+            "Monitor file reads/writes on removable media for unexpected behavior.",
+            "Restrict or disable auto-run and auto-play features to limit malicious execution.",
+            "Use device control software to block or alert on unauthorized USB or other removable drives.",
+            "Regularly scan removable media for malware before connecting to critical systems."
         ],
+        "data_sources": "Drive, File, Process",
         "log_sources": [
             {"type": "File System Logs", "source": "Windows Security Event Logs (Event ID 4663, 4660)"},
             {"type": "Removable Media Logs", "source": "USB Device Logs, Device Control Logs"},
@@ -25,6 +24,9 @@ def get_content():
             "Monitor for execution of files stored on removable media.",
             "Detect unauthorized USB devices being connected to critical systems.",
             "Identify unexpected modifications to files on removable drives."
+        ],
+        "apt": [
+            "APT28"
         ],
         "spl_query": [
             "index=endpoint sourcetype=sysmon \n| search event_id=6 OR event_id=11 \n| stats count by host, file_path"
