@@ -32,10 +32,10 @@ def get_content():
         "false_positive": "False positives may occur due to legitimate use of certain IP addresses or domains commonly used by APT28, such as those used for email infrastructure. Create rules to validate the context of these occurrences.",  # Known false positives and guidance
         "clearing_steps": ["Use antivirus software to remove malware, manually inspect affected systems for persistence mechanisms, and ensure that all backdoors have been closed.", "Review network traffic logs to identify and remove any other backdoors or command-and-control channels."],  # Steps for remediation
         "ioc": {  # Indicators of Compromise (IOCs)
-            "sha256": ["12c6d378a4c66b3b44b90d91f68b9fa282b9fce9d99d073a33fa63a539b104e9"],  # Example SHA256 hash value
-            "md5": ["f7d93f8d6a1c6b7fc54d6cfcc598a13d"],  # Example MD5 hash value
-            "ip": ["185.215.232.33", "5.189.133.50"],  # Example IP addresses
-            "domain": ["fancybear.ru", "apt28.com"],  # Example domains
-            "resources": ["https://www.fireeye.com/blog/threat-research/2020/06/fancy-bear-disk-to-ram-malware.html"]  # Additional resources or references for IOCs if applicable
+            "sha256": [""],  # Example SHA256 hash value
+            "md5": [""],  # Example MD5 hash value
+            "ip": ["", ""],  # Example IP addresses
+            "domain": ["", ""],  # Example domains
+            "resources": ["", ""]  # Additional resources or references for IOCs if applicable
         }
     }
