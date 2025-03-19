@@ -12,9 +12,6 @@ config_bp = Blueprint('config', __name__, url_prefix='/config')
 
 
 def handle_arguments():
-    """
-    Handle command-line arguments.
-    """
     parser = argparse.ArgumentParser(
         description="Hunt-AI Application Command-Line Interface",
         usage="python3 app.py [-v | --custom-help]"

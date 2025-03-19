@@ -9,10 +9,11 @@ from flask_session import Session
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from app.Blueprints.models import db, User
-from app.Blueprints.user_creation_bp import user_creation_bp
-from app.Blueprints.routes import routes_bp
-from app.Blueprints.Routes.notebook_bp import notebook_bp
+from Blueprints.models import db, User
+from Blueprints.user_creation_bp import user_creation_bp
+from Blueprints.routes import routes_bp
+from Blueprints.Routes.notebook_bp import notebook_bp
+
 
 from static.tips import get_random_tip_or_joke
 

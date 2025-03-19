@@ -24,35 +24,7 @@ from Modules.Investigate.filehash import get_filehash_content
 # Blueprint definition
 routes_bp = Blueprint('routes', __name__)
 
-# Helper functions
-def get_readme_description():
-    """Extracts and returns the project description from README.md."""
-    README_PATH = os.path.join(os.getcwd(), "README.md")
-    if not os.path.exists(README_PATH):
-        return "No description available."
-
-    description = []
-    capture = False
-
-    try:
-        with open(README_PATH, "r", encoding="utf-8") as readme_file:
-            for line in readme_file:
-                if "HUNT-AI" in line:
-                    capture = True
-                    description.append(line.strip())
-                elif capture and not line.strip():
-                    break
-                elif capture:
-                    description.append(line.strip())
-    except Exception as e:
-        return f"Error reading README.md: {e}"
-
-    return " ".join(description) if description else "No description available."
-
 def perform_search(query):
-    """
-    Searches through all technique fields to match the query.
-    """
     query = query.lower()
     techniques = load_techniques()  # Load all techniques
     results = []
@@ -90,14 +62,24 @@ def perform_search(query):
     return results
 
 
+@routes_bp.route('/search')
+def search():
+    query = request.args.get('query')
+    results = perform_search(query)  # Your search function
+    if not results:
+        flash("No results found", "warning")
+        # Redirect back to the referring page or a default route if no referrer is available.
+        return redirect(request.referrer or url_for('routes.home'))
+    return render_template('search_results.html', query=query, results=results)
+
+
 @routes_bp.route('/')
 def home():
-    cover_images_path = os.path.join('app', 'static', 'Pictures', 'Cover_Images')
+    cover_images_path = os.path.join('static', 'Pictures', 'Cover_Images')
     cover_images = [os.path.join('Pictures', 'Cover_Images', filename) 
                     for filename in os.listdir(cover_images_path) 
                     if filename.lower().endswith(('png', 'jpg', 'jpeg', 'gif'))]
     selected_image = random.choice(cover_images) if cover_images else None
-    readme_description = get_readme_description()
 
     links = [
         {"name": "Visit Start.me", "url": "https://start.me/p/qbzw4e/cyber-security"},
@@ -116,7 +98,6 @@ def home():
         full_ascii_art=full_ascii_art_stripped,
         infinitei=infinitei_stripped,
         links=links,
-        readme_description=readme_description,
         selected_image=selected_image,
         random_tip=random_tip,  # Pass the formatted tip only
         random_tip_type=random_tip_type  # Pass the type for styling
@@ -125,10 +106,7 @@ def home():
 
 # Function to dynamically load tactics from the Tactics folder
 def load_tactics():
-    """
-    Dynamically loads tactics from the Tactics folder and sorts them by tactic_id.
-    """
-    tactics_path = os.path.join(os.getcwd(),'app', 'Modules', 'Tactics')
+    tactics_path = os.path.join(os.getcwd(), 'Modules', 'Tactics')
     tactics = []
 
     # Iterate through all Python files in the Tactics folder
@@ -232,11 +210,8 @@ def investigate_malware():
 
 
 def load_techniques():
-    """
-    Dynamically loads all techniques from the /Modules/techniques/ folder.
-    """
     techniques = {}
-    techniques_path = os.path.join(os.getcwd(),"app", "Modules", "techniques")
+    techniques_path = os.path.join(os.getcwd(), "Modules", "techniques")
 
     if not os.path.exists(techniques_path):
         print(f"❌ Folder not found: {techniques_path}")
@@ -327,7 +302,6 @@ def technique_page(url_id):
     return render_template('technique.html', technique=selected_technique)
 
 
-
 @routes_bp.route('/tactic_techniques/<tactic>')
 def tactic_techniques(tactic):
     # Load the tactic's techniques
@@ -335,14 +309,3 @@ def tactic_techniques(tactic):
     techniques = load_techniques_for_tactic(tactic_folder)
     
     return jsonify(list(techniques.values()))
-
-
-@routes_bp.route('/search')
-def search():
-    query = request.args.get('query')
-    results = perform_search(query)  # Your search function
-    if not results:
-        flash("No results found", "warning")
-        # Redirect back to the referring page or a default route if no referrer is available.
-        return redirect(request.referrer or url_for('routes.home'))
-    return render_template('search_results.html', query=query, results=results)
