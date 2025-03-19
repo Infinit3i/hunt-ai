@@ -7,26 +7,27 @@ def get_content():
         "url_id": "T1543/003",
         "title": "Create or Modify System Process: Windows Service",
         "tactic": "Persistence, Privilege Escalation",
-        "data_sources": "Windows Event Logs, Registry, File System",
-        "protocol": "N/A",
-        "os": "Windows",
-        "objective": "Adversaries may create or modify Windows services for persistence or privilege escalation.",
-        "scope": "Monitor service creation and modification events.",
-        "threat_model": "Attackers can install malicious services or modify existing ones to maintain persistence.",
-        "hypothesis": [
-            "Are new services being created with unusual names?",
-            "Are existing services being modified unexpectedly?",
-            "Are attackers abusing service misconfigurations for privilege escalation?"
+        "description": "Adversaries may create or modify Windows services to execute malicious payloads for persistence or privilege escalation. Windows services perform background system functions and can be configured to start at boot. Attackers may install new services, modify existing ones, or exploit vulnerable drivers to execute malicious code.",
+        "tags": ["Persistence", "Privilege Escalation", "Windows", "Windows Service"],
+        "tactic": "Persistence, Privilege Escalation",
+        "protocol": "Windows API, Windows Service Control Manager",
+        "os": ["Windows"],
+        "tips": [
+            "Monitor processes and command-line arguments for actions that create or modify services.",
+            "Detect execution of 'sc.exe', 'PowerShell', or 'wmic' for service modifications.",
+            "Monitor Windows Registry modifications related to service configuration."
         ],
+        "data_sources": "Process Creation, Windows Registry, Service Creation, Command Execution, Driver Load",
         "tips": [
             "Monitor Event ID 7045 (service installation) and 4697 (non-default service creation).",
             "Check for services with unusual startup types (e.g., auto-start with unsigned binaries).",
             "Detect suspicious service binaries placed in writable directories."
         ],
         "log_sources": [
-            {"type": "Windows Event Logs", "source": "Security.evtx", "destination": "System.evtx"},
+            {"type": "Windows Security", "source": "", "destination": "4624 - type 3, 4697"},
+            {"type": "Windows System", "source": "", "destination": "7034, 7035, 7036, 7040, 7045"},
             {"type": "Registry", "source": "SYSTEM\\CurrentControlSet\\Services"},
-            {"type": "File System", "source": "Prefetch, Service Executables"}
+            {"type": "File System", "source": "Prefetch, Service Executables"},
         ],
         "source_artifacts": [
             {"type": "Prefetch", "location": "C:\\Windows\\Prefetch", "identify": "sc.exe, services.exe"}
@@ -39,10 +40,9 @@ def get_content():
             "Analyze service executable paths for anomalies.",
             "Check for unsigned service executables."
         ],
-        "apt": ["G0007", "G0032"],
+        "apt": ["ZxShell", "Bankshot", "Hydraq", "Sednit", "BlackEnergy", "Lotus Blossom", "Sunburst", "Grim Spider", "AcidBox", "Carbanak", "WastedLocker", "Cuba", "Kazuar", "APT41", "DarkVishnya", "Winnti"],
         "spl_query": [
-            "index=windows EventCode=7045 | table Time, ServiceName, ImagePath",
-            "index=windows EventCode=4697 | table Time, ServiceName, User"
+            "index=windows (EventCode=7045 OR EventCode=4697) \n| table Time, ServiceName, ImagePath",
         ],
         "hunt_steps": [
             "Search for recently created services in the registry.",
@@ -76,31 +76,8 @@ def get_content():
 
 
 '''
-        {
-            "title": "Source Event Logs",
-            "content": """
-No specific source event logs are generated for service-based persistence.
-            """
-        },
-        {
-            "title": "Destination Event Logs",
-            "content": """
-### Destination Event Logs
-- **security.evtx**
-    - `4624` Logon Type 3
-        - Source IP/Logon User Name
-    - `4697`
-        - Records service installation (non-default)
-    - Useful for centralized log monitoring.
-
-- **system.evtx**
-    - `7034` - Service crashed unexpectedly.
-    - `7035` - Service sent a Start/Stop control.
-    - `7036` - Service started or stopped.
-    - `7040` - Start type changed (Boot | On Request | Disabled).
-    - `7045` - A service was installed on the system.
-            """
-        },
+     
+          
         {
             "title": "Source Registry",
             "content": """

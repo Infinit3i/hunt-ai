@@ -7,17 +7,17 @@ def get_content():
         "url_id": "1542/001",
         "title": "System Firmware: BIOS Flashing",
         "tactic": "Persistence",
-        "data_sources": "Firmware Version Monitoring, Windows Event Logs, Registry, File Integrity Monitoring",
-        "protocol": "N/A",
-        "os": "Windows, Linux, macOS",
-        "objective": "Detect and mitigate unauthorized BIOS flashing that enables advanced persistence at the firmware level.",
-        "scope": "Monitor firmware modifications and unauthorized flashing attempts.",
-        "threat_model": "Adversaries may modify the BIOS or UEFI firmware to establish persistent control over a system, executing malicious code before the OS loads.",
-        "hypothesis": [
-            "Has the BIOS/UEFI firmware been altered from the original manufacturer version?",
-            "Are unauthorized BIOS flashing tools being executed on endpoints?",
-            "Are there mismatches between firmware integrity checks and vendor-provided binaries?"
+        "description": "Adversaries may create or modify Launch Agents to repeatedly execute malicious payloads as part of persistence. When a user logs in, per-user launchd processes start, loading parameters for each launch-on-demand user agent from property list (.plist) files in `/System/Library/LaunchAgents`, `/Library/LaunchAgents`, and `~/Library/LaunchAgents`. Attackers may install a new Launch Agent that executes at login by placing a .plist file in the appropriate directories and setting the `RunAtLoad` or `KeepAlive` keys to `true`.",
+        "tags": ["Persistence", "Privilege Escalation", "macOS", "Launch Agent"],
+        "tactic": "Persistence, Privilege Escalation",
+        "protocol": "macOS Launchd, System Daemons",
+        "os": ["macOS"],
+        "tips": [
+            "Monitor Launch Agent creation through additional .plist files.",
+            "Use file monitoring applications to track changes in LaunchAgent directories.",
+            "Validate Launch Agents with 'RunAtLoad' set to 'true' to ensure they align with policy."
         ],
+        "data_sources": "File Creation, File Modification, Service Creation, Command Execution",
         "tips": [
             "Monitor firmware hashes and compare with known-good versions.",
             "Enable Secure Boot to prevent unauthorized firmware changes.",
@@ -36,6 +36,9 @@ def get_content():
         ],
         "detection_methods": [
             "Monitor registry keys for BIOS flashing tools.",
+            "Monitor for new or modified LaunchAgent .plist files.",
+            "Detect execution of 'launchctl' commands related to Launch Agents.",
+            "Analyze persistence configurations with 'RunAtLoad' or 'KeepAlive' settings.",
             "Track Event ID 1100 (Windows Audit Log Cleared) before firmware changes.",
             "Compare firmware versions with manufacturer-provided binaries."
         ],
