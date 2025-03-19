@@ -4,17 +4,17 @@ def get_content():
         "url_id": "T1485",
         "title": "Data Wiping Activity",
         "tactic": "Impact",
-        "data_sources": "Endpoint, File System, Process Monitoring",
-        "protocol": "N/A",
-        "os": "Windows, Linux, macOS",
-        "objective": "Detect and mitigate data wiping attacks, where adversaries delete or overwrite files to disrupt operations or remove forensic evidence.",
-        "scope": "Identify unusual file deletions or modifications that indicate data-wiping attempts. Monitor mass file deletion commands or abnormal changes in file system structures. Detect adversaries using scripts or malware to wipe sensitive data.",
-        "threat_model": "Attackers may delete critical files to disrupt business operations or destroy forensic evidence. Data wiping tools (e.g., sdelete, rm -rf, cipher /w, dd) are often used to overwrite files beyond recovery.",
-        "hypothesis": [
-            "Are there unexpected file deletions on critical endpoints?",
-            "Are scripts or commands mass-deleting files?",
-            "Are attackers targeting backup files or logs for deletion?"
+        "description": "Adversaries may destroy data and files on specific systems or in large numbers on a network to interrupt availability.",
+        "tags": ["Data Destruction", "Impact"],
+        "tactic": "Impact",
+        "protocol": "",
+        "os": "Windows, Linux, macOS, Containers, IaaS",
+        "tips": [
+            "Monitor execution and command-line parameters of binaries that could be involved in data destruction.",
+            "Look for large quantities of file modifications in user directories and system folders.",
+            "In cloud environments, detect anomalous high-volume deletion events."
         ],
+        "data_sources": "Cloud Storage, Command, File, Image, Instance, Process, Snapshot, Volume",
         "log_sources": [
             {"type": "File System Activity", "source": "Sysmon (Event ID 23 - File Delete), Windows Security Logs"},
             {"type": "Process Execution", "source": "Sysmon (Event ID 1 - Process Creation, Event ID 13 - Registry Modification)"},
