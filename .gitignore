@@ -8,3 +8,4 @@ __init__.py
 users.db
 *.json
 /flask_session
+/app/flask_session/*
