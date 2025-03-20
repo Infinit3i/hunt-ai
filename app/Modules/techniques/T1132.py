@@ -3,17 +3,30 @@ def get_content():
         "id": "T1132",
         "url_id": "T1132",
         "title": "Data Encoding",
-        "tactic": "Command and Control",
-        "data_sources": "Network Traffic, Firewall Logs, Proxy Logs, Endpoint Logs, Intrusion Detection Systems (IDS)",
-        "protocol": "HTTP, HTTPS, DNS, SMTP, FTP, TCP, UDP",
-        "os": "Platform Agnostic",
-        "objective": "Detect and mitigate adversaries using data encoding techniques to obfuscate command-and-control (C2) communications and evade detection.",
-        "scope": "Identify obfuscated network traffic patterns, encoded payloads, and disguised command-and-control (C2) channels.",
-        "threat_model": "Adversaries use encoding techniques such as Base64, XOR, or custom algorithms to hide malicious communications and avoid detection.",
-        "hypothesis": [
-            "Are there unusual encoded payloads in network traffic?",
-            "Is data being exfiltrated using non-standard encoding techniques?",
-            "Are adversaries leveraging encoding to bypass security controls?"
+        "description": "Adversaries may encode data to make the content of command and control traffic more difficult to detect. Some data encoding systems may also result in data compression, such as gzip.",  # Simple description (one pair of quotes)
+        "tags": [
+            "Data Encoding",
+            "Command and Control",
+            "Network Traffic",
+            "Binary-to-Text",
+            "Character Encoding",
+            "Wikipedia Binary-to-text Encoding",
+            "Wikipedia Character Encoding",
+            "Mythc Documentation",
+            "ProofPoint Ursnif Aug 2016",
+            "Forcepoint Monsoon",
+            "Cisco H1N1 Part 2",
+            "Anomali Linux Rabbit 2018",
+            "University of Birmingham C2",
+            "Itzik Kotler, SafeBreach"
+        ],
+        "tactic": "Command and Control",  # Associated MITRE ATT&CK tactic
+        "protocol": "Various",  # Protocol used in the attack technique
+        "os": "Linux, Windows, macOS",  # Targeted operating systems
+        "tips": [
+            "Analyze network data for uncommon data flows (e.g., a client sending significantly more data than it receives)",
+            "Look for processes utilizing the network that do not normally communicate or have never been seen before",
+            "Analyze packet contents for unexpected protocol behavior on the port in use"
         ],
         "log_sources": [
             {"type": "Network Traffic", "source": "Zeek (Bro), Suricata, Wireshark"},

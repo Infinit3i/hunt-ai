@@ -6,23 +6,29 @@ def get_content():
         "id": "T1486",
         "url_id": "T1486",
         "title": "Data Encrypted for Impact",
-        "tactic": "Impact",
-        "data_sources": "File monitoring, Process monitoring, Windows Event Logs, Endpoint Detection and Response (EDR)",
-        "protocol": "N/A",
-        "os": "Windows, Linux, macOS",
-        "objective": "Adversaries encrypt files on a victim's system to disrupt operations and demand ransom payments.",
-        "scope": "Detect unauthorized encryption activities and prevent ransomware attacks.",
-        "threat_model": "Attackers deploy ransomware to encrypt valuable files and demand payment for decryption keys.",
-        "hypothesis": [
-            "Are critical files being encrypted by unexpected processes?",
-            "Are backup files being deleted or modified in correlation with file encryption?",
-            "Are systems showing signs of unauthorized encryption tools being executed?"
+        "description": "Adversaries may encrypt data on target systems or networks to interrupt availability, often demanding ransom for decryption. They may also destroy keys to render data permanently inaccessible.",  # Simple description (one pair of quotes)
+        "tags": [
+            "Data Encrypted for Impact",
+            "Ransomware",
+            "Encryption",
+            "Worm-like Propagation",
+            "MBR Encryption",
+            "Cloud Storage",
+            "Extortion",
+            "Availability",
+            "Impact",
+            "File System"
         ],
+        "tactic": "Impact",  # Associated MITRE ATT&CK tactic
+        "protocol": "Various",  # Protocol used in the attack technique
+        "os": "IaaS, Linux, Windows, macOS",  # Targeted operating systems
         "tips": [
-            "Monitor file access patterns to detect rapid encryption of multiple files.",
-            "Alert on unexpected mass file renaming or extensions commonly used in ransomware attacks (e.g., .locked, .crypt).",
-            "Use behavioral analysis tools to detect ransomware-like behavior."
+            "Monitor process execution for vssadmin, wbadmin, bcdedit, and other utilities commonly abused for encryption or data destruction",
+            "Track large volumes of file modifications and newly created ransom note files",
+            "Watch for unusual kernel driver installation and suspicious admin share access",
+            "In cloud environments, monitor for anomalous changes to storage objects or replaced copies"
         ],
+        "data_sources": "Cloud Storage, Command, File, Network Share, Process",  # Relevant data sources
         "log_sources": [
             {"type": "File Monitoring", "source": "Sysmon Event ID 11 (File Creation)", "destination": "EDR Alerts"},
             {"type": "Process Monitoring", "source": "Sysmon Event ID 1 (Process Creation)", "destination": "Security Logs"},

@@ -3,17 +3,26 @@ def get_content():
         "id": "T1074",
         "url_id": "T1074",
         "title": "Sensitive Document Access",
-        "tactic": "Collection",
-        "data_sources": "File Access Logs, SMB/NFS Logs, Cloud Storage Logs, Endpoint Detection & Response (EDR)",
-        "protocol": "SMB, NFS, HTTP, HTTPS",
-        "os": "Windows, Linux, macOS",
-        "objective": "Detect and mitigate unauthorized access to sensitive documents, which may indicate insider threats, compromised credentials, or unauthorized data access attempts.",
-        "scope": "Monitor file access activity on network shares, cloud storage, and local systems. Identify document modifications, copies, or deletions occurring outside normal working hours. Detect large-scale document access indicative of exfiltration attempts.",
-        "threat_model": "Adversaries may attempt to access or exfiltrate sensitive documents through compromised user credentials, insider threats, or malware scanning for sensitive data.",
-        "hypothesis": [
-            "Are there users accessing large volumes of sensitive files unexpectedly?",
-            "Is document access occurring outside normal working hours?",
-            "Are users copying, deleting, or modifying critical files in bulk?"
+        "description": "Adversaries may stage collected data in a central location or directory prior to Exfiltration, potentially combining files or using cloud instances to minimize C2 connections and evade detection.",  # Simple description
+        "tags": [
+            "Data Staging",
+            "Collection",
+            "Cloud",
+            "PWC Cloud Hopper April 2017",
+            "Mandiant M-Trends 2020",
+            "Microsoft Volt Typhoon May 2023",
+            "CrowdStrike Grim Spider May 2019",
+            "Kaspersky Lyceum October 2021",
+            "ClearSky Siamesekitten August 2021",
+            "CISA Scattered Spider Advisory November 2023"
+        ],
+        "tactic": "Collection",  # Associated MITRE ATT&CK tactic
+        "protocol": "Various",  # Protocol used in the attack technique
+        "os": "IaaS, Linux, Windows, macOS",  # Targeted operating systems
+        "tips": [
+            "Monitor for processes that read files from multiple locations and write them to a single directory or file",
+            "Check for compression or encryption utilities (e.g., 7zip, RAR, ZIP) in unexpected locations",
+            "Audit publicly writable directories and central staging folders (e.g., temp, recycle bin) for suspicious archives"
         ],
         "log_sources": [
             {"type": "File Access Logs", "source": "Windows Security Logs (Event ID 4663), Sysmon (Event ID 11), Linux AuditD"},

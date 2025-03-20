@@ -3,18 +3,28 @@ def get_content():
         "id": "T1132.001",
         "url_id": "T1132/001",
         "title": "Data Encoding: Standard Encoding",
-        "tactic": "Command and Control",
-        "data_sources": "Network Traffic, Firewall Logs, Proxy Logs, Endpoint Logs, Intrusion Detection Systems (IDS)",
-        "protocol": "HTTP, HTTPS, DNS, SMTP, FTP, TCP, UDP",
-        "os": "Platform Agnostic",
-        "objective": "Detect and mitigate adversaries using standard encoding techniques such as Base64, URL encoding, or UTF-8 encoding to obfuscate command-and-control (C2) communications and evade detection.",
-        "scope": "Identify encoded network traffic patterns, encoded payloads, and disguised command-and-control (C2) channels.",
-        "threat_model": "Adversaries use standard encoding techniques to transform data, allowing them to bypass security controls and avoid detection in network and endpoint monitoring.",
-        "hypothesis": [
-            "Are there unusual Base64 or URL-encoded payloads in network traffic?",
-            "Is data being exfiltrated using standard encoding techniques?",
-            "Are adversaries encoding commands to evade detection?"
+        "description": "Adversaries may encode data with a standard data encoding system to make C2 traffic more difficult to detect. Some data encoding systems may also result in data compression, such as gzip.",  # Simple description (one pair of quotes)
+        "tags": [
+            "Data Encoding",
+            "Standard Encoding",
+            "Command and Control",
+            "Wikipedia Binary-to-text Encoding",
+            "Wikipedia Character Encoding",
+            "University of Birmingham C2",
+            "Elastic Pikabot 2024",
+            "Elastic Latrodectus May 2024",
+            "ESET ForSSHe December 2018",
+            "Lotus Blossom Jun 2015"
         ],
+        "tactic": "Command and Control",  # Associated MITRE ATT&CK tactic
+        "protocol": "Various",  # Protocol used in the attack technique
+        "os": "Linux, Windows, macOS",  # Targeted operating systems
+        "tips": [
+            "Analyze network data for uncommon data flows (e.g., a client sending significantly more data than it receives)",
+            "Identify processes utilizing the network that do not normally have network communication or have never been seen before",
+            "Analyze packet contents to detect communications that do not follow expected protocol behavior on the port in use"
+        ],
+        "data_sources": "Network Traffic: Network Traffic Content",
         "log_sources": [
             {"type": "Network Traffic", "source": "Zeek (Bro), Suricata, Wireshark"},
             {"type": "Firewall Logs", "source": "Palo Alto, Fortinet, Cisco ASA"},
