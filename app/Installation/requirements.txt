@@ -4,7 +4,7 @@ flask-login
 flask-session
 flask-sqlalchemy
 flask-testing
-gunicorn==22.0.0
+gunicorn==23.0.0
 redis
 requests
 sqlalchemy
