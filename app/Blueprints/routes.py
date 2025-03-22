@@ -62,20 +62,9 @@ def perform_search(query):
     return results
 
 
-@routes_bp.route('/search')
-def search():
-    query = request.args.get('query')
-    results = perform_search(query)  # Your search function
-    if not results:
-        flash("No results found", "warning")
-        # Redirect back to the referring page or a default route if no referrer is available.
-        return redirect(request.referrer or url_for('routes.home'))
-    return render_template('search_results.html', query=query, results=results)
-
-
 @routes_bp.route('/')
 def home():
-    cover_images_path = os.path.join('static', 'Pictures', 'Cover_Images')
+    cover_images_path = os.path.join('app', 'static', 'Pictures', 'Cover_Images')
     cover_images = [os.path.join('Pictures', 'Cover_Images', filename) 
                     for filename in os.listdir(cover_images_path) 
                     if filename.lower().endswith(('png', 'jpg', 'jpeg', 'gif'))]
@@ -106,7 +95,7 @@ def home():
 
 # Function to dynamically load tactics from the Tactics folder
 def load_tactics():
-    tactics_path = os.path.join(os.getcwd(), 'Modules', 'Tactics')
+    tactics_path = os.path.join(os.getcwd(),'app', 'Modules', 'Tactics')
     tactics = []
 
     # Iterate through all Python files in the Tactics folder
@@ -211,7 +200,7 @@ def investigate_malware():
 
 def load_techniques():
     techniques = {}
-    techniques_path = os.path.join(os.getcwd(), "Modules", "techniques")
+    techniques_path = os.path.join(os.getcwd(),"app", "Modules", "techniques")
 
     if not os.path.exists(techniques_path):
         print(f"❌ Folder not found: {techniques_path}")
@@ -309,3 +298,14 @@ def tactic_techniques(tactic):
     techniques = load_techniques_for_tactic(tactic_folder)
     
     return jsonify(list(techniques.values()))
+
+
+@routes_bp.route('/search')
+def search():
+    query = request.args.get('query')
+    results = perform_search(query)  # Your search function
+    if not results:
+        flash("No results found", "warning")
+        # Redirect back to the referring page or a default route if no referrer is available.
+        return redirect(request.referrer or url_for('routes.home'))
+    return render_template('search_results.html', query=query, results=results)

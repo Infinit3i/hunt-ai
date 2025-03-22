@@ -10,7 +10,7 @@ from datetime import datetime
 notebook_bp = Blueprint('notebook', __name__, url_prefix='/notebook')
 
 # Ensure the notebooks directory exists
-NOTEBOOKS_DIR = os.path.join(os.getcwd(), "notebooks")
+NOTEBOOKS_DIR = "/app/notebooks"
 if not os.path.exists(NOTEBOOKS_DIR):
     os.makedirs(NOTEBOOKS_DIR, exist_ok=True)
 
