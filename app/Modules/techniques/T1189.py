@@ -3,18 +3,17 @@ def get_content():
         "id": "T1189",
         "url_id": "T1189",
         "title": "Drive-by Compromise",
+        "description": "Adversaries may gain access to a system through a user visiting a website over the normal course of browsing. With this technique, the user's web browser is typically targeted for exploitation.",
+        "tags": [],
         "tactic": "Initial Access",
-        "data_sources": "Web Proxy Logs, Network Traffic Analysis, Endpoint Monitoring, Browser Logs",
-        "protocol": "HTTP, HTTPS",
+        "protocol": "HTTP/HTTPS",
         "os": "Windows, Linux, macOS",
-        "objective": "Detect and mitigate malicious website-based attacks that compromise users through drive-by downloads or browser exploits.",
-        "scope": "Monitor for suspicious web activity, exploit delivery attempts, and unexpected file downloads from high-risk domains.",
-        "threat_model": "Adversaries may exploit vulnerabilities in web browsers or embedded plugins to execute code when a user visits a compromised or malicious website.",
-        "hypothesis": [
-            "Are users visiting malicious websites known for exploit delivery?",
-            "Are there unauthorized file downloads occurring without user interaction?",
-            "Are exploit kits being detected in network traffic or endpoint behavior?"
+        "tips": [
+            "Enable browser exploit protection features.",
+            "Restrict scripting languages and plug-ins where possible.",
+            "Use DNS filtering or proxies to block known malicious domains."
         ],
+        "data_sources": "Application Log, File, Network Traffic, Process",
         "log_sources": [
             {"type": "Web Proxy Logs", "source": "URL Filtering, Suspicious Domains Accessed"},
             {"type": "Network Traffic Analysis", "source": "Malicious Payload Delivery, Command and Control (C2) Communications"},

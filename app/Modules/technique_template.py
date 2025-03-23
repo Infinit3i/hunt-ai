@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "",  # Tactic Technique ID (e.g., T1556.001)
-        "url_id": "",  # URL segment for technique reference (e.g., 1556/001)
+        "url_id": "",  # URL segment for technique reference (e.g., T1556/001)
         "title": "",  # Name of the attack technique
         "description": "",  # only use one pair of "" with a simple Description of the attack technique
         "tags": [],  # Tags associated with the technique
