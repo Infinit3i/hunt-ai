@@ -35,8 +35,7 @@ def get_content():
         ],
         "apt": [],
         "spl_query": [
-            "index=macos_logs event_type=process_creation
-| search binary_modification=true"
+            "index=macos_logs event_type=process_creation | search binary_modification=true"
         ],
         "hunt_steps": [
             "Identify recently modified Mach-O binaries",
