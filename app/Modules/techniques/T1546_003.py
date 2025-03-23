@@ -7,17 +7,17 @@ def get_content():
         "url_id": "1546/003",
         "title": "Event Triggered Execution: Windows Management Instrumentation (WMI)",
         "tactic": "Persistence, Execution",
-        "data_sources": "Windows Event Logs, Registry, File System Monitoring, Process Execution",
-        "protocol": "WMI",
+        "description": "Adversaries may establish persistence and elevate privileges by executing malicious content triggered by a WMI event subscription.",
+        "tags": ["wmi", "event subscription", "mof", "WmiPrvSe.exe", "persistence", "privilege escalation"],
+        "tactic": "Persistence",
+        "protocol": "",
         "os": "Windows",
-        "objective": "Detect and mitigate adversaries leveraging WMI for persistence and remote execution.",
-        "scope": "Monitor suspicious WMI activity including unauthorized event consumer registrations, process executions, and registry changes.",
-        "threat_model": "Attackers use WMI for stealthy persistence by registering event consumers that trigger malicious payload execution.",
-        "hypothesis": [
-            "Are unauthorized WMI event consumers being registered?",
-            "Is WMI being used for remote command execution?",
-            "Are there persistent WMI triggers linked to suspicious scripts or binaries?"
+        "tips": [
+            "Monitor for creation of WMI EventFilter, EventConsumer, and FilterToConsumerBinding entries",
+            "Use Autoruns and PowerShell to inspect WMI subscriptions",
+            "Monitor execution from WmiPrvSe.exe as an indicator of malicious WMI event triggers"
         ],
+        "data_sources": "Command, File, Process, WMI",
         "tips": [
             "Monitor Event ID 5857, 5860, and 5861 for suspicious WMI event consumer registrations.",
             "Analyze process executions triggered by `wmiprvse.exe`.",
