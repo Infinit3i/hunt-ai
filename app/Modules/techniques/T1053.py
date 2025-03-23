@@ -12,14 +12,6 @@ def get_content():
         "data_sources": "Windows Event Logs, Process Monitoring, Command Execution, File Monitoring",
         "protocol": "N/A",
         "os": "Windows, Linux, macOS",
-        "objective": "Detect and mitigate adversaries creating or modifying scheduled tasks to execute malicious code.",
-        "scope": "Monitor scheduled task creation and modifications across operating systems to detect persistence mechanisms.",
-        "threat_model": "Attackers leverage scheduled tasks to execute malicious scripts or programs at specified times or system events, gaining persistence and privilege escalation.",
-        "hypothesis": [
-            "Are new scheduled tasks being created by unauthorized users?",
-            "Are scheduled tasks executing suspicious commands or scripts?",
-            "Is there an increase in scheduled task modifications outside of normal administrative activity?"
-        ],
         "log_sources": [
             {"type": "Windows Event Logs", "source": "Event ID 4698 (Task Created), Event ID 4702 (Task Updated), Event ID 4699 (Task Deleted)"},
             {"type": "Process Monitoring", "source": "Sysmon Event ID 1 (Process Creation)"},
