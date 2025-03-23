@@ -1,7 +1,4 @@
 def get_content():
-    """
-    Returns structured content for OS Credential Dumping (T1003).
-    """
     return {
         "id": "T1003",
         "url_id": "T1003",
