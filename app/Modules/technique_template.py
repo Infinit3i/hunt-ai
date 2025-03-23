@@ -33,6 +33,7 @@ def get_content():
         "enhancements": [],  # Suggested improvements to detection
         "summary": "",  # High-level summary of the technique
         "remediation": "",  # Recommended actions to mitigate risk
-        "improvements": ""  # Suggested ways to improve detection and response
+        "improvements": "",  # Suggested ways to improve detection and response
+        "mitre_version": "16.1"  # MITRE ATT&CK version
     }
 

@@ -2,70 +2,67 @@ def get_content():
     return {
         "id": "T1114.003",
         "url_id": "T1114/003",
-        "title": "Email Forwarding Rule",
-        "tactic": "Collection, Persistence",
-        "data_sources": "Email Logs, Windows Event Logs, Registry, File System",
-        "protocol": "SMTP, IMAP, Exchange",
-        "os": "Windows, Linux, macOS",
-        "objective": "Adversaries may create email forwarding rules to automatically collect and exfiltrate email communications.",
-        "scope": "Monitor email rules and configuration changes for unauthorized forwarding mechanisms.",
-        "threat_model": "Attackers can persist in an environment by setting email forwarding rules to send copies of inbound or outbound emails to an external account.",
-        "hypothesis": [
-            "Are new email forwarding rules being created unexpectedly?",
-            "Are existing rules being modified to exfiltrate data?",
-            "Are attackers using auto-forwarding to bypass DLP controls?"
-        ],
+        "title": "Email Collection: Email Forwarding Rule",
+        "description": "Adversaries may setup email forwarding rules to collect sensitive information. This technique may also allow persistent access to victim emails even after credential resets.",
+        "tags": ["email", "forwarding", "persistence", "collection", "exchange"],
+        "tactic": "Collection",
+        "protocol": "",
+        "os": "Linux, Office Suite, Windows, macOS",
         "tips": [
-            "Monitor changes to email forwarding rules within Exchange, O365, and other mail servers.",
-            "Analyze event logs for unusual modifications to mail client settings.",
-            "Check for rules that forward all emails to external domains."
+            "Monitor email rule creation via logs or API calls like Get-InboxRule.",
+            "Search for mail headers like X-MS-Exchange-Organization-AutoForwarded or X-Forwarded-To.",
+            "Check for mailbox rules that forward emails to external domains."
         ],
+        "data_sources": "Application Log: Application Log Content, Cloud Service: Cloud Service Metadata, Command: Command Execution",
         "log_sources": [
-            {"type": "Email Logs", "source": "Exchange Message Tracking Logs, O365 Audit Logs"},
-            {"type": "Windows Event Logs", "source": "Security.evtx, Application.evtx"},
-            {"type": "Registry", "source": "HKCU\\Software\\Microsoft\\Office\\Outlook\\Rules"}
+            {"type": "Cloud Service", "source": "Cloud Service Metadata", "destination": "Application Log"},
+            {"type": "Command", "source": "Command Execution", "destination": "Application Log"}
         ],
         "source_artifacts": [
-            {"type": "Mail Client Configuration", "location": "Outlook Rules, OWA Rules", "identify": "Unauthorized forwarding rules"}
+            {"type": "Inbox Rule", "location": "Outlook/OWA/MAPI", "identify": "Forward to external domain"}
         ],
         "destination_artifacts": [
-            {"type": "Email Logs", "location": "Mail Server Logs", "identify": "Suspicious auto-forwarding activity"}
+            {"type": "Auto-Forwarded Emails", "location": "Message Headers", "identify": "X-MS-Exchange-Organization-AutoForwarded"}
         ],
         "detection_methods": [
-            "Monitor for creation of new auto-forwarding rules in email servers.",
-            "Detect excessive emails being forwarded to external accounts.",
-            "Analyze email headers for signs of unauthorized forwarding."
+            "Inbox rule analysis (e.g., PowerShell Get-InboxRule)",
+            "Message header inspection for forwarding artifacts",
+            "Message tracking logs and rule property auditing"
         ],
-        "apt": ["G0032", "G0096"],
+        "apt": [
+            "Star Blizzard", "Kimsuky", "DEV-0537", "BEC actors"
+        ],
         "spl_query": [
-            "index=email sourcetype=exchange_logs forwarding_rule=* | table sender, recipient, rule_name"
+            "index=o365 sourcetype=ms:o365:exchange ruleName=*Forward* OR forwardingSmtpAddress=*\n| stats count by user, ruleName, forwardingSmtpAddress",
+            "index=email_headers \"X-MS-Exchange-Organization-AutoForwarded\"=true\n| stats count by sender, recipient"
         ],
         "hunt_steps": [
-            "Investigate new forwarding rules added in the last 30 days.",
-            "Check email logs for anomalous forwarding patterns.",
-            "Correlate rule creation with known threat actor TTPs."
+            "Review inbox rules for all users for hidden or external forwarding.",
+            "Correlate header presence with rule creation timestamps.",
+            "Search logs for administrative use of mail flow rules."
         ],
         "expected_outcomes": [
-            "Unauthorized forwarding rules detected and removed.",
-            "No suspicious activity found, improving baseline detection."
+            "Identification of persistent email collection rules",
+            "Detection of rule abuse not visible in client interface"
         ],
-        "false_positive": "Users may create forwarding rules for legitimate workflow automation.",
+        "false_positive": "Legitimate auto-forwarding rules set by users or admins may appear similar; validation is needed.",
         "clearing_steps": [
-            "Disable and remove unauthorized forwarding rules in mail clients.",
-            "Investigate and revoke compromised accounts if unauthorized forwarding is found."
+            "Delete unauthorized forwarding rules via PowerShell or mail admin panel.",
+            "Alert affected users and monitor mailbox for re-rule attempts."
         ],
         "mitre_mapping": [
-            {"tactic": "Collection", "technique": "T1114.003 (Email Forwarding Rule)", "example": "Adversaries may use email rules to exfiltrate sensitive communications."}
+            {"tactic": "Persistence", "technique": "T1098", "example": "Account Manipulation"},
+            {"tactic": "Credential Access", "technique": "T1556.006", "example": "Email Forwarding for Persistent Access"}
         ],
         "watchlist": [
-            "Monitor for newly created forwarding rules targeting external domains.",
-            "Detect high-volume email forwarding behavior."
+            "Users with forwarding rules targeting external domains",
+            "High volume of mail headers showing auto-forwarding"
         ],
         "enhancements": [
-            "Implement email forwarding restrictions in Exchange/O365 policies.",
-            "Enforce MFA for all email accounts to reduce unauthorized access."
+            "Audit rule creation using M365 Unified Audit Logs",
+            "Restrict external forwarding at the transport layer unless required"
         ],
-        "summary": "Attackers may leverage email forwarding rules to persist in an environment and exfiltrate sensitive email communications.",
-        "remediation": "Review and disable unauthorized forwarding rules, implement security awareness training.",
-        "improvements": "Enhance monitoring for email rule modifications and restrict external email forwarding."
+        "summary": "Email forwarding rules enable adversaries to maintain silent, persistent access to sensitive email content, often even after a password reset. These rules can be hidden or disguised via APIs.",
+        "remediation": "Disable or restrict email forwarding externally. Regularly audit inbox rules and alert on changes.",
+        "improvements": "Implement automated rule creation alerts. Use MAPI editors or third-party tools to detect hidden rules across environments."
     }
