@@ -8,7 +8,11 @@ def get_content():
         "protocol": "RDP, SSH, VNC, SMB",
         "os": "Windows, Linux, macOS",
         "description": "Adversaries may use remote services like RDP, SSH, VNC, or SMB to move laterally within an environment. Remote services allow attackers to control target systems, escalate privileges, and exfiltrate data over encrypted channels.",
-        "tips": [],
+        "tips": [
+            "Monitor for WinRM activity if it is not commonly used in your environment.",
+            "Alert on WinRM usage followed by service creation or registry modification.",
+            "Correlate WinRM activity with account behavior analytics."
+        ],
         "log_sources": [
             {"type": "Authentication ", "source": "Windows Security Logs (Event ID 4624, 4648), Linux SSH Logs"},
             {"type": "Remote Access ", "source": "VPN Logs, RDP, SSH, VNC, SMB"},
