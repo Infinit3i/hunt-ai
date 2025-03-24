@@ -1,3 +1,5 @@
+# Use this template and fill in the content to add a new technique to its own file
+
 def get_content():
     return {
         "id": "",  # Tactic Technique ID (e.g., T1556.001)
