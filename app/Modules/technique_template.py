@@ -28,6 +28,7 @@ def get_content():
         "expected_outcomes": [],  # Expected results from detection/hunting
         "false_positive": "",  # Known false positives and how to handle them
         "clearing_steps": [],  # Steps for remediation and clearing traces - do commands also on machines locally
+        "clearing_playbook": [], # link to microsoft playbook link if possible like https://learn.microsoft.com/en-us/security/operations/incident-response-playbook-phishing
         "mitre_mapping": [  # Next Mitre Technique that could be used after this technique
             {"tactic": "", "technique": "", "example": ""}
         ],
