@@ -5,24 +5,18 @@ def get_content():
     return {
         "id": "T1218.011",
         "url_id": "T1218/011",
-        "title": "Rundll32",
-        "tactic": "Defense Evasion, Execution",
-        "data_sources": "Windows Event Logs, Process Monitoring, File Monitoring",
-        "protocol": "N/A",
+        "title": "System Binary Proxy Execution: Rundll32",
+        "description": "Adversaries may abuse rundll32.exe to proxy execution of malicious code. Using rundll32.exe, vice executing directly, may avoid triggering security tools that may not monitor execution of the rundll32.exe process due to allowlists or false positives.",
+        "tags": ["rundll32", "proxy execution", "defense evasion", "signed binary", "masquerading", "script execution"],
+        "tactic": "Defense Evasion",
+        "protocol": "HTTP",
         "os": "Windows",
-        "objective": "Adversaries may use rundll32.exe to proxy execution of malicious payloads while bypassing security controls.",
-        "scope": "Monitor execution of rundll32.exe with unusual parameters.",
-        "threat_model": "Attackers may abuse rundll32.exe to execute DLL payloads in a way that evades detection.",
-        "hypothesis": [
-            "Is rundll32.exe executing DLLs from suspicious locations?",
-            "Are attackers using rundll32.exe for credential theft or privilege escalation?",
-            "Is rundll32.exe being leveraged for remote execution?"
-        ],
         "tips": [
-            "Monitor for rundll32.exe executions where the command-line arguments reference unusual DLLs.",
-            "Detect rundll32.exe execution outside of standard system directories.",
-            "Look for rundll32.exe spawning unexpected child processes."
+            "Monitor rundll32 executions that involve external URLs or scriptlet objects.",
+            "Track unusual DLL function names, including those using Unicode/ANSI suffixes (W/A).",
+            "Look for rundll32 spawning from uncommon or user-facing applications."
         ],
+        "data_sources": "Command, File, Module, Process",
         "log_sources": [
             {"type": "Windows Event Logs", "source": "Security.evtx", "destination": "System.evtx"},
             {"type": "Process Monitoring", "source": "Sysmon Event ID 1, Event ID 10"},
@@ -39,10 +33,14 @@ def get_content():
             "Detect rundll32.exe spawning child processes that are not standard.",
             "Alert on rundll32.exe execution from non-standard directories."
         ],
-        "apt": ["G0016", "G0032"],
+        "apt": [
+            "Sofacy", "APT19", "APT29", "TA505", "Gamaredon", "Qakbot", "FIN8", "Nobelium", "FIN12", "Lazarus", "Cobalt Kitty", "InvisiMole", "Zebrocy", "Raspberry Robin", "EvilNum", "Turla", "Mockingbird", "Carbanak", "Konni", "Winnti", "SedUploader", "Spalax", "Black Basta"
+        ],
         "spl_query": [
-            "index=windows ProcessName=rundll32.exe | table Time, CommandLine, ParentProcess, ImagePath",
-            "index=windows EventCode=4688 NewProcessName=*rundll32.exe* | table Time, CommandLine, ParentProcess"
+            "index=windows ProcessName=rundll32.exe \n| table Time, CommandLine, ParentProcess, ImagePath",
+            "index=windows EventCode=4688 NewProcessName=*rundll32.exe* \n| table Time, CommandLine, ParentProcess",
+            "index=sysmon EventCode=1 Image=*\\rundll32.exe\n| stats count by CommandLine, ParentImage, User",
+            "index=windows source=\"WinEventLog:Security\" EventCode=4688 NewProcessName=*rundll32.exe*\n| stats count by CommandLine, AccountName"
         ],
         "hunt_steps": [
             "Identify instances of rundll32.exe execution with unusual DLL arguments.",
@@ -58,6 +56,9 @@ def get_content():
             "Taskkill /IM rundll32.exe /F",
             "Delete any unauthorized DLL files loaded via rundll32.exe."
         ],
+        "clearing_playbook": [
+            "https://learn.microsoft.com/en-us/security/operations/incident-response-playbook-malware"
+        ],
         "mitre_mapping": [
             {"tactic": "Defense Evasion", "technique": "T1202 (Indirect Command Execution)", "example": "Attackers use rundll32.exe to execute payloads covertly."}
         ],
@@ -71,5 +72,6 @@ def get_content():
         ],
         "summary": "Rundll32.exe can be abused by attackers to execute malicious DLLs while evading detection.",
         "remediation": "Restrict rundll32.exe execution to trusted DLLs and monitor its usage closely.",
-        "improvements": "Enhance rundll32.exe logging and apply behavior-based detection techniques."
+        "improvements": "Enhance rundll32.exe logging and apply behavior-based detection techniques.",
+        "mitre_version": "16.1"
     }
