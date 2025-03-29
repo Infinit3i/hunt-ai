@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1087.001",  # Tactic Technique ID (e.g., T1087.001)
-        "url_id": "1087/001",  # URL segment for technique reference (e.g., 1087/001)
+        "url_id": "T1087/001",  # URL segment for technique reference (e.g., 1087/001)
         "title": "Account Discovery: Local Account",  # Name of the attack technique
         "description": "Adversaries may gather local system accounts to identify targets for lateral movement or privilege escalation.",
         "tags": [

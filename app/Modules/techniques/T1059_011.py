@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1059.011",  
-        "url_id": "1059/011",  
+        "url_id": "T1059/011",  
         "title": "Command and Scripting Interpreter: Lua",  
         "description": "Adversaries may abuse Lua commands and scripts for execution. Lua is a cross-platform scripting and programming language primarily designed for embedded use in applications. Lua can be executed on the command-line (through the stand-alone lua interpreter), via scripts (.lua), or from Lua-embedded programs (through the struct lua_State). Lua scripts may be executed by adversaries for malicious purposes. Adversaries may incorporate, abuse, or replace existing Lua interpreters to allow for malicious Lua command execution at runtime.",  
         "tags": [

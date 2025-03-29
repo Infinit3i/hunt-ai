@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1136.001",
-        "url_id": "1136/001",
+        "url_id": "T1136/001",
         "title": "Create Account: Local Account",
         "description": "Adversaries may create a local account to maintain access to victim systems. Local accounts are configured for use by users, remote support, services, or administration on a single system. Attackers may use the `net user /add` command on Windows or `dscl -create` on macOS to create local accounts. Kubernetes clusters and network devices can also be targeted using `kubectl` and `username` commands, respectively.",
         "tags": ["Persistence", "Local Account", "User Account Creation"],

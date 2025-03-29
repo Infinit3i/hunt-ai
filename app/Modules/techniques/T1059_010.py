@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1059.010",  # MITRE ATT&CK technique ID
-        "url_id": "1059/010",  # URL segment for reference
+        "url_id": "T1059/010",  # URL segment for reference
         "title": "Command and Scripting Interpreter: AutoHotKey & AutoIT",  # Attack technique name
         "description": "Adversaries may execute commands and perform malicious tasks using AutoIT and AutoHotKey automation scripts. "
                        "AutoIT and AutoHotKey (AHK) are scripting languages that enable users to automate Windows tasks. These automation "

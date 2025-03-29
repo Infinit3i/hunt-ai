@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1059.002",  # MITRE ATT&CK technique ID
-        "url_id": "1059/002",  # URL segment for reference
+        "url_id": "T1059/002",  # URL segment for reference
         "title": "Command and Scripting Interpreter: AppleScript",  # Attack technique name
         "description": (
             "Adversaries may abuse AppleScript for execution. AppleScript is a macOS scripting language designed to control "

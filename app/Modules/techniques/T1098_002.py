@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1098.002",
-        "url_id": "1098/002",
+        "url_id": "T1098/002",
         "title": "Account Manipulation: Additional Email Delegate Permissions",
         "description": (
             "Adversaries may grant additional permission levels to maintain persistent access to an email account, "

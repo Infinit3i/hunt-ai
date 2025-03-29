@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1110.004",  # Tactic Technique ID
-        "url_id": "1110/004",  # URL segment for technique reference
+        "url_id": "T1110/004",  # URL segment for technique reference
         "title": "Brute Force: Credential Stuffing",  # Name of the attack technique
         "description": "Adversaries may use credentials obtained from breach dumps of unrelated accounts to gain access to target accounts through credential overlap. Occasionally, large numbers of username and password pairs are dumped online when a website or service is compromised and the user account credentials accessed. The information may be useful to an adversary attempting to compromise accounts by taking advantage of the tendency for users to use the same passwords across personal and business accounts. Credential stuffing is a risky option because it could cause numerous authentication failures and account lockouts, depending on the organization's login failure policies. Typically, management services over commonly used ports are used when stuffing credentials, including SSH, Telnet, FTP, NetBIOS, SMB, LDAP, Kerberos, RDP, HTTP management services, MSSQL, Oracle, MySQL, and VNC. In addition to management services, adversaries may target single sign-on (SSO) and cloud-based applications utilizing federated authentication protocols, as well as externally facing email applications, such as Office 365.",  
         "tags": [],  

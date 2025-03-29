@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1074.001",  # Tactic Technique ID
-        "url_id": "1074/001",  # URL segment for technique reference
+        "url_id": "T1074/001",  # URL segment for technique reference
         "title": "Data Staged: Local Data Staging",  # Name of the attack technique
         "description": "Adversaries may stage collected data in a central location on the local system prior to exfiltration, potentially combining files or storing them in locations like the Windows Registry or local databases.",  # Simple description
         "tags": [

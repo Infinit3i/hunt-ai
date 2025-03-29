@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1074.002",  # Tactic Technique ID
-        "url_id": "1074/002",  # URL segment for technique reference
+        "url_id": "T1074/002",  # URL segment for technique reference
         "title": "Data Staged: Remote Data Staging",  # Name of the attack technique
         "description": "Adversaries may stage data collected from multiple systems on a single host before exfiltration, potentially using compression or encryption tools. By consolidating data in a remote location or cloud instance, adversaries can reduce connections to C2 and evade detection.",  # Simple description
         "tags": [

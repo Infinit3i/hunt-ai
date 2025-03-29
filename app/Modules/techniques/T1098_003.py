@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1098.003",
-        "url_id": "1098/003",
+        "url_id": "T1098/003",
         "title": "Account Manipulation: Additional Cloud Roles",
         "description": (
             "Adversaries may add roles or permissions to cloud accounts to maintain persistent or escalated privileges. "

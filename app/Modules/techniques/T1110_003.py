@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1110.003",  # Tactic Technique ID
-        "url_id": "1110/003",  # URL segment for technique reference
+        "url_id": "T1110/003",  # URL segment for technique reference
         "title": "Brute Force: Password Spraying",  # Name of the attack technique
         "description": "Adversaries may use a single or small list of commonly used passwords against many different accounts to attempt to acquire valid account credentials. Password spraying uses one password (e.g. 'Password01'), or a small list of commonly used passwords, that may match the complexity policy of the domain. Logins are attempted with that password against many different accounts on a network to avoid account lockouts that would normally occur when brute forcing a single account with many passwords. Typically, management services over commonly used ports are used when password spraying, such as SSH, Telnet, FTP, NetBIOS, SMB, LDAP, Kerberos, RDP, HTTP management services, MSSQL, Oracle, MySQL, and VNC. In addition to management services, adversaries may target single sign-on (SSO) and cloud-based applications utilizing federated authentication protocols, as well as externally facing email applications, such as Office 365.",  
         "tags": [],  

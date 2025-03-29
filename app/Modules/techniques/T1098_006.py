@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1098.006",
-        "url_id": "1098/006",
+        "url_id": "T1098/006",
         "title": "Account Manipulation: Additional Container Cluster Roles",
         "description": (
             "Adversaries may add roles or permissions to container cluster accounts (e.g., Kubernetes RoleBindings) "

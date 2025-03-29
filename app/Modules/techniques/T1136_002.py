@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1136.002",
-        "url_id": "1136/002",
+        "url_id": "T1136/002",
         "title": "Create Account: Domain Account",
         "description": "Adversaries may create a domain account to maintain access to victim systems. Domain accounts are managed by Active Directory Domain Services, where access and permissions are configured across systems and services in that domain. Attackers may use the `net user /add /domain` command to create a domain account.",
         "tags": ["Persistence", "Active Directory", "User Account Creation"],

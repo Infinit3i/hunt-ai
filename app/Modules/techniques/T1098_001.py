@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1098.001",
-        "url_id": "1098/001",
+        "url_id": "T1098/001",
         "title": "Account Manipulation: Additional Cloud Credentials",
         "description": (
             "Adversaries may add credentials to cloud accounts (e.g., new SSH keys, access keys, or service principal "

@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1136.003",  # Tactic Technique ID
-        "url_id": "1136/003",  # URL segment for technique reference
+        "url_id": "T1136/003",  # URL segment for technique reference
         "title": "Create Account: Cloud Account",  # Name of the attack technique
         "description": "Adversaries may create new cloud accounts to maintain persistent access to victim resources by leveraging the permissions and trust associated with those accounts.",  # Simple description
         "tags": [

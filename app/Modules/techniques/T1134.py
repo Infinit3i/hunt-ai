@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1134",
-        "url_id": "1134",
+        "url_id": "T1134",
         "title": "Access Token Manipulation",
         "description": (
             "Adversaries may modify access tokens to operate under a different user or system security context to perform actions "

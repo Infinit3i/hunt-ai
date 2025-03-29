@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1059.006",  # Tactic Technique ID
-        "url_id": "1059/006",  # URL segment for technique reference
+        "url_id": "T1059/006",  # URL segment for technique reference
         "title": "Command and Scripting Interpreter: Python",  # Name of the attack technique
         "description": "Adversaries may abuse Python for malicious script execution across Windows, macOS, and Linux.",  # Simple description of the attack technique
         "tags": [

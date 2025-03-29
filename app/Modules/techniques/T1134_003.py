@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1134.003",
-        "url_id": "1134/003",
+        "url_id": "T1134/003",
         "title": "Access Token Manipulation: Make and Impersonate Token",
         "description": (
             "Adversaries may make new tokens and impersonate users to escalate privileges and bypass access controls. For example, "

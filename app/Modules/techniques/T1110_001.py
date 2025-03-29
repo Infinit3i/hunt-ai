@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1110.001",  # Tactic Technique ID
-        "url_id": "1110/001",  # URL segment for technique reference
+        "url_id": "T1110/001",  # URL segment for technique reference
         "title": "Brute Force: Password Guessing",  # Name of the attack technique
         "description": "Adversaries with no prior knowledge of legitimate credentials within the system or environment may guess passwords to attempt access to accounts. Without knowledge of the password for an account, an adversary may opt to systematically guess the password using a repetitive or iterative mechanism. An adversary may guess login credentials without prior knowledge of system or environment passwords during an operation by using a list of common passwords. Password guessing may or may not take into account the target's policies on password complexity or use policies that may lock accounts out after a number of failed attempts. Guessing passwords can be a risky option because it could cause numerous authentication failures and account lockouts, depending on the organization's login failure policies. Typically, management services over commonly used ports are used when guessing passwords, such as SSH, Telnet, FTP, NetBIOS, SMB, LDAP, Kerberos, RDP, HTTP management services, MSSQL, Oracle, MySQL, VNC, and SNMP. In addition to management services, adversaries may target single sign-on (SSO) and cloud-based applications utilizing federated authentication protocols, as well as externally facing email applications, such as Office 365. Further, adversaries may abuse network device interfaces (such as `wlanAPI`) to brute force accessible WiFi routers via wireless authentication protocols.",  
         "tags": [],  

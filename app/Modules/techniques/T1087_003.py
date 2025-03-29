@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1087.003",  # Tactic Technique ID (e.g., T1087.003)
-        "url_id": "1087/003",  # URL segment for technique reference (e.g., 1087/003)
+        "url_id": "T1087/003",  # URL segment for technique reference (e.g., 1087/003)
         "title": "Account Discovery: Email Account",  # Name of the attack technique
         "description": "Adversaries may gather email addresses from mail services or address lists to identify targets for phishing or lateral movement.",
         "tags": [

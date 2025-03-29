@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1078.002",
-        "url_id": "1078/002",
+        "url_id": "T1078/002",
         "title": "Valid Accounts: Domain Accounts",
         "tactic": "Defense Evasion, Persistence, Privilege Escalation, Initial Access",
         "data_sources": "Authentication logs, Active Directory logs, Network monitoring, Process monitoring",

@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1059.004",  # Tactic Technique ID
-        "url_id": "1059/004",  # URL segment for technique reference
+        "url_id": "T1059/004",  # URL segment for technique reference
         "title": "Command and Scripting Interpreter: Unix Shell",  # Name of the attack technique
         "description": "Adversaries may abuse Unix shell commands and scripts for execution on Linux and macOS systems, leveraging shells like sh, bash, or zsh to run malicious code or automate malicious tasks.",  # Simple description of the attack technique
         "tags": [

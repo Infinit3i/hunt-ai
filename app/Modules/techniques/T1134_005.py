@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1134.005",
-        "url_id": "1134/005",
+        "url_id": "T1134/005",
         "title": "Access Token Manipulation: SID-History Injection",
         "description": (
             "Adversaries may use SID-History Injection to escalate privileges and bypass access controls. "

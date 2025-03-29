@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1078.003",
-        "url_id": "1078/003",
+        "url_id": "T1078/003",
         "title": "Valid Accounts: Local Accounts",
         "tags": ["Credential Access", "Persistence", "Privilege Escalation"],
         "tactic": "Persistence",

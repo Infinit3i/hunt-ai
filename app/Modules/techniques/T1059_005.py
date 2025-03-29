@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "T1059.005",  # Tactic Technique ID
-        "url_id": "1059/005",  # URL segment for technique reference
+        "url_id": "T1059/005",  # URL segment for technique reference
         "title": "Command and Scripting Interpreter: Visual Basic",  # Name of the attack technique
         "description": "Adversaries may abuse Visual Basic (VB) and derivative languages like VBA and VBScript for malicious code execution. This can include malicious macros embedded in Office documents or VBScript files used to run commands via wscript.exe/cscript.exe.",  # Simple description
         "tags": [
