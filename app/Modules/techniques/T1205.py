@@ -3,60 +3,77 @@ def get_content():
         "id": "T1205",
         "url_id": "T1205",
         "title": "Traffic Signaling",
+        "description": "Adversaries may use traffic signaling to hide open ports or other malicious functionality used for persistence or command and control.",
+        "tags": ["Command and Control", "Defense Evasion", "Persistence", "Traffic Signaling", "Port Knocking", "Wake-on-LAN", "Custom Protocols"],
         "tactic": "Command and Control",
-        "data_sources": "Network Traffic, Firewall Logs, Proxy Logs, Endpoint Logs, Intrusion Detection Systems (IDS)",
-        "protocol": "ICMP, DNS, HTTP, HTTPS, Custom Signaling Mechanisms",
-        "os": "Platform Agnostic",
-        "objective": "Detect and mitigate adversaries using traffic signaling to establish command-and-control (C2) communications and evade detection.",
-        "scope": "Identify network traffic patterns indicative of adversaries leveraging covert signaling techniques for C2.",
-        "threat_model": "Adversaries use traffic signaling methods, such as encoded packet headers, timing signals, or steganography, to bypass security controls and maintain persistent C2 communications.",
-        "hypothesis": [
-            "Are there unexpected timing-based or pattern-based network signals?",
-            "Are adversaries leveraging packet headers or protocol misuses for signaling?",
-            "Is there an increase in unusual low-bandwidth traffic potentially used for signaling?"
+        "protocol": "ICMP, DNS, TCP, HTTP, HTTPS, Wake-on-LAN, Custom",
+        "os": "Windows, Linux, macOS, Network",
+        "tips": [
+            "Enable full packet capture or NetFlow for sensitive network segments.",
+            "Look for unusual sequences of failed connection attempts (e.g., port knocking).",
+            "Harden device firmware and image management to prevent backdoor implants."
         ],
+        "data_sources": "Network Traffic, Process",
         "log_sources": [
-            {"type": "Network Traffic", "source": "Zeek (Bro), Suricata, Wireshark"},
-            {"type": "Firewall Logs", "source": "Palo Alto, Fortinet, Cisco ASA"},
-            {"type": "Proxy Logs", "source": "Zscaler, Bluecoat, McAfee Web Gateway"},
-            {"type": "Endpoint Logs", "source": "Sysmon (Event ID 3, 22), EDR (CrowdStrike, Defender ATP)"},
-            {"type": "IDS", "source": "Snort, Suricata, Zeek (Bro)"}
+            {"type": "Network Traffic", "source": "Zeek, Suricata, Wireshark", "destination": ""},
+            {"type": "Network Traffic", "source": "Firewall/Router Logs", "destination": ""},
+            {"type": "Process", "source": "Sysmon (Event ID 3, 22)", "destination": ""}
+        ],
+        "source_artifacts": [
+            {"type": "Firewall Configuration", "location": "Host Firewall or Network Appliance", "identify": "Rules altered dynamically after knock signal"},
+            {"type": "pcap", "location": "Packet Capture Storage", "identify": "Encoded or patterned signaling traffic"}
+        ],
+        "destination_artifacts": [
+            {"type": "Open Ports", "location": "Firewall or Port Table", "identify": "Ports opened dynamically post-signal"},
+            {"type": "Process Execution", "location": "System Memory", "identify": "Triggered malware post-signal via libpcap or raw sockets"}
         ],
         "detection_methods": [
-            "Monitor for anomalous timing patterns in network traffic.",
-            "Detect unexpected modifications in packet headers.",
-            "Identify covert signaling mechanisms using entropy analysis."
+            "Monitor traffic for port knocking or crafted packet sequences",
+            "Detect Wake-on-LAN magic packets on internal subnets",
+            "Use packet timing and entropy analysis to identify covert signaling"
+        ],
+        "apt": [
+            "Turla", "Iron Tiger", "Kobalos", "Snake Malware", "Winnti", "Cd00r", "Synful Knock"
         ],
         "spl_query": [
-            "index=network sourcetype=firewall_logs \n| search protocol=*icmp* OR protocol=*dns* OR protocol=*http* \n| stats count by src_ip, dest_ip, protocol"
+            "index=network (protocol=icmp OR protocol=dns OR port IN (0,1,7,9,65535))\n| stats count by src_ip, dest_ip, port, _time",
+            "index=firewall_logs port!=80 port!=443 port!=53 action=allowed\n| stats count by src_ip, dest_ip, port"
         ],
         "hunt_steps": [
-            "Run Queries in SIEM: Identify potential traffic signaling-related activity.",
-            "Analyze Network Packet Timing: Detect anomalies in packet transmission timing.",
-            "Monitor for Encoded Signaling: Identify covert signaling mechanisms within network traffic.",
-            "Correlate with Threat Intelligence: Compare with known C2 techniques leveraging traffic signaling.",
-            "Validate & Escalate: If malicious activity is found → Escalate to Incident Response."
+            "Inspect sequential failed port connections from the same source (knocking)",
+            "Detect network packets with unusually high entropy in the payload",
+            "Search for signs of pcap or raw socket sniffing libraries in binaries"
         ],
         "expected_outcomes": [
-            "Traffic Signaling-Based C2 Detected: Block malicious signaling traffic and investigate affected hosts.",
-            "No Malicious Activity Found: Improve detection models for traffic signaling-based C2 techniques."
+            "Identification of backdoor triggers or stealthy command/control traffic",
+            "Detection of dynamic port manipulation based on signal packet sequences"
+        ],
+        "false_positive": "Misconfigured scanning tools or legitimate custom protocol software may mimic signaling behavior.",
+        "clearing_steps": [
+            "Reset firewall configurations to default and audit changes",
+            "Isolate affected systems and analyze for implanted services or hidden listeners",
+            "Re-image impacted embedded systems or routers after firmware validation"
+        ],
+        "clearing_playbook": [
+            "https://learn.microsoft.com/en-us/security/operations/incident-response-playbook-network-compromise"
         ],
         "mitre_mapping": [
-            {"tactic": "Command and Control", "technique": "T1205 (Traffic Signaling)", "example": "C2 traffic using timing-based encoding for communication."},
-            {"tactic": "Exfiltration", "technique": "T1048 (Exfiltration Over Alternative Protocol)", "example": "Data exfiltrated using encoded packets as a signaling mechanism."},
-            {"tactic": "Defense Evasion", "technique": "T1070.004 (Indicator Removal on Host)", "example": "Malware deleting logs after using traffic signaling techniques."}
+            {"tactic": "Persistence", "technique": "T1601.001", "example": "Backdoor embedded in patched system image awaiting signal"},
+            {"tactic": "Defense Evasion", "technique": "T1036", "example": "Custom listener using raw sockets camouflaged under legitimate ports"},
+            {"tactic": "Command and Control", "technique": "T1205", "example": "Adversary sends crafted packet sequence to activate malware functionality"}
         ],
         "watchlist": [
-            "Flag outbound traffic with anomalous packet timing variations.",
-            "Monitor for anomalies in protocol usage that deviate from expected norms.",
-            "Detect unauthorized use of custom signaling techniques for C2."
+            "Wake-on-LAN activity on non-administrative networks",
+            "Repeated connection attempts to closed ports",
+            "Suspicious packet header manipulation or unused protocols"
         ],
         "enhancements": [
-            "Deploy entropy-based detection to analyze covert signaling mechanisms.",
-            "Implement behavioral analytics to detect protocol misuse.",
-            "Improve correlation between traffic signaling activity and known threat actor techniques."
+            "Implement Suricata signatures for known port-knocking sequences",
+            "Use Zeek to correlate sequential closed port accesses",
+            "Incorporate threat intelligence feeds for custom signaling IOC indicators"
         ],
-        "summary": "Document detected malicious traffic signaling-based command-and-control activity and affected systems.",
-        "remediation": "Block unauthorized traffic signaling channels, revoke compromised access, and enhance monitoring.",
-        "improvements": "Refine detection models and improve analysis of traffic signaling-based command-and-control techniques."
+        "summary": "Traffic signaling techniques enable stealthy command and control or activation of hidden capabilities, often through covert packet sequences or payload content that only the malware recognizes.",
+        "remediation": "Audit and reset dynamic firewall rules, monitor embedded systems, and isolate endpoints demonstrating unusual traffic triggering behaviors.",
+        "improvements": "Enrich detection logic with behavioral and timing analysis, monitor unassigned ports, and deploy firmware integrity tools.",
+        "mitre_version": "16.1"
     }

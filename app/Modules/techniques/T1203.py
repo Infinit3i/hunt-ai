@@ -1,76 +1,80 @@
 def get_content():
-    """
-    Returns structured content for the Exploitation for Client Execution technique (T1203).
-    """
     return {
         "id": "T1203",
         "url_id": "T1203",
         "title": "Exploitation for Client Execution",
+        "description": "Adversaries may exploit software vulnerabilities in client applications to execute code.",
+        "tags": ["Execution", "Exploit", "Phishing", "Drive-by Compromise", "Office Files", "Browser"],
         "tactic": "Execution",
-        "data_sources": "Process monitoring, File monitoring, Windows Event Logs",
         "protocol": "N/A",
         "os": "Windows, Linux, macOS",
-        "objective": "Adversaries may exploit client applications to execute malicious code on a system.",
-        "scope": "Monitor for unauthorized execution of client application processes.",
-        "threat_model": "Exploiting vulnerabilities in client applications to execute arbitrary code.",
-        "hypothesis": [
-            "Are client applications executing unexpected processes?",
-            "Are known vulnerabilities in client applications being exploited?",
-            "Are users being targeted with malicious documents or exploits?"
-        ],
         "tips": [
-            "Monitor application crash reports and exploit mitigation logs.",
-            "Inspect logs for execution of unexpected processes spawned by client applications.",
-            "Analyze suspicious document files or attachments that exploit vulnerabilities."
+            "Monitor crash reports and exploit mitigation logs for targeted applications.",
+            "Use EDR tools to identify suspicious document or PDF behavior.",
+            "Apply least-privilege principles to reduce exploit impact."
         ],
+        "data_sources": "Application Log, File, Network Traffic, Process",
         "log_sources": [
-            {"type": "Process Monitoring", "source": "Sysmon Event ID 1", "destination": "SIEM"},
-            {"type": "File Monitoring", "source": "Windows Defender Logs", "destination": "Endpoint Security"},
-            {"type": "Windows Event Logs", "source": "Event ID 4688", "destination": "SIEM"}
+            {"type": "Application Log", "source": "Client Application", "destination": "SIEM"},
+            {"type": "File", "source": "User Machine", "destination": ""},
+            {"type": "Network Traffic", "source": "", "destination": "Proxy or EDR"},
+            {"type": "Process", "source": "Client System", "destination": "SIEM"}
         ],
         "source_artifacts": [
-            {"type": "File Artifacts", "location": "User Downloads Folder", "identify": "Malicious executables or documents"}
+            {"type": "Malicious Document", "location": "User Downloads", "identify": "Exploit-laced Office or PDF files"},
+            {"type": "Process List", "location": "System Memory", "identify": "Unexpected child processes from Office or browser apps"}
         ],
         "destination_artifacts": [
-            {"type": "Process Execution", "location": "System Memory", "identify": "Injected shellcode or exploit payloads"}
+            {"type": "Injected Payloads", "location": "Memory", "identify": "Shellcode injected into trusted processes"},
+            {"type": "Network Connections", "location": "Firewall/EDR Logs", "identify": "Outbound traffic post exploit"}
         ],
         "detection_methods": [
-            "Monitor process creation events for unusual parent-child process relationships.",
-            "Analyze network traffic for exploit delivery mechanisms.",
-            "Detect execution of known exploit payloads using behavioral analysis."
+            "Monitor process tree anomalies (e.g., winword.exe spawning cmd.exe).",
+            "Scan for known exploit patterns in document files.",
+            "Use memory scanning for post-exploitation indicators."
         ],
-        "apt": ["G0016", "G0023"],
+        "apt": [
+            "APT28", "TA459", "Inception Framework", "NOBELIUM", "MUSTANG PANDA", "Sidewinder", "Cobalt Group",
+            "Andariel", "OceanLotus", "Sandworm", "Patchwork", "Elfin", "Frankenstein", "Sofacy", "SpeakUp"
+        ],
         "spl_query": [
-            "index=windows EventCode=4688 NewProcessName=* | table _time, ParentProcessName, NewProcessName",
-            "index=endpoint file_create=* exploit* | stats count by file_name, process_name"
+            "index=sysmon EventCode=1\n| search ParentImage=*winword.exe OR ParentImage=*excel.exe OR ParentImage=*acrord32.exe\n| stats count by ParentImage, Image, CommandLine, User",
+            "index=proxy OR index=network http.method=GET AND http.uri=*exploit* | stats count by uri_path, src_ip"
         ],
         "hunt_steps": [
-            "Review recent software vulnerabilities for targeted applications.",
-            "Analyze exploit delivery mechanisms such as email attachments or malicious links.",
-            "Investigate anomalous application behavior using memory forensics."
+            "Identify Office or browser processes spawning unexpected children.",
+            "Look for PDF or Office files recently opened from email or browser.",
+            "Analyze memory dumps of targeted processes for shellcode or injection."
         ],
         "expected_outcomes": [
-            "Exploitation attempts detected and mitigated.",
-            "No suspicious activity found, refining detection strategies."
+            "Detection of code execution via exploit-laced client-side apps.",
+            "Identification of suspicious parent-child execution flows."
         ],
-        "false_positive": "Legitimate software updates or installations may trigger alerts.",
+        "false_positive": "Software updates, scripting add-ins, or automation tools may mimic similar behaviors.",
         "clearing_steps": [
-            "Terminate unauthorized processes.",
-            "Remove malicious files and artifacts.",
-            "Apply security patches to vulnerable client applications."
+            "taskkill /F /IM winword.exe",
+            "Delete suspicious documents from user directories.",
+            "Apply patches for vulnerable Office or browser versions.",
+            "Run full memory and disk AV scan.",
+            "Flush DNS cache: ipconfig /flushdns"
         ],
+        "clearing_playbook": ["https://learn.microsoft.com/en-us/security/operations/incident-response-playbook-phishing"],
         "mitre_mapping": [
-            {"tactic": "Execution", "technique": "T1059 (Command and Scripting Interpreter)", "example": "Adversaries may execute malicious scripts as part of an exploit payload."}
+            {"tactic": "Execution", "technique": "T1059", "example": "Adversaries may execute scripts after exploitation of client apps"},
+            {"tactic": "Persistence", "technique": "T1136", "example": "A malicious document may lead to creation of persistence mechanisms"},
         ],
         "watchlist": [
-            "Monitor execution of client applications for unusual behavior.",
-            "Detect exploitation attempts by correlating security alerts with known vulnerabilities."
+            "Office apps spawning scripting engines or cmd.exe",
+            "PDF readers executing or spawning external processes",
+            "Users receiving files over email or through drive-by links"
         ],
         "enhancements": [
-            "Enable exploit protection mechanisms in endpoint security solutions.",
-            "Implement application whitelisting to prevent unauthorized execution."
+            "Enable ASR (Attack Surface Reduction) rules in Microsoft Defender.",
+            "Use protected view for Office documents from the internet.",
+            "Implement sandbox-based detonation of all external document files."
         ],
-        "summary": "Adversaries exploit client applications to execute arbitrary code, often through crafted documents or malicious web content.",
-        "remediation": "Apply patches for vulnerable software, educate users on phishing risks, and monitor execution activity.",
-        "improvements": "Enhance endpoint monitoring, deploy behavioral analytics, and utilize sandboxing solutions to detect exploit attempts."
+        "summary": "This technique involves exploiting vulnerabilities in client applications like browsers or Office software to achieve code execution. The approach leverages user interaction or drive-by tactics to deliver malicious content.",
+        "remediation": "Keep client software updated, use endpoint protection, disable macros and scripting features by default.",
+        "improvements": "Deploy memory protection technologies, enhance proxy filtering for exploit kits, and correlate endpoint behavior with threat intelligence.",
+        "mitre_version": "16.1"
     }
