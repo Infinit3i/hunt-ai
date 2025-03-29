@@ -23,7 +23,7 @@ def get_content():
         ],
         "detection_methods": [],  # Techniques for identifying the attack
         "apt": [], # APT groups known to use this technique typically start with G#### (e.g., G0016) - do not show the S#### - show the name of the APT not G####
-        "spl_query": [],  # Splunk queries to detect the technique, multiple can be added. for | use \n| - this should be taken literal not putt in on your own
+        "spl_query": [],  # Splunk queries to detect the technique, multiple can be added. for | use \n| - this should be taken literal not put in on your own (the newline should be typed in as \n not an actualy new line in spl_query)
         "hunt_steps": [],  # Steps to proactively hunt for threats
         "expected_outcomes": [],  # Expected results from detection/hunting
         "false_positive": "",  # Known false positives and how to handle them
