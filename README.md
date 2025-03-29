@@ -21,7 +21,7 @@
 <!-- <a title="Docker Pulls" target="_blank" href="https://hub.docker.com/r/b3log/siyuan"><img src="https://img.shields.io/docker/pulls/b3log/siyuan.svg?style=flat-square&color=green"></a> -->
 <!-- <a title="Docker Image Size" target="_blank" href="https://hub.docker.com/r/b3log/siyuan"><img src="https://img.shields.io/docker/image-size/b3log/siyuan.svg?style=flat-square&color=ff96b4"></a> -->
 
-Visit the current running version of [**HUNT-AI**](https://hunt.infint3i.com)
+Visit the current running version of [**HUNT-AI**](https://hunt.infinit3i.com/)
 
 ### 🎯 **Key Features & Benefits**
 
