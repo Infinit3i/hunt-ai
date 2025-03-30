@@ -1,7 +1,4 @@
 def get_content():
-    """
-    Returns structured content for the BIOS Flashing persistence method.
-    """
     return {
         "id": "T1542.001",
         "url_id": "1542/001",
