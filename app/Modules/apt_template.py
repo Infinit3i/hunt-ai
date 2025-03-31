@@ -20,6 +20,7 @@ def get_content():
         "version": "",  # Version of this APT entry (e.g., "2.0")
         "created": "",  # Date when this entry was created (e.g., "27 July 2023")
         "last_modified": "",  # Date when this entry was last modified (e.g., "21 May 2024")
+        "navigator": "", # Reference to the MITRE ATT&CK Navigator of the APT
         "references": [  # References and source documents
             {"source": "", "url": ""}
         ],
