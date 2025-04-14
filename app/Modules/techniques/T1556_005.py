@@ -34,8 +34,7 @@ def get_content():
         ],
         "apt": [],
         "spl_query": [
-            "index=win_ad_logs EventCode=5136 OR CommandLine=\"*AllowReversiblePasswordEncryption $true*\"
-| stats count by ObjectDN, AttributeLDAPDisplayName, OperationType"
+            'index=win_ad_logs EventCode=5136 OR CommandLine=\"*AllowReversiblePasswordEncryption $true*\"| stats count by ObjectDN, AttributeLDAPDisplayName, OperationType'
         ],
         "hunt_steps": [
             "Search for Set-ADUser commands that set reversible encryption.",

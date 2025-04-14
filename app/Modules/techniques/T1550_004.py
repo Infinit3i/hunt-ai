@@ -25,10 +25,7 @@ def get_content():
             "Alert on login activity that bypasses MFA yet results in elevated privilege access."
         ],
         "spl_query": [
-            "index=cloud_logs sourcetype=web_authentication_logs 
-| search event_type=login session_cookie_exists=true 
-| stats dc(src_ip) as unique_ips by session_cookie, user 
-| where unique_ips > 1"
+            "index=cloud_logs sourcetype=web_authentication_logs \n| search event_type=login session_cookie_exists=true \n| stats dc(src_ip) as unique_ips by session_cookie, user \n| where unique_ips > 1"
         ],
         "hunt_steps": [
             "Identify all authentication events using session cookies.",

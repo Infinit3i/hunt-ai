@@ -28,7 +28,7 @@ def get_content():
             "Synful Knock"
         ],
         "spl_query": [
-            "`tftp_logs` \n| search command=put OR command=get \n| stats count by src_ip, dest_ip, filename, command \n| where filename IN ("*.bin", "*.img")"
+            'tftp_logs \n| search command=put OR command=get \n| stats count by src_ip, dest_ip, filename, command \n| where filename IN (".bin", ".img")'
         ],
         "hunt_steps": [
             "Review all TFTP transactions from the last 30 days.",

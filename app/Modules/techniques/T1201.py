@@ -27,9 +27,7 @@ def get_content():
         ],
         "apt": ["Chimera", "Orangeworm", "ComRAT", "CuckooBees", "APT groups targeting cloud IAM"],
         "spl_query": [
-            "index=windows sourcetype=Sysmon 
-| search CommandLine=*Get-ADDefaultDomainPasswordPolicy* OR CommandLine=*net accounts* 
-| stats count by user, host"
+            "index=windows sourcetype=Sysmon \n| search CommandLine=*Get-ADDefaultDomainPasswordPolicy* OR CommandLine=*net accounts* \n| stats count by user, host"
         ],
         "hunt_steps": [
             "Search endpoint telemetry for command usage tied to password policy reading.",
