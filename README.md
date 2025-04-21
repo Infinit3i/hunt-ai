@@ -27,7 +27,7 @@ Visit the current running version of [**HUNT-AI**](https://hunt.infinit3i.com/)
 
 - ✅ **Runbook** – Optimize your threat-hunting process.
 - ✅ **Tracking** – Organize and document your investigations with an electronic **analyst notebook**.
-- ✅ **MITRE ATT&CK** – Attack path is mapped to **T-codes**.
+- ✅ **MITRE ATT&CK** – (16.1) 600/656 Attacks mapped to **T-codes**.
 - ✅ **SIEM Queries** – Quickly identify **malicious activity** with **detection queries**. 
 - ✅ **Tip Notifications** – Receive expert guidance to enhance your threat-hunting strategies.
 - ✅ **Multi-Platform Support** – Compatible with Many operating systems.
