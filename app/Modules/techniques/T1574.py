@@ -3,30 +3,39 @@ def get_content():
         "id": "T1574",
         "url_id": "T1574",
         "title": "Hijack Execution Flow",
+        "description": "Adversaries may execute their own malicious payloads by hijacking the way operating systems run programs. Hijacking execution flow can be used for persistence, privilege escalation, and defense evasion by loading adversary-controlled code into trusted processes.\n\nCommon techniques include DLL search order hijacking, unquoted service paths, environment variable abuse, registry manipulation, and binary replacement. The goal is to alter how the OS or application locates and loads executable code or libraries, often without detection. These hijacks may exploit file system, registry, or environmental weaknesses to insert malicious payloads.\n\nThis behavior can lead to stealthy persistence, privilege escalation, and execution of code that masquerades as legitimate system behavior. Detection relies on analyzing process behavior, file system changes, environment variables, and registry activity for anomalies that indicate execution flow redirection.",
+        "tags": ["execution_hijack", "persistence", "privilege_escalation", "defense_evasion", "MITRE"],
         "tactic": "Defense Evasion",
-        "data_sources": "Process Monitoring, Windows Event, Sysmon, EDR, Registry, File System",
         "protocol": "N/A",
         "os": "Windows, Linux, macOS",
-        "objective": "Detect and mitigate hijack execution flow attacks, where adversaries manipulate the normal execution flow of processes to execute malicious code.",
-        "scope": "Monitor process injections, DLL hijacking, and other execution flow modifications.",
-        "threat_model": "Adversaries hijack execution flow to load malicious code into trusted processes, bypass security mechanisms, and persist using execution hijacking techniques.",
-        "hypothesis": [
-            "Are there unauthorized DLLs loaded by critical system processes?",
-            "Are legitimate processes exhibiting unusual execution patterns?",
-            "Are there suspicious registry modifications related to execution flow control?"
+        "tips": [
+            "Use Sysinternals Autoruns to detect changes in system execution paths.",
+            "Restrict write access to critical application and system directories.",
+            "Harden execution policies using AppLocker or Windows Defender Application Control."
         ],
+        "data_sources": "Process Monitoring, Windows Event, Sysmon, EDR, Registry, File System",
         "log_sources": [
-            {"type": "Process Execution Logs", "source": "Sysmon (Event ID 1 - Process Creation), Windows Security Logs"},
-            {"type": "Registry Modification Logs", "source": "Sysmon (Event ID 13 - Registry Modification), Windows Event Logs"},
-            {"type": "DLL Load Monitoring", "source": "Sysmon (Event ID 7 - DLL Load)"},
-            {"type": "Threat Intelligence Feeds", "source": "VirusTotal, Hybrid Analysis, MISP"}
+            {"type": "Process Execution Logs", "source": "Sysmon (Event ID 1 - Process Creation), Windows Security Logs", "destination": ""},
+            {"type": "Registry Modification Logs", "source": "Sysmon (Event ID 13 - Registry Modification), Windows Event Logs", "destination": ""},
+            {"type": "DLL Load Monitoring", "source": "Sysmon (Event ID 7 - DLL Load)", "destination": ""},
+            {"type": "Threat Intelligence Feeds", "source": "VirusTotal, Hybrid Analysis, MISP", "destination": ""}
+        ],
+        "source_artifacts": [
+            {"type": "DLL/EXE", "location": "%TEMP%, %APPDATA%, C:\\Users\\Public", "identify": "Hijacked or injected payloads placed alongside legitimate executables"}
+        ],
+        "destination_artifacts": [
+            {"type": "Registry Keys, DLLs, Services", "location": "HKLM\\SYSTEM\\CurrentControlSet\\Services, C:\\Windows\\System32", "identify": "Modified service paths, DLLs, or hijacked registry values"}
         ],
         "detection_methods": [
-            "Monitor DLL loads and identify non-standard locations for system-critical DLLs.",
-            "Detect registry modifications that indicate execution hijacking (e.g., Image File Execution Options).",
-            "Correlate process execution patterns with known hijacking techniques."
+            "Monitor for unsigned DLLs loaded by signed processes from unusual directories.",
+            "Alert on creation or modification of registry values related to service configuration or execution flow.",
+            "Correlate process behavior to detect child processes or network activity inconsistent with parent application profiles."
         ],
-        "spl_query": "index=sysmon sourcetype=\"Sysmon\" EventCode=7 | where Image like '%\\Temp\\%' OR Image like '%\\Users\\Public\\%' | stats count by Image, ProcessId, ProcessName",
+        "apt": [
+            "APT10", "APT41", "LuminousMoth", "Cobalt Kitty", "Sidewinder", "TA416", "LuckyMouse",
+            "MUSTANG PANDA", "OceanLotus", "PlugX", "Emissary Panda", "Patchwork", "Metador", "Raspberry Robin"
+        ],
+        "spl_query": "index=sysmon sourcetype=\"Sysmon\" EventCode=7\n| where Image like '%\\Temp\\%' OR Image like '%\\Users\\Public\\%'\n| stats count by Image, ProcessId, ProcessName",
         "hunt_steps": [
             "Run Queries in SIEM: Detect execution flow hijacking via DLL injection or registry modifications.",
             "Correlate with Threat Intelligence Feeds: Validate loaded DLLs and modified registry entries against known attack techniques.",
@@ -37,6 +46,13 @@ def get_content():
         "expected_outcomes": [
             "Execution Flow Hijack Detected: Block or remove the hijacked execution flow modification. Investigate further for malware persistence or lateral movement.",
             "No Malicious Activity Found: Improve baseline monitoring for legitimate execution flow changes."
+        ],
+        "false_positive": "Some developers use execution redirection techniques for debugging or legacy support. Correlate with update/install behavior and known-good hashes before escalating.",
+        "clearing_steps": [
+            "Remove the malicious DLL or binary from hijacked location.",
+            "Restore registry keys or system paths to their legitimate state.",
+            "Reapply secure ACLs to directories and binaries involved.",
+            "Reset affected service configurations or rebuild affected systems if systemic tampering is discovered."
         ],
         "mitre_mapping": [
             {"tactic": "Defense Evasion", "technique": "T1574 (Hijack Execution Flow)", "example": "Adversaries modify execution flow to run malicious code."},
@@ -53,7 +69,8 @@ def get_content():
             "Deploy endpoint detection for hijacking-based persistence techniques.",
             "Harden registry and process execution policies to prevent manipulation."
         ],
-        "summary": "Monitor and detect execution flow hijacking attempts by analyzing process execution, DLL loading, and registry modifications.",
+        "summary": "Monitor and detect execution flow hijacking attempts by analyzing process execution, DLL loading, and registry modifications. This technique is widely abused by threat actors for stealthy persistence and privilege escalation.",
         "remediation": "Block unauthorized execution flow modifications, investigate further for malware persistence, and improve detection baselines.",
-        "improvements": "Strengthen process monitoring policies and enhance security configurations to prevent execution hijacking."
+        "improvements": "Strengthen process monitoring policies and enhance security configurations to prevent execution hijacking.",
+        "mitre_version": "16.1"
     }

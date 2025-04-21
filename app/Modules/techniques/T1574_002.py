@@ -1,23 +1,13 @@
 def get_content():
-    """
-    Returns structured content for the DLL Hijacking persistence method.
-    """
     return {
         "id": "T1574.002",
         "url_id": "T1574/002",
-        "title": "DLL Hijacking",
-        "tactic": "Persistence, Privilege Escalation, Defense Evasion",
-        "data_sources": "Windows Event Logs, File Monitoring, Process Execution",
-        "protocol": "N/A",
+        "title": "Hijack Execution Flow: DLL Side-Loading",
+        "description": "Adversaries may execute their own malicious payloads by side-loading DLLs. This technique is similar to DLL Search Order Hijacking, but instead of waiting for a legitimate application to be invoked, adversaries may deliver both a legitimate signed application and a malicious DLL that the application loads. DLL side-loading abuses the fact that many Windows applications load DLLs from their own directory before checking other system locations.\n\nThis is often done to evade detection by executing code under a trusted application's context. The adversary places a malicious DLL in the same folder as the trusted executable and runs the executable, which unknowingly loads and executes the attacker's DLL. The malicious payload may be obfuscated or encrypted to bypass security mechanisms until it's loaded into memory by the host process.",
+        "tags": ["Windows", "DLL Side-Loading", "Execution Hijack", "Defense Evasion", "Persistence"],
+        "tactic": "Defense Evasion, Persistence, Privilege Escalation",
+        "protocol": "",
         "os": "Windows",
-        "objective": "Adversaries may execute malicious payloads by hijacking DLL search order loading mechanisms.",
-        "scope": "Monitor DLL loading events and analyze execution paths for unauthorized modifications.",
-        "threat_model": "Attackers may replace or introduce malicious DLLs in locations where trusted applications load them, enabling privilege escalation and persistence.",
-        "hypothesis": [
-            "Are there unauthorized DLLs loaded by legitimate processes?",
-            "Are newly created DLLs appearing in system directories?",
-            "Is an attacker using DLL hijacking for persistence or privilege escalation?"
-        ],
         "tips": [
             "Monitor system directories for new DLL files appearing outside of updates.",
             "Compare loaded DLLs against known good baselines to detect anomalies.",
@@ -39,7 +29,7 @@ def get_content():
             "Track process execution chains for unexpected DLL loads.",
             "Use Sysmon Event ID 7 to detect unusual DLL loading behavior."
         ],
-        "apt": ["G0016", "G0045"],
+        "apt": ["APT10", "TA416", "Sidewinder", "MUSTANG PANDA", "APT41", "PlugX", "LookBack", "Darkgate", "Cobalt Kitty"],
         "spl_query": [
             "index=windows EventCode=7 | table Time, ProcessName, DLLPath",
             "index=windows EventCode=1 ImagePath=*\\*.dll | where ParentProcessName!=KnownProcesses"

@@ -1,7 +1,4 @@
 def get_content():
-    """
-    Returns structured content for the PsExec execution method.
-    """
     return {
         "id": "T1569.002",
         "url_id": "1569/002",
