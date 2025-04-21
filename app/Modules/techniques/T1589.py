@@ -1,76 +1,75 @@
 def get_content():
-    """
-    Returns structured content for the Gather Victim Identity Information (T1589) technique.
-    """
     return {
         "id": "T1589",
         "url_id": "T1589",
         "title": "Gather Victim Identity Information",
+        "description": "Adversaries may gather information about the victim's identity that can be used during targeting. Information about identities may include a variety of details, including personal data (ex: employee names, email addresses, security question responses, etc.) as well as sensitive details such as credentials or multi-factor authentication (MFA) configurations. Adversaries may gather this information in various ways, such as direct elicitation via Phishing for Information. Information about users could also be enumerated via other active means such as probing and analyzing responses from authentication services that may reveal valid usernames in a system or permitted MFA methods associated with those usernames. Information about victims may also be exposed to adversaries via online or other accessible data sets. Gathering this information may reveal opportunities for other forms of reconnaissance, establishing operational resources, and/or initial access.",
+        "tags": ["identity", "reconnaissance", "targeting", "phishing", "authentication"],
         "tactic": "Reconnaissance",
-        "data_sources": "Network Traffic, Web Logs, OSINT Sources",
-        "protocol": "HTTP, Social Media APIs, DNS",
-        "os": "Platform Agnostic",
-        "objective": "Adversaries gather victim identity information, such as user accounts, email addresses, and personal details, for further exploitation.",
-        "scope": "Monitor and analyze identity-related data collection activities.",
-        "threat_model": "Attackers gather user credentials, employee directories, or leaked personal information to craft social engineering attacks or gain unauthorized access.",
-        "hypothesis": [
-            "Are adversaries collecting employee emails for phishing campaigns?",
-            "Is there an unusual pattern of identity-related queries in web traffic logs?",
-            "Are adversaries using OSINT techniques to gather personal information?"
-        ],
+        "protocol": "HTTPS, LDAP, DNS, API",
+        "os": "Any",
         "tips": [
-            "Monitor for large-scale data scraping activities on public-facing resources.",
-            "Track access to corporate directories and HR portals.",
-            "Analyze web server logs for enumeration patterns."
+            "Use rate-limiting and CAPTCHA mechanisms on login and signup forms",
+            "Obfuscate or protect public access to staff pages and directories",
+            "Monitor authentication systems for enumeration indicators"
         ],
+        "data_sources": "Web Credential, Command, Network Traffic, Application Log, Cloud Service",
         "log_sources": [
-            {"type": "Web Logs", "source": "Access Logs", "destination": "SIEM"},
-            {"type": "Network Traffic", "source": "Proxy Logs", "destination": "SIEM"},
-            {"type": "OSINT", "source": "Public Databases", "destination": "Threat Intelligence Platforms"}
+            {"type": "Web Credential", "source": "", "destination": ""},
+            {"type": "Command", "source": "", "destination": ""},
+            {"type": "Network Traffic", "source": "", "destination": ""},
+            {"type": "Application Log", "source": "", "destination": ""},
+            {"type": "Cloud Service", "source": "", "destination": ""}
         ],
         "source_artifacts": [
-            {"type": "Email Harvesting", "location": "Corporate Email Directories", "identify": "Leaked Employee Emails"},
-            {"type": "Social Media Scraping", "location": "Public Profiles", "identify": "Employee Personal Information"}
+            {"type": "Clipboard Data", "location": "Memory or browser extensions", "identify": "Copied identity attributes from public sources"},
+            {"type": "Event Logs", "location": "Windows Security Logs", "identify": "Unusual authentications from uncommon IPs"}
         ],
         "destination_artifacts": [
-            {"type": "Compromised Credentials", "location": "Dark Web Forums", "identify": "Leaked User Accounts"}
+            {"type": "Network Connections", "location": "Proxy or web gateway logs", "identify": "Targeted access to staff directories or endpoints"},
+            {"type": "Sysmon Logs", "location": "Event ID 1", "identify": "Execution of recon or credential enumeration tools"}
         ],
         "detection_methods": [
-            "Monitor network traffic for suspicious reconnaissance activity.",
-            "Analyze large-scale data scraping patterns.",
-            "Track access attempts to HR and employee-related databases."
+            "Detect excessive requests to MFA/SSPR-related URLs",
+            "Alert on IPs performing multiple login attempts with different usernames",
+            "Analyze web referer and user-agent strings for scripting and automation"
         ],
-        "apt": ["G0019", "G0022"],
+        "apt": ["Lazarus Group", "TA453", "Ocean Lotus", "Siamesekitten", "FIN13", "Star Blizzard"],
         "spl_query": [
-            "index=web_logs URI=*login* OR URI=*userlist* | stats count by src_ip, user_agent",
-            "index=network_traffic dest_port=80 OR dest_port=443 | search user_agent=*scraper*"
+            "index=web sourcetype=proxy url=*login* OR url=*autodiscover*\n| stats count by src_ip, url",
+            "index=sysmon EventCode=1 OR EventCode=3 CommandLine=*username* OR CommandLine=*login*\n| stats count by CommandLine, ParentImage"
         ],
         "hunt_steps": [
-            "Investigate suspicious spikes in login page access.",
-            "Correlate web scraping activity with threat intelligence sources.",
-            "Review network logs for repeated enumeration queries."
+            "Search for enumeration patterns across login interfaces",
+            "Identify repeat failed attempts using similar usernames",
+            "Correlate metadata like referer and user-agent to scraping activity"
         ],
         "expected_outcomes": [
-            "Potential reconnaissance activity identified and mitigated.",
-            "No malicious activity found, improving baseline detection."
+            "Awareness of adversary reconnaissance prior to credential phishing",
+            "Detection of enumeration and exposure attempts across identity vectors"
         ],
-        "false_positive": "Automated web crawlers and legitimate research activities may exhibit similar patterns.",
+        "false_positive": "User password reset flows and IT admin scripts might mimic some of this behavior. Verify via user validation and audit logs.",
         "clearing_steps": [
-            "Block IPs associated with reconnaissance activity.",
-            "Update access controls on corporate directories and sensitive portals."
+            "Flush clipboard and browser autofill entries",
+            "Clear temporary identity enumeration tools from disk",
+            "Rotate credentials or MFA tokens exposed in public dumps"
         ],
+        "clearing_playbook": ["https://learn.microsoft.com/en-us/security/operations/incident-response-playbook-phishing"],
         "mitre_mapping": [
-            {"tactic": "Reconnaissance", "technique": "T1591 (Gather Victim Org Information)", "example": "Adversaries research target organizations before launching attacks."}
+            {"tactic": "Resource Development", "technique": "T1586", "example": "Use gathered names and emails to build impersonation identities"},
+            {"tactic": "Initial Access", "technique": "T1566", "example": "Send tailored phishing based on gathered identity details"}
         ],
         "watchlist": [
-            "Monitor access to corporate directories and HR systems.",
-            "Detect patterns of email or user enumeration."
+            "Access to internal staff directory endpoints from unusual IPs",
+            "Use of login endpoints without full authentication attempts",
+            "Patterns consistent with MFA probing"
         ],
         "enhancements": [
-            "Implement rate limiting on web portals to prevent automated scraping.",
-            "Strengthen API security and access control mechanisms."
+            "Apply deception identities to trap identity enumeration attempts",
+            "Integrate honeypot login endpoints for attribution collection"
         ],
-        "summary": "Attackers gather victim identity information to craft targeted attacks or gain unauthorized access.",
-        "remediation": "Block unauthorized access to sensitive user information and enhance monitoring of OSINT data collection.",
-        "improvements": "Enhance logging capabilities and deploy behavioral analytics to detect reconnaissance activities."
+        "summary": "This technique covers the adversary's collection of user identity details including names, emails, credentials, and MFA configuration, which are foundational for phishing, impersonation, and broader targeting campaigns.",
+        "remediation": "Limit identity exposure on public sites. Use detection and deception to capture adversary reconnaissance attempts.",
+        "improvements": "Leverage behavior analytics to detect unusual identity queries and auto-flag accounts following enumeration-like activity.",
+        "mitre_version": "16.1"
     }
