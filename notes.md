@@ -6,24 +6,6 @@ https://github.com/Koen1999/suricata-check
     
 https://www.elastic.co/security-labs/continuation-on-persistence-mechanisms
 
-- [Red Canary: Threat Detection Report](https://redcanary.com/threat-detection-report/trends/by-industry/)
-- Summit the Pyramid focuses on actionable defense strategies.
-
-            "title": "Threat-Informed Defense",
-            "content": """
-- Know your threats to focus detection efforts.
-- Be realistic about available log sources and noise levels.
-
-
-itle": "MITRE's Summit the Pyramid",
-            "content": """
-- A framework to prioritize and address threats effectively.
-- Aligns detection and response efforts with adversarial TTPs.
-            """
-
-
-
-Malvertising - Injecting malicious code into trusted websites.
 
 
 Common File Format Attacks
@@ -35,80 +17,31 @@ Common Client-Side Attack Vectors
 - Document and image rendering applications.
 
 
-            "title": "PICERL Framework",
-            "content": """
-- Phases: Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned.
-- Example: Containment using decoys or monitoring tools.
-            """,
-        },
-        {
             "title": "Containment Challenges",
-            "content": """
 - Rapid containment avoids losing critical intelligence.
 - No containment leads to prolonged adversary presence (whack-a-mole).
-            """,
-        },
-        {
+
             "title": "Hunt vs. Reactive Teams",
             "content": """
 - Reactive (Incident Response): Firefighting approach, putting out fires.
 - Hunt Teams: Proactive, leveraging threat intelligence to predict and disrupt.
-            """,
-        },
-        {
-            "title": "Detection Engineering",
-            "content": """
-- Focus on enabling actionable and collaborative processes.
-- Outsource or automate repetitive tasks while maintaining oversight of critical alerts.
-            """,
-        },
-        {
-            "title": "Advanced Forensic Tools",
-            "content": """
-- Volatility: Memory analysis.
-- Splunk and Loggly: Advanced log analysis and monitoring.
-- MFT Analysis: Tools like MFTECmd for NTFS evidence.
-            """,
-        }
-    ]
 
 
-def get_content():
-    """
-    Returns structured content for Windows event log analysis.
-    """
-    return [
-        {
             "title": "Important Event IDs",
             "content": """
 - Logon Events: 4624, 4634, 4672.
 - Administrative Shares: 5140.
 - RDP Session Events: 4778, 4779.
-            """
-        },
-        {
-            "title": "PowerShell Logs",
-            "content": """
+
+"title": "PowerShell Logs",
 - 4104: Script block logging.
-- Transcript logs: Logs all commands and their output.
-            """
-        },
-        {
-            "title": "System Logs for Analysis",
-            "content": """
-- Security Logs: Detect process execution.
-- Application Logs: Identify crashes and anomalies.
-            """
-        },
-        {
-            "title": "Key Event IDs",
-            "content": """
+
+
 - 4624: Logon method (e.g., console, network, RDP).
 - 4672: Logon with admin privileges.
 - 5140: Identifies administrative shares potentially mounted by attackers.
-            """
-        },
-        {
+
+
             "title": "RDP Events",
             "content": """
 - TerminalServices-RDPClient: Logs destination hostname/IP for outgoing RDP sessions.
@@ -132,12 +65,7 @@ def get_content():
     ]
 
 
-def get_content():
-    """
-    Returns structured content for NTFS, journaling, and anti-forensics artifacts.
-    """
-    return [
-        {
+
             "title": "NTFS Metadata and Attributes",
             "content": """
 - MFT Attributes: Tracks MAC timestamps, $File_Name, $Data (resident or non-resident).
@@ -169,12 +97,6 @@ def get_content():
     ]
 
 
-def get_content():
-    """
-    Returns structured content for GMON security insights.
-    """
-    return [
-        {
             "title": "511.1.1 - Botnet Evolution",
             "content": """
 - Botnets mark the transition from traditional to modern attack techniques.
