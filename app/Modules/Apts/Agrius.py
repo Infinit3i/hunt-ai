@@ -19,7 +19,9 @@ def get_content():
                 ]  # List of references
             }
         ],
-        "techniques": ["T1562", "T1490", "T1059", "T1566", "T1071"],  # List of techniques employed by this APT group
+        "techniques": [
+            "T1583", "T1560.001", "T1119", "T1110.003", "T1059.003","T1543.003", "T1005", "T1074.001", "T1140", "T1041","T1190", "T1562.001", "T1570", "T1036", "T1046","T1003.001", "T1003.002", "T1021.001", "T1018","T1505.003", "T1078.002"
+        ],
         "contributors": ["MITRE", "Check Point", "CISA"],  # Contributors of the intel
         "version": "1.0",  # Version of this APT entry
         "created": "5 December 2023",  # Date when this entry was created
