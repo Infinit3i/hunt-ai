@@ -1,7 +1,7 @@
 def get_content():
     return {
         "id": "",  # APT Group ID (e.g., G1017)
-        "url_id": "",  # URL segment for group reference (e.g., "G1017")
+        "url_id": "",  # URL segment for group reference (e.g., "Volt_Typhoon")
         "title": "",  # Name of the APT group (e.g., "Volt Typhoon")
         "tags": [],  # Tags associated with the group (e.g., ["state-sponsored", "critical infrastructure"])
         "description": "",  # Overview/description of the APT group and its objectives
