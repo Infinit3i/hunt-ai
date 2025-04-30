@@ -13,8 +13,9 @@ def get_content():
             "Correlate with other discovery activity to identify early-stage intrusions",
             "Flag access to service management commands from unknown or suspicious processes"
         ],
-        "data_sources": "Command, Process",
+        "data_sources": "Sysmon, Command, Process",
         "log_sources": [
+            {"type": "Sysmon", "source": "", "destination": ""},
             {"type": "Command", "source": "", "destination": ""},
             {"type": "Process", "source": "", "destination": ""}
         ],

@@ -13,7 +13,7 @@ def get_content():
             "Detect use of Volume Shadow Copy or esentutl.exe to duplicate NTDS files",
             "Track tools like secretsdump.py and ntdsutil usage on sensitive systems"
         ],
-        "data_sources": "Command, File",
+        "data_sources": "Sysmon, Command, File",
         "log_sources": [
             {"type": "Command", "source": "", "destination": ""},
             {"type": "File", "source": "", "destination": ""}

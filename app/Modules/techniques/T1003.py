@@ -4,7 +4,6 @@ def get_content():
         "url_id": "T1003",
         "title": "OS Credential Dumping",
         "tactic": "Credential Access",
-        "data_sources": "Windows Event Logs, Process Monitoring, File Monitoring, Registry, Memory Analysis",
         "protocol": "N/A",
         "os": "Windows, Linux, macOS",
         "tags": ["Credential Dumping", "Memory Dumping", "SAM Dumping", "LSASS Memory Dumping"],
@@ -14,6 +13,7 @@ def get_content():
             "Monitor processes interacting with LSASS, SAM, and memory dumps.",
             "Detect unauthorized execution of Mimikatz or similar tools."
         ],
+        "data_sources": "Sysmon, Windows Event Logs, Process Monitoring, File Monitoring, Registry, Memory Analysis",
         "log_sources": [
             {"type": "Windows Event Logs", "source": "Security.evtx", "destination": "System.evtx"},
             {"type": "Process Monitoring", "source": "Sysmon Event ID 10 (ProcessAccess)", "destination": "Sysmon.evtx"},

@@ -13,7 +13,7 @@ def get_content():
             "Look for command-line usage of Mimikatz, reg.exe, or PowerSploit modules like Invoke-Mimikatz",
             "Enable detailed PowerShell logging to capture suspicious scripts"
         ],
-        "data_sources": "Command, Windows Registry",
+        "data_sources": "Sysmon, Command, Windows Registry",
         "log_sources": [
             {"type": "Command", "source": "", "destination": ""},
             {"type": "Windows Registry", "source": "", "destination": ""}

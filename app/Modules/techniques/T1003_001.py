@@ -13,7 +13,7 @@ def get_content():
             "Enable LSASS as a protected process on supported systems",
             "Implement Credential Guard or isolate LSASS using Windows Defender Exploit Guard"
         ],
-        "data_sources": "Command, File, Logon Session, Process, Windows Registry",
+        "data_sources": "Sysmon, Command File, Logon Session, Process, Windows Registry",
         "log_sources": [
             {"type": "Command", "source": "", "destination": ""},
             {"type": "File", "source": "", "destination": ""},

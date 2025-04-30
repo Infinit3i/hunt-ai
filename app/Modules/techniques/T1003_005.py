@@ -13,7 +13,7 @@ def get_content():
             "Use protected user security groups to prevent caching",
             "Monitor for access to SSSD or VAS caches on Linux endpoints"
         ],
-        "data_sources": "Command",
+        "data_sources": "Sysmon, Command",
         "log_sources": [
             {"type": "Command", "source": "", "destination": ""}
         ],

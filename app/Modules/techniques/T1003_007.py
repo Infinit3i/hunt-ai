@@ -13,7 +13,7 @@ def get_content():
             "Restrict access to memory files to only privileged processes",
             "Sanitize application memory by clearing credentials after use"
         ],
-        "data_sources": "Command, File",
+        "data_sources": "Sysmon, Command, File",
         "log_sources": [
             {"type": "Command", "source": "", "destination": ""},
             {"type": "File", "source": "", "destination": ""}

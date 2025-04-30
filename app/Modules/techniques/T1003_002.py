@@ -13,7 +13,7 @@ def get_content():
             "Track creation of files named 'sam', 'system', or 'ntds.dit' in user-accessible paths",
             "Use Sysmon Event ID 11 for access to sensitive SAM files"
         ],
-        "data_sources": "Command, File, Windows Registry",
+        "data_sources": "Sysmon, Command, File, Windows Registry",
         "log_sources": [
             {"type": "Command", "source": "", "destination": ""},
             {"type": "File", "source": "", "destination": ""},

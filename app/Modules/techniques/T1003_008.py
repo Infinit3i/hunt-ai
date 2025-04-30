@@ -13,7 +13,7 @@ def get_content():
             "Alert on usage of tools like unshadow or john",
             "Restrict file permissions and ensure /etc/shadow is only accessible by root"
         ],
-        "data_sources": "Command, File",
+        "data_sources": "Sysmon, Command, File",
         "log_sources": [
             {"type": "Command", "source": "", "destination": ""},
             {"type": "File", "source": "", "destination": ""}

@@ -13,7 +13,7 @@ def get_content():
             "Use logs from Active Directory, NTDS, and DRS to identify suspicious GetNCChanges activity",
             "Restrict membership of Domain Admins, Enterprise Admins, and Administrator groups"
         ],
-        "data_sources": "Active Directory, Network Traffic",
+        "data_sources": "Sysmon, Active Directory, Network Traffic",
         "log_sources": [
             {"type": "Active Directory", "source": "", "destination": ""},
             {"type": "Network Traffic", "source": "", "destination": ""}
