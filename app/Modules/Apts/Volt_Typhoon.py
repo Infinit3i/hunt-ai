@@ -2,7 +2,7 @@
 def get_content():
     return {
         "id": "VoltTyphoon",  # APT name
-        "url_id": "volt_typhoon",  # URL segment APT name all lowercase with _ for spaces
+        "url_id": "Volt_Typhoon",  # URL segment APT name all lowercase with _ for spaces
         "title": "Volt Typhoon",  # Name of the APT group
         "tags": ["state-sponsored", "Chinese", "cyber espionage"],  # Tags associated with the group
         "description": "Volt Typhoon is a Chinese state-sponsored cyber espionage group known for targeting critical infrastructure, including military, government, and telecommunications sectors. The group is highly skilled in maintaining persistent access and operates with a strong focus on stealth.",  # Overview/description of the APT group

@@ -2,7 +2,7 @@
 def get_content():
     return {
         "id": "LazarusGroup",  # APT name
-        "url_id": "lazarus_group",  # URL segment APT name all lowercase with _ for spaces
+        "url_id": "Lazarus_Group",  # URL segment APT name all lowercase with _ for spaces
         "title": "Lazarus Group",  # Name of the APT group
         "tags": ["state-sponsored", "North Korean", "cyber espionage", "financial crimes"],  # Tags associated with the group
         "description": "Lazarus Group is a North Korean state-sponsored cyber espionage and financial crime organization. The group is known for high-profile cyber attacks, including bank heists, ransomware campaigns, and espionage activities against government and corporate entities worldwide.",  # Overview/description of the APT group
