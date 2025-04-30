@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mitre.css') }}" />
+
+<h1>APT Threat Groups</h1>
+
+<div class="mitre-grid">
+    {% for apt in apt_groups %}
+    <div class="mitre-box apt-box" data-checkbox-id="{{ apt.url_id }}" data-url-id="{{ apt.url_id }}">
+        <input type="checkbox" id="{{ apt.url_id }}" class="checkbox-box" />
+        <label for="{{ apt.url_id }}" class="checkbox-label"></label>
+
+        <h2>
+            <a href="{{ url_for('routes.apt_group', group=apt.url_id) }}">
+                {{ apt.title }}
+            </a>
+        </h2>
+        <p>{{ apt.description }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

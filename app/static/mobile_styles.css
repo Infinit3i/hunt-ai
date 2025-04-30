@@ -1,0 +1,19 @@
+@media (max-width: 768px) {
+    .nav-links {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .nav-left,
+    .nav-center,
+    .nav-right {
+      width: 100%;
+      justify-content: center;
+      margin: 5px 0;
+    }
+  
+    .search-bar input[type="text"] {
+      width: 100%;
+    }
+  }
+  

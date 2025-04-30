@@ -8,83 +8,15 @@
       href="{{ url_for('static', filename='styles.css') }}"
     />
     <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='mobile_styles.css') }}"
+    />
+    <link
       id="theme-stylesheet"
       rel="stylesheet"
       href="{{ url_for('static', filename='css/themes/' + theme + '_theme.css') }}"
     />
 
-    <!-- Favicon Links -->
-    <link
-      rel="icon"
-      href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}"
-      type="image/png"
-      sizes="32x32"
-    />
-    <link
-      rel="icon"
-      href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}"
-      type="image/png"
-      sizes="96x96"
-    />
-    <link
-      rel="icon"
-      href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}"
-      type="image/png"
-      sizes="16x16"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="{{ url_for('static', filename='favicon/apple-icon-57x57.png') }}"
-      sizes="57x57"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="{{ url_for('static', filename='favicon/apple-icon-60x60.png') }}"
-      sizes="60x60"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="{{ url_for('static', filename='favicon/apple-icon-72x72.png') }}"
-      sizes="72x72"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="{{ url_for('static', filename='favicon/apple-icon-76x76.png') }}"
-      sizes="76x76"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="{{ url_for('static', filename='favicon/apple-icon-114x114.png') }}"
-      sizes="114x114"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="{{ url_for('static', filename='favicon/apple-icon-120x120.png') }}"
-      sizes="120x120"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="{{ url_for('static', filename='favicon/apple-icon-144x144.png') }}"
-      sizes="144x144"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="{{ url_for('static', filename='favicon/apple-icon-152x152.png') }}"
-      sizes="152x152"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="{{ url_for('static', filename='favicon/apple-icon-180x180.png') }}"
-      sizes="180x180"
-    />
-
-    <!-- Android Icon -->
-    <link
-      rel="icon"
-      href="{{ url_for('static', filename='favicon/android-icon-192x192.png') }}"
-      type="image/png"
-      sizes="192x192"
-    />
 
     <!-- Manifest File -->
     <link
@@ -130,6 +62,7 @@
             </div>
           </div>
           <a class="nav-link" href="/mitre">Hunt</a>
+          <a class="nav-link" href="/group">APT</a>
           <div class="dropdown">
             <a class="nav-link" href="/investigate">Triage</a>
             <div class="dropdown-content">
@@ -152,6 +85,7 @@
         </div>
       </nav>
     </header>
+    <nav class="nav-links">
     <div class="selected-tactics">
       <h2>🔎 Selected T-Codes:</h2>
       <ul id="selected-tactic-list"></ul>
@@ -162,7 +96,7 @@
       {{ random_tip | safe }}
       <!-- Only output the formatted tip -->
     </div>
-
+  </nav>
     <div class="log-source-filter">
       <h3>🔍 Filter by Log Sources:</h3>
       <div>
@@ -224,33 +158,6 @@
               checked
             />
             Sysmon
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              class="log-source-checkbox"
-              value="Windows Registry"
-              checked
-            />
-            Windows Registry
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              class="log-source-checkbox"
-              value="WMI"
-              checked
-            />
-            WMI
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              class="log-source-checkbox"
-              value="Named Pipe"
-              checked
-            />
-            Named Pipe
           </label>
         </details>
 
@@ -320,15 +227,6 @@
             />
             Network Share
           </label>
-          <label>
-            <input
-              type="checkbox"
-              class="log-source-checkbox"
-              value="Network Traffic"
-              checked
-            />
-            Network Traffic
-          </label>
         </details>
 
         <!-- Authentication & Directory Group -->
@@ -374,15 +272,6 @@
               checked
             />
             Application Log
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              class="log-source-checkbox"
-              value="Application Vetting"
-              checked
-            />
-            Application Vetting
           </label>
           <label>
             <input

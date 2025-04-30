@@ -309,3 +309,65 @@ def search():
         # Redirect back to the referring page or a default route if no referrer is available.
         return redirect(request.referrer or url_for('routes.home'))
     return render_template('search_results.html', query=query, results=results)
+
+
+def load_apts():
+    apts_path = os.path.join(os.getcwd(), 'app', 'Modules', 'Apts')
+    apts = []
+
+    for file in os.listdir(apts_path):
+        if file.endswith('.py'):
+            file_path = os.path.join(apts_path, file)
+            module_name = file[:-3]
+
+            try:
+                spec = importlib.util.spec_from_file_location(module_name, file_path)
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+
+                if hasattr(module, 'get_content'):
+                    apt_data = module.get_content()
+                    apts.append({
+                        "id": apt_data.get("id"),
+                        "url_id": apt_data.get("url_id"),
+                        "title": apt_data.get("title"),
+                        "description": apt_data.get("description")
+                    })
+            except Exception as e:
+                print(f"[!] Failed to load APT {file}: {e}")
+
+    apts.sort(key=lambda x: x.get("id", ""))
+    return apts
+
+
+@routes_bp.route('/group')
+def group():
+    apt_groups = load_apts()
+    return render_template('group.html', apt_groups=apt_groups)
+
+
+@routes_bp.route('/apt/<group>')
+def apt_group(group):
+    apts_dir = os.path.join(os.getcwd(), 'app', 'Modules', 'Apts')
+
+    # Find the correct file regardless of case
+    match_file = None
+    for file in os.listdir(apts_dir):
+        if file.lower() == f"{group.lower()}.py":
+            match_file = os.path.join(apts_dir, file)
+            break
+
+    if not match_file or not os.path.exists(match_file):
+        abort(404, description=f"APT group '{group}' not found.")
+
+    try:
+        module_name = os.path.splitext(os.path.basename(match_file))[0]
+        spec = importlib.util.spec_from_file_location(module_name, match_file)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        apt_data = module.get_content()
+    except Exception as e:
+        print(f"[!] Failed to load APT module {group}: {e}")
+        abort(500, description="Error loading APT group data.")
+
+    return render_template('apt.html', apt=apt_data)

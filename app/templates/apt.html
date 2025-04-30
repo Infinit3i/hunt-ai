@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mitre.css') }}" />
+
+<h1>{{ apt.title }} [{{ apt.id }}]</h1>
+<p>{{ apt.description }}</p>
+
+<div class="tag-container">
+  {% for tag in apt.tags %}
+    <span class="tag">{{ tag }}</span>
+  {% endfor %}
+</div>
+
+{% if apt.associated_groups %}
+<h2>🧩 Also Known As</h2>
+<ul>
+  {% for alias in apt.associated_groups %}
+    <li>🕵️ {{ alias }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<h2>⚔️ Techniques Used</h2>
+<div class="mitre-grid">
+  {% for tid in apt.techniques %}
+  <div class="mitre-box technique-box" data-checkbox-id="{{ tid }}">
+    <input type="checkbox" id="{{ tid }}" class="checkbox-box" />
+    <label for="{{ tid }}" class="checkbox-label"></label>
+    <h2>
+      <a href="{{ url_for('routes.technique_page', url_id=tid) }}">
+        {{ tid }}
+      </a>
+    </h2>
+  </div>
+  {% endfor %}
+</div>
+
+<h2>📜 Campaigns</h2>
+{% for camp in apt.campaigns %}
+<div class="info-box">
+  <h3>{{ camp.name }} ({{ camp.id }})</h3>
+  <p><strong>First Seen:</strong> {{ camp.first_seen }} | <strong>Last Seen:</strong> {{ camp.last_seen }}</p>
+  <p><strong>References:</strong></p>
+  <ul>
+    {% for ref in camp.references %}
+      <li><a href="{{ ref }}" target="_blank">{{ ref }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endfor %}
+
+<h2>🧹 Clearing Steps</h2>
+<ul>
+  {% for step in apt.clearing_steps %}
+    <li>🧼 {{ step }}</li>
+  {% endfor %}
+</ul>
+
+<h2>🎯 Expected Outcomes</h2>
+<ul>
+  {% for outcome in apt.expected_outcomes %}
+    <li>🔍 {{ outcome }}</li>
+  {% endfor %}
+</ul>
+
+<h2>⚠️ False Positives</h2>
+<p>{{ apt.false_positive }}</p>
+
+<h2>🕵️ Hunt Steps</h2>
+<ul>
+  {% for step in apt.hunt_steps %}
+    <li>🚀 {{ step }}</li>
+  {% endfor %}
+</ul>
+
+<h2>🛡️ Remediation</h2>
+<p>{{ apt.remediation }}</p>
+
+<h2>📈 Future Improvements</h2>
+<p>{{ apt.improvements }}</p>
+
+{% if apt.ioc %}
+<h2>🧬 Indicators of Compromise (IOC)</h2>
+<table>
+  <tr>
+    <th>SHA256</th>
+    <th>MD5</th>
+    <th>IP</th>
+    <th>Domain</th>
+  </tr>
+  <tr>
+    <td>{{ apt.ioc.sha256 | join(', ') }}</td>
+    <td>{{ apt.ioc.md5 | join(', ') }}</td>
+    <td>{{ apt.ioc.ip | join(', ') }}</td>
+    <td>{{ apt.ioc.domain | join(', ') }}</td>
+  </tr>
+</table>
+{% endif %}
+
+{% if apt.references %}
+<h2>📚 References</h2>
+<ul>
+  {% for ref in apt.references %}
+    <li><a href="{{ ref.url }}" target="_blank">{{ ref.source }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if apt.resources %}
+<h2>🔗 Additional Resources</h2>
+<ul>
+  {% for resource in apt.resources %}
+    <li><a href="{{ resource }}" target="_blank">{{ resource }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<p><strong>🛠 Version:</strong> {{ apt.version }} | <strong>📅 Created:</strong> {{ apt.created }} | <strong>✏️ Last Modified:</strong> {{ apt.last_modified }}</p>
+<p><strong>📢 Contributors:</strong> {{ apt.contributors | join(', ') }}</p>
+
+<a href="{{ url_for('routes.group') }}">⬅️ Back to APT Groups</a>
+{% endblock %}

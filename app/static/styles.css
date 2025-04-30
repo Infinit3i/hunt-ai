@@ -551,16 +551,16 @@ button {
 /* Navbar */
 .nav-links {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between; /* Space between left, center, and right sections */
   align-items: center;
   padding: 0 20px; /* Optional padding for spacing */
 }
 
 .nav-left {
-  flex: 0 0 auto; /* Prevents the nav-left (search-bar) from growing or shrinking */
-  display: flex;
   align-items: center;
   gap: 15px;
+  width: 10%;
 }
 
 .nav-center {
@@ -598,7 +598,9 @@ button {
   border-radius: 5px 0 0 5px; /* Rounded left corners */
   font-size: 14px;
   vertical-align: middle;
-  width: 300px; /* Set to twice the previous width (default ~150px) */
+  width: 100%;
+  max-width: 300px;
+  min-width: 150px;
 }
 
 .search-bar button {
