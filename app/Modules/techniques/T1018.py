@@ -7,14 +7,15 @@ def get_content():
         "tags": ["discovery", "network scan", "remote systems", "net view", "ping", "tracert", "arp", "hosts file"],
         "tactic": "Discovery",
         "protocol": "ICMP, SMB, ARP",
-        "os": "Linux, Network, Windows, macOS",
+        "os": "Linux, Windows, macOS",
         "tips": [
             "Correlate system events with scanning behavior (e.g., net view, ping sweeps).",
             "Monitor for access to local files like hosts or ARP cache in a discovery context.",
             "Look for recon behavior post-compromise prior to lateral movement."
         ],
-        "data_sources": "Command, File, Network Traffic, Process",
+        "data_sources": "Sysmon, Command, File, Network Traffic, Process",
         "log_sources": [
+            {"type": "Sysmon", "source": "", "destination": ""},
             {"type": "Command", "source": "", "destination": ""},
             {"type": "File", "source": "", "destination": ""},
             {"type": "Network Traffic", "source": "", "destination": ""},

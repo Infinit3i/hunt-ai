@@ -4,11 +4,11 @@ def get_content():
         "url_id": "T1021/004",
         "title": "Lateral Movement: SSH Hijacking",
         "tactic": "Lateral Movement",
-        "data_sources": "Authentication Logs, Process Creation Logs, Network Traffic Logs, Security Monitoring Tools",
         "protocol": "SSH, OpenSSH, Secure Shell",
         "os": "Windows, Linux, macOS",
         "description": "Adversaries may use SSH hijacking to move laterally within an environment. SSH hijacking involves an attacker stealing or hijacking SSH keys to gain unauthorized access to remote systems. Adversaries may abuse SSH keys to maintain persistence, escalate privileges, or exfiltrate data over encrypted channels.",
         "tips": [],
+        "data_sources": "Sysmon, Authentication Logs, Process Creation Logs, Network Traffic Logs, Security Monitoring Tools",
         "log_sources": [
             {"type": "Authentication Logs", "source": "/var/log/auth.log, Windows Event Logs (Event ID 4648, 4624)"},
             {"type": "Process Creation Logs", "source": "Sysmon (Event ID 1, 11), Linux Auditd"},

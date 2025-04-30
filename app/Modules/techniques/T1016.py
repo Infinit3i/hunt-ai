@@ -13,8 +13,9 @@ def get_content():
             "Alert on execution of networking tools by unusual users or paths.",
             "Use script block logging to capture PowerShell-based reconnaissance."
         ],
-        "data_sources": "Command, Process, Script",
+        "data_sources": "Sysmon, Command, Process, Script",
         "log_sources": [
+            {"type": "Sysmon", "source": "", "destination": ""},
             {"type": "Command", "source": "", "destination": ""},
             {"type": "Process", "source": "", "destination": ""},
             {"type": "Script", "source": "", "destination": ""}
@@ -22,7 +23,7 @@ def get_content():
         "source_artifacts": [
             {"type": "Command History", "location": "~/.bash_history", "identify": "Use of ifconfig, ip a, or route"},
             {"type": "Script", "location": "C:\\Users\\<User>\\AppData\\Local\\Temp", "identify": "Custom scripts containing netstat, ipconfig"},
-            {"type": "PowerShell Logs", "location": "Event ID 4104", "identify": "Network-related discovery commands"}
+            {"type": "PowerShell", "location": "Event ID 4104", "identify": "Network-related discovery commands"}
         ],
         "destination_artifacts": [
             {"type": "Event Logs", "location": "Windows Security/Event Logs", "identify": "Newly spawned cmd.exe or PowerShell processes"},

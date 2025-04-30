@@ -4,16 +4,15 @@ def get_content():
         "url_id": "T1021/003",
         "title": "Lateral Movement: Distributed Component Object Model (DCOM)",
         "tactic": "Lateral Movement",
-        "data_sources": "Authentication Logs, Process Creation Logs, Network Traffic Logs, Security Monitoring Tools",
         "protocol": "DCOM, RPC, SMB",
         "os": "Windows",
         "description": "Adversaries may use Distributed Component Object Model (DCOM) for lateral movement within an environment. DCOM is a proprietary Microsoft technology that allows communication between software components distributed across a network. Adversaries may abuse DCOM for remote code execution, privilege escalation, and lateral movement to other systems.",
         "tips": [],
+        "data_sources": "Sysmon, Authentication, Process Creation, Network Traffic",
         "log_sources": [
-            {"type": "Authentication Logs", "source": "Windows Event Logs (Event ID 4624, 4672, 4688)"},
-            {"type": "Process Creation Logs", "source": "Sysmon (Event ID 1, 11), Windows Security Logs (Event ID 4688)"},
-            {"type": "Network Traffic Logs", "source": "Zeek (Bro), Suricata, Wireshark, NetFlow"},
-            {"type": "Security Monitoring Tools", "source": "SIEM, EDR (CrowdStrike, Defender ATP, Carbon Black)"}
+            {"type": "Sysmon", "source": "1, 11"},
+            {"type": "Windows Security", "source": "4624, 4672, 4688"},
+            {"type": "Network Traffic", "source": "Zeek (Bro), Suricata, Wireshark, NetFlow"},
         ],
         "detection_methods": [
             "Monitor for DCOM-related process executions on remote systems.",

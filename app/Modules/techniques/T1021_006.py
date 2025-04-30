@@ -4,7 +4,6 @@ def get_content():
         "url_id": "T1021/006",
         "title": "Remote Services: PowerShell Remoting",
         "tactic": "Lateral Movement",
-        "data_sources": "Windows System, Windows PowerShell, Windows Registry",
         "protocol": "WinRM, PowerShell Remoting",
         "os": "Windows",
         "description": "Adversaries may use PowerShell Remoting to execute commands on remote systems. PowerShell Remoting is a powerful tool for system administrators, but adversaries can abuse it for lateral movement and remote",
@@ -13,6 +12,7 @@ def get_content():
             "Restrict PowerShell execution policy to prevent unauthorized scripts.",
             "Monitor WinRM logs for abnormal session creation (Event ID 91, 142)."
         ],
+        "data_sources": "Sysmon, Windows System, Windows PowerShell, Windows Registry",
         "log_sources": [
             {"type": "Authentication", "source": "Windows Security Logs (Event ID 4648, 4624, 4672)", "destination": "SIEM"},
             {"type": "Process Execution", "source": "PowerShell Operational Logs (Event ID 40961, 40962, 8193, 8194)", "destination": "SIEM"},

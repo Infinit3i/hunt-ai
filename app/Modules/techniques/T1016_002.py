@@ -13,8 +13,9 @@ def get_content():
             "Correlate system access to WLAN password file locations and extraction tools.",
             "Review registry and memory analysis for cleartext storage of Wi-Fi credentials."
         ],
-        "data_sources": "Command, Process",
+        "data_sources": "Sysmon, Command, Process",
         "log_sources": [
+            {"type": "Sysmon", "source": "", "destination": ""},
             {"type": "Command", "source": "", "destination": ""},
             {"type": "Process", "source": "", "destination": ""}
         ],

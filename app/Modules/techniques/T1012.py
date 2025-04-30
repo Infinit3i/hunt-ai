@@ -13,8 +13,9 @@ def get_content():
             "Watch for tools or malware using Windows APIs to read sensitive registry values.",
             "Detect unusual access to rarely queried registry paths."
         ],
-        "data_sources": "Command, Process, Windows Registry",
+        "data_sources": "Sysmon, Command, Process, Windows Registry",
         "log_sources": [
+            {"type": "Sysmon", "source": "", "destination": ""},
             {"type": "Command", "source": "", "destination": ""},
             {"type": "Process", "source": "", "destination": ""},
             {"type": "Windows Registry", "source": "", "destination": ""}
@@ -22,7 +23,7 @@ def get_content():
         "source_artifacts": [
             {"type": "Process List", "location": "System logs or EDR telemetry", "identify": "Command line processes involving reg.exe or PowerShell registry queries"},
             {"type": "Registry Hives", "location": "HKLM or HKCU", "identify": "Queried for installed software, OS config, or system info"},
-            {"type": "Sysmon Logs", "location": "Event ID 13", "identify": "Registry key read events"}
+            {"type": "Sysmon", "location": "Event ID 13", "identify": "Registry key read events"}
         ],
         "destination_artifacts": [],
         "detection_methods": [

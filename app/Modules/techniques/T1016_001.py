@@ -13,15 +13,16 @@ def get_content():
             "Set alerts for outbound ICMP from non-standard user accounts.",
             "Investigate tools like curl, wget, or certutil used in odd contexts."
         ],
-        "data_sources": "Command, Process",
+        "data_sources": "Sysmon, Command, Process",
         "log_sources": [
+            {"type": "Sysmon", "source": "", "destination": ""},
             {"type": "Command", "source": "", "destination": ""},
             {"type": "Process", "source": "", "destination": ""}
         ],
         "source_artifacts": [
             {"type": "Command History", "location": "~/.bash_history", "identify": "Contains ping or tracert usage"},
-            {"type": "Sysmon Logs", "location": "Event ID 1", "identify": "Process Create with 'ping', 'curl', or 'tracert'"},
-            {"type": "PowerShell Logs", "location": "Event ID 4104", "identify": "Script using Test-NetConnection or Invoke-WebRequest"}
+            {"type": "Sysmon", "location": "Event ID 1", "identify": "Process Create with 'ping', 'curl', or 'tracert'"},
+            {"type": "PowerShell", "location": "Event ID 4104", "identify": "Script using Test-NetConnection or Invoke-WebRequest"}
         ],
         "destination_artifacts": [
             {"type": "Network Connections", "location": "Firewall Logs", "identify": "Outbound ICMP or HTTP/HTTPS to known test domains"},

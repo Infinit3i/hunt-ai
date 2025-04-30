@@ -13,7 +13,7 @@ def get_content():
             "Monitor cloud service logs for console or session starts from unfamiliar users or IPs.",
             "Enforce the use of multi-factor authentication and rotate SSH keys regularly."
         ],
-        "data_sources": "Logon Session",
+        "data_sources": "Sysmon, Logon Session",
         "log_sources": [
             {"type": "Logon Session", "source": "Cloud Audit Logs", "destination": ""}
         ],

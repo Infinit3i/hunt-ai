@@ -4,7 +4,6 @@ def get_content():
         "url_id": "T1021/001",
         "title": "Remote Services: Remote Desktop Protocol",
         "tactic": "lateral_movement",
-        "data_sources": "Authentication Logs, Network Traffic Logs, Process Monitoring, Windows Event Logs",
         "protocol": "RDP (TCP/3389)",
         "os": "Windows",
         "description": "Adversaries may use RDP to move laterally within an environment. RDP is a common protocol used by system administrators to remotely manage Windows systems. Adversaries may abuse RDP to access systems within a network after obtaining valid credentials, allowing them to move laterally and maintain persistence on a victim network.",
@@ -15,6 +14,7 @@ def get_content():
                  "21: Session logon succeeded",
                  "22: Shell start notification received",
                  ],
+        "data_sources": "Sysmon, Authentication Logs, Network Traffic Logs, Process Monitoring, Windows Event Logs",
         "log_sources": [
             {"type": "Windows Security", "source": "4648 - Logon specifying alternate credentials, 4624, 4625, 4776", "destination": "4624 Logon Type 10 (Source IP/Logon User Name), 4778, 4778/4779 (IP Address of Source/Source System Name, Logon User Name)"},
             {"type": "Microsoft-Windows-TerminalServices-RDPClient/Operational", "source": "1024, 1102", "destination": ""},

@@ -13,7 +13,7 @@ def get_content():
             "Track cloud CLI usage for administrative commands like `Connect-AZAccount` or `gcloud auth login`.",
             "Enforce MFA for all cloud accounts, especially administrative ones."
         ],
-        "data_sources": "Logon Session",
+        "data_sources": "Sysmon, Logon Session",
         "log_sources": [
             {"type": "Logon Session", "source": "Cloud Audit Logs", "destination": ""}
         ],

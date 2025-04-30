@@ -13,7 +13,7 @@ def get_content():
             "Alert on VNC connections where default/test credentials are used.",
             "Hunt for unusual mouse/keyboard activity from headless systems or during screen lock."
         ],
-        "data_sources": "Logon Session, Network Traffic, Process",
+        "data_sources": "Sysmon, Logon Session, Network Traffic, Process",
         "log_sources": [
             {"type": "Logon Session", "source": "", "destination": ""},
             {"type": "Network Traffic", "source": "", "destination": ""},

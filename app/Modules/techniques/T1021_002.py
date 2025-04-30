@@ -4,7 +4,6 @@ def get_content():
         "url_id": "T1021/002",
         "title": "Remote Services: SMBExec",
         "tactic": "Lateral Movement",
-        "data_sources": "Windows Event Logs, Registry, File Monitoring, Network Traffic Analysis",
         "protocol": "SMB",
         "os": "Windows",
         "description": "Adversaries may use SMBExec to execute commands remotely over SMB without writing files to disk, making it a stealthy lateral movement technique.",
@@ -13,9 +12,11 @@ def get_content():
             "Analyze ADMIN$ access logs to detect suspicious SMB connections.",
             "Detect and investigate the execution of execute.bat in TEMP directories."
         ],
+        "data_sources": "Sysmon, Windows Event, Registry, File Monitoring, Network Traffic Analysis",
         "log_sources": [
-            {"type": "Windows Security Logs", "source": "security.evtx", "destination": "SIEM"},
-            {"type": "Windows System Logs", "source": "system.evtx", "destination": "SIEM"},
+            {"type": "Sysmon", "source": "", "destination": ""},
+            {"type": "Windows Security", "source": "", "destination": ""},
+            {"type": "Windows System", "source": "", "destination": ""},
             {"type": "File Monitoring", "source": "C:\\Windows\\Prefetch\\", "destination": "EDR"},
             {"type": "Network Monitoring", "source": "NetFlow, SMB Traffic", "destination": "Network Security Tools"}
         ],
